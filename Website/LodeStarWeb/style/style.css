@@ -1,0 +1,78 @@
+.col-centered {
+    float: none;
+    margin: 0 auto;
+}
+
+body {
+    background: black;
+}
+
+iframe {
+    border: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+.hero-padding h1 {
+    padding-top: 150px;
+    font-size: 75px;
+    text-shadow: 0 0 30px rgba(150,150,150,1)
+}
+
+
+h1, h3 {
+    color: white;
+}
+
+.navbar {
+    border-radius: 0;
+    margin: 0;
+    background: white; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(black, transparent); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(black, transparent); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(black, transparent); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(black, transparent); /* Standard syntax */
+    border-bottom: 0;
+    z-index: 4;
+}
+
+#navbar a {
+    color: #FFFFFF;
+}
+
+.hero-vr-view {
+    padding: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -100;
+}
+/* MOBILE */
+@media screen and (max-width: 700px) {
+    iframe {
+        height: 400px;
+    }
+    .hero-padding {
+        height: 400px;
+    }
+}
+
+/* DESKTOP */
+@media screen and (min-width: 700px) {
+    iframe {
+        height: 700px;
+    }
+    .hero-padding {
+        height: 700px;
+    }
+}
+
+.about-the-project {
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 100;
+}

@@ -1,15 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>LodeStar</title>
+    <title>VR View - gallery example</title>
+    <meta name=viewport content="width=device-width, initial-scale=1">
+    <meta charset="utf-8"/>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <link href="style/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
-    <p>With a great app, comes a great website. Ain't this amazing?</p>
-    <p>JK things must be simple. not simpler...</p>
 
-    <p>We are building an app called LodeStar. Specifications report is <a href="files/ellie.pdf">here</a></p>
+<nav id="navbar" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Coming Soon</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="files/ellie.pdf">Specification Report</a></li>
+                <li><a href="https://github.com/celikkoseoglu/LodeStar">GitHub</a></li>
+                <li><a href="#">Team</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
+
+<div class="hero-padding">
+
+    <h1 class="col-md-12 text-center">LodeStar</h1>
+    <h3 class="col-md-12 text-center">Travel With Ease</h3>
+
+    <div class="col-md-12 hero-vr-view">
+        <div id="vrview"></div>
+    </div>
+
+</div>
+
+<div class="col-md-8 col-centered text-center about-the-project">
+    <h1>Our Aim</h1>
+    <br>
+    <p>is to help people value their time which would otherwise be wasted at the gates of airports by giving them a glance of the destination airport and city. When travelling by plane, especially internationally, passengers must go to the airports early in order to finish pre-flight routines. Those routines end up with a lot of freetime. During this time, the mobile application LodeStar features Virtual Reality platform and offers 360º exploring and guiding experience throughout the destination city. It shows how to navigate through the inside of destination airport, where to get a SIM card, rent a car, buy a train ticket or find a taxi and even suggests which one to pick depending on your time and money constraints. From the airport to a hotel or popular touristic stops, LodeStar provides informations, comments, suggestions that user needs during their travel. Although some of these features are available in other apps, LodeStar uniquely combines all of these features while providing VR scenery that adds to user experience. This will help users to effectively use their limited freetime in their journeys. A picture is worth a thousand words, and the 360º guides of LodeStar will outmatch popular means of written or verbal description.</p>
+</div>
+
+<div class="col-md-8 col-centered text-center">
+    <h1>Meet the Team</h1>
+    <br>
+    <p>Barış Poyraz</p>
+    <p>Berk Evren Abbasoğlu</p>
+    <p>Çelik Köseoğlu</p>
+    <p>Efe Ulaş Akay Seyitoğlu</p>
+    <p>Hüseyin Beyan</p>
+</div>
+
+<div><p>Web sitesinin yapım aşamasında olduğunu beyan etmek isteriz.</p></div>
+
+
+<script src="js/vrview.js"></script>
+<script src="js/index.js"></script>
 </body>
 </html>
