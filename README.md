@@ -10,7 +10,7 @@ Reports
 ---------------------
 
 * [Project Specifications Report](http://lodestarapp.com/files/ellie.pdf)
-* [Analysis Report] (http://lodestarapp.com/files/violet.pdf)
+* [Analysis Report](http://lodestarapp.com/files/violet.pdf)
 * High-Level Design Report
 * Low-Level Design Report
 * Final Report
