@@ -4,7 +4,7 @@
 }
 
 body {
-    background: black;
+    background: antiquewhite;
 }
 
 iframe {
@@ -25,7 +25,7 @@ iframe {
 
 
 h1, h3 {
-    color: white;
+    color: black;
 }
 
 .navbar {
