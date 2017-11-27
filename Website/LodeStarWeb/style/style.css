@@ -4,7 +4,7 @@
 }
 
 body {
-    background: antiquewhite;
+    background: #CFD8DC;
 }
 
 iframe {
@@ -32,10 +32,10 @@ h1, h3 {
     border-radius: 0;
     margin: 0;
     background: white; /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(black, transparent); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(black, transparent); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(black, transparent); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(black, transparent); /* Standard syntax */
+    background: -webkit-linear-gradient(#020506, #020506); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#020506, #020506); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#020506, #020506); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#020506, #020506); /* Standard syntax */
     border-bottom: 0;
     z-index: 4;
 }
@@ -75,4 +75,8 @@ h1, h3 {
     color: #FFFFFF;
     font-size: 16px;
     font-weight: 100;
+}
+
+.card {
+    background: #ffffff;
 }
