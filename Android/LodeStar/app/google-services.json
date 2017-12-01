@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "991682754007",
+    "project_id": "firebase-lodestar"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:991682754007:android:9460caad46966afd",
+        "android_client_info": {
+          "package_name": "com.lodestarapp.cs491.lodestar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "991682754007-uoqeg5btuo8kob0nkkl7ffh7l228jdo4.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "991682754007-bqm2cnbto720osdvrognfevmgs3k9ei5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "bilkent.cs491.lodestar",
+            "certificate_hash": "6b7a9875f8eedd4c5af002b2a2bbf6cac7899381"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCx1o44WFHXYZ0H8zfM22hwsgiL_IWp8rk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
