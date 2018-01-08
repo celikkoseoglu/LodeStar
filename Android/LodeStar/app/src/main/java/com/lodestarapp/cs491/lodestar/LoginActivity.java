@@ -95,4 +95,12 @@ public class LoginActivity extends AppCompatActivity implements
         startActivity(intent);
     }
 
+    /**
+     * QR Code
+     */
+    public void qrCodeStart(View view){
+
+    }
+
+
 }

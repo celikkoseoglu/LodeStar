@@ -1,1 +1,1 @@
-include ':app', ':BrickBreaker'
+include ':app'
