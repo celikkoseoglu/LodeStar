@@ -79,4 +79,38 @@ h1, h3 {
 
 .card {
     background: #ffffff;
+
+}
+
+#concept div {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+ul.social-buttons li a:active, ul.social-buttons li a:focus, ul.social-buttons li a:hover {
+    background-color: #fed136;
+}
+
+ul.social-buttons .twitter:hover, ul.social-buttons .twitter:focus, ul.social-buttons .twitter:active {
+    background-color: rgb(85, 172, 238);
+}
+
+ul.social-buttons .facebook:hover, ul.social-buttons .facebook:focus, ul.social-buttons .facebook:active {
+    background-color: rgb(59, 89, 152);
+}
+
+ul.social-buttons .linkedin:hover, ul.social-buttons .linkedin:focus, ul.social-buttons .linkedin:active {
+    background-color: rgb(0, 123, 181);
+}
+
+ul.social-buttons .github:hover, ul.social-buttons .github:focus, ul.social-buttons .github:active {
+    background-color: rgb(128, 1, 128);
+}
+
+ul.social-buttons .instagram:hover, ul.social-buttons .instagram:focus, ul.social-buttons .instagram:active {
+    background-color: rgb(155, 105, 84);
+}
+
+ul.social-buttons .mail:hover, ul.social-buttons .mail:focus, ul.social-buttons .mail:active {
+    background-color: rgb(221, 221, 221);
 }

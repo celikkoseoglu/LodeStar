@@ -35,7 +35,14 @@ h6 {
 }
 
 section {
-    padding: 10px 0;
+    padding-top: 0px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    background-color: rgba(252,251,250,0.9);
+    border-radius: 8px;
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30); /* material casts shadow */
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 section h2.section-heading {
@@ -105,10 +112,6 @@ img::selection {
 
 img::-moz-selection {
     background: transparent;
-}
-
-body {
-    -webkit-tap-highlight-color: #fed136;
 }
 
 #mainNav {
@@ -392,7 +395,7 @@ body {
 }
 
 footer {
-    padding: 25px 0;
+    padding: 25px;
     text-align: center;
     background: #131b1f;
 }
@@ -429,8 +432,4 @@ ul.social-buttons li a {
     border-radius: 100%;
     outline: none;
     background-color: #212529;
-}
-
-ul.social-buttons li a:active, ul.social-buttons li a:focus, ul.social-buttons li a:hover {
-    background-color: #fed136;
 }
