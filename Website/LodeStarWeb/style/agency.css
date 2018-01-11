@@ -17,7 +17,7 @@ a {
 }
 
 a:hover {
-    color: #fec503;
+    color: rgb(138, 182, 198);
 }
 
 .text-primary {
@@ -34,12 +34,28 @@ h6 {
     font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-section {
-    padding-top: 0px;
+.section-top {
+    border-bottom-right-radius: 9px;
+    border-bottom-left-radius: 9px;
     padding-bottom: 20px;
     margin-bottom: 20px;
-    background-color: rgba(252,251,250,0.9);
+}
+
+.section-middle {
     border-radius: 8px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.section-bottom {
+    border-top-right-radius: 9px;
+    border-top-left-radius: 9px;
+}
+
+section {
+    padding-top: 0px;
+
+    background-color: rgba(252,251,250,0.9);
     box-shadow: 0 19px 38px rgba(0,0,0,0.30); /* material casts shadow */
     margin-left: 5%;
     margin-right: 5%;
@@ -102,7 +118,7 @@ section h3.section-subheading {
 }
 
 ::selection {
-    background: #fed136;
+    background: rgb(138, 182, 198);
     text-shadow: none;
 }
 
@@ -382,6 +398,7 @@ img::-moz-selection {
     width: 175px;
     height: 175px;
     border: 7px solid #fff;
+    box-shadow: 0 19px 38px rgba(0,0,0,0.20);
 }
 
 .team-member h4 {

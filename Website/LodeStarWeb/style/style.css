@@ -20,9 +20,9 @@ iframe {
 .hero-padding h1 {
     padding-top: 150px;
     font-size: 75px;
-    text-shadow: 0 0 30px rgba(150,150,150,1)
+    text-shadow: 0 0 30px rgba(150,150,150,1);
+    margin-top: 40px;
 }
-
 
 h1, h3 {
     color: black;
@@ -37,7 +37,10 @@ h1, h3 {
     background: -moz-linear-gradient(#020506, #020506); /* For Firefox 3.6 to 15 */
     background: linear-gradient(#020506, #020506); /* Standard syntax */
     border-bottom: 0;
-    z-index: 4;
+}
+
+#navbar {
+    z-index: 140;
 }
 
 #navbar a {
@@ -49,8 +52,13 @@ h1, h3 {
     position: absolute;
     top: 0;
     left: 0;
-    z-index: -100;
+    z-index: 100;
 }
+
+#about {
+    padding-bottom: 70px;
+}
+
 /* MOBILE */
 @media screen and (max-width: 700px) {
     iframe {
@@ -64,10 +72,10 @@ h1, h3 {
 /* DESKTOP */
 @media screen and (min-width: 700px) {
     iframe {
-        height: 700px;
+        min-height: 700px;
     }
     .hero-padding {
-        height: 700px;
+        min-height: 700px;
     }
 }
 
@@ -77,14 +85,26 @@ h1, h3 {
     font-weight: 100;
 }
 
-.card {
+.card div {
     background: #ffffff;
-
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 5px;
+    box-shadow: 0 19px 38px rgba(0,0,0,0.10);
 }
 
-#concept div {
-    padding-left: 0;
-    padding-right: 0;
+.card hr {
+    margin-top: 1px;
+    margin-bottom: 3px;
+}
+
+#concept {
+    padding-bottom: 20px;
+}
+
+.extra-padded-col {
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 ul.social-buttons li a:active, ul.social-buttons li a:focus, ul.social-buttons li a:hover {

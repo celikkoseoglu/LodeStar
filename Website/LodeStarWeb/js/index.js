@@ -14,16 +14,24 @@
  */
 var vrView;
 
+var timer;
+var delay = 500;
+
 //the VR view will take 80% of the browser display height on a page refresh.
 jQuery(document).ready(function() {
     var height = $(window).height();
     var width = $(window).width();
+    
+    clearTimeout(timer);
+    timer = setTimeout(function() {
+        $('iframe').css('height', height * 0.8);
+        $('iframe').css('width', width);
 
-    $('iframe').css('height', height * 0.8 | 0);
-    $('iframe').css('width', width - 2 | 0);
+        $('.hero-padding').css('height', height * 0.8);
+        $('.hero-padding').css('width', width);
+    }, delay );
 
-    $('.hero-padding').css('height', height * 0.8 | 0);
-    $('.hero-padding').css('width', width - 2 | 0);
+
 });
 
 //Could change this to run on window resize.
@@ -32,10 +40,10 @@ $( window ).resize(function() {
     var width = $(window).width();
 
     $('iframe').css('height', height * 0.8 | 0);
-    $('iframe').css('width', width - 2 | 0);
+    $('iframe').css('width', width | 0);
 
     $('.hero-padding').css('height', height * 0.8 | 0);
-    $('.hero-padding').css('width', width - 2 | 0);
+    $('.hero-padding').css('width', width | 0);
 });
 
 // All the scenes for the experience

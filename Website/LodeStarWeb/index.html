@@ -19,7 +19,7 @@
 </head>
 <body>
 
-<nav id="navbar" class="navbar navbar-inverse navbar-fixed-top">
+<nav id="navbar" class="navbar navbar-inverse navbar-fixed-top" style="z-index: 180">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -35,7 +35,6 @@
                 <li><a href="files/violet.pdf">Analysis Report</a></li>
                 <li><a href="files/evie.pdf">High Level Design Report</a></li>
                 <li><a href="https://github.com/celikkoseoglu/LodeStar">GitHub</a></li>
-                <li><a href="https://github.com/celikkoseoglu/LodeStar">GitHub</a></li>
                 <li><a href="#">Team</a></li>
             </ul>
         </div>
@@ -43,15 +42,15 @@
 </nav>
 
 <div class="hero-padding">
-    <h1 class="col-md-12 text-center">LodeStar</h1>
-    <h3 class="col-md-12 text-center">Travel With Ease</h3>
+    <h1 class="col-md-12 text-center" style="z-index: 130">LodeStar</h1>
+    <h3 class="col-md-12 text-center" style="z-index: 130">Travel With Ease</h3>
 
     <div class="col-md-12 hero-vr-view">
         <div id="vrview"></div>
     </div>
 </div>
 
-<section class="bg-light" id="about">
+<section class="bg-light section-top" id="about">
     <div class="container-fluid">
         <div class="row">
             <div class="text-center">
@@ -87,7 +86,7 @@
     </div>
 </section>
 
-<section class="bg-light" id="team">
+<section class="bg-light section-middle" id="team">
     <div class="container-fluid">
         <div class="row">
             <div class="text-center">
@@ -170,7 +169,7 @@
                     <h4>Hüseyin Beyan</h4>
                     <p class="text-muted">Lead Developer</p>
                     <ul class="list-inline social-buttons">
-                        <li><a target="_blank" class="twitter" href="http://twitter.com/celikkoseoglu"><i
+                        <li><a target="_blank" class="twitter" href="http://twitter.com/IceIceDoydum"><i
                                 class="fa fa-twitter"></i></a></li>
                         <li><a target="_blank" class="linkedin" href="http://linkedin.com/in/celikk"><i
                                 class="fa fa-linkedin"></i></a></li>
@@ -184,7 +183,7 @@
     </div>
 </section>
 
-<section class="bg-light" id="advisorandjury">
+<section class="bg-light section-middle" id="advisorandjury">
     <div class="container-fluid">
         <div class="row">
             <div class="text-center">
@@ -197,7 +196,8 @@
             <div class="col-sm-2">
                 <div class="team-member">
                     <img class="mx-auto rounded-circle"
-                         src="https://avatars0.githubusercontent.com/u/11838388?s=460&v=4" alt="">
+                         src="https://camo.githubusercontent.com/19a3c9bca5e674f457e970dda80fe70d15ab17d2/687474703a2f2f77332e63732e62696c6b656e742e6564752e74722f74722f77702d636f6e74656e742f75706c6f6164732f73697465732f322f323031362f30342f42756c656e745f4f7a6775632e6a7067"
+                         alt="">
                     <h4>Bülent Özgüç</h4>
                     <p class="text-muted">Advisor</p>
                     <ul class="list-inline social-buttons">
@@ -213,9 +213,9 @@
             <div class="col-sm-2">
                 <div class="team-member">
                     <img class="mx-auto rounded-circle"
-                         src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAAdsAAAAJGEzZGYyZWVhLWE2N2UtNGFiNi05NzVjLTU2YmUzODFmMzcyNQ.jpg"
+                         src="https://camo.githubusercontent.com/f238cb4405dde5f215ecd3abc0e068d3b2ac3457/687474703a2f2f77332e63732e62696c6b656e742e6564752e74722f74722f77702d636f6e74656e742f75706c6f6164732f73697465732f322f323031362f30352f63696764656d67756e64757a64656d69722e6a7067"
                          alt="">
-                    <h4>Çiğdem Gündüz Demir</h4>
+                    <h4>Çiğdem Demir</h4>
                     <p class="text-muted">Jury Member</p>
                     <ul class="list-inline social-buttons">
                         <li><a target="_blank" class="twitter" href="http://twitter.com/celikkoseoglu"><i
@@ -230,7 +230,8 @@
             <div class="col-sm-2">
                 <div class="team-member">
                     <img class="mx-auto rounded-circle"
-                         src="https://avatars3.githubusercontent.com/u/11910328?s=460&v=4" alt="">
+                         src="https://camo.githubusercontent.com/27321f49b225d640bff5e38c6476ada2337afecd/687474703a2f2f7777772e63732e62696c6b656e742e6564752e74722f7e677564756b6261792f677564756b6261792e6a7067"
+                         alt="">
                     <h4>Uğur Güdükbay</h4>
                     <p class="text-muted">Jury Member</p>
                     <ul class="list-inline social-buttons">
@@ -248,43 +249,67 @@
     </div>
 </section>
 
-<section class="bg-light" id="concept">
-    <div class="container">
-        <div class="row col-centered">
+<section class="bg-light section-bottom" id="concept">
+
+    <div class="container-fluid">
+        <div class="row">
             <div class="text-center">
                 <h2 class="section-heading text-uppercase">THE CONCEPT</h2>
-                <h3 class="section-subheading text-muted">take a sneek peek</h3>
+                <h3 class="section-subheading text-muted">take a sneak peek</h3>
             </div>
         </div>
-        <div class="card col-md-3">
-            <img class="card-img-top" src="images/mockups/Home.png" alt="Home Page Mockup" style="width:100%">
-            <div class="card-body">
-                <br>
-                <h4 class="card-title">Home Page</h4>
-                <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
+        <div class="row">
+
+            <div class=""></div>
+
+            <div class="card col-md-3 extra-padded-col">
+                <img class="card-img-top" src="images/mockups/Home.png" alt="Home Page Mockup" style="width:100%">
+                <div class="card-body">
+                    <br>
+                    <h4 class="card-title">Home Page</h4>
+                    <hr>
+                    <p class="card-text">Every app needs a landing page. From this page, the user will be able to jump
+                        right in by scanning the QR code on the boarding pass. If the user has VR glasses, LodeStar will
+                        provide an even better experience.</p>
+                </div>
             </div>
-        </div>
-        <div class="col-md-1"></div>
-        <div class="card col-md-3">
-            <img class="card-img-top" src="images/mockups/TripArrival.png" alt="Trip Arrival Page Mockup"
-                 style="width:100%">
-            <div class="card-body">
-                <br>
-                <h4 class="card-title">Trip Page</h4>
-                <p class="card-text">The user will be able to select any of the cards to obtain information about the
-                    weather, currency rates, places to see, where to buy a SIM card, etc.</p>
+            <div class="card col-md-3 extra-padded-col">
+                <img class="card-img-top" src="images/mockups/TripArrival.png" alt="Home Page Mockup"
+                     style="width:100%">
+                <div class="card-body">
+                    <br>
+                    <h4 class="card-title">Trip Page</h4>
+                    <hr>
+                    <p class="card-text">After scanning the boarding pass or entering details manually, the user will be
+                        able to learn highly relevant information about the destination country. Transport, food,
+                        touristic attractions, nearby places and a lot more.</p>
+                </div>
             </div>
-        </div>
-        <div class="col-md-1"></div>
-        <div class="card col-md-3">
-            <img class="card-img-top" src="images/mockups/FlightDetails.png" alt="Flight Details Page Mockup"
-                 style="width:100%">
-            <div class="card-body">
-                <br>
-                <h4 class="card-title">Flight Information Page</h4>
-                <p class="card-text">The user will see the local time in both countries, both now and the time of
-                    landing. Other details like flight speed and type of plane can be viewed here as well</p>
+            <div class="card col-md-3 extra-padded-col">
+                <img class="card-img-top" src="images/mockups/FlightDetails.png" alt="Home Page Mockup"
+                     style="width:100%">
+                <div class="card-body">
+                    <br>
+                    <h4 class="card-title">Flight Info Page</h4>
+                    <hr>
+                    <p class="card-text">Some people are just more curious than others. All information available about
+                        the flight will be composed magnificently on a single page. Everything the user might want to
+                        learn about is available here.</p>
+                </div>
             </div>
+            <div class="card col-md-3 extra-padded-col">
+                <img class="card-img-top" src="images/mockups/CurrencyRates.png" alt="Home Page Mockup"
+                     style="width:100%">
+                <div class="card-body">
+                    <br>
+                    <h4 class="card-title">Currency Info Page</h4>
+                    <hr>
+                    <p class="card-text">Since LodeStar knows about your origin and destination country, currency rates
+                        can easily be obtained. Moreover, the VR mode will even guide you to the currency exchange
+                        office in the airport.</p>
+                </div>
+            </div>
+
         </div>
     </div>
 </section>
@@ -318,9 +343,9 @@
             </div>
             <div class="col-md-4">
                 <ul class="list-inline quicklinks">
-                    <li><a href="#">Maybe a Link?</a>
+                    <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Rick</a>
                     </li>
-                    <li><a href="#">Another Link?</a>
+                    <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Roll</a>
                     </li>
                 </ul>
             </div>
@@ -330,5 +355,6 @@
 
 <script src="js/vrview.js"></script>
 <script src="js/index.js"></script>
+
 </body>
 </html>
