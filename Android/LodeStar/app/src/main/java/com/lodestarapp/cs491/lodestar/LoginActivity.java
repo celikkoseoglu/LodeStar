@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
@@ -24,15 +25,26 @@ public class LoginActivity extends AppCompatActivity implements
 
     private GoogleApiClient mGoogleApiClient;
 
-
     private SignInButton signInButton;
 
-
+    private Button signInWithEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+
+        signInWithEmail = (Button) findViewById(R.id.button_email);
+
+        signInWithEmail.setOnClickListener(
+                new Button.OnClickListener(){
+                    public void onClick(View v){
+                        Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+                        startActivity(intent);
+                    }
+                }
+        );
 
         signInButton = (SignInButton) findViewById(R.id.GoogleSignInButton);
         signInButton.setOnClickListener(this);
