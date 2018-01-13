@@ -86,7 +86,7 @@ h1, h3 {
 }
 
 .card div {
-    background: #ffffff;
+    background: #fcfcfc;
     padding-left: 10px;
     padding-right: 10px;
     padding-bottom: 5px;
@@ -128,7 +128,7 @@ ul.social-buttons .github:hover, ul.social-buttons .github:focus, ul.social-butt
 }
 
 ul.social-buttons .instagram:hover, ul.social-buttons .instagram:focus, ul.social-buttons .instagram:active {
-    background-color: rgb(155, 105, 84);
+    background-color: rgb(188, 42, 141);
 }
 
 ul.social-buttons .mail:hover, ul.social-buttons .mail:focus, ul.social-buttons .mail:active {
