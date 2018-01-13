@@ -13,16 +13,6 @@
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="144dp"
-        android:layout_height="45dp"
-        android:text="Trip"
-        android:textColor="@android:color/background_light"
-        tools:layout_editor_absoluteX="120dp"
-        tools:layout_editor_absoluteY="0dp" />
+        />
 
 </android.support.constraint.ConstraintLayout>

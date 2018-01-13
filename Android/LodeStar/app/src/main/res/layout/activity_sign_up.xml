@@ -1,10 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.lodestarapp.cs491.lodestar.SignUpActivity"
+    android:orientation="vertical"
     android:background="@drawable/thy_lounge_background">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="48dp"
+        android:text="@string/app_name"
+        android:textColor="@android:color/background_light"
+        android:textSize="48sp" />
+
+    <TableLayout
+        android:layout_width="220dp"
+        android:layout_height="150dp"
+        android:layout_below="@id/textView"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/shape_sign_up"
+        android:alpha="0.4"
+        >
+        <TableRow>
+            <ImageView
+                android:src="@drawable/ic_003_user"
+                android:scaleType="fitStart"
+                android:tint="@color/colorWhite"
+                />
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:text="@string/user_name"
+                android:textColor="@color/colorWhite"
+                android:paddingTop="5dp"
+                android:layout_marginStart="10dp"
+                />
+        </TableRow>
+        <View
+            android:layout_height="0.5dp"
+            android:background="#FFFFFFFF"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp"
+            />
+        <TableRow>
+            <ImageView
+                android:src="@drawable/ic_002_mail"
+                android:scaleType="fitStart"
+                android:tint="@color/colorWhite"
+                android:layout_marginTop="5dp"
+                />
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:text="@string/user_mail"
+                android:textColor="@color/colorWhite"
+                android:paddingTop="8dp"
+                android:layout_marginStart="10dp"
+                />
+        </TableRow>
+        <View
+            android:layout_height="0.5dp"
+            android:background="#FFFFFFFF"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp"
+            />
+        <TableRow>
+            <ImageView
+                android:src="@drawable/ic_001_key"
+                android:scaleType="fitStart"
+                android:tint="@color/colorWhite"
+                />
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:text="@string/user_password"
+                android:textColor="@color/colorWhite"
+                android:paddingTop="5dp"
+                android:layout_marginStart="10dp" />
+        </TableRow>
+        <View
+            android:layout_height="0.5dp"
+            android:background="#FFFFFFFF"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp"
+            />
+        <TableRow>
+            <ImageView
+                android:src="@drawable/ic_001_key"
+                android:scaleType="fitStart"
+                android:tint="@color/colorWhite"
+                />
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:text="@string/user_retype_password"
+                android:textColor="@color/colorWhite"
+                android:layout_marginStart="10dp"
+                />
+        </TableRow>
+    </TableLayout>
+</RelativeLayout>

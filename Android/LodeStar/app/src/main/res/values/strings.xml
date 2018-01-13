@@ -5,6 +5,9 @@
     <string name="user_has_account_sign_in">"Already have an account</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_trip">TripActivity</string>
-
+	<string name="user_name">Username</string>
+    <string name="user_mail">E-Mail</string>
+    <string name="user_password">Password</string>
+    <string name="user_retype_password">Retype Password</string>
 
 </resources>
