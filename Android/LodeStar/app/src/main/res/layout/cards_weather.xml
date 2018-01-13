@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="368dp"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="136dp" >
+
+        <ImageView
+            android:id="@+id/weather_picture"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:background="@color/colorBlack"/>
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:textColor="@color/colorBlack"
+            android:text="@string/today_weather"
+            android:layout_gravity="top"
+            android:layout_marginStart="100dp"
+            />
+
+        <TextView
+            android:id="@+id/weather_feels_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/weather_feels_like"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="100dp"
+            android:layout_marginStart="100dp"
+            android:textColor="@color/colorForestGreen"/>
+
+        <TextView
+            android:id="@+id/weather_humidity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="@string/weather_humidity"
+            android:layout_marginTop="50dp"
+            android:textColor="@color/colorRoyalBlue"
+            />
+
+    </android.support.v7.widget.CardView>
+</android.support.constraint.ConstraintLayout>

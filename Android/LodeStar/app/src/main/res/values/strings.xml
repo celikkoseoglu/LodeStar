@@ -9,5 +9,9 @@
     <string name="user_mail">E-Mail</string>
     <string name="user_password">Password</string>
     <string name="user_retype_password">Retype Password</string>
+    <string name="weather_activity">Weather Information</string>
+    <string name="today_weather">Today is</string>
+    <string name="weather_feels_like">feels like</string>
+    <string name="weather_humidity">humidity</string>
 
 </resources>
