@@ -3,6 +3,8 @@
     <string name="app_name">LodeStar</string>
     <string name="sign_up_email">Sign up using email</string>
     <string name="user_has_account_sign_in">"Already have an account</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_trip">TripActivity</string>
 
 
 </resources>
