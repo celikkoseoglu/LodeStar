@@ -25,6 +25,15 @@ public class WeatherInformationActivity extends Activity {
 
         //Adapter
 
+        String requestFromTheUrl = "http://localhost:3001?dataType=weather&city=London";
+
+
+        sendRequestToServer(requestFromTheUrl);
+
+    }
+
+    private void sendRequestToServer(String requestFromTheUrl) {
+
     }
 
 }
