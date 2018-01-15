@@ -24,6 +24,10 @@
         <activity
             android:name=".TripActivity"
             android:label="@string/title_activity_trip"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".HomeActivity"
+            android:label="@string/title_activity_home"
             android:theme="@style/AppTheme"></activity>
     </application>
 

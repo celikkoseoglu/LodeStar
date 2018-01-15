@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/the_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:elevation="4dp"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Home"
+                android:textColor="@android:color/background_light"
+                android:textSize="20sp"/>
+
+
+        </android.support.v7.widget.Toolbar>
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\nTap here to scan a boarding pass\n"
+            android:textAllCaps="false"
+            android:drawableBottom="@drawable/qr"
+            android:alpha="0.8"
+            android:layout_below="@id/the_toolbar"
+            android:textSize="17sp"
+            />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="    Enter Flight Number"
+            android:textAllCaps="false"
+            android:background="@android:color/background_light"
+            android:gravity="left|center_vertical"
+            android:layout_below="@id/button2"
+            android:drawableRight="@drawable/ic_arrow_right"
+            android:drawableLeft="@drawable/blue"
+            android:paddingLeft="10dp"
+            />
+
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="    Manually Search for Destination"
+            android:textAllCaps="false"
+            android:background="@android:color/background_light"
+            android:gravity="left|center_vertical"
+            android:layout_below="@id/button3"
+            android:drawableRight="@drawable/ic_arrow_right"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:drawableLeft="@drawable/red"
+            android:paddingLeft="10dp"
+            />
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="    View Your Trip History"
+            android:textAllCaps="false"
+            android:background="@android:color/background_light"
+            android:gravity="left|center_vertical"
+            android:layout_below="@id/button4"
+            android:drawableRight="@drawable/ic_arrow_right"
+            android:drawableLeft="@drawable/green"
+            android:paddingLeft="10dp"
+            />
+
+        <Button
+            android:id="@+id/button6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/VR_AD"
+            android:textAllCaps="false"
+            android:alpha="0.8"
+            android:drawableLeft="@drawable/ic_cardboard"
+            android:layout_below="@id/button5"
+
+            >
+
+        </Button>
+
+
+
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>
