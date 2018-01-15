@@ -27,6 +27,7 @@
             android:name=".TripActivity"
             android:label="@string/title_activity_trip"
             android:theme="@style/AppTheme"></activity>
+        <activity android:name=".WeatherInformationActivity" />
     </application>
 
 </manifest>
