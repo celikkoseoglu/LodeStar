@@ -51,8 +51,8 @@
             android:scaleType="centerCrop"
             android:src="@drawable/thy_lounge_background"/>
 
-        <ViewSwitcher
-            android:id="@+id/switcher"
+        <ViewFlipper
+            android:id="@+id/flipper"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -124,133 +124,144 @@
 
             </RelativeLayout>
 
-        </ViewSwitcher>
+        </ViewFlipper>
 
     </android.support.v7.widget.CardView>
 
-   <TableLayout
-       android:id="@+id/tableLayout"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:layout_below="@id/my_card"
-       tools:layout_editor_absoluteX="0dp"
-       tools:layout_editor_absoluteY="242dp">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/my_card">
 
-       <TableRow
-           android:id="@+id/row1"
-           android:layout_width="wrap_content"
+
+
+
+
+
+       <TableLayout
+           android:id="@+id/tableLayout"
+           android:layout_width="match_parent"
            android:layout_height="wrap_content"
-           android:layout_weight="0.3">
+           android:layout_below="@id/my_card"
+           tools:layout_editor_absoluteX="0dp"
+           tools:layout_editor_absoluteY="242dp">
 
-           <Button
-               android:id="@+id/transport"
-               android:layout_width="0dip"
-               android:layout_weight="1"
-               android:layout_height="fill_parent"
-               android:text="Transport Options"
-               android:textAllCaps="false"
-               android:drawableTop="@drawable/ic_001_bus"
-               android:alpha="0.7"/>
+           <TableRow
+               android:id="@+id/row1"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_weight="0.3">
 
-           <Button
-               android:id="@+id/weather"
-               android:layout_width="0dip"
-               android:layout_weight="1"
-               android:layout_height="fill_parent"
-               android:text="Weather"
-               android:textAllCaps="false"
-               android:drawableTop="@drawable/ic_004_sun"
-               android:alpha="0.7"/>
+               <Button
+                   android:id="@+id/transport"
+                   android:layout_width="0dip"
+                   android:layout_weight="1"
+                   android:layout_height="fill_parent"
+                   android:text="Transport Options"
+                   android:textAllCaps="false"
+                   android:drawableTop="@drawable/ic_001_bus"
+                   android:alpha="0.7"/>
 
-           <Button
-               android:id="@+id/flightinfo"
-               android:layout_width="0dip"
-               android:layout_weight="1"
-               android:layout_height="fill_parent"
-               android:text="Flight Information"
-               android:textAllCaps="false"
-               android:drawableTop="@drawable/ic_002_travel"
-               android:alpha="0.7"/>
-       </TableRow>
+               <Button
+                   android:id="@+id/weather"
+                   android:layout_width="0dip"
+                   android:layout_weight="1"
+                   android:layout_height="fill_parent"
+                   android:text="Weather"
+                   android:textAllCaps="false"
+                   android:drawableTop="@drawable/ic_004_sun"
+                   android:alpha="0.7"/>
 
-       <TableRow
-           android:id="@+id/row2"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_weight="0.3">
+               <Button
+                   android:id="@+id/flightinfo"
+                   android:layout_width="0dip"
+                   android:layout_weight="1"
+                   android:layout_height="fill_parent"
+                   android:text="Flight Information"
+                   android:textAllCaps="false"
+                   android:drawableTop="@drawable/ic_002_travel"
+                   android:alpha="0.7"/>
+           </TableRow>
 
-           <Button
-               android:id="@+id/shopping"
-               android:layout_width="0dip"
-               android:layout_weight="1"
-               android:layout_height="fill_parent"
-               android:text="Shopping"
-               android:textAllCaps="false"
-               android:drawableTop="@drawable/ic_001_shopping_bag"
-               android:alpha="0.7"/>
+           <TableRow
+               android:id="@+id/row2"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_weight="0.3">
 
-           <Button
-               android:id="@+id/lounge"
-               android:layout_width="0dip"
-               android:layout_weight="1"
-               android:layout_height="fill_parent"
-               android:text="Lounge Services"
-               android:textAllCaps="false"
-               android:drawableTop="@drawable/ic_002_vip"
-               android:alpha="0.7"/>
+               <Button
+                   android:id="@+id/shopping"
+                   android:layout_width="0dip"
+                   android:layout_weight="1"
+                   android:layout_height="fill_parent"
+                   android:text="Shopping"
+                   android:textAllCaps="false"
+                   android:drawableTop="@drawable/ic_001_shopping_bag"
+                   android:alpha="0.7"/>
 
-           <Button
-               android:id="@+id/restaurants"
-               android:layout_width="0dip"
-               android:layout_weight="1"
-               android:layout_height="fill_parent"
-               android:text="Restaurants"
-               android:textAllCaps="false"
-               android:drawableTop="@drawable/ic_003_cutlery"
-               android:alpha="0.7"/>
+               <Button
+                   android:id="@+id/lounge"
+                   android:layout_width="0dip"
+                   android:layout_weight="1"
+                   android:layout_height="fill_parent"
+                   android:text="Lounge Services"
+                   android:textAllCaps="false"
+                   android:drawableTop="@drawable/ic_002_vip"
+                   android:alpha="0.7"/>
 
-       </TableRow>
+               <Button
+                   android:id="@+id/restaurants"
+                   android:layout_width="0dip"
+                   android:layout_weight="1"
+                   android:layout_height="fill_parent"
+                   android:text="Restaurants"
+                   android:textAllCaps="false"
+                   android:drawableTop="@drawable/ic_003_cutlery"
+                   android:alpha="0.7"/>
 
-       <TableRow
-           android:id="@+id/row3"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_weight="0.3">
-           android:layout_below="@id/car"
+           </TableRow>
 
-           <Button
-               android:id="@+id/living"
-               android:layout_width="0dip"
-               android:layout_weight="1"
-               android:layout_height="fill_parent"
-               android:text="Living Expenses"
-               android:textAllCaps="false"
-               android:drawableTop="@drawable/ic_001_wallet"
-               android:alpha="0.7"/>
+           <TableRow
+               android:id="@+id/row3"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_weight="0.3">
+               android:layout_below="@id/car"
 
-           <Button
-               android:id="@+id/places"
-               android:layout_width="0dip"
-               android:layout_weight="1"
-               android:layout_height="fill_parent"
-               android:text="Places To \nSee"
-               android:textAllCaps="false"
-               android:drawableTop="@drawable/ic_002_picnic_table"
-               android:alpha="0.7"/>
+               <Button
+                   android:id="@+id/living"
+                   android:layout_width="0dip"
+                   android:layout_weight="1"
+                   android:layout_height="fill_parent"
+                   android:text="Living Expenses"
+                   android:textAllCaps="false"
+                   android:drawableTop="@drawable/ic_001_wallet"
+                   android:alpha="0.7"/>
 
-           <Button
-               android:id="@+id/accomodation"
-               android:layout_width="0dip"
-               android:layout_weight="1"
-               android:layout_height="fill_parent"
-               android:text="Accomodation"
-               android:textAllCaps="false"
-               android:drawableTop="@drawable/ic_003_hotel"
-               android:alpha="0.7"/>
+               <Button
+                   android:id="@+id/places"
+                   android:layout_width="0dip"
+                   android:layout_weight="1"
+                   android:layout_height="fill_parent"
+                   android:text="Places To \nSee"
+                   android:textAllCaps="false"
+                   android:drawableTop="@drawable/ic_002_picnic_table"
+                   android:alpha="0.7"/>
 
-       </TableRow>
+               <Button
+                   android:id="@+id/accomodation"
+                   android:layout_width="0dip"
+                   android:layout_weight="1"
+                   android:layout_height="fill_parent"
+                   android:text="Accomodation"
+                   android:textAllCaps="false"
+                   android:drawableTop="@drawable/ic_003_hotel"
+                   android:alpha="0.7"/>
 
-   </TableLayout>
+           </TableRow>
+
+       </TableLayout>
+        </ScrollView>
     </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

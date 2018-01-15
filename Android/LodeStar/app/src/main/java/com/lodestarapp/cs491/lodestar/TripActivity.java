@@ -9,10 +9,11 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ViewFlipper;
 import android.widget.ViewSwitcher;
 
 public class TripActivity extends AppCompatActivity {
-    public ViewSwitcher view_switcher;
+    public ViewFlipper view_flipper;
     public View firstView;
     public View secondView;
 
@@ -25,20 +26,27 @@ public class TripActivity extends AppCompatActivity {
 
 
 
-        view_switcher =   (ViewSwitcher)findViewById(R.id.switcher);
+        view_flipper =   (ViewFlipper) findViewById(R.id.flipper);
+
+
+
         CardView card = (CardView) findViewById(R.id.my_card);
         firstView= findViewById(R.id.view1);
         secondView = findViewById(R.id.view2);
         card.setOnTouchListener(new OnSwipeTouchListener(TripActivity.this) {
             public void onSwipeLeft() {
-                if (view_switcher.getCurrentView() != secondView){
-                    view_switcher.showNext();
+                if (view_flipper.getCurrentView() != secondView){
+                    view_flipper.setInAnimation(TripActivity.this, R.anim.left_enter);
+                    view_flipper.setOutAnimation(TripActivity.this, R.anim.left_out);
+                    view_flipper.showNext();
                 }
             }
 
             public void onSwipeRight() {
-                if (view_switcher.getCurrentView() != firstView){
-                    view_switcher.showPrevious();
+                if (view_flipper.getCurrentView() != firstView){
+                    view_flipper.setOutAnimation(TripActivity.this, R.anim.right_out);
+                    view_flipper.setInAnimation(TripActivity.this, R.anim.right_enter);
+                    view_flipper.showPrevious();
                 }
             }
         });
