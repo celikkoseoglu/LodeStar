@@ -50,4 +50,16 @@
         android:clickable="true"
         android:focusable="true" />
 
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/login_text"
+        android:layout_alignStart="@+id/login_text"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="17dp"
+        android:layout_marginStart="17dp"
+        android:onClick="weatherStart"
+        android:text="Weather" />
+
 </RelativeLayout>
