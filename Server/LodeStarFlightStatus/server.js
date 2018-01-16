@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
         response.on('end', function() {
             jsonMessage = JSON.parse(replyMessage);
 
-            res.send(JSON.stringify(jsonMessage["list"][0], null, 4));
+            res.send(JSON.stringify(jsonMessage, null, 4));
 
             //console.log(jsonMessage["list"][1]);
 
@@ -106,4 +106,4 @@ app.get('/', (req, res) => {
     }
 });
 
-app.listen(3001, () => console.log('Example app listening on port 3000!'));
+app.listen(3001, () => console.log('Example app listening on port 3001!'));

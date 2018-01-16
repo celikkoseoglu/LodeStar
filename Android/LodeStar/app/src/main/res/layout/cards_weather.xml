@@ -18,6 +18,7 @@
             android:background="@color/colorBlack"/>
         
         <TextView
+            android:id="@+id/weather_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="100dp"
