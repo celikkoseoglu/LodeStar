@@ -30,8 +30,9 @@
         <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity android:name=".WeatherInformationActivity" />
+        <activity android:name=".Models.CurrencyActivity"></activity>
     </application>
 
 </manifest>
