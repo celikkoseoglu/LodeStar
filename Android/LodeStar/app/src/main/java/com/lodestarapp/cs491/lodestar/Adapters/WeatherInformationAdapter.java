@@ -70,9 +70,9 @@ public class WeatherInformationAdapter extends RecyclerView.Adapter<WeatherInfor
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.weatherInfoView.setText(description.get(0));
-        holder.humidityView.setText("" + humidity.get(0));
-        holder.temperatureView.setText("" + temperature.get(0));
+        holder.weatherInfoView.setText(description.get(position));
+        holder.humidityView.setText("" + humidity.get(position));
+        holder.temperatureView.setText("" + temperature.get(position));
         holder.weatherView = null;
     }
 

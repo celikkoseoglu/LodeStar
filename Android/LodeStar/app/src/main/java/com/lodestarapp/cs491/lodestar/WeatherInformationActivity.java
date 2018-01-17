@@ -101,15 +101,23 @@ public class WeatherInformationActivity extends Activity {
                     double humidity;
                     String weatherDescription;
 
-                    for (int i = 0; i < 1; i++) {
+                    for (int i = 0; i < 10; i++) {
                         theList = jsonListArray.getJSONObject(i);
+
+                        Log.i(TAG, "List " + i + " contains: " + theList.toString());
 
                         main = theList.getJSONObject("main");
                         temp = main.getDouble("temp");
                         humidity = main.getDouble("humidity");
 
+
+
                         weather = theList.getJSONArray("weather");
-                        weatherDescription = weather.getJSONObject(i).getString("description");
+                        weatherDescription = weather.getJSONObject(0).getString("description");
+
+
+
+                        Log.i(TAG, "List contains: " + theList.toString());
 
                         Log.i(TAG, "adapterWeather");
 
@@ -118,7 +126,7 @@ public class WeatherInformationActivity extends Activity {
                         Log.i(TAG, weatherDescription);
 
                         temperatureList.add(i, temp);
-                        humidityList.add(i, temp);
+                        humidityList.add(i, humidity);
                         descriptionList.add(i, weatherDescription);
 
                     }
