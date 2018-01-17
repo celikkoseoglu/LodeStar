@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="100dp"
             android:textColor="@color/colorBlack"
-            android:text="@string/today_weather"
+            android:text="@string/other_days_weather"
             android:layout_gravity="top"
             android:layout_marginStart="100dp"
             />
