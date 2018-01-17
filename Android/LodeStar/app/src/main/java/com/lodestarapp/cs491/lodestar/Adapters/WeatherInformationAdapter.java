@@ -1,7 +1,6 @@
 package com.lodestarapp.cs491.lodestar.Adapters;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,14 +9,11 @@ import android.widget.TextView;
 
 import com.lodestarapp.cs491.lodestar.Models.WeatherInformation;
 import com.lodestarapp.cs491.lodestar.R;
-
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.List;
 
-public class WeatherInformationAdapter extends RecyclerView.Adapter<WeatherInformationAdapter.ViewHolder> {
+public class WeatherInformationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private JSONObject weatherInformationFromServer;
     private WeatherInformation[] weatherInformation;
@@ -25,6 +21,9 @@ public class WeatherInformationAdapter extends RecyclerView.Adapter<WeatherInfor
     private List<String> description;
     private List<Double> temperature;
     private List<Double> humidity;
+
+    private static final int TODAY = 0;
+    private static final int OTHER = 1;
 
     private static final String TAG = "weatherAdapterMessage";
 
@@ -41,14 +40,27 @@ public class WeatherInformationAdapter extends RecyclerView.Adapter<WeatherInfor
         //parseTheJSONResponse(weatherInformationFromServer);
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
+    static class TodaysWeatherViewHolder extends RecyclerView.ViewHolder {
+
+        ImageView weatherTodayView;
+        TextView weatherInfoToday;
+
+        TodaysWeatherViewHolder(View itemView){
+            super(itemView);
+
+            this.weatherTodayView = itemView.findViewById(R.id.weather_picture_today);
+            this.weatherInfoToday = itemView.findViewById(R.id.weather_info_today);
+        }
+    }
+
+    static class OtherDaysViewHolder extends RecyclerView.ViewHolder {
 
         ImageView weatherView;
         TextView weatherInfoView;
         TextView temperatureView;
         TextView humidityView;
 
-        ViewHolder(View itemView) {
+        OtherDaysViewHolder(View itemView) {
             super(itemView);
 
             this.weatherView = itemView.findViewById(R.id.weather_picture);
@@ -61,23 +73,50 @@ public class WeatherInformationAdapter extends RecyclerView.Adapter<WeatherInfor
 
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cards_weather,
-                parent, false);
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        return new ViewHolder(view);
+        RecyclerView.ViewHolder viewHolder = null;
+
+        switch (viewType){
+            case TODAY:
+                View todayView = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_weather_today,
+                        parent, false);
+                viewHolder = new TodaysWeatherViewHolder(todayView);
+                break;
+            case OTHER:
+                View otherDaysView = LayoutInflater.from(parent.getContext()).inflate(R.layout.cards_weather,
+                        parent, false);
+                viewHolder = new OtherDaysViewHolder(otherDaysView);
+        }
+
+        return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.weatherInfoView.setText(description.get(position));
-        holder.humidityView.setText("" + humidity.get(position));
-        holder.temperatureView.setText("" + temperature.get(position));
-        holder.weatherView = null;
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        switch (holder.getItemViewType()){
+            case TODAY:
+                ((TodaysWeatherViewHolder) holder).weatherInfoToday.setText(description.get(0));
+                break;
+            case OTHER:
+                ((OtherDaysViewHolder) holder).weatherInfoView.setText(description.get(position));
+                ((OtherDaysViewHolder) holder).humidityView.setText(String.format("%s",
+                        humidity.get(position)));
+                ((OtherDaysViewHolder) holder).temperatureView.setText(String.format("%s",
+                        temperature.get(position)));
+                break;
+        }
     }
 
     @Override
     public int getItemCount() {
         return weatherInformation.length;
+    }
+
+    @Override
+    public int getItemViewType(int position){
+        if (position == TODAY)
+            return TODAY;
+        return OTHER;
     }
 }
