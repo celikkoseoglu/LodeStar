@@ -1,59 +1,57 @@
-const readline = require('readline');
 const http = require('http');
-const moment = require('moment');
-
+const express = require('express');
+const app = express();
 
 const APIKey = "c00ba395bae7607aaa0cf79dd388bb2d";
 
-const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+app.get('/', (req, res) => {
 
+    let request = http.request("http://api.openweathermap.org/data/2.5/forecast?q=" + req.query.city + "&appid=" + APIKey, function(response) {
 
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
-
-rl.question('Enter city name: ', (city) => {
-
-    let request = http.request("http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIKey, function(response){
-
-        console.log("Weather information for: " + city);
+    console.log("Weather information for: " + req.query.city);
 
         let replyMessage = "";
         let jsonMessage  = "";
 
-        response.on('data', function(data){
+        response.on('data', function(data) {
             replyMessage = replyMessage + data;
         });
 
-        response.on('end', function(){
+        response.on('end', function() {
             jsonMessage = JSON.parse(replyMessage);
-            //console.log(JSON.stringify(jsonMessage, null, 4));
+
+            var responseMessage = [];
+
+            //if the next available weather info is at 15:00, skip the day and start searching for the other dates after the first day
+            var i = (24 - (new Date(jsonMessage["list"][0]["dt_txt"])).getHours()) / 3 + 4;
+            console.log((new Date(jsonMessage["list"][0]["dt_txt"])).getHours());
+
+            responseMessage.push(jsonMessage["list"][0]);
+
+            for (i; i < jsonMessage["list"].length; i+=8) {
+                responseMessage.push((jsonMessage["list"][i]));
+                //var weatherDate = new Date(jsonMessage["list"][i]["dt_txt"]);
+                //console.log(weatherDate.getHours());
+            }
+
+            console.log(responseMessage);
+
+            res.send(JSON.stringify(responseMessage, null, 4));
 
             //console.log(jsonMessage["list"][1]);
-
-            let date1 = jsonMessage["list"][0].dt;
-
-            let temp1C = kelvinTo(0, jsonMessage["list"][0].main["temp"]);
-            let temp1K = kelvinTo(1, jsonMessage["list"][0].main["temp"]);
-
-            console.log(days[moment.unix(date1).day() - 1] + " " + parseFloat(temp1C).toFixed(2) +
-                "C , " + parseFloat(temp1K).toFixed(2) + "F");
         });
-
-        //console.log("" + ${jsonMessage.list.dt});
 
     });
 
-request.end();
+    request.end();
+    
+});
+
+app.listen(3005, () => console.log('LodeStar Weather listening on port 3005!'));
 
 //kelvin to celcius - fahrenheidt
 //unix time to date
 //feels like temperature
-
-rl.close();
-});
-
 function kelvinTo(what, temp) {
     if (what === 0)
         return temp - 273.15;
