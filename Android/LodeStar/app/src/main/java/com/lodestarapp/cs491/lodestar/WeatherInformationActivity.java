@@ -1,8 +1,7 @@
 package com.lodestarapp.cs491.lodestar;
 
-import android.app.Activity;
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -12,26 +11,28 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.lodestarapp.cs491.lodestar.Adapters.WeatherInformationAdapter;
+import com.lodestarapp.cs491.lodestar.Models.WeatherInformation;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-public class WeatherInformationActivity extends Activity {
+public class WeatherInformationActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
-    private List<String> descriptionList = new ArrayList<>();
-    private List<Double> temperatureList = new ArrayList<>();
-    private List<Double> humidityList = new ArrayList<>();
+    private List<WeatherInformation> weatherInformationList = new ArrayList<>();
 
     private static final String TAG = "theMessage";
 
@@ -47,19 +48,13 @@ public class WeatherInformationActivity extends Activity {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         //Request Weather Information from the Server
-        String requestFromTheUrl = "http://10.0.2.2:3001?dataType=weather&city=London";
+        String requestFromTheUrl = "http://lodestarapp.com:3005/?city=London";
         sendRequestToServer(requestFromTheUrl);
 
         Log.i(TAG, "hi");
 
-        for (int i = 0; i < 5; i++) {
-            descriptionList.add("");
-            temperatureList.add(0.0);
-            humidityList.add(0.0);
-        }
-
         //Adapter
-        mAdapter = new WeatherInformationAdapter(descriptionList, temperatureList, humidityList);
+        mAdapter = new WeatherInformationAdapter(weatherInformationList);
         mRecyclerView.setAdapter(mAdapter);
 
     }
@@ -67,68 +62,63 @@ public class WeatherInformationActivity extends Activity {
     public void sendRequestToServer(String requestFromTheUrl) {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
 
-        final JSONObject[] responseFromServer = new JSONObject[1];
+        final JSONArray[] responseFromServer = new JSONArray[1];
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, requestFromTheUrl, null, new Response.Listener<JSONObject>() {
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, requestFromTheUrl, null, new Response.Listener<JSONArray>() {
             @Override
-            public void onResponse(JSONObject response) {
+            public void onResponse(JSONArray response) {
                 Log.i(TAG, response.toString());
                 responseFromServer[0] = response;
 
                 parseTheJSONResponse(responseFromServer[0]);
 
-                //mAdapter = new WeatherInformationAdapter(responseFromServer[0]);
-                //mRecyclerView.setAdapter(mAdapter);
-
             }
 
-            private void parseTheJSONResponse(JSONObject weatherInformationFromServer) {
-                JSONArray jsonListArray;
-
-                //For now, take the first five
-
+            private void parseTheJSONResponse(JSONArray weatherInformationFromServer) {
                 try {
                     Log.i(TAG, "adapterWeather");
-                    Log.i(TAG, weatherInformationFromServer.toString());
-                    jsonListArray = weatherInformationFromServer.getJSONArray("list");
-                    Log.i(TAG, jsonListArray.toString());
+                    Log.i(TAG, weatherInformationFromServer.getJSONObject(0).getString("dt_txt"));
+                    Log.i(TAG, weatherInformationFromServer.getJSONObject(1).getString("dt_txt"));
+                    Log.i(TAG, weatherInformationFromServer.getJSONObject(2).getString("dt_txt"));
+                    Log.i(TAG, weatherInformationFromServer.getJSONObject(3).getString("dt_txt"));
+                    Log.i(TAG, weatherInformationFromServer.getJSONObject(4).getString("dt_txt"));
+                    Log.i(TAG, weatherInformationFromServer.getJSONObject(5).getString("dt_txt"));
 
-                    JSONObject theList;
+                    Log.i(TAG, weatherInformationFromServer.getJSONObject(0).getJSONObject("main").getString("temp"));
+
+                    JSONObject process;
                     JSONObject main;
                     JSONArray weather;
 
+                    SimpleDateFormat simpleInputDate = new SimpleDateFormat("yyyy-mm-dd");
+                    Date dateToConvertToFullName;
+                    SimpleDateFormat simpleOutputDate = new SimpleDateFormat("EEEE");
+
+                    String date;
                     double temp;
                     double humidity;
                     String weatherDescription;
 
-                    for (int i = 0; i < 10; i++) {
-                        theList = jsonListArray.getJSONObject(i);
+                    for (int i = 0; i < 6; i++) {
+                        process = weatherInformationFromServer.getJSONObject(i);
+                        main = process.getJSONObject("main");
+                        weather = process.getJSONArray("weather");
 
-                        Log.i(TAG, "List " + i + " contains: " + theList.toString());
-
-                        main = theList.getJSONObject("main");
+                        date = process.getString("dt_txt");
                         temp = main.getDouble("temp");
                         humidity = main.getDouble("humidity");
 
-
-
-                        weather = theList.getJSONArray("weather");
                         weatherDescription = weather.getJSONObject(0).getString("description");
 
+                        try {
+                            dateToConvertToFullName = simpleInputDate.parse(date);
+                            date = simpleOutputDate.format(dateToConvertToFullName);
+                        }catch (ParseException parseException){
+                            parseException.printStackTrace();
+                        }
 
-
-                        Log.i(TAG, "List contains: " + theList.toString());
-
-                        Log.i(TAG, "adapterWeather");
-
-                        Log.i(TAG, "" + temp);
-                        Log.i(TAG, "" + humidity);
-                        Log.i(TAG, weatherDescription);
-
-                        temperatureList.add(i, temp);
-                        humidityList.add(i, humidity);
-                        descriptionList.add(i, weatherDescription);
-
+                        weatherInformationList.add(i,
+                                new WeatherInformation(date, weatherDescription, temp, humidity));
                     }
                 }catch (JSONException jsonException){
                     Log.e(TAG, "JSON Parsing error");
@@ -148,6 +138,6 @@ public class WeatherInformationActivity extends Activity {
                 responseFromServer[0] = null;
             }
         });
-        requestQueue.add(jsonObjectRequest);
+        requestQueue.add(jsonArrayRequest);
     }
 }

@@ -16,28 +16,16 @@ import java.util.List;
 public class WeatherInformationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private JSONObject weatherInformationFromServer;
-    private WeatherInformation[] weatherInformation;
 
-    private List<String> description;
-    private List<Double> temperature;
-    private List<Double> humidity;
+    private List<WeatherInformation> weatherInformationList;
 
     private static final int TODAY = 0;
     private static final int OTHER = 1;
 
     private static final String TAG = "weatherAdapterMessage";
 
-    public WeatherInformationAdapter(List<String> description, List<Double> temperature,
-                                     List<Double> humidity){
-
-        this.description = description;
-        this.temperature = temperature;
-        this.humidity = humidity;
-
-        this.weatherInformationFromServer = weatherInformationFromServer;
-
-        weatherInformation = new WeatherInformation[5];
-        //parseTheJSONResponse(weatherInformationFromServer);
+    public WeatherInformationAdapter(List<WeatherInformation> weatherInformationList){
+        this.weatherInformationList = weatherInformationList;
     }
 
     static class TodaysWeatherViewHolder extends RecyclerView.ViewHolder {
@@ -96,21 +84,23 @@ public class WeatherInformationAdapter extends RecyclerView.Adapter<RecyclerView
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         switch (holder.getItemViewType()){
             case TODAY:
-                ((TodaysWeatherViewHolder) holder).weatherInfoToday.setText(description.get(0));
+                ((TodaysWeatherViewHolder) holder).weatherInfoToday.setText(weatherInformationList.
+                        get(0).getDescription());
                 break;
             case OTHER:
-                ((OtherDaysViewHolder) holder).weatherInfoView.setText(description.get(position));
+                ((OtherDaysViewHolder) holder).weatherInfoView.setText(weatherInformationList.
+                        get(position).getDescription());
                 ((OtherDaysViewHolder) holder).humidityView.setText(String.format("%s",
-                        humidity.get(position)));
+                        weatherInformationList.get(position).getHumidity()));
                 ((OtherDaysViewHolder) holder).temperatureView.setText(String.format("%s",
-                        temperature.get(position)));
+                        weatherInformationList.get(position).getFeelsLikeTemperature()));
                 break;
         }
     }
 
     @Override
     public int getItemCount() {
-        return weatherInformation.length;
+        return weatherInformationList.size();
     }
 
     @Override

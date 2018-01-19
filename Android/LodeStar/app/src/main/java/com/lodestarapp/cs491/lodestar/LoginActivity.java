@@ -118,7 +118,7 @@ public class LoginActivity extends AppCompatActivity implements
      * Weather
      */
     public void weatherStart(View view){
-        Intent intent = new Intent(this, FlightInfoActivity.class);
+        Intent intent = new Intent(this, WeatherInformationActivity.class);
         startActivity(intent);
     }
 

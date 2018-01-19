@@ -1,13 +1,18 @@
 package com.lodestarapp.cs491.lodestar.Models;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class WeatherInformation {
 
+    private String date;
+    private String description;
     private double feelsLikeTemperature;
     private double humidity;
-    private String date;
 
-    public WeatherInformation(String date, double feelsLikeTemperature, double humidity){
+    public WeatherInformation(String date, String description, double feelsLikeTemperature, double humidity){
         this.date = date;
+        this.description = description;
         this.feelsLikeTemperature = feelsLikeTemperature;
         this.humidity = humidity;
     }
@@ -24,9 +29,7 @@ public class WeatherInformation {
         return date;
     }
 
-    public double convertKelvinTo(String type, double temp){
-        if(type.equals("C"))
-            return temp - 273.15;
-        return temp * (9/5) - 459.67;
+    public String getDescription() {
+        return description;
     }
 }
