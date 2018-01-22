@@ -14,6 +14,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.lodestarapp.cs491.lodestar.Models.WeatherInformation;
 
 
 public class LoginActivity extends AppCompatActivity implements

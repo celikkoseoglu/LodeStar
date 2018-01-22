@@ -34,7 +34,7 @@ public class TripActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trip2);
 
-        String requestFromTheUrl = "http://10.0.2.2:3001?dataType=flightInfo";
+        String requestFromTheUrl = "http://10.0.2.2:3006?dataType=flightInfo";
         sendRequestToServer(requestFromTheUrl);
 
 

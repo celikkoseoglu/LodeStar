@@ -32,7 +32,6 @@
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme" />
         <activity android:name=".WeatherInformationActivity" />
-        <activity android:name=".LoginActivity$CurrencyActivity" />
         <activity android:name=".FlightInfoActivity" >
         </activity>
     </application>
