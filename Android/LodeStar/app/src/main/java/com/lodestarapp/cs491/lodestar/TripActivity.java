@@ -1,7 +1,9 @@
 package com.lodestarapp.cs491.lodestar;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
@@ -20,6 +22,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.lodestarapp.cs491.lodestar.Models.FlightInfo;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,11 +31,13 @@ public class TripActivity extends AppCompatActivity {
     public ViewFlipper view_flipper;
     public View firstView;
     public View secondView;
+    private FlightInfo flightInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trip2);
+        flightInfo = new FlightInfo();
 
         String requestFromTheUrl = "http://10.0.2.2:3006?dataType=flightInfo";
         sendRequestToServer(requestFromTheUrl);
@@ -66,6 +71,17 @@ public class TripActivity extends AppCompatActivity {
 
     }
 
+    public void weatherStart(View view){
+        Intent intent = new Intent(this, WeatherInformationActivity.class);
+        startActivity(intent);
+    }
+
+    public void flightInfoStart(View view){
+        Intent intent = new Intent(this, FlightInfoActivity.class);
+        intent.putExtra("FLIGHT_INFO", flightInfo);
+        startActivity(intent);
+    }
+
     private static final String TAG = "theMessage";
 
     public void sendRequestToServer(String requestFromTheUrl) {
@@ -92,27 +108,46 @@ public class TripActivity extends AppCompatActivity {
                     Log.i(TAG, flightInformationFromServer.toString());
                     info = flightInformationFromServer.getString("ident");
                     TextView view =  findViewById(R.id.info_text1);
-                    view.setText("You will be boarding " + info.toString() + " from");
+                    view.setText("You will be boarding " + info + " from");
 
                     TextView view1 =  findViewById(R.id.info_text3);
-                    view1.setText("You will be boarding " + info.toString() + " to");
+                    view1.setText("You will be boarding " + info + " to");
+
+                    flightInfo.setLink("https://flightaware.com/live/flight/"+info);
 
                     JSONObject or = flightInformationFromServer.getJSONObject("origin");
                     JSONObject des = flightInformationFromServer.getJSONObject("destination");
 
+
                     TextView view2 =  findViewById(R.id.info_text5);
-                    view2.setText( or.getString("city").toString());
+                    view2.setText( or.getString("city"));
+                    flightInfo.setOrig(or.getString("city"));
+                    flightInfo.setOrig_airport(or.getString("airport_name"));
 
                     TextView view4 =  findViewById(R.id.info_text6);
-                    view4.setText( des.getString("city").toString());
+                    view4.setText( des.getString("city"));
+                    flightInfo.setDest(des.getString("city"));
+                    flightInfo.setDest_airport(des.getString("airport_name"));
+
 
                     TextView view5 =  findViewById(R.id.info_text2);
-                    view5.setText("Swipe right to see information about " + des.getString("city").toString() );
+                    view5.setText("Swipe right to see information about " + des.getString("city").toString());
 
                     TextView view3 =  findViewById(R.id.info_text4);
                     view3.setText("Swipe right to see information about " + or.getString("city").toString() );
 
                     Log.i(TAG, info.toString());
+
+                    JSONObject depTime = flightInformationFromServer.getJSONObject("filed_departure_time");
+                    flightInfo.setOrig_localtime(depTime.getString("time") + " " + depTime.getString("tz"));
+                    flightInfo.setOrig_date(depTime.getString("date"));
+
+                    JSONObject arrTime = flightInformationFromServer.getJSONObject("estimated_arrival_time");
+                    flightInfo.setDest_date(arrTime.getString("date"));
+                    flightInfo.setDest_localtime(arrTime.getString("time") + " " + arrTime.getString("tz"));
+
+                    String aircarft = flightInformationFromServer.getString("aircrafttype");
+                    flightInfo.setAircraft(aircarft);
 
 
                 }catch (JSONException jsonException){

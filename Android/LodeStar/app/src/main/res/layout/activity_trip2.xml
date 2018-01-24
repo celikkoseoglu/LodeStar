@@ -182,6 +182,7 @@
                         android:alpha="0.7"
                         android:drawableTop="@drawable/ic_004_sun"
                         android:text="Weather"
+                        android:onClick="weatherStart"
                         android:textAllCaps="false" />
 
                     <Button
@@ -192,6 +193,7 @@
                         android:alpha="0.7"
                         android:drawableTop="@drawable/ic_002_travel"
                         android:text="Flight Information"
+                        android:onClick="flightInfoStart"
                         android:textAllCaps="false" />
                 </TableRow>
 
@@ -238,7 +240,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.3">
-                    android:layout_below="@id/car"
 
                     <Button
                         android:id="@+id/living"

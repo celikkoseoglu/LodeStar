@@ -1,5 +1,7 @@
 package com.lodestarapp.cs491.lodestar;
 
+import android.content.Intent;
+import android.os.Parcel;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,68 +14,72 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.lodestarapp.cs491.lodestar.Models.FlightInfo;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class FlightInfoActivity extends AppCompatActivity {
+    FlightInfo flightInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flight_info);
 
-        String requestFromTheUrl = "http://10.0.2.2:3001?dataType=flightInfo";
-        sendRequestToServer(requestFromTheUrl);
+        Bundle data = getIntent().getExtras();
+        if (data != null) {
+            flightInfo = data.getParcelable("FLIGHT_INFO");
+        }
+
+        TextView view =  findViewById(R.id.textView1);
+        view.setText(flightInfo.getOrig());
+
+        TextView view2 =  findViewById(R.id.textView2);
+        view2.setText(flightInfo.getDest());
+
+        TextView view5 =  findViewById(R.id.textView5);
+        view5.setText(flightInfo.getOrig_airport());
+
+        TextView view6 =  findViewById(R.id.textView6);
+        view6.setText(flightInfo.getDest_airport());
+
+
+        TextView view7 =  findViewById(R.id.textView7);
+        view7.setText(flightInfo.getOrig_localtime());
+
+        TextView view8 =  findViewById(R.id.textView8);
+        view8.setText(flightInfo.getDest_localtime());
+
+        TextView view9 =  findViewById(R.id.textView9);
+        view9.setText(flightInfo.getOrig_date());
+
+        TextView view10 =  findViewById(R.id.textView10);
+        view10.setText(flightInfo.getDest_date());
+
+        TextView view20 =  findViewById(R.id.textView20);
+        view20.setText(flightInfo.getAircraft());
+
+        TextView view25 =  findViewById(R.id.textView25);
+        view25.setText("when you arrive "+ flightInfo.getDest());
+
+        String time = flightInfo.getDest_localtime();
+        int hour;
+        if(time.contains("pm")){
+            hour = 12 + Integer. parseInt(time.substring(0,2));
+        }
+        else{
+            hour = Integer. parseInt(time.substring(0,2));
+        }
+
+        hour = (hour / 3) * 3;
 
     }
-    private static final String TAG = "theMessage";
-
-    public void sendRequestToServer(String requestFromTheUrl) {
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-
-        final JSONObject[] responseFromServer = new JSONObject[1];
-
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, requestFromTheUrl, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                Log.i(TAG, response.toString());
-                responseFromServer[0] = response;
-
-                parseTheJSONResponse(responseFromServer[0]);
-
-                //mAdapter = new WeatherInformationAdapter(responseFromServer[0]);
-                //mRecyclerView.setAdapter(mAdapter);
-            }
-
-            private void parseTheJSONResponse(JSONObject flightInformationFromServer) {
-                String info;
-
-                try {
-                    Log.i(TAG, flightInformationFromServer.toString());
-                    info = flightInformationFromServer.getString("ident");
-                    Log.i(TAG, info.toString());
-                    TextView view =  findViewById(R.id.textView1);
-                    view.setText(info.toString());
-
-                }catch (JSONException jsonException){
-                    Log.e(TAG, "JSON Parsing error");
-                }
-
-
-
-                //findViewById(R.id.weather_progress_bar).setVisibility(View.GONE);
-
-            }
-        }, new Response.ErrorListener() {
-            public void onErrorResponse(VolleyError error) {
-                Log.i(TAG, "Failed to get weather information");
-                Log.i(TAG, error.getMessage());
-                Log.i(TAG, error.getLocalizedMessage());
-                Log.i(TAG, error.toString());
-            }
-        });
-        requestQueue.add(jsonObjectRequest);
+    public void tripStart(View view){
+        Intent intent = new Intent(this, TripActivity.class);
+        startActivity(intent);
     }
+
+
 }
