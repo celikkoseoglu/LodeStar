@@ -40,13 +40,15 @@
             android:id="@+id/button2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/the_toolbar"
+            android:alpha="0.8"
+            android:drawableBottom="@drawable/qr"
+            android:onClick="readQRCode"
             android:text="\nTap here to scan a boarding pass\n"
             android:textAllCaps="false"
-            android:drawableBottom="@drawable/qr"
-            android:alpha="0.8"
-            android:layout_below="@id/the_toolbar"
-            android:textSize="17sp"
-            />
+            android:textSize="17sp" />
 
         <Button
             android:id="@+id/button3"

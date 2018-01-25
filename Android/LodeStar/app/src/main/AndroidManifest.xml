@@ -4,6 +4,8 @@
     package="com.lodestarapp.cs491.lodestar">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
 
     <application
         android:allowBackup="true"
@@ -34,6 +36,7 @@
         <activity android:name=".WeatherInformationActivity" />
         <activity android:name=".FlightInfoActivity"></activity>
         <activity android:name=".CurrencyActivity"></activity>
+        <activity android:name=".QRCodeActivity" />
     </application>
 
 </manifest>

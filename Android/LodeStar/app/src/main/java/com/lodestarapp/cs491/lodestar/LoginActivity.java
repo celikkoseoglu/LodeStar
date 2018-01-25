@@ -108,12 +108,6 @@ public class LoginActivity extends AppCompatActivity implements
         startActivity(intent);
     }
 
-    /**
-     * QR Code
-     */
-    public void qrCodeStart(View view){
-
-    }
 
     /**
      * Weather
@@ -125,6 +119,11 @@ public class LoginActivity extends AppCompatActivity implements
 
     public void tripStart(View view){
         Intent intent = new Intent(this, TripActivity.class);
+        startActivity(intent);
+    }
+
+    public void homeStart(View view){
+        Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
     }
 

@@ -72,4 +72,14 @@
         android:onClick="tripStart"
         android:text="TRIP" />
 
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button2"
+        android:layout_alignEnd="@+id/button3"
+        android:layout_alignRight="@+id/button3"
+        android:onClick="homeStart"
+        android:text="HOME" />
+
 </RelativeLayout>
