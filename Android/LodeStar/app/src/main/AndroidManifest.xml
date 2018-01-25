@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.lodestarapp.cs491.lodestar" >
+    package="com.lodestarapp.cs491.lodestar">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -12,8 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:replace="android:icon, android:theme" >
-        <activity android:name=".LoginActivity" >
+        tools:replace="android:icon, android:theme">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,8 +32,8 @@
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme" />
         <activity android:name=".WeatherInformationActivity" />
-        <activity android:name=".FlightInfoActivity" >
-        </activity>
+        <activity android:name=".FlightInfoActivity"></activity>
+        <activity android:name=".CurrencyActivity"></activity>
     </application>
 
 </manifest>
