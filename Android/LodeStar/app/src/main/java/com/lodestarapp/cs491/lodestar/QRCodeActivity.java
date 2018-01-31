@@ -20,6 +20,7 @@ import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
+import com.google.zxing.pdf417.encoder.PDF417;
 
 import java.io.IOException;
 
@@ -61,10 +62,10 @@ public class QRCodeActivity extends AppCompatActivity{
     private void openCamera() {
         Log.d(TAG, "openCamera function started");
         barcodeDetector = new BarcodeDetector.Builder(this).
-                setBarcodeFormats(Barcode.PDF417).build();
+                setBarcodeFormats(Barcode.ALL_FORMATS).build();
 
-        cameraSource = new CameraSource.Builder(this, barcodeDetector)
-                .setRequestedPreviewSize(640,480).build();
+        cameraSource = new CameraSource.Builder(this, barcodeDetector).setRequestedPreviewSize(1600,1024)
+                .setAutoFocusEnabled(true).build();
 
         surfaceView.getHolder().addCallback(new SurfaceHolder.Callback() {
             @Override
@@ -100,10 +101,16 @@ public class QRCodeActivity extends AppCompatActivity{
 
             @Override
             public void receiveDetections(Detector.Detections<Barcode> detections) {
-                final SparseArray barcodeData = detections.getDetectedItems();
+                final SparseArray<Barcode> barcodeData = detections.getDetectedItems();
 
-                Toast toast =  Toast.makeText(getApplicationContext(), barcodeData.valueAt(0).toString(), Toast.LENGTH_LONG);
-                toast.show();
+
+                QRCodeActivity.this.runOnUiThread(new Runnable() {
+                    public void run() {
+                        if(barcodeData.size()>0)
+                            Toast.makeText(QRCodeActivity.this, barcodeData.valueAt(0).displayValue, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
 
                 for (int i = 0; i < barcodeData.size(); i++){
                     Log.d(TAG, barcodeData.valueAt(i).toString());
