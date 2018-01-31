@@ -58,7 +58,7 @@ public class QRCodeActivity extends AppCompatActivity{
 
     private void openCamera() {
         barcodeDetector = new BarcodeDetector.Builder(this).
-                setBarcodeFormats(Barcode.QR_CODE).build();
+                setBarcodeFormats(Barcode.PDF417).build();
 
         barcodeDetector.setProcessor(new Detector.Processor<Barcode>() {
             @Override
