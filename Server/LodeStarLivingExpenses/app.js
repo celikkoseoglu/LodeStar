@@ -1,15 +1,24 @@
 const https = require('https');
 var all = '';
+var readline = require('readline');
 
 var result = '';
+var city = 'London'
 
 //var pg = require("pg");
 //var conString = "pg://admin:guest@localhost:5432/LivingExpenses";
 //var client = new pg.Client(conString);
 //client.connect();
 
+var rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
 
-https.get('https://www.numbeo.com/cost-of-living/in/London', (res) => {
+rl.question('Enter city: ', (city) => {
+
+
+let req = https.get('https://www.numbeo.com/cost-of-living/in/'+city, (res) => {
  
   res.on('data', (d) => {
     all = all + d.toString();
@@ -31,6 +40,8 @@ https.get('https://www.numbeo.com/cost-of-living/in/London', (res) => {
 
 }).on('error', (e) => {
   console.error(e);
+});
+
 });
 
 function myFunction1(str) {
