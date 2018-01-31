@@ -85,7 +85,7 @@ public class QRCodeActivity extends AppCompatActivity{
 
                 if(ContextCompat.checkSelfPermission(QRCodeActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED){
                     try {
-                        cameraSource.start();
+                        cameraSource.start(surfaceView.getHolder());
                     }catch (IOException ioException){
                         ioException.printStackTrace();
                     }
