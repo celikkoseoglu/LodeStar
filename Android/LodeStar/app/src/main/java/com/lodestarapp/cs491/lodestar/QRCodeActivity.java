@@ -2,6 +2,7 @@ package com.lodestarapp.cs491.lodestar;
 
 import android.*;
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -37,53 +38,74 @@ public class QRCodeActivity extends AppCompatActivity{
 
         surfaceView = findViewById(R.id.surfaceView);
 
+        checkForCameraPermission();
+    }
+
+    private void checkForCameraPermission() {
         int cameraPermissionCheck = ContextCompat.
                 checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA);
 
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED){
-            barcodeDetector = new BarcodeDetector.Builder(this).
-                    setBarcodeFormats(Barcode.QR_CODE).build();
+        if (cameraPermissionCheck == PackageManager.PERMISSION_GRANTED){
+            openCamera();
+        }
+        else if(cameraPermissionCheck == PackageManager.PERMISSION_DENIED){
+            requestPermissionForCamera();
+        }
 
-            cameraSource = new CameraSource.Builder(this, barcodeDetector).build();
+    }
 
-            surfaceView.getHolder().addCallback(new SurfaceHolder.Callback() {
-                @Override
-                public void surfaceCreated(SurfaceHolder surfaceHolder) {
+    private void openCamera() {
+        barcodeDetector = new BarcodeDetector.Builder(this).
+                setBarcodeFormats(Barcode.QR_CODE).build();
 
-                    /*try {
+        cameraSource = new CameraSource.Builder(this, barcodeDetector).build();
+
+        surfaceView.getHolder().addCallback(new SurfaceHolder.Callback() {
+            @Override
+            public void surfaceCreated(SurfaceHolder surfaceHolder) {
+
+                if(ContextCompat.checkSelfPermission(QRCodeActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED){
+                    try {
                         cameraSource.start();
                     }catch (IOException ioException){
                         ioException.printStackTrace();
-                    }*/
-
-
-
+                    }
                 }
+            }
 
-                @Override
-                public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {
+            @Override
+            public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {}
 
-                }
+            @Override
+            public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
 
-                @Override
-                public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
-                    cameraSource.stop();
-                }
-            });
-        }
-        else {
-            ActivityCompat.requestPermissions(QRCodeActivity.this,
-                    new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA);
-        }
+                cameraSource.stop();
+            }
+        });
+    }
 
-
-
-
+    private void requestPermissionForCamera() {
+        ActivityCompat.requestPermissions(QRCodeActivity.this,
+                new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA);
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            @NonNull String permissions[], @NonNull int[] grantResults){
 
+        switch (requestCode){
+            case REQUEST_CAMERA:
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    openCamera();
+                }
+                else{
+                    Intent intent = new Intent(this, HomeActivity.class);
+                    startActivity(intent);
+                }
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        }
     }
 }
