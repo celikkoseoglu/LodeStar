@@ -57,8 +57,37 @@ public class QRCodeActivity extends AppCompatActivity{
     }
 
     private void openCamera() {
+        Log.d(TAG, "openCamera function started");
         barcodeDetector = new BarcodeDetector.Builder(this).
                 setBarcodeFormats(Barcode.PDF417).build();
+
+        cameraSource = new CameraSource.Builder(this, barcodeDetector)
+                .setRequestedPreviewSize(640,480).build();
+
+        surfaceView.getHolder().addCallback(new SurfaceHolder.Callback() {
+            @Override
+            public void surfaceCreated(SurfaceHolder surfaceHolder) {
+
+                if(ContextCompat.checkSelfPermission(QRCodeActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED){
+                    try {
+
+                        cameraSource.start(surfaceView.getHolder());
+                        Log.d(TAG, "camera source started");
+                    }catch (IOException ioException){
+                        ioException.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {}
+
+            @Override
+            public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
+
+                cameraSource.stop();
+            }
+        });
 
         barcodeDetector.setProcessor(new Detector.Processor<Barcode>() {
             @Override
@@ -73,32 +102,6 @@ public class QRCodeActivity extends AppCompatActivity{
                 for (int i = 0; i < barcodeData.size(); i++){
                     Log.d(TAG, barcodeData.valueAt(i).toString());
                 }
-            }
-        });
-
-        cameraSource = new CameraSource.Builder(this, barcodeDetector)
-                .setRequestedPreviewSize(640,480).build();
-
-        surfaceView.getHolder().addCallback(new SurfaceHolder.Callback() {
-            @Override
-            public void surfaceCreated(SurfaceHolder surfaceHolder) {
-
-                if(ContextCompat.checkSelfPermission(QRCodeActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED){
-                    try {
-                        cameraSource.start(surfaceView.getHolder());
-                    }catch (IOException ioException){
-                        ioException.printStackTrace();
-                    }
-                }
-            }
-
-            @Override
-            public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {}
-
-            @Override
-            public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
-
-                cameraSource.stop();
             }
         });
     }
@@ -116,6 +119,7 @@ public class QRCodeActivity extends AppCompatActivity{
             case REQUEST_CAMERA:
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    Log.d(TAG, "Call to openCamera");
                     openCamera();
                 }
                 else{
