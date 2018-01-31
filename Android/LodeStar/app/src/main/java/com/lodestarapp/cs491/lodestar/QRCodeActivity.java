@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import android.util.Log;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.widget.Toast;
 
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
@@ -61,6 +63,25 @@ public class QRCodeActivity extends AppCompatActivity{
         barcodeDetector = new BarcodeDetector.Builder(this).
                 setBarcodeFormats(Barcode.PDF417).build();
 
+        barcodeDetector.setProcessor(new Detector.Processor<Barcode>() {
+            @Override
+            public void release() {
+
+            }
+
+            @Override
+            public void receiveDetections(Detector.Detections<Barcode> detections) {
+                final SparseArray barcodeData = detections.getDetectedItems();
+
+                Toast toast =  Toast.makeText(getApplicationContext(), barcodeData.valueAt(0).toString(), Toast.LENGTH_LONG);
+                toast.show();
+
+                for (int i = 0; i < barcodeData.size(); i++){
+                    Log.d(TAG, barcodeData.valueAt(i).toString());
+                }
+            }
+        });
+
         cameraSource = new CameraSource.Builder(this, barcodeDetector)
                 .setRequestedPreviewSize(640,480).build();
 
@@ -84,26 +105,11 @@ public class QRCodeActivity extends AppCompatActivity{
 
             @Override
             public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
-
                 cameraSource.stop();
             }
         });
 
-        barcodeDetector.setProcessor(new Detector.Processor<Barcode>() {
-            @Override
-            public void release() {
 
-            }
-
-            @Override
-            public void receiveDetections(Detector.Detections<Barcode> detections) {
-                final SparseArray barcodeData = detections.getDetectedItems();
-
-                for (int i = 0; i < barcodeData.size(); i++){
-                    Log.d(TAG, barcodeData.valueAt(i).toString());
-                }
-            }
-        });
     }
 
     private void requestPermissionForCamera() {
