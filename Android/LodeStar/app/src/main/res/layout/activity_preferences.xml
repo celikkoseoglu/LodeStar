@@ -5,14 +5,240 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/my_toolbar"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+        android:id="@+id/the_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        />
+        app:contentInsetLeft="7dp"
+        app:contentInsetStart="7dp"
+        >
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Preferences"
+            android:textColor="@android:color/background_light"
+            android:textSize="20sp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_gravity="left"
+            android:background="@android:color/transparent"
+            android:drawableLeft="@drawable/arrow_left"
+            android:gravity="left|center_vertical"
+            android:minWidth="0dp"
+            android:padding="0dp"
+            android:text=" Me"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            android:textColor="@android:color/holo_blue_bright"
+            android:layout_alignParentStart="true" />
+    </android.support.v7.widget.Toolbar>
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="  crackerjack"
+            android:textSize="20sp"
+            android:paddingLeft="10dp"
+            android:paddingBottom="10dp"
+            android:paddingRight="10dp"
+            android:paddingStart="10dp"
+            android:paddingTop="10dp"
+            android:textStyle="bold"/>
+
+        <Switch
+            android:id="@+id/switch1"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="    Public Profile"
+            android:textAllCaps="false"
+            android:layout_weight="1"
+            android:background="@android:color/background_light"
+            android:gravity="left|center_vertical"
+            android:drawableLeft="@drawable/blue"
+            android:paddingLeft="10dp"
+            android:checked="true"
+            android:typeface="sans" />
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="    Change Username"
+            android:textAllCaps="false"
+            android:background="@android:color/background_light"
+            android:gravity="left|center_vertical"
+            android:drawableRight="@drawable/ic_arrow_right"
+            android:drawableLeft="@drawable/blue"
+            android:paddingLeft="10dp"
+            android:typeface="sans"
+            />
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="    Change Password"
+            android:textAllCaps="false"
+            android:background="@android:color/background_light"
+            android:gravity="left|center_vertical"
+            android:drawableRight="@drawable/ic_arrow_right"
+            android:drawableLeft="@drawable/blue"
+            android:paddingLeft="10dp"
+            android:typeface="sans"
+            />
+
+        <Button
+            android:id="@+id/button6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="    Privacy Options"
+            android:textAllCaps="false"
+            android:background="@android:color/background_light"
+            android:gravity="left|center_vertical"
+            android:drawableRight="@drawable/ic_arrow_right"
+            android:drawableLeft="@drawable/blue"
+            android:paddingLeft="10dp"
+            android:typeface="sans"
+            />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="  social media accounts"
+            android:textSize="20sp"
+            android:paddingLeft="10dp"
+            android:paddingBottom="10dp"
+            android:paddingRight="10dp"
+            android:paddingStart="10dp"
+            android:paddingTop="10dp"
+            android:typeface="sans"
+            />
+
+        <Button
+            android:id="@+id/button7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="    Link with your Facebook Account"
+            android:textAllCaps="false"
+            android:background="@android:color/background_light"
+            android:gravity="left|center_vertical"
+            android:drawableRight="@drawable/ic_arrow_right"
+            android:drawableLeft="@drawable/blue"
+            android:paddingLeft="10dp"
+            android:typeface="sans"
+            />
+
+        <Button
+            android:id="@+id/button8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="    Link with your Google Account"
+            android:textAllCaps="false"
+            android:background="@android:color/background_light"
+            android:gravity="left|center_vertical"
+            android:drawableRight="@drawable/ic_arrow_right"
+            android:drawableLeft="@drawable/blue"
+            android:paddingLeft="10dp"
+            android:typeface="sans"
+            />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="  miscellaneous"
+            android:textSize="20sp"
+            android:paddingLeft="10dp"
+            android:paddingBottom="10dp"
+            android:paddingRight="10dp"
+            android:paddingStart="10dp"
+            android:paddingTop="10dp"/>
+
+        <Switch
+            android:id="@+id/switch2"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="    Share Anonymous Statistics"
+            android:textAllCaps="false"
+            android:layout_weight="1"
+            android:background="@android:color/background_light"
+            android:gravity="left|center_vertical"
+            android:drawableLeft="@drawable/blue"
+            android:paddingLeft="10dp"
+            android:typeface="sans"/>
+
+        <Button
+            android:id="@+id/button10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="    About Lodestar"
+            android:textAllCaps="false"
+            android:background="@android:color/background_light"
+            android:gravity="left|center_vertical"
+            android:drawableRight="@drawable/ic_arrow_right"
+            android:drawableLeft="@drawable/blue"
+            android:paddingLeft="10dp"
+            android:typeface="sans"
+            />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="  "
+            android:textSize="10sp"/>
+
+        <Button
+            android:id="@+id/button11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="    Log Out"
+            android:textColor="@color/colorRed"
+            android:textAllCaps="false"
+            android:textAlignment="center"
+            android:background="@android:color/background_light"
+            android:gravity="center_vertical"
+            android:typeface="sans"
+            />
+
+
+
+
+
+    </LinearLayout>
+
+    </ScrollView>
+
+
 
 </android.support.constraint.ConstraintLayout>

@@ -82,6 +82,12 @@ public class TripActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void currencyStart(View view){
+        Intent intent = new Intent(this, CurrencyActivity.class);
+        intent.putExtra("FLIGHT_INFO", flightInfo);
+        startActivity(intent);
+    }
+
     private static final String TAG = "theMessage";
 
     public void sendRequestToServer(String requestFromTheUrl) {
