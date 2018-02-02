@@ -4,6 +4,8 @@ const app = express();
 
 app.get('/', (req, res) => {
 
+		var flightData;
+
         var originAirportCode = req.query.originAirportCode;
         var destinationAirportCode = req.query.destinationAirportCode;
         var flightNumber = req.query.flightNumber;
@@ -21,38 +23,43 @@ app.get('/', (req, res) => {
 
         var client = new Client(client_options);
 
-        client.registerMethod('findFlights', fxmlUrl + 'FindFlight', 'GET');
-        var findFlightArgs = {
-            parameters: {
-                origin: originAirportCode,
-                destination: destinationAirportCode
-            }
-        };
-
         client.registerMethod('weatherConditions', fxmlUrl + 'WeatherConditions', 'GET');
+        client.registerMethod('flightInfoStatus', fxmlUrl + 'FlightInfoStatus', 'GET');
+        
+        var flightInfoStatusArgs = {
+        	parameters: {
+        		ident: flightNumber,
+        		include_ex_data: false,
+        		howMany: 1
+        	}
+        };
 
-        client.methods.findFlights(findFlightArgs, function (data, response) {
-            //console.log(JSON.stringify(data.FindFlightResult.num_flights, null, 4));
-            //console.log(JSON.stringify(data.FindFlightResult.flights[0], null, 4));
-
-            console.log(data.FindFlightResult.flights[0].segments[0].ident);
-            console.log(data);
-
-            for (var i = 0; i < Object.keys(data.FindFlightResult.flights[0].segments).length; i++) {
-                if (data.FindFlightResult.flights[0].segments[i].ident == flightNumber)
-                    res.send(JSON.stringify(data.FindFlightResult.flights[0].segments[i], null, 4));
-            }
-        });
-
-        /*var weatherConditionsArgs = {
+        var weatherConditionsArgs = {
             parameters: {
-                airport_code: 'PVG'
+                airport_code: originAirportCode,
+                howMany: 1
             }
         };
 
-        client.methods.weatherConditions(weatherConditionsArgs, function (data, response) {
-            console.log(JSON.stringify(data.WeatherConditionsResult.conditions[0], null, 4));
-        });*/
+        client.methods.flightInfoStatus(flightInfoStatusArgs, function (data, response) {
+
+        	delete data.FlightInfoStatusResult.flights[0].faFlightID;
+        	delete data.FlightInfoStatusResult.flights[0].tailnumber;
+        	delete data.FlightInfoStatusResult.flights[0].type;
+        	delete data.FlightInfoStatusResult.flights[0].codeshares;
+
+            flightData = data.FlightInfoStatusResult.flights[0];
+
+            client.methods.weatherConditions(weatherConditionsArgs, function (data, response) {
+	            delete data.WeatherConditionsResult.conditions[0].airport_code;
+	            delete data.WeatherConditionsResult.conditions[0].time;
+	            delete data.WeatherConditionsResult.conditions[0].temp_dewpoint;
+	            delete data.WeatherConditionsResult.conditions[0].wind_speed_gust;
+	            delete data.WeatherConditionsResult.conditions[0].raw_data;
+	            flightData.weather = data.WeatherConditionsResult.conditions[0];
+	            res.send(flightData);
+        	});
+        });
 });
 
-app.listen(3006, () => console.log('Example app listening on port 3006!'));
+app.listen(3006, () => console.log('LodeStar FlightStatus listening on port 3006!'));
