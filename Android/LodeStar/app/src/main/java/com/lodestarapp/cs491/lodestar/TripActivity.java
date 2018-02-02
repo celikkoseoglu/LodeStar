@@ -23,6 +23,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.lodestarapp.cs491.lodestar.Models.FlightInfo;
+import com.lodestarapp.cs491.lodestar.Models.QRCodeInfo;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,6 +33,7 @@ public class TripActivity extends AppCompatActivity {
     public View firstView;
     public View secondView;
     private FlightInfo flightInfo;
+    private QRCodeInfo qrCodeInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +41,14 @@ public class TripActivity extends AppCompatActivity {
         setContentView(R.layout.activity_trip2);
         flightInfo = new FlightInfo();
 
+        //String requestFromTheUrl = "http://10.0.2.2:3006?dataType=flightInfo";
         String requestFromTheUrl = "http://10.0.2.2:3006?dataType=flightInfo";
-        sendRequestToServer(requestFromTheUrl);
+        //sendRequestToServer(requestFromTheUrl);
+
+        Bundle data = getIntent().getExtras();
+        if (data != null) {
+            qrCodeInfo = data.getParcelable("QRCodeInfo");
+        }
 
 
 
@@ -113,7 +121,11 @@ public class TripActivity extends AppCompatActivity {
                 try {
                     Log.i(TAG, flightInformationFromServer.toString());
                     info = flightInformationFromServer.getString("ident");
+
                     TextView view =  findViewById(R.id.info_text1);
+
+                    //info = qrCodeInfo.getFlightCode();
+
                     view.setText("You will be boarding " + info + " from");
 
                     TextView view1 =  findViewById(R.id.info_text3);

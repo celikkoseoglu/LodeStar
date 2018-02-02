@@ -32,12 +32,19 @@ public class WeatherInformationAdapter extends RecyclerView.Adapter<RecyclerView
 
         ImageView weatherTodayView;
         TextView weatherInfoToday;
+        TextView temperatureView;
+        TextView feelsLikeView;
+        TextView humidityView;
+
 
         TodaysWeatherViewHolder(View itemView){
             super(itemView);
 
             this.weatherTodayView = itemView.findViewById(R.id.weather_picture_today);
             this.weatherInfoToday = itemView.findViewById(R.id.weather_info_today);
+            this.temperatureView = itemView.findViewById(R.id.temperatureToday);
+            this.feelsLikeView = itemView.findViewById(R.id.weather_feels_like);
+            this.humidityView = itemView.findViewById(R.id.weather_humidity);
         }
     }
 
@@ -86,6 +93,10 @@ public class WeatherInformationAdapter extends RecyclerView.Adapter<RecyclerView
             case TODAY:
                 ((TodaysWeatherViewHolder) holder).weatherInfoToday.setText(weatherInformationList.
                         get(0).getDescription());
+                ((TodaysWeatherViewHolder) holder).temperatureView.setText(String.format("%s",
+                        weatherInformationList.get(0).getFeelsLikeTemperature()));
+                ((TodaysWeatherViewHolder) holder).humidityView.setText(String.format("%s",
+                        weatherInformationList.get(0).getHumidity()));
                 break;
             case OTHER:
                 ((OtherDaysViewHolder) holder).weatherInfoView.setText(weatherInformationList.

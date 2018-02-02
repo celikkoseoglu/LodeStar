@@ -5,6 +5,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
@@ -21,6 +22,7 @@ import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 import com.google.zxing.pdf417.encoder.PDF417;
+import com.lodestarapp.cs491.lodestar.Models.QRCodeInfo;
 
 import java.io.IOException;
 
@@ -36,12 +38,18 @@ public class QRCodeActivity extends AppCompatActivity{
 
     private final int REQUEST_CAMERA = 100;
 
+    private boolean read = false;
+
+    private QRCodeInfo qrCodeInfo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qrcode);
 
         surfaceView = findViewById(R.id.surfaceView);
+
+        qrCodeInfo = new QRCodeInfo();
 
         checkForCameraPermission();
     }
@@ -62,7 +70,7 @@ public class QRCodeActivity extends AppCompatActivity{
     private void openCamera() {
         Log.d(TAG, "openCamera function started");
         barcodeDetector = new BarcodeDetector.Builder(this).
-                setBarcodeFormats(Barcode.ALL_FORMATS).build();
+                setBarcodeFormats(Barcode.PDF417).build();
 
         cameraSource = new CameraSource.Builder(this, barcodeDetector).setRequestedPreviewSize(1600,1024)
                 .setAutoFocusEnabled(true).build();
@@ -103,21 +111,49 @@ public class QRCodeActivity extends AppCompatActivity{
             public void receiveDetections(Detector.Detections<Barcode> detections) {
                 final SparseArray<Barcode> barcodeData = detections.getDetectedItems();
 
-
                 QRCodeActivity.this.runOnUiThread(new Runnable() {
                     public void run() {
-                        if(barcodeData.size()>0)
+                        if(barcodeData.size()>0) {
+                            read = true;
+                            Log.d(TAG, "23423423");
+
                             Toast.makeText(QRCodeActivity.this, barcodeData.valueAt(0).displayValue, Toast.LENGTH_SHORT).show();
+
+                            Log.d(TAG, "asdfsadf");
+
+                            String[] parts = barcodeData.valueAt(0).displayValue.split(" +");
+
+                            qrCodeInfo.setFrom(parts[2].substring(0, 3));
+                            qrCodeInfo.setTo(parts[2].substring(3, 6));
+                            qrCodeInfo.setFlightCode(parts[2].substring(6).concat(parts[3]));
+
+                            Log.d(TAG, "99999999999");
+
+                            cameraSource.stop();
+
+                            returnToTripActivity();
+                        }
                     }
                 });
 
+                Log.d(TAG, "Size: " + barcodeData.size());
 
                 for (int i = 0; i < barcodeData.size(); i++){
-                    Log.d(TAG, barcodeData.valueAt(i).toString());
+                    Log.d(TAG, "At i: " + i + " have: " + barcodeData.valueAt(i).displayValue);
                 }
             }
         });
 
+    }
+
+    private void returnToTripActivity() {
+
+        Log.d(TAG, "3333");
+
+        Intent intent = new Intent(this, TripActivity.class);
+        intent.putExtra("QRCodeInfo", qrCodeInfo);
+        startActivity(intent);
+        Log.d(TAG, "4444");
     }
 
     private void requestPermissionForCamera() {
