@@ -18,7 +18,7 @@ Reports
 
 Team Members
 ---------------------
-| <img width="150" height="150" src="https://avatars0.githubusercontent.com/u/11838388?s=460&v=4"/>     | <img width="150" height= "150" src="https://instagram.fsaw1-8.fna.fbcdn.net/t51.2885-19/s320x320/19436845_299557267176195_7273152856620793856_a.jpg"/> | <img width="150" height="150"  src="https://avatars3.githubusercontent.com/u/5185809?s=460&v=4"/> | <img width="150" height="150" src="https://instagram.fsaw1-8.fna.fbcdn.net/t51.2885-19/s320x320/19227494_233122187193012_7539599536604315648_a.jpg"/> | <img width="150" height="150" src="https://lh3.googleusercontent.com/xl20NFITKb1BCsHuHHCDFS9yImoOQU-u-WyJODR_DtVgVv7cCaP8Kvqmslr-wwUkrgykuVA=s85"/>
+| <img width="150" height="150" src="https://avatars0.githubusercontent.com/u/11838388?s=460&v=4"/>     | <img width="150" height= "150" src="https://instagram.fsaw1-8.fna.fbcdn.net/t51.2885-19/s320x320/19436845_299557267176195_7273152856620793856_a.jpg"/> | <img width="150" height="150"  src="https://avatars3.githubusercontent.com/u/5185809?s=460&v=4"/> | <img width="150" height="150" src="https://instagram.fsaw1-8.fna.fbcdn.net/t51.2885-19/s320x320/19227494_233122187193012_7539599536604315648_a.jpg"/> | <img width="150" height="150" src="https://avatars1.githubusercontent.com/u/11910328?s=400&u=33f33d4496d28c8a78bce9d5c2df025ca7c9f069&v=4"/>
 | :---: |:---: | :---: | :---: | :---: |
 | 	Barış Poyraz      | 	Berk Evren Abbasoğlu | Çelik Köseoğlu | Efe Ulaş Akay Seyitoğlu | 	Hüseyin Beyan
 
