@@ -31,54 +31,53 @@ public class FlightInfoActivity extends AppCompatActivity {
         Bundle data = getIntent().getExtras();
         if (data != null) {
             flightInfo = data.getParcelable("FLIGHT_INFO");
+
+            TextView view = findViewById(R.id.textView1);
+            if(flightInfo.getOrig() != null)
+                view.setText(flightInfo.getOrig());
+
+            TextView view2 = findViewById(R.id.textView2);
+            if(flightInfo.getDest() != null)
+                view2.setText(flightInfo.getDest());
+
+            TextView view5 = findViewById(R.id.textView5);
+            if(flightInfo.getOrig_airport() != null)
+                view5.setText(flightInfo.getOrig_airport());
+
+            TextView view6 = findViewById(R.id.textView6);
+            if(flightInfo.getDest_airport() != null)
+                view6.setText(flightInfo.getDest_airport());
+
+
+            TextView view7 = findViewById(R.id.textView7);
+            if(flightInfo.getOrig_localtime() != null)
+                view7.setText(flightInfo.getOrig_localtime());
+
+            TextView view8 = findViewById(R.id.textView8);
+            if(flightInfo.getDest_localtime() != null)
+                view8.setText(flightInfo.getDest_localtime());
+
+            TextView view9 = findViewById(R.id.textView9);
+            if(flightInfo.getOrig_date() != null)
+                view9.setText(flightInfo.getOrig_date());
+
+            TextView view10 = findViewById(R.id.textView10);
+            if(flightInfo.getDest_date() != null)
+                view10.setText(flightInfo.getDest_date());
+
+            TextView view20 = findViewById(R.id.textView20);
+            if(flightInfo.getAircraft() != null)
+                view20.setText(flightInfo.getAircraft());
+
+            TextView view25 = findViewById(R.id.textView25);
+            if(flightInfo.getDest() != null)
+                view25.setText("when you arrive " + flightInfo.getDest());
+
         }
-
-        TextView view =  findViewById(R.id.textView1);
-        view.setText(flightInfo.getOrig());
-
-        TextView view2 =  findViewById(R.id.textView2);
-        view2.setText(flightInfo.getDest());
-
-        TextView view5 =  findViewById(R.id.textView5);
-        view5.setText(flightInfo.getOrig_airport());
-
-        TextView view6 =  findViewById(R.id.textView6);
-        view6.setText(flightInfo.getDest_airport());
-
-
-        TextView view7 =  findViewById(R.id.textView7);
-        view7.setText(flightInfo.getOrig_localtime());
-
-        TextView view8 =  findViewById(R.id.textView8);
-        view8.setText(flightInfo.getDest_localtime());
-
-        TextView view9 =  findViewById(R.id.textView9);
-        view9.setText(flightInfo.getOrig_date());
-
-        TextView view10 =  findViewById(R.id.textView10);
-        view10.setText(flightInfo.getDest_date());
-
-        TextView view20 =  findViewById(R.id.textView20);
-        view20.setText(flightInfo.getAircraft());
-
-        TextView view25 =  findViewById(R.id.textView25);
-        view25.setText("when you arrive "+ flightInfo.getDest());
-
-        String time = flightInfo.getDest_localtime();
-        int hour;
-        if(time.contains("pm")){
-            hour = 12 + Integer. parseInt(time.substring(0,2));
-        }
-        else{
-            hour = Integer. parseInt(time.substring(0,2));
-        }
-
-        hour = (hour / 3) * 3;
 
     }
     public void tripStart(View view){
-        Intent intent = new Intent(this, TripActivity.class);
-        startActivity(intent);
+        finish();
     }
 
 

@@ -5,7 +5,10 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-feature android:name="android.hardware.camera" android:required="false" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
 
     <application
         android:allowBackup="true"
@@ -34,13 +37,15 @@
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme" />
         <activity android:name=".WeatherInformationActivity" />
-        <activity android:name=".FlightInfoActivity"></activity>
-        <activity android:name=".CurrencyActivity"></activity>
+        <activity android:name=".FlightInfoActivity" />
+        <activity android:name=".CurrencyActivity" />
         <activity android:name=".QRCodeActivity" />
 
         <meta-data
             android:name="com.google.android.gms.vision.DEPENDENCIES"
-            android:value="barcode"/>
+            android:value="barcode" />
+
+        <activity android:name=".LivingExpensesActivity"></activity>
     </application>
 
 </manifest>

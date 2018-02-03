@@ -220,7 +220,7 @@
                         android:layout_weight="1"
                         android:alpha="0.7"
                         android:drawableTop="@drawable/ic_002_vip"
-                        android:text="Currency"
+                        android:text="Currency Exchange"
                         android:textAllCaps="false"
                         android:onClick="currencyStart"/>
 
@@ -250,7 +250,8 @@
                         android:alpha="0.7"
                         android:drawableTop="@drawable/ic_001_wallet"
                         android:text="Living Expenses"
-                        android:textAllCaps="false" />
+                        android:textAllCaps="false"
+                        android:onClick="livingStart"/>
 
                     <Button
                         android:id="@+id/places"

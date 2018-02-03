@@ -131,8 +131,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="3dp"
-                    android:background="#d7d7d7"
-                    android:layout_below="@+id/cardView1">
+                    android:layout_below="@+id/cardView1"
+                    android:background="@color/cardview_light_background">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -163,7 +163,7 @@
                             android:textSize="15sp" />
 
 
-                        <Button
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:drawableLeft="@drawable/ic_cardboard2"
@@ -186,7 +186,7 @@
                             android:text="2.  Address 2 \n..\n.."
                             android:textSize="15sp" />
 
-                        <Button
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:drawableLeft="@drawable/ic_cardboard2"
