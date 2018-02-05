@@ -1,0 +1,10 @@
+{
+  "name": "LodeStarCurrencyExchange",
+  "version": "0.0.1",
+  "dependencies": {
+    "node-rest-client": "^3.1.0",
+    "express": "^4.16.2",
+    "money": "^0.2.0",
+    "open-exchange-rates": "^0.3.0"
+  }
+}
