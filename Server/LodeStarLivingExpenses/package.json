@@ -1,0 +1,16 @@
+{
+  "name": "LodeStarLivingExpenses",
+  "version": "1.0.0",
+  "description": "Retrieves living expenses for the specified city",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Celik Koseoglu <celikkoseoglu@me.com>",
+  "license": "MIT",
+  "dependencies": {
+    "node-rest-client": "^3.1.0",
+    "express": "^4.16.2"
+  }
+}
