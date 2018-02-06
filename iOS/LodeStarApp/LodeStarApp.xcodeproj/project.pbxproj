@@ -24,6 +24,7 @@
 		8D6F76DF1F961B40004824B0 /* SelectNationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6F76DE1F961B40004824B0 /* SelectNationViewController.swift */; };
 		8DBB5DC91FDECED3003CF1D7 /* flight.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8DBB5DC81FDECED3003CF1D7 /* flight.jpg */; };
 		8DBB5DCB1FDED8E2003CF1D7 /* bus.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8DBB5DCA1FDED8E2003CF1D7 /* bus.jpg */; };
+		8DC4DCB72021CBAC00DBF943 /* FlightInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC4DCB62021CBAC00DBF943 /* FlightInformationViewController.swift */; };
 		F706920C93114283E2A46A09 /* Pods_LodeStarApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC355C9C62AF5D3EFF746B52 /* Pods_LodeStarApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +61,7 @@
 		8D6F76DE1F961B40004824B0 /* SelectNationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectNationViewController.swift; sourceTree = "<group>"; };
 		8DBB5DC81FDECED3003CF1D7 /* flight.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = flight.jpg; sourceTree = "<group>"; };
 		8DBB5DCA1FDED8E2003CF1D7 /* bus.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bus.jpg; sourceTree = "<group>"; };
+		8DC4DCB62021CBAC00DBF943 /* FlightInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlightInformationViewController.swift; sourceTree = "<group>"; };
 		DC355C9C62AF5D3EFF746B52 /* Pods_LodeStarApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LodeStarApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0296F5819E422DCEF19640A /* Pods-LodeStarApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LodeStarApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-LodeStarApp/Pods-LodeStarApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -107,6 +109,7 @@
 		8D6F76BD1F961993004824B0 /* LodeStarApp */ = {
 			isa = PBXGroup;
 			children = (
+				8DC4DCB62021CBAC00DBF943 /* FlightInformationViewController.swift */,
 				8D2A6C2E1FDE71F600AA44E7 /* TravelViewController.swift */,
 				8D6F76BE1F961993004824B0 /* AppDelegate.swift */,
 				8D6F76DE1F961B40004824B0 /* SelectNationViewController.swift */,
@@ -326,6 +329,7 @@
 				8D6F76BF1F961993004824B0 /* AppDelegate.swift in Sources */,
 				8D2F8FEE1FD57C7600334A86 /* SwiftyJSON.swift in Sources */,
 				8D3D437F200A3CDA0091CCEB /* ProfileViewController.swift in Sources */,
+				8DC4DCB72021CBAC00DBF943 /* FlightInformationViewController.swift in Sources */,
 				8D3D437D200A3AD30091CCEB /* LogCell.swift in Sources */,
 				8D2A6C331FDE781C00AA44E7 /* CollectionCell.swift in Sources */,
 				8D2A6C351FDE7E1600AA44E7 /* LodeStarLayout.swift in Sources */,
