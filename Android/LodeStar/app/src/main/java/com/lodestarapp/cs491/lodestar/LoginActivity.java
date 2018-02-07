@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
@@ -15,6 +16,8 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.lodestarapp.cs491.lodestar.Models.WeatherInformation;
+
+import static android.widget.Toast.LENGTH_LONG;
 
 
 public class LoginActivity extends AppCompatActivity implements
@@ -30,6 +33,10 @@ public class LoginActivity extends AppCompatActivity implements
 
     private Button signInWithEmail;
 
+    private TextView alreadySignedInQuestion;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,14 +45,17 @@ public class LoginActivity extends AppCompatActivity implements
 
         signInWithEmail = (Button) findViewById(R.id.button_email);
 
-        signInWithEmail.setOnClickListener(
-                new Button.OnClickListener(){
-                    public void onClick(View v){
-                        Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
-                        startActivity(intent);
-                    }
-                }
-        );
+        alreadySignedInQuestion = (TextView) findViewById(R.id.login_text);
+
+//        signInWithEmail.setOnClickListener(
+//                new Button.OnClickListener(){
+//                    public void onClick(View v){
+//
+//                        Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+//                        startActivity(intent);
+//                    }
+//                }
+//        );
 
         signInButton = (SignInButton) findViewById(R.id.GoogleSignInButton);
         signInButton.setOnClickListener(this);
@@ -58,7 +68,7 @@ public class LoginActivity extends AppCompatActivity implements
                 .enableAutoManage(this, new GoogleApiClient.OnConnectionFailedListener(){
                     @Override
                     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-                        Toast.makeText(LoginActivity.this, "Error", Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginActivity.this, "Error", LENGTH_LONG).show();
                     }
                 })
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
@@ -67,6 +77,13 @@ public class LoginActivity extends AppCompatActivity implements
 
     @Override
     public void onClick(View view) {
+
+        Toast.makeText(this,"Burda hojam",Toast.LENGTH_LONG).show();
+        if(view == alreadySignedInQuestion) {
+            Toast.makeText(this,".(",Toast.LENGTH_LONG).show();
+            startActivity(new Intent(this,SignUpActivity.class));
+        }
+
         switch (view.getId()){
             case R.id.GoogleSignInButton:
                 signIn();

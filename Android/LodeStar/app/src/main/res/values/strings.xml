@@ -17,4 +17,5 @@
     <string name="title_activity_home">HomeActivity</string>
     <string name="VR_AD"><font size="17">\nDo you have VR glasses?\n</font>\n\<font size="13">Tap here to learn how
         to get them\nfor an enhanced LodeStar\nexperience\n</font></string>
+    <string name="title_activity_user_login">UserLoginActivity</string>
 </resources>
