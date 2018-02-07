@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.lodestarapp.cs491.lodestar.UserLoginActivity"
+    android:background="@drawable/thy_lounge_background">
+
+    <LinearLayout
+        android:layout_width="368dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:orientation="vertical"
+        >
+
+        <EditText
+            android:id="@+id/emailEditLoginS"
+            android:layout_width="368dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:hint="Enter email"
+            android:inputType="textEmailAddress" />
+
+        <EditText
+            android:id="@+id/textPasswordLoginS"
+            android:layout_width="368dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:hint="Enter password"
+            android:inputType="textPassword" />
+
+        <EditText
+            android:id="@+id/reTypeLoginS"
+            android:layout_width="368dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:hint="Re-Enter password"
+            android:inputType="textPassword" />
+
+
+
+        <Button
+            android:id="@+id/SButton"
+            android:layout_width="368dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:text="Sign in!" />
+
+        <TextView
+            android:textAlignment="center"
+            android:text="Would you like to register instead?"
+            android:id="@+id/txtLoginS"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            />
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>
+
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+    <!--<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--tools:context="com.lodestarapp.loginscreenandroid.MainActivity">-->
+    <!---->
+    <!--<LinearLayout-->
+    <!--android:layout_centerHorizontal="true"-->
+    <!--android:layout_centerVertical="true"-->
+    <!--android:orientation="vertical"-->
+    <!--android:layout_width="368dp"-->
+    <!--android:layout_height="495dp"-->
+    <!--&gt;-->
+
+    <!--<EditText-->
+    <!--android:inputType="textPassword"-->
+    <!--android:hint="EMAIL:"-->
+    <!--android:id="@+id/emailEdit"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+
+    <!--/>-->
+
+    <!--<EditText-->
+    <!--android:inputType="textPassword"-->
+    <!--android:hint="PASSWORD:"-->
+    <!--android:id="@+id/editTxt"-->
+    <!--android:layout_margin="15dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_width="match_parent"-->
+
+    <!--/>-->
+    <!---->
+    <!--<TextView-->
+    <!--android:textAlignment="center"-->
+    <!--android:text="The record is already in the Database. Would you like to sign in instead?"-->
+    <!--android:id="@+id/textSignin"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_width="match_parent"-->
+    <!--/>-->
+
+    <!--<Button-->
+    <!--android:layout_margin="15dp"-->
+    <!--android:id="@+id/RegButton"-->
+    <!--android:text="Register"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_width="88dp"-->
+    <!--tools:layout_editor_absoluteY="330dp"-->
+    <!--tools:layout_editor_absoluteX="148dp"-->
+
+    <!--/>-->
+
+
+    <!--</LinearLayout>-->
+
+    <!--</android.support.constraint.ConstraintLayout>-->

@@ -63,6 +63,14 @@ extension TravelViewController {
             
         }
         
+        else if text == "Flight Information" {
+            
+            let flightInformationTap = UITapGestureRecognizer(target: self, action: #selector(TravelViewController.flightInformationTapAction(_:)))
+            cell.cellImage.isUserInteractionEnabled = true
+            cell.cellImage.addGestureRecognizer(flightInformationTap)
+            
+        }
+        
         cell.displayContent(title: text, cellImage: image!)
         
         return cell
@@ -228,6 +236,14 @@ class TravelViewController: UIViewController, TravelViewControllerDelegate, UICo
         
         let storyboard = self.storyboard
         let controller = storyboard?.instantiateViewController(withIdentifier: "weatherNAV")
+        self.present(controller!, animated: true, completion: nil)
+        
+    }
+    
+    @IBAction func flightInformationTapAction(_ sender: UITapGestureRecognizer) {
+        
+        let storyboard = self.storyboard
+        let controller = storyboard?.instantiateViewController(withIdentifier: "flightInformationNAV")
         self.present(controller!, animated: true, completion: nil)
         
     }

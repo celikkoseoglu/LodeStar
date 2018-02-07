@@ -45,7 +45,11 @@
             android:name="com.google.android.gms.vision.DEPENDENCIES"
             android:value="barcode" />
 
-        <activity android:name=".LivingExpensesActivity"></activity>
+        <activity android:name=".LivingExpensesActivity" />
+        <activity
+            android:name=".UserLoginActivity"
+            android:label="@string/title_activity_user_login"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
