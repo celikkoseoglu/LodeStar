@@ -2,17 +2,25 @@ package com.lodestarapp.cs491.lodestar;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Point;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
+import android.util.AttributeSet;
 import android.util.Log;
+import android.view.Display;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 import android.widget.ViewSwitcher;
 
@@ -22,6 +30,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.vision.text.Line;
 import com.lodestarapp.cs491.lodestar.Models.FlightInfo;
 import com.lodestarapp.cs491.lodestar.Models.QRCodeInfo;
 
@@ -35,11 +44,21 @@ public class TripActivity extends AppCompatActivity {
     private FlightInfo flightInfo;
     private QRCodeInfo qrCodeInfo;
 
+    ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trip2);
         flightInfo = new FlightInfo();
+
+
+
+
+
+
+
+
 
         //String requestFromTheUrl = "http://10.0.2.2:3006?dataType=flightInfo";
         String requestFromTheUrl = "http://10.0.2.2:3006?dataType=flightInfo";
@@ -78,6 +97,51 @@ public class TripActivity extends AppCompatActivity {
         });
 
     }
+
+    public void onWindowFocusChanged(boolean hasFocus) {
+        // TODO Auto-generated method stub
+        super.onWindowFocusChanged(hasFocus);
+        updateSizeInfo();
+    }
+    private void updateSizeInfo() {
+        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.row3);
+
+        int w = linearLayout.getWidth();
+
+
+        Button bt = findViewById(R.id.living);
+        ViewGroup.LayoutParams params = bt.getLayoutParams();
+        //Button new width
+        params.height = (w-15)/3;
+        bt.setLayoutParams(params);
+
+        Button bt1 = findViewById(R.id.places);
+        bt1.setLayoutParams(params);
+
+        Button bt2 = findViewById(R.id.accomodation);
+        bt2.setLayoutParams(params);
+
+        Button bt3 = findViewById(R.id.transport);
+        bt3.setLayoutParams(params);
+
+        Button bt4 = findViewById(R.id.weather);
+        bt4.setLayoutParams(params);
+
+        Button bt5 = findViewById(R.id.flightinfo);
+        bt5.setLayoutParams(params);
+
+        Button bt6 = findViewById(R.id.shopping);
+        bt6.setLayoutParams(params);
+
+        Button bt7 = findViewById(R.id.lounge);
+        bt7.setLayoutParams(params);
+
+        Button bt8 = findViewById(R.id.restaurants);
+        bt8.setLayoutParams(params);
+
+    }
+
+
 
     public void weatherStart(View view){
         Intent intent = new Intent(this, WeatherInformationActivity.class);

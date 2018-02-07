@@ -18,4 +18,10 @@
     <string name="VR_AD"><font size="17">\nDo you have VR glasses?\n</font>\n\<font size="13">Tap here to learn how
         to get them\nfor an enhanced LodeStar\nexperience\n</font></string>
     <string name="title_activity_user_login">UserLoginActivity</string>
+    <string name="title_activity_tab">TabActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

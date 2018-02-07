@@ -173,7 +173,7 @@ public class QRCodeActivity extends AppCompatActivity{
                     openCamera();
                 }
                 else{
-                    Intent intent = new Intent(this, HomeActivity.class);
+                    Intent intent = new Intent(this, TabActivity.class);
                     startActivity(intent);
                 }
             default:
