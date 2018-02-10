@@ -1,6 +1,7 @@
 package com.lodestarapp.cs491.lodestar;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Parcel;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -65,9 +66,38 @@ public class FlightInfoActivity extends AppCompatActivity {
             if(flightInfo.getDest_date() != null)
                 view10.setText(flightInfo.getDest_date());
 
+            TextView view11 = findViewById(R.id.textView11);
+            if(flightInfo.getDistance() != 0)
+                view11.setText("Direct Distance: " + Math.round(flightInfo.getDistance()* 1.609344) + " km");
+
+            TextView view12 = findViewById(R.id.textView12);
+            if(flightInfo.getSpeed() != 0)
+                view12.setText("Planned speed: " + Math.round(flightInfo.getSpeed() * 1.852)  + " km/h");
+
+            TextView view14 = findViewById(R.id.textView14);
+                view14.setText(flightInfo.getDelay()/(-60) + " minutes" );
+
             TextView view20 = findViewById(R.id.textView20);
             if(flightInfo.getAircraft() != null)
                 view20.setText(flightInfo.getAircraft());
+
+
+            TextView view24 = findViewById(R.id.textView24);
+            if(flightInfo.getWeather() != null)
+                view24.setText(flightInfo.getWeather());
+
+            TextView view26 = findViewById(R.id.textView26);
+                view26.setText(flightInfo.getTemperature() + "°C");
+
+            TextView view27 = findViewById(R.id.textView27);
+            view27.setText( "feels like: " + flightInfo.getFeelsLike()  + "°C" );
+
+            TextView view28 = findViewById(R.id.textView28);
+            view28.setText(  flightInfo.getHumidity()+ "%" );
+
+
+
+
 
             TextView view25 = findViewById(R.id.textView25);
             if(flightInfo.getDest() != null)
@@ -80,5 +110,11 @@ public class FlightInfoActivity extends AppCompatActivity {
         finish();
     }
 
+    public void openLink(View view) {
+        if(flightInfo.getAircraft() != null){
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/search?tbm=isch&q=" + flightInfo.getAircraft()));
+            startActivity(browserIntent);
+        }
 
+    }
 }

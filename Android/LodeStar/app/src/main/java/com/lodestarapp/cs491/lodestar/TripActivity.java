@@ -1,5 +1,6 @@
 package com.lodestarapp.cs491.lodestar;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
@@ -31,6 +32,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.vision.text.Line;
+import com.lodestarapp.cs491.lodestar.Controllers.FlightInfoController;
+import com.lodestarapp.cs491.lodestar.Controllers.LivingExpensesController;
 import com.lodestarapp.cs491.lodestar.Models.FlightInfo;
 import com.lodestarapp.cs491.lodestar.Models.QRCodeInfo;
 
@@ -43,37 +46,32 @@ public class TripActivity extends AppCompatActivity {
     public View secondView;
     private FlightInfo flightInfo;
     private QRCodeInfo qrCodeInfo;
+    private FlightInfoController flc = new FlightInfoController();
 
     ;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trip2);
         flightInfo = new FlightInfo();
 
+        findViewById(R.id.flipper).setVisibility(View.GONE);
 
-
-
-
-
-
-
+        Button bt5 = findViewById(R.id.flightinfo);
+        bt5.setClickable(false);
 
         //String requestFromTheUrl = "http://10.0.2.2:3006?dataType=flightInfo";
-        String requestFromTheUrl = "http://10.0.2.2:3006?dataType=flightInfo";
-        //sendRequestToServer(requestFromTheUrl);
+        //String requestFromTheUrl = "http://10.0.2.2:3006?dataType=flightInfo";
+        sendRequest();
 
         Bundle data = getIntent().getExtras();
         if (data != null) {
             qrCodeInfo = data.getParcelable("QRCodeInfo");
         }
 
-
-
         view_flipper =   (ViewFlipper) findViewById(R.id.flipper);
-
-
 
         CardView card = (CardView) findViewById(R.id.my_card);
         firstView= findViewById(R.id.view1);
@@ -169,94 +167,99 @@ public class TripActivity extends AppCompatActivity {
 
     private static final String TAG = "theMessage";
 
-    public void sendRequestToServer(String requestFromTheUrl) {
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
+    public void sendRequest() {
+        String flight = "THY26";
 
-        final JSONObject[] responseFromServer = new JSONObject[1];
-
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, requestFromTheUrl, null, new Response.Listener<JSONObject>() {
+        flc.getFlightInfo(flight, this, new FlightInfoController.VolleyCallback2() {
             @Override
-            public void onResponse(JSONObject response) {
-                Log.i(TAG, response.toString());
-                responseFromServer[0] = response;
-
-                parseTheJSONResponse(responseFromServer[0]);
-
-                //mAdapter = new WeatherInformationAdapter(responseFromServer[0]);
-                //mRecyclerView.setAdapter(mAdapter);
-            }
-
-            private void parseTheJSONResponse(JSONObject flightInformationFromServer) {
-                String info;
-
+            public void onSuccess(JSONObject result) {
                 try {
-                    Log.i(TAG, flightInformationFromServer.toString());
-                    info = flightInformationFromServer.getString("ident");
-
-                    TextView view =  findViewById(R.id.info_text1);
+                    String info = result.getString("ident");
+                    TextView view = findViewById(R.id.info_text1);
 
                     //info = qrCodeInfo.getFlightCode();
 
                     view.setText("You will be boarding " + info + " from");
 
-                    TextView view1 =  findViewById(R.id.info_text3);
+                    TextView view1 = findViewById(R.id.info_text3);
                     view1.setText("You will be boarding " + info + " to");
 
-                    flightInfo.setLink("https://flightaware.com/live/flight/"+info);
+                    flightInfo.setLink("https://flightaware.com/live/flight/" + info);
 
-                    JSONObject or = flightInformationFromServer.getJSONObject("origin");
-                    JSONObject des = flightInformationFromServer.getJSONObject("destination");
+                    JSONObject or = result.getJSONObject("origin");
+                    JSONObject des = result.getJSONObject("destination");
 
 
-                    TextView view2 =  findViewById(R.id.info_text5);
-                    view2.setText( or.getString("city"));
+                    TextView view2 = findViewById(R.id.info_text5);
+                    view2.setText(or.getString("city"));
                     flightInfo.setOrig(or.getString("city"));
                     flightInfo.setOrig_airport(or.getString("airport_name"));
 
-                    TextView view4 =  findViewById(R.id.info_text6);
-                    view4.setText( des.getString("city"));
+                    TextView view4 = findViewById(R.id.info_text6);
+                    view4.setText(des.getString("city"));
                     flightInfo.setDest(des.getString("city"));
                     flightInfo.setDest_airport(des.getString("airport_name"));
 
 
-                    TextView view5 =  findViewById(R.id.info_text2);
+                    TextView view5 = findViewById(R.id.info_text2);
                     view5.setText("Swipe right to see information about " + des.getString("city").toString());
 
-                    TextView view3 =  findViewById(R.id.info_text4);
-                    view3.setText("Swipe right to see information about " + or.getString("city").toString() );
+                    TextView view3 = findViewById(R.id.info_text4);
+                    view3.setText("Swipe right to see information about " + or.getString("city").toString());
 
                     Log.i(TAG, info.toString());
 
-                    JSONObject depTime = flightInformationFromServer.getJSONObject("filed_departure_time");
+                    JSONObject depTime = result.getJSONObject("filed_departure_time");
                     flightInfo.setOrig_localtime(depTime.getString("time") + " " + depTime.getString("tz"));
                     flightInfo.setOrig_date(depTime.getString("date"));
 
-                    JSONObject arrTime = flightInformationFromServer.getJSONObject("estimated_arrival_time");
+                    JSONObject arrTime = result.getJSONObject("filed_arrival_time");
                     flightInfo.setDest_date(arrTime.getString("date"));
                     flightInfo.setDest_localtime(arrTime.getString("time") + " " + arrTime.getString("tz"));
 
-                    String aircarft = flightInformationFromServer.getString("aircrafttype");
+                    String aircarft = result.getString("aircrafttype");
                     flightInfo.setAircraft(aircarft);
 
+                    String distance = result.getString("distance_filed");
+                    flightInfo.setDistance(Integer.parseInt(distance));
 
-                }catch (JSONException jsonException){
+                    String speed = result.getString("filed_airspeed_kts");
+                    flightInfo.setSpeed(Integer.parseInt(speed));
+
+                    String delay = result.getString("arrival_delay");
+                    flightInfo.setDelay(Integer.parseInt(delay));
+
+
+                    findViewById(R.id.ll1).setVisibility(View.GONE);
+                    findViewById(R.id.flipper).setVisibility(View.VISIBLE);
+
+                    JSONObject weather = result.getJSONObject("weather");
+                    String weatherCond = weather.getString("cloud_friendly");
+                    flightInfo.setWeather(weatherCond);
+
+                    String temp = weather.getString("temp_air");
+                    flightInfo.setTemperature(Integer.parseInt(temp));
+
+                    String tempFeel = weather.getString("temp_perceived");
+                    flightInfo.setFeelsLike(Integer.parseInt(tempFeel));
+
+                    String humidity = weather.getString("temp_relhum");
+                    flightInfo.setHumidity(Integer.parseInt(humidity));
+
+                    Button bt5 = findViewById(R.id.flightinfo);
+                    bt5.setClickable(true);
+
+
+
+
+                } catch (JSONException jsonException) {
                     Log.e(TAG, "JSON Parsing error");
                 }
 
-
-
-                //findViewById(R.id.weather_progress_bar).setVisibility(View.GONE);
-
-            }
-        }, new Response.ErrorListener() {
-            public void onErrorResponse(VolleyError error) {
-                Log.i(TAG, "Failed to get weather information");
-                Log.i(TAG, error.getMessage());
-                Log.i(TAG, error.getLocalizedMessage());
-                Log.i(TAG, error.toString());
             }
         });
-        requestQueue.add(jsonObjectRequest);
+
+
     }
 
 

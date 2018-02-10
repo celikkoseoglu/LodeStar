@@ -38,12 +38,17 @@
                 tools:layout_editor_absoluteY="19dp" />
         </android.support.v7.widget.Toolbar>
 
+
+
+
         <android.support.v7.widget.CardView
             android:id="@+id/my_card"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_below="@id/my_toolbar"
             android:gravity="center">
+
+
 
             <ImageView
                 android:id="@+id/imageView"
@@ -54,6 +59,25 @@
                 android:layout_alignParentTop="true"
                 android:scaleType="centerCrop"
                 android:src="@drawable/thy_lounge_background" />
+
+            <LinearLayout
+                android:id="@+id/ll1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginTop="30dp">
+
+                <ProgressBar
+                    android:id="@+id/pb2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:indeterminate="true"
+                    android:indeterminateTint="@color/colorRoyalBlue"
+                    />
+
+            </LinearLayout>
+
 
             <ViewFlipper
                 android:id="@+id/flipper"

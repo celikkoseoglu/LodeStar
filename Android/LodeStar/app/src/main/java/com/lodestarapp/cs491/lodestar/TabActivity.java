@@ -32,6 +32,11 @@ public class TabActivity extends AppCompatActivity {
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_002_star);
 
 
+        tabLayout.getTabAt(0).getIcon().setAlpha(255);
+        tabLayout.getTabAt(1).getIcon().setAlpha(90);
+
+
+
 
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -45,10 +50,10 @@ public class TabActivity extends AppCompatActivity {
                 switch (position) {
                     case 0:
                         tabLayout.getTabAt(0).getIcon().setAlpha(255);
-                        tabLayout.getTabAt(1).getIcon().setAlpha(128);
+                        tabLayout.getTabAt(1).getIcon().setAlpha(90);
                         break;
                     case 1:
-                        tabLayout.getTabAt(0).getIcon().setAlpha(128);
+                        tabLayout.getTabAt(0).getIcon().setAlpha(90);
                         tabLayout.getTabAt(1).getIcon().setAlpha(255);
                         break;
                 }

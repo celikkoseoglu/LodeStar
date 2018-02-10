@@ -3,9 +3,6 @@ package com.lodestarapp.cs491.lodestar.Models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * Created by HÜSEYİN on 24.1.2018.
- */
 
 public class FlightInfo implements Parcelable{
     private String dest;
@@ -29,6 +26,13 @@ public class FlightInfo implements Parcelable{
     private String aircraft;
     private String link;
 
+    private int delay;
+
+    private String weather;
+    private int temperature;
+    private int feelsLike;
+    private int humidity;
+
 
     public FlightInfo() {
 
@@ -49,6 +53,11 @@ public class FlightInfo implements Parcelable{
         speed = in.readInt();
         aircraft = in.readString();
         link = in.readString();
+        delay=in.readInt();
+        weather=in.readString();
+        temperature=in.readInt();
+        feelsLike=in.readInt();
+        humidity=in.readInt();
     }
 
     public static final Creator<FlightInfo> CREATOR = new Creator<FlightInfo>() {
@@ -195,5 +204,51 @@ public class FlightInfo implements Parcelable{
         parcel.writeInt(speed);
         parcel.writeString(aircraft);
         parcel.writeString(link);
+        parcel.writeInt(delay);
+        parcel.writeString(weather);
+        parcel.writeInt(temperature);
+        parcel.writeInt(feelsLike);
+        parcel.writeInt(humidity);
+
+    }
+
+    public int getDelay() {
+        return delay;
+    }
+
+    public void setDelay(int delay) {
+        this.delay = delay;
+    }
+
+    public String getWeather() {
+        return weather;
+    }
+
+    public void setWeather(String weather) {
+        this.weather = weather;
+    }
+
+    public int getTemperature() {
+        return temperature;
+    }
+
+    public void setTemperature(int temperature) {
+        this.temperature = temperature;
+    }
+
+    public int getFeelsLike() {
+        return feelsLike;
+    }
+
+    public void setFeelsLike(int feelsLike) {
+        this.feelsLike = feelsLike;
+    }
+
+    public int getHumidity() {
+        return humidity;
+    }
+
+    public void setHumidity(int humidity) {
+        this.humidity = humidity;
     }
 }

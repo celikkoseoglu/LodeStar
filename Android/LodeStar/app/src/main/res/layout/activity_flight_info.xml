@@ -103,7 +103,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="50dp"
                     android:textSize="15sp"
-                    android:text="Leaving from Gate 208"/>
+                    android:text="Leaving from "/>
 
                 <TextView
                     android:id="@+id/textView5"
@@ -163,7 +163,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginEnd="10dp"
                     android:textSize="15sp"
-                    android:text="Arriving to Terminal 1"
+                    android:text="Arriving to "
                     />
 
                 <TextView
@@ -477,7 +477,8 @@
                     android:layout_marginTop="65dp"
                     android:textSize="15sp"
                     android:text="Tap Here"
-                    android:textColor="@android:color/holo_blue_bright"/>
+                    android:textColor="@android:color/holo_blue_bright"
+                    android:onClick="openLink"/>
 
 
                 <TextView
@@ -503,7 +504,7 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginTop="90dp"
                 android:textSize="15sp"
-                android:text="33,000ft"/>
+                android:text="0"/>
 
                 <TextView
                     android:id="@+id/textView30"

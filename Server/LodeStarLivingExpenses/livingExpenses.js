@@ -8,7 +8,7 @@ var all = '';
 
 app.get('/', (req, res) => {
     let request = https.request("https://www.numbeo.com/cost-of-living/in/" + req.query.city, function(response) {
-
+        all = '';
         response.on('data', function(data) {
             all = all + data.toString();
         });
@@ -23,6 +23,9 @@ app.get('/', (req, res) => {
             myFunction7(all);
             myFunction8(all);
 
+            if(all.includes("Our system cannot find city with named with"))
+                result = '{}';
+
             //there has to be a better way to create a json object rather than relying on string operations. Added to future work list.
             res.send(JSON.parse(result));
         });
@@ -36,8 +39,8 @@ app.listen(3007, () => console.log('LodeStar Living Expenses listening on port 3
 function myFunction1(str) {
     var param = 'A single person monthly costs';
     var n = str.search(param);
-    result += '{ "' + str.substr(n, param.length) + '":"' + str.substr(n + param.length + 27, 10) + '",';
-
+    result = '{ "' + str.substr(n, param.length) + '":"' + str.substr(n + param.length + 27, 10) + '",';
+    
 }
 
 function myFunction2(str) {
