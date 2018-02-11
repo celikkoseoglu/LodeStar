@@ -12,8 +12,6 @@ import Alamofire
 
 class WeatherViewController: UIViewController {
     
-    
-    
     @IBOutlet weak var todayItIsText: UILabel!
     @IBOutlet weak var weatherImage: UIImageView!
     @IBOutlet weak var todayHumidityText: UILabel!
@@ -29,7 +27,6 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var nextDayFeelsTemperature: UILabel!
     @IBOutlet weak var nextDayTemperature: UILabel!
     @IBOutlet weak var nextDayText: UILabel!
-
     
     override func viewDidLoad() {
         super.viewDidLoad()

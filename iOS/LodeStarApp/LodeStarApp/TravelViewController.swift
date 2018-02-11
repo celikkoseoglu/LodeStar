@@ -40,6 +40,14 @@ extension TravelViewController {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CollectionCell
         
+        cell.layer.shadowColor = UIColor.black.cgColor
+        cell.layer.shadowOffset = CGSize(width: 5, height: 5)
+        
+        cell.layer.shadowRadius = 5;
+        cell.layer.shadowOpacity = 0.25;
+        cell.clipsToBounds = false
+        cell.layer.masksToBounds = false
+        
         let index = indexPath as NSIndexPath
         
         let image = UIImage(named: searchesImage[index.row])
@@ -177,6 +185,8 @@ class TravelViewController: UIViewController, TravelViewControllerDelegate, UICo
         
         destinationCityImage.removeGestureRecognizer(swipeRight)
         destinationCityImage.addGestureRecognizer(swipeLeft)
+        
+        //destinationCityImage.image = UIImage(named: "istanbul.png")
         
         boardingInfoLabel.text = "You will be boarding PJ15396 from"
         
