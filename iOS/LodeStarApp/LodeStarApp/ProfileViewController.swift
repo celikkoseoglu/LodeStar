@@ -93,6 +93,13 @@ class ProfileViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    @IBAction func logoutButton(_ sender: UIButton) {
+        
+        dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
