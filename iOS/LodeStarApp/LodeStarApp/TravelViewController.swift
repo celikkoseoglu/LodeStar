@@ -9,7 +9,7 @@
 import UIKit
 
 fileprivate let itemsPerRow: CGFloat = 3
-fileprivate let sectionInsets = UIEdgeInsets(top: 50.0, left: 20.0, bottom: 50.0, right: 20.0)
+fileprivate let sectionInsets = UIEdgeInsets(top: 0.0, left: 6.0, bottom: 3.0, right: 6.0)
 fileprivate let cellCount = 9
 fileprivate let reuseIdentifier = "CollectionCell"
 fileprivate var searchesText = ["Transport Options", "Weather", "Flight Information", "Shopping", "Lounge", "Restaurants", "Living Expenses", "Places to See", "Accomodation"]
@@ -42,7 +42,6 @@ extension TravelViewController {
         
         cell.layer.shadowColor = UIColor.black.cgColor
         cell.layer.shadowOffset = CGSize(width: 5, height: 5)
-        
         cell.layer.shadowRadius = 5;
         cell.layer.shadowOpacity = 0.25;
         cell.clipsToBounds = false
@@ -241,6 +240,11 @@ class TravelViewController: UIViewController, TravelViewControllerDelegate, UICo
         self.present(controller!, animated: true, completion: nil)
         
     }
+    
+    @IBAction func logoutButtonAction(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     
     @IBAction func weatherTapAction(_ sender: UITapGestureRecognizer) {
         
