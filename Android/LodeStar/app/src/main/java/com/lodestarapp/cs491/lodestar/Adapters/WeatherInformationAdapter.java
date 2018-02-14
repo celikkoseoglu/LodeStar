@@ -15,10 +15,7 @@ import java.util.List;
 
 public class WeatherInformationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private JSONObject weatherInformationFromServer;
-
     private List<WeatherInformation> weatherInformationList;
-
     private static final int TODAY = 0;
     private static final int OTHER = 1;
 

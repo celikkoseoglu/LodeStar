@@ -14,6 +14,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.lodestarapp.cs491.lodestar.Adapters.WeatherInformationAdapter;
+import com.lodestarapp.cs491.lodestar.Controllers.WeatherInformationController;
+import com.lodestarapp.cs491.lodestar.Interfaces.LodeStarServerCallback;
 import com.lodestarapp.cs491.lodestar.Models.WeatherInformation;
 
 import org.json.JSONArray;
@@ -47,11 +49,11 @@ public class WeatherInformationActivity extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        //Request Weather Information from the Server
-        String requestFromTheUrl = "http://lodestarapp.com:3005/?city=London";
-        sendRequestToServer(requestFromTheUrl);
 
-        Log.i(TAG, "hi");
+        WeatherInformationController weatherInformationController = new
+                WeatherInformationController("London");
+
+        sendRequestToServer(weatherInformationController);
 
         //Adapter
         mAdapter = new WeatherInformationAdapter(weatherInformationList);
@@ -59,85 +61,68 @@ public class WeatherInformationActivity extends AppCompatActivity {
 
     }
 
-    public void sendRequestToServer(String requestFromTheUrl) {
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-
-        final JSONArray[] responseFromServer = new JSONArray[1];
-
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, requestFromTheUrl, null, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                Log.i(TAG, response.toString());
-                responseFromServer[0] = response;
-
-                parseTheJSONResponse(responseFromServer[0]);
-
-            }
-
-            private void parseTheJSONResponse(JSONArray weatherInformationFromServer) {
-                try {
-                    Log.i(TAG, "adapterWeather");
-                    Log.i(TAG, weatherInformationFromServer.getJSONObject(0).getString("dt_txt"));
-                    Log.i(TAG, weatherInformationFromServer.getJSONObject(1).getString("dt_txt"));
-                    Log.i(TAG, weatherInformationFromServer.getJSONObject(2).getString("dt_txt"));
-                    Log.i(TAG, weatherInformationFromServer.getJSONObject(3).getString("dt_txt"));
-                    Log.i(TAG, weatherInformationFromServer.getJSONObject(4).getString("dt_txt"));
-                    Log.i(TAG, weatherInformationFromServer.getJSONObject(5).getString("dt_txt"));
-
-                    Log.i(TAG, weatherInformationFromServer.getJSONObject(0).getJSONObject("main").getString("temp"));
-
-                    JSONObject process;
-                    JSONObject main;
-                    JSONArray weather;
-
-                    SimpleDateFormat simpleInputDate = new SimpleDateFormat("yyyy-mm-dd");
-                    Date dateToConvertToFullName;
-                    SimpleDateFormat simpleOutputDate = new SimpleDateFormat("EEEE");
-
-                    String date;
-                    double temp;
-                    double humidity;
-                    String weatherDescription;
-
-                    for (int i = 0; i < 6; i++) {
-                        process = weatherInformationFromServer.getJSONObject(i);
-                        main = process.getJSONObject("main");
-                        weather = process.getJSONArray("weather");
-
-                        date = process.getString("dt_txt");
-                        temp = main.getDouble("temp");
-                        humidity = main.getDouble("humidity");
-
-                        weatherDescription = weather.getJSONObject(0).getString("description");
-
-                        try {
-                            dateToConvertToFullName = simpleInputDate.parse(date);
-                            date = simpleOutputDate.format(dateToConvertToFullName);
-                        }catch (ParseException parseException){
-                            parseException.printStackTrace();
-                        }
-
-                        weatherInformationList.add(i,
-                                new WeatherInformation(date, weatherDescription, temp, humidity));
+    public void sendRequestToServer(WeatherInformationController weatherInformationController) {
+        weatherInformationController.getWeatherInformation(weatherInformationController.getRequestFromTheUrl(),
+                getApplicationContext(), new LodeStarServerCallback() {
+                    @Override
+                    public void onSuccess(JSONArray jsonArray, JSONObject jsonObject) {
+                        parseTheJSONResponse(jsonArray);
                     }
-                }catch (JSONException jsonException){
-                    Log.e(TAG, "JSON Parsing error");
+                });
+    }
+
+    private void parseTheJSONResponse(JSONArray weatherInformationFromServer) {
+        try {
+            Log.i(TAG, "adapterWeather");
+            Log.i(TAG, weatherInformationFromServer.getJSONObject(0).getString("dt_txt"));
+            Log.i(TAG, weatherInformationFromServer.getJSONObject(1).getString("dt_txt"));
+            Log.i(TAG, weatherInformationFromServer.getJSONObject(2).getString("dt_txt"));
+            Log.i(TAG, weatherInformationFromServer.getJSONObject(3).getString("dt_txt"));
+            Log.i(TAG, weatherInformationFromServer.getJSONObject(4).getString("dt_txt"));
+            Log.i(TAG, weatherInformationFromServer.getJSONObject(5).getString("dt_txt"));
+
+            Log.i(TAG, weatherInformationFromServer.getJSONObject(0).getJSONObject("main").getString("temp"));
+
+            JSONObject process;
+            JSONObject main;
+            JSONArray weather;
+
+            SimpleDateFormat simpleInputDate = new SimpleDateFormat("yyyy-mm-dd");
+            Date dateToConvertToFullName;
+            SimpleDateFormat simpleOutputDate = new SimpleDateFormat("EEEE");
+
+            String date;
+            double temp;
+            double humidity;
+            String weatherDescription;
+
+            for (int i = 0; i < 6; i++) {
+                process = weatherInformationFromServer.getJSONObject(i);
+                main = process.getJSONObject("main");
+                weather = process.getJSONArray("weather");
+
+                date = process.getString("dt_txt");
+                temp = main.getDouble("temp");
+                humidity = main.getDouble("humidity");
+
+                weatherDescription = weather.getJSONObject(0).getString("description");
+
+                try {
+                    dateToConvertToFullName = simpleInputDate.parse(date);
+                    date = simpleOutputDate.format(dateToConvertToFullName);
+                }catch (ParseException parseException){
+                    parseException.printStackTrace();
                 }
 
-                mAdapter.notifyDataSetChanged();
-                findViewById(R.id.weather_progress_bar).setVisibility(View.GONE);
+                weatherInformationList.add(i,
+                        new WeatherInformation(date, weatherDescription, temp, humidity));
+            }
+        }catch (JSONException jsonException){
+            Log.e(TAG, "JSON Parsing error");
+        }
 
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.i(TAG, "Failed to get weather information");
-                Log.i(TAG, error.getMessage());
-                Log.i(TAG, error.getLocalizedMessage());
-                Log.i(TAG, error.toString());
-                responseFromServer[0] = null;
-            }
-        });
-        requestQueue.add(jsonArrayRequest);
+        mAdapter.notifyDataSetChanged();
+        findViewById(R.id.weather_progress_bar).setVisibility(View.GONE);
+
     }
 }
