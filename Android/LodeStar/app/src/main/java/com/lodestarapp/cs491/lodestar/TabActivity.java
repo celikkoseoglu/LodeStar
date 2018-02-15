@@ -1,6 +1,7 @@
 package com.lodestarapp.cs491.lodestar;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -13,14 +14,17 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.lodestarapp.cs491.lodestar.Interfaces.MyOnFocusListenable;
+import com.lodestarapp.cs491.lodestar.Models.QRCodeInfo;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TabActivity extends AppCompatActivity {
     TripActivity trip = new TripActivity();
+    boolean exit = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,6 +113,32 @@ public class TabActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @Override
+    public void onBackPressed() {
+        if(exit){
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+
+
+
+        }
+        else{
+            Toast.makeText(this, "Press Back again to Exit.",
+                    Toast.LENGTH_SHORT).show();
+            exit = true;
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    exit = false;
+                }
+            }, 2 * 1000);
+
+
+        }
+
+    }
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
@@ -151,6 +181,16 @@ public class TabActivity extends AppCompatActivity {
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
+
+        Bundle data = getIntent().getExtras();
+        if (data != null) {
+            QRCodeInfo qrCodeInfo = data.getParcelable("QRCodeInfo");
+
+            if(qrCodeInfo != null){
+                ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+                viewPager.setCurrentItem(1);
+            }
+        }
 
         if(trip instanceof MyOnFocusListenable) {
             ((MyOnFocusListenable) trip).onWindowFocusChanged(hasFocus);

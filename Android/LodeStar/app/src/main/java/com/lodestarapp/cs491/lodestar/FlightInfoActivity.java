@@ -75,7 +75,7 @@ public class FlightInfoActivity extends AppCompatActivity {
                 view12.setText("Planned speed: " + Math.round(flightInfo.getSpeed() * 1.852)  + " km/h");
 
             TextView view14 = findViewById(R.id.textView14);
-                view14.setText(flightInfo.getDelay()/(-60) + " minutes" );
+                view14.setText(flightInfo.getDelay()/(60) + " minutes" );
 
             TextView view20 = findViewById(R.id.textView20);
             if(flightInfo.getAircraft() != null)
