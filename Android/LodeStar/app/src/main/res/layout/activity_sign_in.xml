@@ -31,15 +31,17 @@
         <TableRow>
 
             <ImageView
-                app:srcCompat="@drawable/ic_003_user"
-                android:scaleType="fitStart"
-                />
+                android:scaleType="center"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                app:srcCompat="@drawable/ic_003_user" />
             <EditText
                 android:id="@+id/uName2"
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
                 android:maxLines="1"
-                android:hint="Enter email"
+                android:textColorHint="@color/cardview_light_background"
+                android:hint="@string/enter_username"
                 android:maxLength="256"
                 android:inputType="textEmailAddress"
                 android:shadowColor="@color/colorWhite"
@@ -50,15 +52,17 @@
         <TableRow>
             <ImageView
                 app:srcCompat="@drawable/ic_002_mail"
-                android:scaleType="fitStart"
-
+                android:scaleType="center"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
                 />
 
             <EditText
                 android:id="@+id/emailEdit2"
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
-                android:hint="Enter password"
+                android:textColorHint="@color/cardview_light_background"
+                android:hint="@string/enter_e_mail"
                 android:maxLength="100"
                 android:maxLines="1"
                 android:inputType="textEmailAddress"
@@ -71,13 +75,16 @@
 
             <ImageView
                 app:srcCompat="@drawable/ic_001_key"
-                android:scaleType="fitStart"
+                android:scaleType="center"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
                  />
             <EditText
                 android:id="@+id/textPassword2"
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
-                android:hint="Re-Enter password"
+                android:hint="@string/enter_password"
+                android:textColorHint="@color/cardview_light_background"
                 android:maxLength="100"
                 android:maxLines="1"
                 android:inputType="textPassword"
@@ -91,16 +98,6 @@
 
 
 
-    <Button
-        android:id="@+id/RegButton2"
-        android:layout_width="500px"
-        android:layout_height="100px"
-        android:layout_below="@+id/tableLayout3"
-        android:layout_margin="15dp"
-        android:onClick="registerButtonMe"
-        android:layout_centerInParent="true"
-        android:text="Sign In!" />
-
     <TextView
         android:id="@+id/textSignin2"
         android:layout_width="match_parent"
@@ -113,6 +110,19 @@
         android:text="Would you like to create a new account instead?"
         android:textAlignment="center"
         android:textColor="@color/colorWhite" />
+
+    <Button
+        android:id="@+id/RegButton2"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tableLayout3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:background="@android:color/holo_red_dark"
+        android:onClick="registerButtonMe"
+        android:text="Sign In!"
+        android:textAllCaps="false"
+        android:textColor="@android:color/background_light" />
 
 
 

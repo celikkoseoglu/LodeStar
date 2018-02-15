@@ -27,4 +27,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_user_page">UserPage</string>
+    <string name="enter_username"><i>Enter Username</i></string>
+    <string name="enter_e_mail"><i>Enter E-mail</i></string>
+    <string name="enter_password"><i>Enter password</i></string>
+    <string name="re_enter_password"><i>Re-Enter password</i></string>
 </resources>
