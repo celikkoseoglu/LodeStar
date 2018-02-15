@@ -36,6 +36,7 @@
                 android:layout_marginLeft="10dp"
                 android:paddingTop="5dp"
                 android:id="@+id/userName"
+                android:maxLines="1"
                 android:layout_marginStart="10dp"
                 android:textColor="@color/colorWhite"
                 />
@@ -50,6 +51,7 @@
                 android:layout_marginLeft="10dp"
                 android:id="@+id/emailEdit"
                 android:textColor="@color/colorWhite"
+                android:maxLines="1"
                 android:paddingTop="8dp"
                 android:layout_marginStart="10dp"
                 />
@@ -64,6 +66,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
                 android:id="@+id/textPassword"
+                android:maxLines="1"
                 android:inputType="textPassword"
                 android:textColor="@color/colorWhite"
                 />
@@ -76,6 +79,7 @@
             <EditText
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
+                android:maxLines="1"
                 android:id="@+id/reTypePassword"
                 android:inputType="textPassword"
                 android:textColor="@color/colorWhite"

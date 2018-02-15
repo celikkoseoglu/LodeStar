@@ -69,7 +69,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         }
         else if(v == txtViewSignIn) {
             Toast.makeText(this,".(",Toast.LENGTH_LONG).show();
-            startActivity(new Intent(this,UserLoginActivity.class));
+            startActivity(new Intent(this,LoginActivity.class));
         }
 
 

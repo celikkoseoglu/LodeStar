@@ -38,7 +38,7 @@
                 android:id="@+id/uName2"
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
-                android:lines="5"
+                android:maxLines="1"
                 android:hint="Enter email"
                 android:inputType="textEmailAddress"
                 android:shadowColor="@color/colorWhite"
@@ -58,7 +58,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
                 android:hint="Enter password"
-                android:lines="5"
+                android:maxLines="1"
                 android:inputType="textEmailAddress"
                 android:textColor="@color/colorWhite" />
 
@@ -76,7 +76,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
                 android:hint="Re-Enter password"
-                android:lines="5"
+                android:maxLines="1"
                 android:inputType="textPassword"
                 android:textColor="@color/colorWhite" />
         </TableRow>
@@ -92,7 +92,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp"
             android:hint="Re-Enter password"
-            android:lines="5"
+            android:maxLines="1"
             android:inputType="textPassword"
             android:textColor="@color/colorWhite" />
     </TableRow>
