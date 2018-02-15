@@ -22,6 +22,10 @@ android {
     dexOptions {
         preDexLibraries = false
     }
+
+    defaultConfig {
+        vectorDrawables.useSupportLibrary = true
+    }
 }
 
 dependencies {

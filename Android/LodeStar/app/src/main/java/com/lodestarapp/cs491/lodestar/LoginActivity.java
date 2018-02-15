@@ -139,15 +139,7 @@ public class LoginActivity extends AppCompatActivity implements
         startActivity(intent);
     }
 
-    public void tripStart(View view){
-        Intent intent = new Intent(this, TripActivity.class);
-        startActivity(intent);
-    }
 
-    public void homeStart(View view){
-        Intent intent = new Intent(this, HomeActivity.class);
-        startActivity(intent);
-    }
 
 
 

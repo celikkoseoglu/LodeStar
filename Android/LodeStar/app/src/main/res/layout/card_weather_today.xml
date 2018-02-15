@@ -7,7 +7,9 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <android.support.v7.widget.CardView
             android:id="@+id/weather_cardview_today"
@@ -33,24 +35,25 @@
                     android:id="@+id/textView23"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/textView24"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignStart="@+id/textView24"
-                    android:layout_marginTop="10dp"
-                    android:text="It will be"
+                    android:layout_toEndOf="@+id/weather_picture_today"
+                    android:layout_toRightOf="@+id/weather_picture_today"
+                    android:layout_marginTop="26dp"
+                    android:text="Today is"
                     android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/weather_info_today"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/textView25"
-                    android:layout_alignStart="@+id/textView25"
-                    android:layout_alignTop="@+id/imageView3"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginStart="2dp"
+                    android:layout_toEndOf="@+id/textView23"
+                    android:layout_toRightOf="@+id/textView23"
                     android:text="weather_info_today"
-                    android:textSize="18sp"
-                    android:textColor="#353535"/>
+                    android:layout_marginTop="20dp"
+                    android:textColor="#353535"
+                    android:textSize="18sp" />
+
 
                 <TextView
                     android:id="@+id/temperatureToday"
@@ -76,7 +79,7 @@
                     android:layout_marginLeft="50dp"
                     android:layout_marginStart="50dp"
                     android:layout_marginTop="140dp"
-                    android:text="feels like 16°C"
+                    android:text="feels like 16°"
                     android:textColor="#7eb75d"
                     android:textSize="15sp" />
 
@@ -84,10 +87,10 @@
                     android:id="@+id/weather_humidity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginRight="50dp"
+                    android:layout_alignParentRight="true"
                     android:layout_marginEnd="50dp"
+                    android:layout_marginRight="50dp"
                     android:layout_marginTop="90dp"
                     android:text="52%"
                     android:textColor="#5d72b7"
@@ -98,15 +101,26 @@
                     android:id="@+id/textView29"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
                     android:layout_marginBottom="20dp"
-                    android:layout_marginRight="50dp"
                     android:layout_marginEnd="50dp"
+                    android:layout_marginRight="50dp"
                     android:layout_marginTop="140dp"
                     android:text="humidity   "
                     android:textColor="#5d72b7"
                     android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/textView31"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/weather_picture_today"
+                    android:layout_toEndOf="@+id/weather_picture_today"
+                    android:layout_toRightOf="@+id/weather_picture_today"
+                    android:text="in "
+                    android:textColor="#353535"
+                    android:textSize="18sp"/>
 
 
             </RelativeLayout>
