@@ -58,8 +58,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
 
+        String str1 = String.valueOf(reTypeField.getText());
 
-        if(reTypeField != passwordField) {
+        String str2 = String.valueOf(passwordField.getText());
+
+        if(!str1.equals(str2)) {
             Toast.makeText(this,"Please check the password!",Toast.LENGTH_LONG).show();
         }
         int isRegisteredSuccessfully = 0;

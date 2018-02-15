@@ -20,7 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class SignInActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private EditText emailF, passwordF,reEnter;
+    private EditText emailF, passwordF;
     private Button signButton;
     private TextView txtViewtoSignUp;
     private ProgressDialog pDialog;
@@ -43,7 +43,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 //        }
 
         //Intialize Everything
-        reEnter = (EditText) findViewById(R.id.reTypePassword2);
+       // reEnter = (EditText) findViewById(R.id.reTypePassword2);
         emailF = (EditText) findViewById(R.id.emailEdit2);
         signButton = (Button) findViewById(R.id.RegButton2);
         passwordF = (EditText) findViewById(R.id.textPassword2);
@@ -54,7 +54,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         txtViewtoSignUp.setOnClickListener(this);
 
         emailF.setTextColor(Color.WHITE);
-        reEnter.setTextColor(Color.WHITE);
+     //   reEnter.setTextColor(Color.WHITE);
         passwordF.setTextColor(Color.WHITE);
         txtViewtoSignUp.setTextColor(Color.WHITE);
 
@@ -64,13 +64,13 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
 
-        String str1 = String.valueOf(reEnter.getText());
+     //   String str1 = String.valueOf(reEnter.getText());
         String str2 = String.valueOf(passwordF.getText());
 
-        if(!str1.equals(str2)) {
+     /*   if(!str1.equals(str2)) {
             Toast.makeText(this,"A " + passwordF.getText() + " B " + reEnter.getText(),Toast.LENGTH_LONG).show();
             return;
-        }
+        } */
 
         if(v == txtViewtoSignUp) {
             finish();

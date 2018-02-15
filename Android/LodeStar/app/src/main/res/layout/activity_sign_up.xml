@@ -28,14 +28,16 @@
         android:id="@+id/tableLayout2">
         <TableRow>
             <ImageView
-                android:src="@drawable/ic_003_user"
+                app:srcCompat="@drawable/ic_003_user"
                 android:scaleType="fitStart"
                 />
 
             <EditText
                 android:layout_marginLeft="10dp"
+                android:singleLine="true"
                 android:paddingTop="5dp"
                 android:id="@+id/userName"
+                android:maxLength="75"
                 android:maxLines="1"
                 android:layout_marginStart="10dp"
                 android:textColor="@color/colorWhite"
@@ -43,14 +45,16 @@
         </TableRow>
         <TableRow>
             <ImageView
-                android:src="@drawable/ic_002_mail"
+                app:srcCompat="@drawable/ic_002_mail"
                 android:scaleType="fitStart"
                 android:layout_marginTop="5dp"
                 />
             <EditText
                 android:layout_marginLeft="10dp"
+                android:singleLine="true"
                 android:id="@+id/emailEdit"
                 android:textColor="@color/colorWhite"
+                android:maxLength="256"
                 android:maxLines="1"
                 android:paddingTop="8dp"
                 android:layout_marginStart="10dp"
@@ -60,12 +64,14 @@
 
         <TableRow>
             <ImageView
-                android:src="@drawable/ic_001_key"
+                app:srcCompat="@drawable/ic_001_key"
                 android:scaleType="fitStart" />
             <EditText
+                android:singleLine="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
                 android:id="@+id/textPassword"
+                android:maxLength="100"
                 android:maxLines="1"
                 android:inputType="textPassword"
                 android:textColor="@color/colorWhite"
@@ -74,12 +80,14 @@
 
         <TableRow>
             <ImageView
-                android:src="@drawable/ic_001_key"
+                app:srcCompat="@drawable/ic_001_key"
                 android:scaleType="fitStart" />
             <EditText
+                android:singleLine="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
                 android:maxLines="1"
+                android:maxLength="100"
                 android:id="@+id/reTypePassword"
                 android:inputType="textPassword"
                 android:textColor="@color/colorWhite"

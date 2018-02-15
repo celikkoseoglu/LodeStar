@@ -22,7 +22,7 @@
 
     <TableLayout
         android:layout_width="250dp"
-        android:layout_height="175dp"
+        android:layout_height="135dp"
         android:layout_centerInParent="true"
         android:background="@drawable/shape_sign_up"
         android:alpha="0.4"
@@ -31,7 +31,7 @@
         <TableRow>
 
             <ImageView
-                android:src="@drawable/ic_003_user"
+                app:srcCompat="@drawable/ic_003_user"
                 android:scaleType="fitStart"
                 />
             <EditText
@@ -40,6 +40,7 @@
                 android:layout_marginStart="10dp"
                 android:maxLines="1"
                 android:hint="Enter email"
+                android:maxLength="256"
                 android:inputType="textEmailAddress"
                 android:shadowColor="@color/colorWhite"
                 android:textColor="@color/colorWhite" />
@@ -48,7 +49,7 @@
 
         <TableRow>
             <ImageView
-                android:src="@drawable/ic_002_mail"
+                app:srcCompat="@drawable/ic_002_mail"
                 android:scaleType="fitStart"
 
                 />
@@ -58,6 +59,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
                 android:hint="Enter password"
+                android:maxLength="100"
                 android:maxLines="1"
                 android:inputType="textEmailAddress"
                 android:textColor="@color/colorWhite" />
@@ -68,7 +70,7 @@
         <TableRow>
 
             <ImageView
-                android:src="@drawable/ic_001_key"
+                app:srcCompat="@drawable/ic_001_key"
                 android:scaleType="fitStart"
                  />
             <EditText
@@ -76,26 +78,12 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
                 android:hint="Re-Enter password"
+                android:maxLength="100"
                 android:maxLines="1"
                 android:inputType="textPassword"
                 android:textColor="@color/colorWhite" />
         </TableRow>
 
-    <TableRow>
-
-        <ImageView
-            android:src="@drawable/ic_001_key"
-            android:scaleType="fitStart"
-            />
-        <EditText
-            android:id="@+id/reTypePassword2"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"
-            android:hint="Re-Enter password"
-            android:maxLines="1"
-            android:inputType="textPassword"
-            android:textColor="@color/colorWhite" />
-    </TableRow>
 
 
 </TableLayout>
