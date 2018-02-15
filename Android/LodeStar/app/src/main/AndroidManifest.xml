@@ -54,7 +54,11 @@
             android:name=".UserLoginActivity"
             android:label="@string/title_activity_user_login"
             android:theme="@style/AppTheme" />
-        <activity android:name=".TabActivity"></activity>
+        <activity android:name=".TabActivity" />
+        <activity
+            android:name=".UserPage"
+            android:label="@string/title_activity_user_page"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

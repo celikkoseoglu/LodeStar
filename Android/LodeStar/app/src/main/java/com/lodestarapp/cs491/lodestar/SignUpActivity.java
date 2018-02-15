@@ -32,12 +32,13 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //Toast.makeText(this,"Nerdesin gozum",Toast.LENGTH_LONG).show();
         super.onCreate(savedInstanceState);
         // isDBAuthanticated = false;
         initializeDB();
         authManager = FirebaseAuth.getInstance();
 
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_sign_up);
 
         //Bind Buttons & EditText & TextViews & bars
         registerButton = (Button) findViewById(R.id.RegButton);
@@ -96,7 +97,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     Toast.makeText(SignUpActivity.this,"Congrats! You can now explore anywhere with LodeStar!",Toast.LENGTH_SHORT).show();
                     //  startActivity(new Intent(this,UserLoginActivity.class));
                     finish();
-                    startActivity(new Intent(getApplicationContext(),UserLoginActivity.class));
+                    startActivity(new Intent(getApplicationContext(),LoginActivity.class));
                 }
                 else {
                     Toast.makeText(SignUpActivity.this,"Oooops Please Try Again :( ",Toast.LENGTH_SHORT).show();
@@ -112,4 +113,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         //  fa = FirebaseAuth.getInstance();
         //      isDBAuthanticated = true;
     } //Initializes the database
+
+
 }

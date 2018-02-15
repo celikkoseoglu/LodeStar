@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity implements
 
     private Button signInWithEmail;
 
-    private TextView alreadySignedInQuestion;
+    // private TextView alreadySignedInQuestion;
 
 
 
@@ -45,7 +45,8 @@ public class LoginActivity extends AppCompatActivity implements
 
         signInWithEmail = (Button) findViewById(R.id.button_email);
 
-        alreadySignedInQuestion = (TextView) findViewById(R.id.login_text);
+        //  alreadySignedInQuestion = (TextView) findViewById(R.id.login_text);
+        // alreadySignedInQuestion.setOnClickListener(this);
 
 //        signInWithEmail.setOnClickListener(
 //                new Button.OnClickListener(){
@@ -77,12 +78,12 @@ public class LoginActivity extends AppCompatActivity implements
 
     @Override
     public void onClick(View view) {
+//        Toast.makeText(this,".(",Toast.LENGTH_LONG).show();
+//        if(view == alreadySignedInQuestion) {
+//            Toast.makeText(this,".(",Toast.LENGTH_LONG).show();
+//            startActivity(new Intent(this,WeatherInformation.class));
+//        }
 
-        Toast.makeText(this,"Burda hojam",Toast.LENGTH_LONG).show();
-        if(view == alreadySignedInQuestion) {
-            Toast.makeText(this,".(",Toast.LENGTH_LONG).show();
-            startActivity(new Intent(this,SignUpActivity.class));
-        }
 
         switch (view.getId()){
             case R.id.GoogleSignInButton:
@@ -141,6 +142,15 @@ public class LoginActivity extends AppCompatActivity implements
 
 
 
+    public void signUpStart(View view) {
+        Intent intent = new Intent(this, SignInActivity.class);
+        startActivity(intent);
+    }
+
+    public void signUpPlease(View v) {
+        Intent intent = new Intent(this, SignUpActivity.class);
+        startActivity(intent);
+    }
 
 
 

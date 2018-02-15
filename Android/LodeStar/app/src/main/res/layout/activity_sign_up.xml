@@ -1,64 +1,169 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.lodestarapp.cs491.lodestar.SignUpActivity"
+    android:orientation="vertical"
     android:background="@drawable/thy_lounge_background">
 
-    <LinearLayout
-        android:layout_centerVertical="true"
-        android:layout_width="368dp"
+    <TextView
+        android:id="@+id/textSignin"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="140dp"
+        android:text="@string/app_name_sign_up"
+        android:textColor="@android:color/background_light"
+        android:textSize="24sp" />
 
-        <EditText
-            android:id="@+id/emailEdit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:hint="Enter email"
-            android:inputType="textEmailAddress" />
+    <TableLayout
+        android:layout_width="250dp"
+        android:layout_height="170dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/shape_sign_up"
+        android:alpha="0.4"
+        android:id="@+id/tableLayout2">
+        <TableRow>
+            <ImageView
+                android:src="@drawable/ic_003_user"
+                android:scaleType="fitStart"
+                />
 
-        <EditText
-            android:id="@+id/textPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorAccent"
-
-            android:layout_margin="15dp"
-            android:hint="Enter password"
-            android:inputType="textPassword" />
-
-
-        <EditText
-            android:id="@+id/reTypePassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:hint="Re-Enter password"
-            android:inputType="textPassword" />
-
-        <Button
-            android:id="@+id/RegButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:text="Register!" />
-
-
-
-
-        <TextView
-            android:textAlignment="center"
-            android:text="Would you like to sign in instead?"
-            android:id="@+id/textSignin"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            />
-    </LinearLayout>
+            <EditText
+                android:layout_marginLeft="10dp"
+                android:paddingTop="5dp"
+                android:id="@+id/userName"
+                android:layout_marginStart="10dp"
+                android:textColor="@color/colorWhite"
+                />
+        </TableRow>
+        <TableRow>
+            <ImageView
+                android:src="@drawable/ic_002_mail"
+                android:scaleType="fitStart"
+                android:layout_marginTop="5dp"
+                />
+            <EditText
+                android:layout_marginLeft="10dp"
+                android:id="@+id/emailEdit"
+                android:textColor="@color/colorWhite"
+                android:paddingTop="8dp"
+                android:layout_marginStart="10dp"
+                />
+        </TableRow>
 
 
+        <TableRow>
+            <ImageView
+                android:src="@drawable/ic_001_key"
+                android:scaleType="fitStart" />
+            <EditText
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:id="@+id/textPassword"
+                android:inputType="textPassword"
+                android:textColor="@color/colorWhite"
+                />
+        </TableRow>
 
-</android.support.constraint.ConstraintLayout>
+        <TableRow>
+            <ImageView
+                android:src="@drawable/ic_001_key"
+                android:scaleType="fitStart" />
+            <EditText
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:id="@+id/reTypePassword"
+                android:inputType="textPassword"
+                android:textColor="@color/colorWhite"
+                />
+        </TableRow>
+
+
+
+    </TableLayout>
+
+
+    <Button
+        android:id="@+id/RegButton"
+        android:layout_width="500px"
+        android:layout_height="100px"
+        android:layout_below="@+id/tableLayout2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="23dp"
+        android:text="Register!"
+        android:onClick="registerButtonMe"/>
+
+</RelativeLayout>
+
+
+
+
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+    <!--<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--tools:context="com.lodestarapp.cs491.lodestar.SignUpActivity"-->
+    <!--android:background="@drawable/thy_lounge_background">-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_centerVertical="true"-->
+    <!--android:layout_width="368dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="vertical">-->
+
+    <!--<EditText-->
+    <!--android:id="@+id/emailEdit"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_margin="15dp"-->
+    <!--android:hint="Enter email"-->
+    <!--android:inputType="textEmailAddress" />-->
+
+    <!--<EditText-->
+    <!--android:id="@+id/textPassword"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:textColor="@color/colorAccent"-->
+
+    <!--android:layout_margin="15dp"-->
+    <!--android:hint="Enter password"-->
+    <!--android:inputType="textPassword" />-->
+
+
+    <!--<EditText-->
+    <!--android:id="@+id/reTypePassword"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_margin="15dp"-->
+    <!--android:hint="Re-Enter password"-->
+    <!--android:inputType="textPassword" />-->
+
+    <!--<Button-->
+    <!--android:id="@+id/RegButton"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_margin="15dp"-->
+    <!--android:text="Register!" />-->
+
+
+
+
+    <!--<TextView-->
+    <!--android:textAlignment="center"-->
+    <!--android:text="Would you like to sign in instead?"-->
+    <!--android:id="@+id/textSignin"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_width="match_parent"-->
+    <!--/>-->
+    <!--</LinearLayout>-->
+
+
+
+    <!--</android.support.constraint.ConstraintLayout>-->
