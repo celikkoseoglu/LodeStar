@@ -112,7 +112,7 @@
                     android:textSize="15sp" />
 
                 <TextView
-                    android:id="@+id/textView31"
+                    android:id="@+id/weather_city"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@+id/weather_picture_today"
@@ -120,7 +120,7 @@
                     android:layout_toRightOf="@+id/weather_picture_today"
                     android:text="in "
                     android:textColor="#353535"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp" />
 
 
             </RelativeLayout>

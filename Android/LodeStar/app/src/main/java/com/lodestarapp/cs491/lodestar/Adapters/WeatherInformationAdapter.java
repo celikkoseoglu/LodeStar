@@ -1,6 +1,9 @@
 package com.lodestarapp.cs491.lodestar.Adapters;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +14,7 @@ import com.lodestarapp.cs491.lodestar.Models.WeatherInformation;
 import com.lodestarapp.cs491.lodestar.R;
 import org.json.JSONObject;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class WeatherInformationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -19,9 +23,15 @@ public class WeatherInformationAdapter extends RecyclerView.Adapter<RecyclerView
     private static final int TODAY = 0;
     private static final int OTHER = 1;
 
+    private Context context;
+
+    private SparseArray weatherIconMap;
+
     private static final String TAG = "weatherAdapterMessage";
 
-    public WeatherInformationAdapter(List<WeatherInformation> weatherInformationList){
+    public WeatherInformationAdapter(SparseArray weatherIconMap, Context context, List<WeatherInformation> weatherInformationList){
+        this.weatherIconMap = weatherIconMap;
+        this.context = context;
         this.weatherInformationList = weatherInformationList;
     }
 
@@ -32,6 +42,7 @@ public class WeatherInformationAdapter extends RecyclerView.Adapter<RecyclerView
         TextView temperatureView;
         TextView feelsLikeView;
         TextView humidityView;
+        TextView cityNameView;
 
 
         TodaysWeatherViewHolder(View itemView){
@@ -42,6 +53,8 @@ public class WeatherInformationAdapter extends RecyclerView.Adapter<RecyclerView
             this.temperatureView = itemView.findViewById(R.id.temperatureToday);
             this.feelsLikeView = itemView.findViewById(R.id.weather_feels_like);
             this.humidityView = itemView.findViewById(R.id.weather_humidity);
+            this.cityNameView = itemView.findViewById(R.id.weather_city);
+
         }
     }
 
@@ -71,13 +84,15 @@ public class WeatherInformationAdapter extends RecyclerView.Adapter<RecyclerView
 
         switch (viewType){
             case TODAY:
-                View todayView = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_weather_today,
-                        parent, false);
+                View todayView = LayoutInflater.from(parent.getContext()).
+                        inflate(R.layout.card_weather_today,
+                                parent, false);
                 viewHolder = new TodaysWeatherViewHolder(todayView);
                 break;
             case OTHER:
-                View otherDaysView = LayoutInflater.from(parent.getContext()).inflate(R.layout.cards_weather,
-                        parent, false);
+                View otherDaysView = LayoutInflater.from(parent.getContext()).
+                        inflate(R.layout.cards_weather,
+                                parent, false);
                 viewHolder = new OtherDaysViewHolder(otherDaysView);
         }
 
@@ -90,18 +105,35 @@ public class WeatherInformationAdapter extends RecyclerView.Adapter<RecyclerView
             case TODAY:
                 ((TodaysWeatherViewHolder) holder).weatherInfoToday.setText(weatherInformationList.
                         get(0).getDescription());
-                ((TodaysWeatherViewHolder) holder).temperatureView.setText(String.format("%s",
-                        weatherInformationList.get(0).getFeelsLikeTemperature()));
-                ((TodaysWeatherViewHolder) holder).humidityView.setText(String.format("%s",
-                        weatherInformationList.get(0).getHumidity()));
+                ((TodaysWeatherViewHolder) holder).temperatureView.setText(String.format("%s°C",
+                        String.format("%s",
+                                weatherInformationList.get(0).getTemperature())));
+                ((TodaysWeatherViewHolder) holder).feelsLikeView.setText(String.format("%s°C",
+                        String.format("%s", "feels like " +
+                                weatherInformationList.get(0).getFeelsLikeTemperature())));
+                ((TodaysWeatherViewHolder) holder).humidityView.setText(String.format("%s%%",
+                        String.format("%s",
+                                weatherInformationList.get(0).getHumidity())));
+                ((TodaysWeatherViewHolder) holder).cityNameView.
+                        setText(String.format("in %s", weatherInformationList.get(0).getCity()));
+                ((TodaysWeatherViewHolder) holder).weatherTodayView.
+                        setImageResource(this.context.getResources().
+                                getIdentifier(weatherIconMap.get(weatherInformationList.
+                                                get(0).getWeatherId() / 100).toString(),
+                                        "drawable", this.context.getPackageName()));
                 break;
             case OTHER:
                 ((OtherDaysViewHolder) holder).weatherInfoView.setText(weatherInformationList.
                         get(position).getDescription());
-                ((OtherDaysViewHolder) holder).humidityView.setText(String.format("%s",
-                        weatherInformationList.get(position).getHumidity()));
-                ((OtherDaysViewHolder) holder).temperatureView.setText(String.format("%s",
-                        weatherInformationList.get(position).getFeelsLikeTemperature()));
+                ((OtherDaysViewHolder) holder).humidityView.setText(String.format("%s%%",
+                        String.format("%s", weatherInformationList.get(position).getHumidity())));
+                ((OtherDaysViewHolder) holder).temperatureView.setText(String.format("%s°C",
+                        String.format("%s",
+                                weatherInformationList.get(position).getFeelsLikeTemperature())));
+                ((OtherDaysViewHolder) holder).weatherView.setImageResource(this.context.
+                        getResources().getIdentifier(weatherIconMap.get(weatherInformationList
+                                .get(position).getWeatherId() / 100).toString(),
+                        "drawable", this.context.getPackageName()));
                 break;
         }
     }
