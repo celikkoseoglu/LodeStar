@@ -37,7 +37,7 @@ class LogCell: UICollectionViewCell {
         self.cityName.text = cityName
         self.tapToViewCity.text = tapToViewCity
         
-        self.backgroundColor = UIColor(colorLiteralRed: 209/255, green: 209/255, blue: 209/255, alpha: 0.8)
+        self.backgroundColor = UIColor(red: 209/255, green: 209/255, blue: 209/255, alpha: 0.8)
         
     }
 

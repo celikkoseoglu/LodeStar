@@ -10,15 +10,12 @@ import UIKit
 
 fileprivate let itemsPerRow: CGFloat = 3
 fileprivate let sectionInsets = UIEdgeInsets(top: 0.0, left: 6.0, bottom: 3.0, right: 6.0)
-fileprivate let cellCount = 9
 fileprivate let reuseIdentifier = "CollectionCell"
-fileprivate var searchesText = ["Transport Options", "Weather", "Flight Information", "Shopping", "Lounge", "Restaurants", "Living Expenses", "Places to See", "Accomodation"]
-fileprivate var searchesImage = ["transport", "weather", "flight", "shopping", "lounge", "restaurants", "livingExpenses", "placesToSee", "accomodation"]
+fileprivate var availableServices = ["Transport Options", "Weather", "Flight Information", "Shopping", "Lounge", "Restaurants", "Living Expenses", "Places to See", "Accomodation"]
+fileprivate var availableServiceImages = ["transport", "weather", "flight", "shopping", "lounge", "restaurants", "livingExpenses", "placesToSee", "accomodation"]
 
 protocol TravelViewControllerDelegate {
-    
     func setDestinationInfo(_ name:String)
-    
 }
 
 // MARK: - UICollectionViewDataSource
@@ -28,18 +25,17 @@ extension TravelViewController {
         return 1
     }
     
-    //2
-    func collectionView(_ collectionView: UICollectionView,
-                                 numberOfItemsInSection section: Int) -> Int {
-        return searchesText.count
+    // TODO this should return the number of available services in the airport
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return availableServices.count
     }
     
     //3
-    func collectionView(_ collectionView: UICollectionView,
-                                 cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CollectionCell
         
+        //background shadow for collectionView elements
         cell.layer.shadowColor = UIColor.black.cgColor
         cell.layer.shadowOffset = CGSize(width: 5, height: 5)
         cell.layer.shadowRadius = 5;
@@ -48,9 +44,9 @@ extension TravelViewController {
         cell.layer.masksToBounds = false
         
         let index = indexPath as NSIndexPath
-        
-        let image = UIImage(named: searchesImage[index.row])
-        let text = searchesText[index.row]
+
+        let image = UIImage(named: availableServiceImages[index.row])
+        let text = availableServices[index.row]
         cell.cellImage.image = image
         cell.title.text = text
         
@@ -86,11 +82,7 @@ extension TravelViewController {
 }
 
 extension TravelViewController : UICollectionViewDelegateFlowLayout {
-    //1
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
-        //2
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
         let availableWidth = view.frame.width - paddingSpace
         let widthPerItem = availableWidth / itemsPerRow
@@ -98,17 +90,11 @@ extension TravelViewController : UICollectionViewDelegateFlowLayout {
         return CGSize(width: widthPerItem, height: widthPerItem)
     }
     
-    //3
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        insetForSectionAt section: Int) -> UIEdgeInsets {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return sectionInsets
     }
     
-    // 4
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return sectionInsets.left
     }
 }
@@ -137,8 +123,7 @@ class TravelViewController: UIViewController, TravelViewControllerDelegate, UICo
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view,  from a nib.
-        
+
         collectionView.dataSource = self
         collectionView.delegate = self
         

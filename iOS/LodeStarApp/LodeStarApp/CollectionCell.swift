@@ -47,8 +47,6 @@ class CollectionCell: UICollectionViewCell {
     func displayContent(title: String, cellImage: UIImage) {
         self.title.text = title
         
-        cellImage.resize(maxWidthHeight: 90)
-        
         self.cellImage.image = cellImage
         
     }
