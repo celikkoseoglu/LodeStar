@@ -90,7 +90,7 @@ public class WeatherInformationActivity extends AppCompatActivity {
             Log.i(TAG, weatherInformationFromServer.getJSONObject(2).getString("dt_txt"));
             Log.i(TAG, weatherInformationFromServer.getJSONObject(3).getString("dt_txt"));
             Log.i(TAG, weatherInformationFromServer.getJSONObject(4).getString("dt_txt"));
-            Log.i(TAG, weatherInformationFromServer.getJSONObject(5).getString("dt_txt"));
+            //Log.i(TAG, weatherInformationFromServer.getJSONObject(5).getString("dt_txt"));
 
             Log.i(TAG, weatherInformationFromServer.getJSONObject(0).getJSONObject("main").getString("temp"));
 
@@ -108,7 +108,7 @@ public class WeatherInformationActivity extends AppCompatActivity {
             String weatherDescription;
             int weatherID;
 
-            for (int i = 0; i < 6; i++) {
+            for (int i = 0; i < 5; i++) {
                 process = weatherInformationFromServer.getJSONObject(i);
                 main = process.getJSONObject("main");
                 weather = process.getJSONArray("weather");
