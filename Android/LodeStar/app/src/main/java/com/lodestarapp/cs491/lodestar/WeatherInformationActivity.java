@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.View;
 
 import com.android.volley.Request;
@@ -26,6 +27,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 public class WeatherInformationActivity extends AppCompatActivity {
@@ -33,8 +35,11 @@ public class WeatherInformationActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    private WeatherInformationController weatherInformationController;
 
     private List<WeatherInformation> weatherInformationList = new ArrayList<>();
+
+    private SparseArray weatherIconMap;
 
     private static final String TAG = "theMessage";
 
@@ -43,20 +48,26 @@ public class WeatherInformationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
 
+        weatherIconMap = new SparseArray();
+        weatherIconMap.append(2, "p200");
+        weatherIconMap.append(5, "p500");
+        weatherIconMap.append(6, "p600");
+        weatherIconMap.append(7, "p700");
+        weatherIconMap.append(8, "p800");
+
         mRecyclerView = findViewById(R.id.my_weather_recycler_view);
         mRecyclerView.setHasFixedSize(true);
 
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-
-        WeatherInformationController weatherInformationController = new
+        weatherInformationController = new
                 WeatherInformationController("London");
 
         sendRequestToServer(weatherInformationController);
 
         //Adapter
-        mAdapter = new WeatherInformationAdapter(weatherInformationList);
+        mAdapter = new WeatherInformationAdapter(weatherIconMap, this.getApplicationContext() ,weatherInformationList);
         mRecyclerView.setAdapter(mAdapter);
 
     }
@@ -79,7 +90,7 @@ public class WeatherInformationActivity extends AppCompatActivity {
             Log.i(TAG, weatherInformationFromServer.getJSONObject(2).getString("dt_txt"));
             Log.i(TAG, weatherInformationFromServer.getJSONObject(3).getString("dt_txt"));
             Log.i(TAG, weatherInformationFromServer.getJSONObject(4).getString("dt_txt"));
-            Log.i(TAG, weatherInformationFromServer.getJSONObject(5).getString("dt_txt"));
+            //Log.i(TAG, weatherInformationFromServer.getJSONObject(5).getString("dt_txt"));
 
             Log.i(TAG, weatherInformationFromServer.getJSONObject(0).getJSONObject("main").getString("temp"));
 
@@ -95,8 +106,9 @@ public class WeatherInformationActivity extends AppCompatActivity {
             double temp;
             double humidity;
             String weatherDescription;
+            int weatherID;
 
-            for (int i = 0; i < 6; i++) {
+            for (int i = 0; i < 5; i++) {
                 process = weatherInformationFromServer.getJSONObject(i);
                 main = process.getJSONObject("main");
                 weather = process.getJSONArray("weather");
@@ -106,6 +118,9 @@ public class WeatherInformationActivity extends AppCompatActivity {
                 humidity = main.getDouble("humidity");
 
                 weatherDescription = weather.getJSONObject(0).getString("description");
+                weatherID = Integer.parseInt(weather.getJSONObject(0).getString("id"));
+
+                Log.d(TAG, "........ " + weatherID);
 
                 try {
                     dateToConvertToFullName = simpleInputDate.parse(date);
@@ -115,7 +130,8 @@ public class WeatherInformationActivity extends AppCompatActivity {
                 }
 
                 weatherInformationList.add(i,
-                        new WeatherInformation(date, weatherDescription, temp, humidity));
+                        new WeatherInformation(weatherInformationController.getCity(),
+                                date, weatherDescription, temp, temp, humidity, weatherID));
             }
         }catch (JSONException jsonException){
             Log.e(TAG, "JSON Parsing error");

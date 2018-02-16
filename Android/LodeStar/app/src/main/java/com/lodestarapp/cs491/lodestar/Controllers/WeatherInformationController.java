@@ -23,7 +23,7 @@ public class WeatherInformationController {
 
     public WeatherInformationController(String city){
         this.city = city;
-        this.requestFromTheUrl = "http://lodestarapp.com:3005/?city=" + getCity();
+        this.requestFromTheUrl = "http://lodestarapp.com:3005/?city=" + getCity() + "&units=metric";
     }
 
     public void getWeatherInformation(String requestFromTheUrl, Context context,
@@ -39,9 +39,6 @@ public class WeatherInformationController {
                 Log.i(TAG, response.toString());
                 responseFromServer[0] = response;
                 lodeStarServerCallback.onSuccess(responseFromServer[0], null);
-
-                //parseTheJSONResponse(responseFromServer[0]);
-
             }
         }, new Response.ErrorListener() {
             @Override
@@ -57,7 +54,7 @@ public class WeatherInformationController {
 
     }
 
-    private String getCity() {
+    public String getCity() {
         return city;
     }
 

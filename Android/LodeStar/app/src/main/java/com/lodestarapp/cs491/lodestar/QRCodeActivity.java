@@ -150,7 +150,7 @@ public class QRCodeActivity extends AppCompatActivity{
 
         Log.d(TAG, "3333");
 
-        Intent intent = new Intent(this, TripActivity.class);
+        Intent intent = new Intent(this, TabActivity.class);
         intent.putExtra("QRCodeInfo", qrCodeInfo);
         startActivity(intent);
         Log.d(TAG, "4444");

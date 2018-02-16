@@ -35,7 +35,8 @@
         android:background="@android:color/holo_red_dark"
         android:textAllCaps="false"
         android:text="@string/sign_up_email"
-        android:textColor="@android:color/background_light" />
+        android:textColor="@android:color/background_light"
+        android:onClick="signUpPlease"/>
 
     <TextView
         android:id="@+id/login_text"
@@ -46,9 +47,10 @@
         android:layout_marginTop="31dp"
         android:text="@string/user_has_account_sign_in"
         android:textColor="@android:color/background_light"
-        android:onClick="onClick"
+        android:onClick="signUpStart"
         android:clickable="true"
-        android:focusable="true" />
+        android:focusable="true"
+        />
 
     <Button
         android:id="@+id/button2"
@@ -71,6 +73,9 @@
         android:layout_below="@+id/button2"
         android:onClick="tabStart"
         android:text="TABS" />
+
+
+
 
 
 </RelativeLayout>

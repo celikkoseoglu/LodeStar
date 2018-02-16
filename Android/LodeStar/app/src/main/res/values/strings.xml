@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">LodeStar</string>
+    <string name="app_name_sign_in">LodeStar Sign In</string>
+    <string name="app_name_sign_up">LodeStar Sign Up</string>
     <string name="sign_up_email">Sign up using email</string>
     <string name="user_has_account_sign_in">"Already have an account</string>
     <string name="title_activity_main">MainActivity</string>
@@ -24,4 +26,11 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_user_page">UserPage</string>
+    <string name="enter_username"><i>Enter Username</i></string>
+    <string name="enter_e_mail"><i>Enter E-mail</i></string>
+    <string name="enter_password"><i>Enter password</i></string>
+    <string name="re_enter_password"><i>Re-Enter password</i></string>
+    <string name="title_activity_forgot_password">ForgotPassword</string>
+    <string name="forgot_password">Forgot Password</string>
 </resources>

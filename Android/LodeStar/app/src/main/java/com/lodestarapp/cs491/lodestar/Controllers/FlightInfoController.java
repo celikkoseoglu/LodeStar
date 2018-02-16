@@ -47,9 +47,9 @@ public class FlightInfoController {
         }, new Response.ErrorListener() {
             public void onErrorResponse(VolleyError error) {
                 Log.i(TAG, "Failed to get flight information");
-                Log.i(TAG, error.getMessage());
-                Log.i(TAG, error.getLocalizedMessage());
-                Log.i(TAG, error.toString());
+                //Log.i(TAG, error.getMessage());
+                //Log.i(TAG, error.getLocalizedMessage());
+                //Log.i(TAG, error.toString());
             }
         });
         requestQueue.add(jsonObjectRequest);

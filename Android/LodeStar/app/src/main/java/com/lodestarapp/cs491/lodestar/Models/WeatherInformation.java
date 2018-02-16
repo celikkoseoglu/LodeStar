@@ -5,16 +5,23 @@ import java.util.Date;
 
 public class WeatherInformation {
 
+    private String city;
     private String date;
     private String description;
+    private double temperature;
     private double feelsLikeTemperature;
     private double humidity;
+    private int weatherId;
 
-    public WeatherInformation(String date, String description, double feelsLikeTemperature, double humidity){
+    public WeatherInformation(String city, String date, String description, double temperature,
+                              double feelsLikeTemperature, double humidity, int weatherId){
+        this.city = city;
         this.date = date;
         this.description = description;
+        this.temperature = temperature;
         this.feelsLikeTemperature = feelsLikeTemperature;
         this.humidity = humidity;
+        this.weatherId = weatherId;
     }
 
     public double getFeelsLikeTemperature() {
@@ -31,5 +38,17 @@ public class WeatherInformation {
 
     public String getDescription() {
         return description;
+    }
+
+    public double getTemperature() {
+        return temperature;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public int getWeatherId() {
+        return weatherId;
     }
 }
