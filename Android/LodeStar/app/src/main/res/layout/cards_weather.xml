@@ -20,7 +20,7 @@
             android:id="@+id/weather_picture"
             android:layout_width="85dp"
             android:layout_height="85dp"
-            android:background="@color/colorBlack"/>
+            android:background="@color/colorWhite"/>
         
         <TextView
             android:id="@+id/weather_info"
