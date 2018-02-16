@@ -35,24 +35,22 @@
                     android:id="@+id/textView23"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="26dp"
                     android:layout_toEndOf="@+id/weather_picture_today"
                     android:layout_toRightOf="@+id/weather_picture_today"
-                    android:layout_marginTop="26dp"
                     android:text="Today is"
-                    android:textSize="12sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/weather_info_today"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginStart="2dp"
-                    android:layout_toEndOf="@+id/textView23"
-                    android:layout_toRightOf="@+id/textView23"
+                    android:layout_alignTop="@+id/weather_picture_today"
+                    android:layout_toEndOf="@+id/weather_feels_like"
+                    android:layout_toRightOf="@+id/weather_feels_like"
                     android:text="weather_info_today"
-                    android:layout_marginTop="20dp"
                     android:textColor="#353535"
-                    android:textSize="18sp" />
+                    android:textSize="22sp" />
 
 
                 <TextView
@@ -115,12 +113,12 @@
                     android:id="@+id/weather_city"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/weather_picture_today"
+                    android:layout_below="@+id/textView23"
                     android:layout_toEndOf="@+id/weather_picture_today"
                     android:layout_toRightOf="@+id/weather_picture_today"
                     android:text="in "
                     android:textColor="#353535"
-                    android:textSize="18sp" />
+                    android:textSize="22sp" />
 
 
             </RelativeLayout>

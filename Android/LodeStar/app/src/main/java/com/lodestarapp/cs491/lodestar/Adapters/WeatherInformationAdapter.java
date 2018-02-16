@@ -123,8 +123,9 @@ public class WeatherInformationAdapter extends RecyclerView.Adapter<RecyclerView
                                         "drawable", this.context.getPackageName()));
                 break;
             case OTHER:
-                ((OtherDaysViewHolder) holder).weatherInfoView.setText(weatherInformationList.
-                        get(position).getDescription());
+                ((OtherDaysViewHolder) holder).weatherInfoView.setText(String.format("%s  -  %s",
+                        weatherInformationList.get(position).getDate(), weatherInformationList.
+                        get(position).getDescription()));
                 ((OtherDaysViewHolder) holder).humidityView.setText(String.format("%s%%",
                         String.format("%s", weatherInformationList.get(position).getHumidity())));
                 ((OtherDaysViewHolder) holder).temperatureView.setText(String.format("%s°C",
