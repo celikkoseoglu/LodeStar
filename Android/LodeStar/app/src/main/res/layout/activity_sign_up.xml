@@ -114,7 +114,7 @@
         android:layout_below="@+id/tableLayout2"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
-        android:background="@android:color/holo_red_dark"
+        android:background="#ba2d1d"
         android:onClick="signUpPlease"
         android:text="Sign Up!"
         android:textAllCaps="false"
