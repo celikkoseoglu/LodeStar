@@ -107,7 +107,7 @@
         android:layout_below="@+id/RegButton2"
         android:layout_marginTop="13dp"
         android:onClick="Signin2"
-        android:text="Would you like to create a new account instead?"
+        android:text="Forgot Password?"
         android:textAlignment="center"
         android:textColor="@color/colorWhite" />
 
@@ -123,6 +123,9 @@
         android:text="Sign In!"
         android:textAllCaps="false"
         android:textColor="@android:color/background_light" />
+
+
+
 
 
 

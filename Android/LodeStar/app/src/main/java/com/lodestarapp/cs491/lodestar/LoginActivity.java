@@ -27,6 +27,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.auth.FirebaseAuth;
 import com.lodestarapp.cs491.lodestar.Models.WeatherInformation;
 
 import static android.widget.Toast.LENGTH_LONG;
@@ -48,7 +49,6 @@ public class LoginActivity extends AppCompatActivity implements
     private Button signInWithEmail;
 
     // private TextView alreadySignedInQuestion;
-
 
 
     @Override
@@ -98,14 +98,14 @@ public class LoginActivity extends AppCompatActivity implements
         Log.w(TAG, "Kobe0 ");
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser != null)
-            updateUI(currentUser);
-    }
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//
+//        FirebaseUser currentUser = mAuth.getCurrentUser();
+//        if (currentUser != null)
+//            updateUI(currentUser);
+//    }
 
     private void updateUI(FirebaseUser currentUser) {
         Intent intent = new Intent(this, HomeActivity.class);

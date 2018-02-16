@@ -28,6 +28,8 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +46,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
         //Intialize Everything
        // reEnter = (EditText) findViewById(R.id.reTypePassword2);
+        //butt4 = (Button) findViewById(R.id.RegButton3);
         emailF = (EditText) findViewById(R.id.emailEdit2);
         signButton = (Button) findViewById(R.id.RegButton2);
         passwordF = (EditText) findViewById(R.id.textPassword2);
@@ -51,6 +54,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         pDialog= new ProgressDialog(this);
 
         signButton.setOnClickListener(this);
+       // butt4.setOnClickListener(this);
         txtViewtoSignUp.setOnClickListener(this);
 
         emailF.setTextColor(Color.WHITE);
@@ -74,11 +78,13 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
         if(v == txtViewtoSignUp) {
             finish();
-            startActivity(new Intent(this,SignUpActivity.class));
+            startActivity(new Intent(this,ForgotPasswordActivity.class));
         }
         else if(v == signButton) {
+            Toast.makeText(this,"LOL",Toast.LENGTH_LONG).show();
             tryToLogIn();
         }
+
 
     }
 
@@ -102,4 +108,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         });
 
     }
+
+
 }

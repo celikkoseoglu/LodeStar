@@ -31,4 +31,6 @@
     <string name="enter_e_mail"><i>Enter E-mail</i></string>
     <string name="enter_password"><i>Enter password</i></string>
     <string name="re_enter_password"><i>Re-Enter password</i></string>
+    <string name="title_activity_forgot_password">ForgotPassword</string>
+    <string name="forgot_password">Forgot Password</string>
 </resources>
