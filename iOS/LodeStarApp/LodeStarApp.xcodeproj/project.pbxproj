@@ -36,6 +36,7 @@
 		8D2A6C351FDE7E1600AA44E7 /* LodeStarLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2A6C341FDE7E1600AA44E7 /* LodeStarLayout.swift */; };
 		8D2EAC792007735A000819DA /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2EAC782007735A000819DA /* WeatherViewController.swift */; };
 		8D2F8FEE1FD57C7600334A86 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2F8FED1FD57C7600334A86 /* SwiftyJSON.swift */; };
+		8D302A8420387E6D00710A78 /* WeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D302A8320387E6D00710A78 /* WeatherCell.swift */; };
 		8D3D437B200A2FDC0091CCEB /* TransportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3D437A200A2FDC0091CCEB /* TransportViewController.swift */; };
 		8D3D437D200A3AD30091CCEB /* LogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3D437C200A3AD30091CCEB /* LogCell.swift */; };
 		8D3D437F200A3CDA0091CCEB /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3D437E200A3CDA0091CCEB /* ProfileViewController.swift */; };
@@ -103,6 +104,7 @@
 		8D2A6C341FDE7E1600AA44E7 /* LodeStarLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LodeStarLayout.swift; sourceTree = "<group>"; };
 		8D2EAC782007735A000819DA /* WeatherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
 		8D2F8FED1FD57C7600334A86 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		8D302A8320387E6D00710A78 /* WeatherCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherCell.swift; sourceTree = "<group>"; };
 		8D3D437A200A2FDC0091CCEB /* TransportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransportViewController.swift; sourceTree = "<group>"; };
 		8D3D437C200A3AD30091CCEB /* LogCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogCell.swift; sourceTree = "<group>"; };
 		8D3D437E200A3CDA0091CCEB /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 				8D6F76BE1F961993004824B0 /* AppDelegate.swift */,
 				8D6F76DE1F961B40004824B0 /* SelectNationViewController.swift */,
 				8D6F76C21F961993004824B0 /* Main.storyboard */,
+				8D302A8320387E6D00710A78 /* WeatherCell.swift */,
 				8D11715C200F74FE0032860E /* LoginViewController.swift */,
 				8D3D437E200A3CDA0091CCEB /* ProfileViewController.swift */,
 				8D3D437C200A3AD30091CCEB /* LogCell.swift */,
@@ -294,7 +297,7 @@
 				TargetAttributes = {
 					8D6F76BA1F961992004824B0 = {
 						CreatedOnToolsVersion = 8.2;
-						DevelopmentTeam = 84BN7PWNQH;
+						DevelopmentTeam = 9WCG59W5KE;
 						ProvisioningStyle = Automatic;
 					};
 					8D6F76CE1F961993004824B0 = {
@@ -429,6 +432,7 @@
 				8D2F8FEE1FD57C7600334A86 /* SwiftyJSON.swift in Sources */,
 				8D3D437F200A3CDA0091CCEB /* ProfileViewController.swift in Sources */,
 				8DC4DCB72021CBAC00DBF943 /* FlightInformationViewController.swift in Sources */,
+				8D302A8420387E6D00710A78 /* WeatherCell.swift in Sources */,
 				8D3D437D200A3AD30091CCEB /* LogCell.swift in Sources */,
 				8D2A6C331FDE781C00AA44E7 /* CollectionCell.swift in Sources */,
 				8D2A6C351FDE7E1600AA44E7 /* LodeStarLayout.swift in Sources */,
@@ -588,7 +592,7 @@
 			baseConfigurationReference = 2E1BD3D5549A92F56E0B6398 /* Pods-LodeStarApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 84BN7PWNQH;
+				DEVELOPMENT_TEAM = 9WCG59W5KE;
 				INFOPLIST_FILE = LodeStarApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.BerkEvrenAbbasoglu.LodeStarApp;
@@ -602,7 +606,7 @@
 			baseConfigurationReference = E0296F5819E422DCEF19640A /* Pods-LodeStarApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 84BN7PWNQH;
+				DEVELOPMENT_TEAM = 9WCG59W5KE;
 				INFOPLIST_FILE = LodeStarApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.BerkEvrenAbbasoglu.LodeStarApp;

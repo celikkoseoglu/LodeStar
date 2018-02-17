@@ -10,31 +10,102 @@ import Foundation
 import UIKit
 import Alamofire
 
+fileprivate let itemsPerRow: CGFloat = 1
+fileprivate let sectionInsets = UIEdgeInsets(top: 0.0, left: 6.0, bottom: 3.0, right: 6.0)
+fileprivate let cellCount = 6
+fileprivate let reuseIdentifier = "weatherCell"
+
+fileprivate var weatherPics = [UIImage(named: "maraudingFiendPanda"), UIImage(named: "maraudingFiendPanda"), UIImage(named: "maraudingFiendPanda"), UIImage(named: "maraudingFiendPanda"), UIImage(named: "maraudingFiendPanda"), UIImage(named: "maraudingFiendPanda")]
+fileprivate var dayTexts = ["Today it is ", "Today it is ", "Today it is ", "Today it is ", "Today it is ", "Today it is "]
+fileprivate var temperatures = [39, 38, 39, 39, 39, 34]
+fileprivate var feelsLikeTemperatures = [41, 40, 41,41, 41, 36]
+fileprivate var humidities = [88, 86, 85, 99, 42, 56]
+fileprivate var humidityComments = ["Highly humid", "Highly humid", "Highly humid", "Highly humid", "Highly humid", "Highly humid"]
+fileprivate var weatherTexts = ["Rainy", "Rainy", "Rainy", "Rainy", "Rainy", "Rainy"]
+
+// MARK: - UICollectionViewDataSource
+extension WeatherViewController {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    //2
+    func collectionView(_ collectionView: UICollectionView,
+                        numberOfItemsInSection section: Int) -> Int {
+        return 6
+    }
+    
+    //3
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! WeatherCell
+        
+        let index = indexPath as NSIndexPath
+        
+        //background shadow for collectionView elements
+        cell.layer.shadowColor = UIColor.black.cgColor
+        cell.layer.shadowOffset = CGSize(width: 5, height: 5)
+        cell.layer.shadowRadius = 5;
+        cell.layer.shadowOpacity = 0.25;
+        cell.clipsToBounds = false
+        cell.layer.masksToBounds = false
+        
+        cell.weatherPic.image = weatherPics[index.row]
+        cell.dayText.text = dayTexts[index.row]
+        cell.temperature.text = String(temperatures[index.row])
+        cell.feelsLikeTemperature.text = String(feelsLikeTemperatures[index.row])
+        cell.humidity.text = String(humidities[index.row])
+        cell.humidityComment.text = humidityComments[index.row]
+        cell.weatherText.text = weatherTexts[index.row]
+        
+        cell.displayContent(weatherPic: weatherPics[index.row]!, dayText: dayTexts[index.row], temperature: temperatures[index.row], feelsLikeTemperature: feelsLikeTemperatures[index.row], humidity: humidities[index.row], humidityComment: humidityComments[index.row], weatherText: weatherTexts[index.row])
+        
+        return cell
+        
+    }
+}
+
+extension WeatherViewController : UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource {
+    //1
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        //2
+        let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
+        let availableWidth = view.frame.width - paddingSpace
+        let widthPerItem = availableWidth / itemsPerRow
+        let heightperItem = 230 as CGFloat
+        
+        return CGSize(width: widthPerItem, height: heightperItem )
+    }
+    
+    //3
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        insetForSectionAt section: Int) -> UIEdgeInsets {
+        return sectionInsets
+    }
+    
+    // 4
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return sectionInsets.left
+    }
+}
+
 class WeatherViewController: UIViewController {
     
-    @IBOutlet weak var todayItIsText: UILabel!
-    @IBOutlet weak var weatherImage: UIImageView!
-    @IBOutlet weak var todayHumidityText: UILabel!
-    @IBOutlet weak var todayHumidityNumber: UILabel!
-    @IBOutlet weak var todayFeelsTemperature: UILabel!
-    @IBOutlet weak var todayTemperature: UILabel!
-    @IBOutlet weak var locationText: UILabel!
-    @IBOutlet weak var todayWeatherConditionText: UILabel!
-    
-    @IBOutlet weak var theRestOfTheWeekText: UILabel!
-    @IBOutlet weak var nextDayHumidityText: UILabel!
-    @IBOutlet weak var nextDayHumidityNumber: UILabel!
-    @IBOutlet weak var nextDayFeelsTemperature: UILabel!
-    @IBOutlet weak var nextDayTemperature: UILabel!
-    @IBOutlet weak var nextDayText: UILabel!
-    
+    @IBOutlet weak var collectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view,  from a nib.
-        defaultValues()
+        collectionView.dataSource = self
+        collectionView.delegate = self
         
-        jsonparse()
-        
+        self.collectionView.isScrollEnabled = true
         //self.navigationController?.navigationBar.isTranslucent = false
         
     }
@@ -44,32 +115,12 @@ class WeatherViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func defaultValues() {
-        
-        todayItIsText.text = "Today it is"
-        todayTemperature.text = "11°"
-        todayFeelsTemperature.text = "feels like 12°"
-        locationText.text = "in Bull Town"
-        todayWeatherConditionText.text = "Raining Shit"
-        todayHumidityNumber.text = "89%"
-        todayHumidityText.text = "Highly humid"
-        
-        theRestOfTheWeekText.text = "The rest of the week"
-        nextDayText.text = "Friday - Not as Shitty"
-        nextDayTemperature.text = "13°"
-        nextDayFeelsTemperature.text = "12°"
-        nextDayHumidityText.text = "not as humid"
-        nextDayHumidityNumber.text = "88%"
-        
-    }
-    
-    func jsonparse() {
-        Alamofire.request("http://localhost:3001/?dataType=weather&city=Ankara").responseJSON { response in
+    /*func jsonparse() {
+       Alamofire.request("http://lodestarapp.com:3005/?city=Ankara&units=metric").responseJSON { response in
             //print("Request: \(String(describing: response.request))")   // original url request
             //print("Response: \(String(describing: response.response))") // http url response
             print("Result: \(response.result)")                         // response serialization result
-            
-            if let json = response.result.value {
+                
                 //print("JSON: \(json)") // serialized json response
                 let JSON = response.result.value as? NSDictionary
                 let id = JSON?["main"] as! NSDictionary
@@ -78,14 +129,14 @@ class WeatherViewController: UIViewController {
                 temp = temp - 273
                 let tempInt = Int(temp)
                 
-                self.todayTemperature.text = String(tempInt)
-            }
-            
+                temperatures[0] = tempInt
+        }
+    
             /*if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
              print("Data: \(utf8Text)") // original server data as UTF8 string
              }*/
-        }
     }
+ */
     
     // MARK: Actions
     @IBAction func backButtonTapAction(_ sender: UIButton) {
