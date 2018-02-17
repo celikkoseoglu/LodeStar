@@ -220,6 +220,11 @@ public class LoginActivity extends AppCompatActivity implements
         startActivity(intent);
     }
 
+    public void meStart(View view){
+        Intent intent = new Intent(this, UserPage.class);
+        startActivity(intent);
+    }
+
 
 
 }

@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
+import android.view.Window;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -53,6 +54,7 @@ public class WeatherInformationActivity extends AppCompatActivity {
         weatherIconMap.append(5, "p500");
         weatherIconMap.append(6, "p600");
         weatherIconMap.append(7, "p700");
+        
         weatherIconMap.append(8, "p800");
 
         mRecyclerView = findViewById(R.id.my_weather_recycler_view);

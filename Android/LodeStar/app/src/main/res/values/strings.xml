@@ -33,4 +33,9 @@
     <string name="re_enter_password"><i>Re-Enter password</i></string>
     <string name="title_activity_forgot_password">ForgotPassword</string>
     <string name="forgot_password">Forgot Password</string>
+
+    <string name="user_activity">Me</string>
+    <string name="user_trip_logs_count">##</string>
+    <string name="user_trip_count">##</string>
+    <string name="user_last_trip_to">Miami</string>
 </resources>
