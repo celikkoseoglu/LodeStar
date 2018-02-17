@@ -11,10 +11,13 @@ import com.lodestarapp.cs491.lodestar.R;
 
 public class UserPageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    private static final int PROFILE = 0;
+    private static final int POSTS = 1;
+
     static class UserPageProfile extends RecyclerView.ViewHolder {
 
         ImageView profilePictureView;
-        TextView usernameView;
+        TextView realNameView;
         TextView tripLogsCountView;
         TextView tripsCountView;
         TextView lastTripToView;
@@ -23,7 +26,7 @@ public class UserPageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             super(itemView);
 
             this.profilePictureView = itemView.findViewById(R.id.me_profile_picture);
-            this.usernameView = itemView.findViewById(R.id.me_username);
+            this.realNameView = itemView.findViewById(R.id.me_realName);
             this.tripLogsCountView = itemView.findViewById(R.id.me_trip_logs_count);
             this.tripsCountView = itemView.findViewById(R.id.me_trip_count);
             this.lastTripToView = itemView.findViewById(R.id.me_last_trip_city);
@@ -32,12 +35,41 @@ public class UserPageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     }
 
+    static class UserPagePosts extends RecyclerView.ViewHolder {
+
+        ImageView profilePictureView;
+        TextView realNameView;
+        TextView userNameView;
+        TextView dateView;
+        TextView userPostView;
+
+        UserPagePosts(View itemView){
+            super(itemView);
+
+            this.profilePictureView = itemView.findViewById(R.id.me_profile_picture);
+            this.realNameView = itemView.findViewById(R.id.me_realName);
+            this.userNameView = itemView.findViewById(R.id.me_username);
+            this.dateView = itemView.findViewById(R.id.me_post_date);
+            this.userPostView = itemView.findViewById(R.id.me_user_post);
+
+        }
+    }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         RecyclerView.ViewHolder viewHolder = null;
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_me, parent, false);
-        viewHolder = new UserPageProfile(view);
+
+        switch (viewType){
+            case PROFILE:
+                View profileView = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_me, parent, false);
+                viewHolder = new UserPageProfile(profileView);
+                break;
+            case POSTS:
+                View postsView = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_me_posts, parent, false);
+                viewHolder = new UserPagePosts(postsView);
+                break;
+        }
 
         return viewHolder;
     }
@@ -49,6 +81,13 @@ public class UserPageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public int getItemCount() {
-        return 1;
+        return 5;
+    }
+
+    @Override
+    public int getItemViewType(int position){
+        if (position == PROFILE)
+            return PROFILE;
+        return POSTS;
     }
 }

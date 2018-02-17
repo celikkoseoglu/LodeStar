@@ -29,7 +29,7 @@
                     />
 
                 <TextView
-                    android:id="@+id/me_username"
+                    android:id="@+id/me_realName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/me_profile_picture"
@@ -43,7 +43,7 @@
                     android:id="@+id/me_trip_logs"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/me_username"
+                    android:layout_below="@id/me_realName"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="20dp"
                     android:text="Trip Logs"
@@ -54,7 +54,7 @@
                     android:id="@+id/me_trip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/me_username"
+                    android:layout_below="@id/me_realName"
                     android:layout_marginLeft="30dp"
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="20dp"
