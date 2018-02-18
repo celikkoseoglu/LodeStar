@@ -35,7 +35,7 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
     @Override
     public void onClick(View v) {
         if(v == butt4) {
-             Toast.makeText(this,"Please make sure you enter the credentials correctly",Toast.LENGTH_LONG).show();
+         //    Toast.makeText(this,"Please make sure you enter the credentials correctly",Toast.LENGTH_LONG).show();
             forgotPassword();
         }
     }
@@ -50,7 +50,7 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(ForgotPasswordActivity.this,"LOL",Toast.LENGTH_LONG).show();
+                           // Toast.makeText(ForgotPasswordActivity.this,"LOL",Toast.LENGTH_LONG).show();
                         }
                     }
                 });
