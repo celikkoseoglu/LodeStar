@@ -15,6 +15,9 @@ buildscript {
         // in the individual module build.gradle files
         classpath 'com.google.gms:google-services:3.1.1'
 
+        classpath 'com.google.protobuf.nano:protobuf-javanano:3.1.0'
+
+
     }
 }
 
@@ -28,3 +31,4 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+

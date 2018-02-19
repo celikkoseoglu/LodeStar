@@ -285,7 +285,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:textSize="25sp"
-                    android:text="-------------------------------------"
+                    android:text="-----------------------------------"
                     android:layout_marginTop="125dp"
                     />
 

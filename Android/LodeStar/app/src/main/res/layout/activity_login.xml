@@ -84,5 +84,15 @@
         android:onClick="meStart"
         android:text="ME" />
 
+    <Button
+        android:id="@+id/button10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button9"
+        android:layout_alignEnd="@+id/button2"
+        android:layout_alignRight="@+id/button2"
+        android:onClick="VRstart"
+        android:text="VR" />
+
 
 </RelativeLayout>
