@@ -9,6 +9,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookSdk;
+import com.facebook.LoggingBehavior;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -43,18 +46,30 @@ public class LoginActivity extends AppCompatActivity implements
     private SignInButton signInButton;
 
     private Button signInWithEmail;
+    private CallbackManager callbackManager;
 
     // private TextView alreadySignedInQuestion;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        FacebookSdk.setApplicationId(getString(R.string.facebook_app_id));
+        //initialize Facebook SDK
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        if (BuildConfig.DEBUG) {
+            FacebookSdk.setIsDebugEnabled(true);
+            FacebookSdk.addLoggingBehavior(LoggingBehavior.INCLUDE_ACCESS_TOKENS);
+        }
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
 
         signInWithEmail = (Button) findViewById(R.id.button_email);
+        callbackManager = CallbackManager.Factory.create();
 
         //  alreadySignedInQuestion = (TextView) findViewById(R.id.login_text);
         // alreadySignedInQuestion.setOnClickListener(this);
@@ -109,6 +124,7 @@ public class LoginActivity extends AppCompatActivity implements
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data){
+        callbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode == RC_SIGN_IN){
