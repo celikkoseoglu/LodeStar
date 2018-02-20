@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -30,7 +31,21 @@
                 android:textColor="@color/colorWhite"
                 android:text="@string/user_activity"
                 />
+
+            <ImageButton
+                android:id="@+id/me_settings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:background="@null"
+                app:srcCompat="@drawable/ic_settings"
+                android:layout_alignParentEnd="true" />
+
         </android.support.v7.widget.Toolbar>
+
+
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/my_user_page_recycler_view"
@@ -42,10 +57,11 @@
             tools:layout_editor_absoluteY="64dp" />
 
         <ProgressBar
-            android:id="@+id/weather_progress_bar"
+            android:id="@+id/user_progress_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:indeterminate="true"/>
+
 
     </RelativeLayout>
 
