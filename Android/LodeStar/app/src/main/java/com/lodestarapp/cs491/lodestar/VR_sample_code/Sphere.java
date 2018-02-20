@@ -120,9 +120,7 @@ public class Sphere {
                 GLES20.GL_FRAGMENT_SHADER, fragmentShader);
 
         // Setting the attributes for the shader, this Step can be ignored
-        mProgramHandle = ShaderHelper.createAndLinkProgram(vertexShaderHandle,
-                fragmentShaderHandle, new String[]{"a_Position",
-                        "a_TexCoordinate"});
+        mProgramHandle = ShaderHelper.createAndLinkProgram(vertexShaderHandle,fragmentShaderHandle, new String[]{"a_Position","a_TexCoordinate"});
 
         // Set our per-vertex lighting program.
         GLES20.glUseProgram(mProgramHandle);

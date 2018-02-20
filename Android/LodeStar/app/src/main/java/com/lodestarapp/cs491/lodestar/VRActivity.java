@@ -84,7 +84,7 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
     @Override
     public void onNewFrame(HeadTransform headTransform) {
         Matrix.setLookAtM(mCamera, 0, 0.0f, 0.0f, CAMERA_Z, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
-        checkGLError("onReadyToDraw");
+        //checkGLError("onReadyToDraw");
     }
 
 
@@ -98,7 +98,7 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
 
         mSphere.draw(mViewProjectionMatrix);
 
-        checkGLError("onDrawEye");
+        //checkGLError("onDrawEye");
 
         if (mIsCardboardTriggered) {
             mIsCardboardTriggered = false;
