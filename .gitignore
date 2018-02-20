@@ -154,3 +154,7 @@ DerivedData/
 !default.mode2v3
 *.perspectivev3
 !default.perspectivev3
+
+## exclude node_modules. Use package.json npm install instead
+
+node_modules/
