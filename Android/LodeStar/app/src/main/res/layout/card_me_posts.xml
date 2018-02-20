@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -16,7 +17,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
 
                 <ImageView
@@ -77,6 +78,34 @@
                     android:text="I've definitely seen one of the most beautiful cities on Earth. With LodeStar, it was just like a walk in the park. That easy."
                     android:textColor="#353535"
                     android:textSize="12sp" />
+
+                <ImageButton
+                    android:id="@+id/user_post_city_more_info_button"
+                    android:layout_width="300dp"
+                    android:layout_height="100dp"
+                    android:layout_alignLeft="@+id/me_user_post"
+                    android:layout_alignStart="@+id/me_user_post"
+                    android:layout_below="@+id/me_user_post"
+                    android:layout_marginTop="14dp"
+                    app:srcCompat="@drawable/thy_lounge_background"
+                    tools:layout_editor_absoluteX="164dp"
+                    tools:layout_editor_absoluteY="96dp" />
+
+                <TextView
+                    android:id="@+id/user_post_city_more_info_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/user_post_city_more_info_button"
+                    android:layout_alignStart="@+id/user_post_city_more_info_button"
+                    android:layout_below="@+id/user_post_city_more_info_button"
+                    android:layout_marginTop="8dp"
+                    android:maxWidth="300dp"
+                    android:text="Tap to View Istanbul in LodeStar"
+                    android:textColor="#353535"
+                    android:textSize="12sp"
+                    tools:layout_editor_absoluteX="181dp"
+                    tools:layout_editor_absoluteY="221dp"
+                     />
 
 
             </RelativeLayout>
