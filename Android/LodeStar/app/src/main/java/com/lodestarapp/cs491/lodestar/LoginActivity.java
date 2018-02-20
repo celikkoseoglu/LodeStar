@@ -12,6 +12,8 @@ import android.widget.Toast;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
 import com.facebook.LoggingBehavior;
+import com.facebook.Profile;
+import com.facebook.ProfileTracker;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -42,6 +44,7 @@ public class LoginActivity extends AppCompatActivity implements
     private GoogleSignInClient googleSignInClient;
     private GoogleApiClient mGoogleApiClient;
     private FirebaseAuth mAuth;
+  //  private SignUpActivity signUpManager = new SignUpActivity();
 
     private SignInButton signInButton;
 
@@ -70,6 +73,18 @@ public class LoginActivity extends AppCompatActivity implements
 
         signInWithEmail = (Button) findViewById(R.id.button_email);
         callbackManager = CallbackManager.Factory.create();
+
+        ProfileTracker profileTracker = new ProfileTracker() {
+            @Override
+            protected void onCurrentProfileChanged(
+                    Profile oldProfile,
+                    Profile currentProfile) {
+                // App code
+
+                Toast.makeText(LoginActivity.this, currentProfile.getFirstName(), LENGTH_LONG).show();
+
+            }
+        };
 
         //  alreadySignedInQuestion = (TextView) findViewById(R.id.login_text);
         // alreadySignedInQuestion.setOnClickListener(this);
@@ -106,8 +121,9 @@ public class LoginActivity extends AppCompatActivity implements
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
-        Log.w(TAG, "Kobe0 ");
+       // Log.w(TAG, "Kobe0 ");
     }
+
 
 //    @Override
 //    protected void onStart() {

@@ -112,6 +112,39 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         return 1;
     } //returns a positive number if registered successfully
 
+    public int tryToRegister2(String password1,String email1) {
+        //Get authentication
+        String passwordStr = password1;
+        String emailStr = email1;
+
+        if (TextUtils.isEmpty(emailStr) || TextUtils.isEmpty(passwordStr)) {
+
+            Toast.makeText(this,"Please make sure you enter the credentials correctly",Toast.LENGTH_LONG).show();
+            return -27; //Finish the function, cannot register
+
+        }
+
+        dialog.setMessage("Please wait :) ");
+        dialog.show();
+        authManager.createUserWithEmailAndPassword(emailStr,passwordStr).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> t) {
+                if(t.isSuccessful()) {
+                    Toast.makeText(SignUpActivity.this,"Congrats! You can now explore anywhere with LodeStar!",Toast.LENGTH_SHORT).show();
+                    //  startActivity(new Intent(this,UserLoginActivity.class));
+                    finish();
+                    startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+                }
+                else {
+                    Toast.makeText(SignUpActivity.this,"Oooops Please Try Again :( ",Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        }); // Inster to database
+        dialog.dismiss();
+        return 1;
+    } //returns a positive number if registered successfully
+
     public void initializeDB() {
         //  fa = FirebaseAuth.getInstance();
         //      isDBAuthanticated = true;
