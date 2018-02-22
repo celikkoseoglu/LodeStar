@@ -14,26 +14,14 @@
  * limitations under the License.
  */
 
-package com.lodestarapp.cs491.lodestar.VR_sample_code;
+package com.lodestarapp.cs491.lodestar.VR;
 
 import android.opengl.GLES20;
 import android.util.Log;
 
-/**
- * Helper function to compile a shader.
- *
- * @author Sree Kumar A.V
- */
 public class ShaderHelper {
     private static final String TAG = "ShaderHelper";
 
-    /**
-     * Helper function to compile a shader.
-     *
-     * @param shaderType   The shader type.
-     * @param shaderSource The shader source code.
-     * @return An OpenGL handle to the shader.
-     */
     public static int compileShader(final int shaderType, final String shaderSource) {
         int shaderHandle = GLES20.glCreateShader(shaderType);
 
@@ -63,14 +51,7 @@ public class ShaderHelper {
         return shaderHandle;
     }
 
-    /**
-     * Helper function to compile and link a program.
-     *
-     * @param vertexShaderHandle   An OpenGL handle to an already-compiled vertex shader.
-     * @param fragmentShaderHandle An OpenGL handle to an already-compiled fragment shader.
-     * @param attributes           Attributes that need to be bound to the program.
-     * @return An OpenGL handle to the program.
-     */
+
     public static int createAndLinkProgram(final int vertexShaderHandle, final int fragmentShaderHandle, final String[] attributes) {
         int programHandle = GLES20.glCreateProgram();
 

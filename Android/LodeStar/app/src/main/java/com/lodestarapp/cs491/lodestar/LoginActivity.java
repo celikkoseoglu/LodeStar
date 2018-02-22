@@ -228,8 +228,8 @@ public class LoginActivity extends AppCompatActivity implements
     /**
      * Weather
      */
-    public void weatherStart(View view){
-        Intent intent = new Intent(this, WeatherInformationActivity.class);
+    public void panoStart(View view){
+        Intent intent = new Intent(this, PanoramaActivity.class);
         startActivity(intent);
     }
 
@@ -257,6 +257,8 @@ public class LoginActivity extends AppCompatActivity implements
         Intent intent = new Intent(this, VRActivity.class);
         startActivity(intent);
     }
+
+
 
 
 

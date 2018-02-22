@@ -61,8 +61,8 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="17dp"
         android:layout_marginStart="17dp"
-        android:onClick="weatherStart"
-        android:text="Weather" />
+        android:onClick="panoStart"
+        android:text="Pano" />
 
     <Button
         android:id="@+id/button3"
@@ -75,20 +75,10 @@
         android:text="TABS" />
 
     <Button
-        android:id="@+id/button9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/button2"
-        android:layout_alignLeft="@+id/button2"
-        android:layout_alignStart="@+id/button2"
-        android:onClick="meStart"
-        android:text="ME" />
-
-    <Button
         android:id="@+id/button10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button9"
+        android:layout_above="@+id/button2"
         android:layout_alignEnd="@+id/button2"
         android:layout_alignRight="@+id/button2"
         android:onClick="VRstart"

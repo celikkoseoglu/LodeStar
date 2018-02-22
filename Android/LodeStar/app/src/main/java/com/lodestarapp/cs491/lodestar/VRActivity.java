@@ -1,10 +1,11 @@
 package com.lodestarapp.cs491.lodestar;
 
-import android.media.MediaPlayer;
+import android.content.pm.ActivityInfo;
 import android.opengl.GLES20;
 import android.opengl.Matrix;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.widget.Toast;
 
 import com.google.vrtoolkit.cardboard.CardboardActivity;
@@ -12,8 +13,8 @@ import com.google.vrtoolkit.cardboard.CardboardView;
 import com.google.vrtoolkit.cardboard.Eye;
 import com.google.vrtoolkit.cardboard.HeadTransform;
 import com.google.vrtoolkit.cardboard.Viewport;
-import com.lodestarapp.cs491.lodestar.VR_sample_code.MatrixCalculator;
-import com.lodestarapp.cs491.lodestar.VR_sample_code.Sphere;
+import com.lodestarapp.cs491.lodestar.VR.MatrixCalculator;
+import com.lodestarapp.cs491.lodestar.VR.Renderer;
 
 import javax.microedition.khronos.egl.EGLConfig;
 
@@ -23,7 +24,7 @@ import static android.opengl.Matrix.multiplyMM;
 public class VRActivity extends CardboardActivity implements CardboardView.StereoRenderer{
     private static final String TAG = "VR ";
     private CardboardView cv;
-    private Sphere mSphere;
+    private Renderer renderer;
 
 
     private final float[] mCamera = new float[16];
@@ -32,11 +33,9 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
 
     private float CAMERA_Z = 0.5f;
     private float[] mView = new float[16];
-    private CardboardView mCardboardView;
     private int[] mResourceId = {R.drawable.airport, R.drawable.photo_sphere_2 };
     private int mCurrentPhotoPos = 0;
     private boolean mIsCardboardTriggered;
-    private MediaPlayer mMediaPlayer;
 
 
 
@@ -49,8 +48,11 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
         cv.setRenderer(this);
         setCardboardView(cv);
 
-        Toast toast =  Toast.makeText(getApplicationContext(), "Bring the phone in horizontal position", Toast.LENGTH_LONG);
-        toast.show();
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
+
+        //Toast toast =  Toast.makeText(getApplicationContext(), "Bring the phone in horizontal position", Toast.LENGTH_LONG);
+        //toast.show();
 
     }
 
@@ -63,15 +65,15 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
     public void onSurfaceChanged(int p0, int p1) {
         glViewport(0, 0, p0, p1);
 
-        MatrixCalculator.perspectiveM(mProjectionMatrix, 90, (float) p0 / (float) p1, 1f, 10f);
+        MatrixCalculator.perspectiveUpdate(mProjectionMatrix, 90, (float) p0 / (float) p1, 1f, 10f);
     }
 
     public void onSurfaceCreated(EGLConfig config) {
         Log.i(TAG, "onSurfaceCreated");
-        GLES20.glClearColor(1f, 1f, 0f, 1f);// Dark background so text shows up well.
+        GLES20.glClearColor(1f, 1f, 1f, 1f);
 
-        mSphere = new Sphere(this, 50, 5f);
-        mSphere.loadTexture(this, getPhotoIndex());
+        renderer = new Renderer(this, 50, 5f);
+        renderer.loadTexture(this, getPhotoIndex());
         checkGLError("onSurfaceCreated");
 
     }
@@ -96,7 +98,7 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
 
         multiplyMM(mViewProjectionMatrix, 0, mProjectionMatrix, 0, mView, 0);
 
-        mSphere.draw(mViewProjectionMatrix);
+        renderer.draw(mViewProjectionMatrix);
 
         //checkGLError("onDrawEye");
 
@@ -117,28 +119,43 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
 
 
     private void resetTexture() {
-        mSphere.deleteCurrentTexture();
-        checkGLError("after deleting texture");
-        mSphere.loadTexture(this, getPhotoIndex());
-        checkGLError("loading texture");
+        renderer.deleteCurrentTexture();
+        //checkGLError("after deleting texture");
+        renderer.loadTexture(this, getPhotoIndex());
+        //checkGLError("loading texture");
     }
 
     private int getPhotoIndex() {
         return mResourceId[mCurrentPhotoPos++ % mResourceId.length];
-
-
     }
 
     @Override
     protected void onStop() {
         super.onStop();
 
-        if (mMediaPlayer != null)
-            mMediaPlayer.stop();
 
     }
 
-    private static void checkGLError(String label) {
+    public boolean onTouchEvent(MotionEvent e) {
+
+        float x = e.getX();
+        float y = e.getY();
+
+        switch (e.getAction()) {
+            case MotionEvent.ACTION_MOVE:
+                //mIsCardboardTriggered = true;
+
+                Toast toast =  Toast.makeText(getApplicationContext(), "touched", Toast.LENGTH_SHORT);
+                toast.show();
+        }
+
+        return true;
+    }
+
+
+
+
+        private static void checkGLError(String label) {
         int error;
         while ((error = GLES20.glGetError()) != GLES20.GL_NO_ERROR) {
             Log.e(TAG, label + ": glError " + error);
