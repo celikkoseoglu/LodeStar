@@ -1,21 +1,17 @@
 const request = require('request');
 
-var coordinates1 = 40.7243;
-var coordinates2 = -74.0018;
-
-var coorString = coordinates1 + ',' + coordinates2
-
 request({
-    url: 'https://api.foursquare.com/v2/venues/search',
+    url: 'https://api.foursquare.com/v2/venues/explore',
     method: 'GET',
     qs: {
-        client_id: '2ZXD11VBHAMIQQMD02LAPSMDUFF0HA5TMG0CERZQKRTT3GB2',
-        client_secret: '3JXYJDDAXS4ULVFZR2Z4EVIILRBREM0K11LNTURJRXVDAIVY',
-        ll: '40.7243,-74.0018',
+        client_id: 'YUYULQTBMYN3VEFRZLV4UDSWMEQDVNUBOSCTCE2ALE0VIZ12',
+        client_secret: 'NMPD43K4MGD2JT4ZFQ5JX2OC1GPT5HR3PU4FZVW1IMRBDIGC',
+        //ll: '40.7243,-74.0018',
         //near: 'Ankara,TR',
-        query: 'coffee',
-        v: '20170801',
-        limit: 7
+        ll: '40.115078394119855,32.99340509342176',
+        //query: 'coffee',
+        v: '20180221'
+        //limit: 2
     }
 }, function(err, res, body) {
     if (err) {
@@ -24,7 +20,7 @@ request({
 
         var data = JSON.parse(body);
 
-        console.log(JSON.stringify(data.response.venues, null, 4));
+        console.log(JSON.stringify(data.response, null, 4));
 
     }
 });

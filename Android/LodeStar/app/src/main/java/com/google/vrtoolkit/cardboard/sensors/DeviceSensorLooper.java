@@ -87,6 +87,6 @@ public class DeviceSensorLooper implements SensorEventProvider {
     }
     ///something { 1,4 }
     static {
-        INPUT_SENSORS = new int[] { 1 };
+        INPUT_SENSORS = new int[] { 1,4 };
     }
 }
