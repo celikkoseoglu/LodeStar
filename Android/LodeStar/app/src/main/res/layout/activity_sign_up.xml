@@ -20,13 +20,16 @@
 
     <TableLayout
         android:layout_width="250dp"
-        android:layout_height="180dp"
+        android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_marginTop="40dp"
         android:background="@drawable/shape_sign_up"
         android:alpha="0.4"
         android:id="@+id/tableLayout2">
-        <TableRow >
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="45dp">
+
             <ImageView
                 app:srcCompat="@drawable/ic_003_user"
                 android:scaleType="center"
@@ -39,14 +42,25 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
                 android:maxLines="1"
-                android:textColorHint="@color/cardview_light_background"
+                android:textColorHint="#7e7e7e"
                 android:hint="@string/enter_username"
                 android:maxLength="256"
                 android:inputType="textEmailAddress"
                 android:shadowColor="@color/colorWhite"
                 android:textColor="@color/colorWhite" />
         </TableRow>
-        <TableRow>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="1dp"
+            android:background="@android:color/darker_gray" />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="45dp">
             <ImageView
                 app:srcCompat="@drawable/ic_002_mail"
                 android:scaleType="center"
@@ -57,7 +71,7 @@
                 android:id="@+id/emailEdit"
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
-                android:textColorHint="@color/cardview_light_background"
+                android:textColorHint="#7e7e7e"
                 android:hint="@string/enter_e_mail"
                 android:maxLength="100"
                 android:maxLines="1"
@@ -65,8 +79,18 @@
                 android:textColor="@color/colorWhite" />
         </TableRow>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="1dp"
+            android:background="@android:color/darker_gray" />
 
-        <TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="45dp">
             <ImageView
                 app:srcCompat="@drawable/ic_001_key"
                 android:scaleType="center"
@@ -76,7 +100,7 @@
                 android:id="@+id/textPassword"
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
-                android:textColorHint="@color/cardview_light_background"
+                android:textColorHint="#7e7e7e"
                 android:hint="@string/enter_password"
                 android:maxLength="100"
                 android:maxLines="1"
@@ -84,7 +108,17 @@
                 android:textColor="@color/colorWhite" />
         </TableRow>
 
-        <TableRow>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="1dp"
+            android:background="@android:color/darker_gray" />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="45dp">
             <ImageView
                 app:srcCompat="@drawable/ic_001_key"
                 android:scaleType="center"
@@ -92,7 +126,7 @@
                 android:layout_marginLeft="10dp" />
             <EditText
                 android:id="@+id/reTypePassword"
-                android:textColorHint="@color/cardview_light_background"
+                android:textColorHint="#7e7e7e"
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
                 android:hint="@string/re_enter_password"

@@ -6,4 +6,44 @@
     android:layout_height="match_parent"
     tools:context="com.lodestarapp.cs491.lodestar.PanoramaActivity">
 
+
+
+    <com.lodestarapp.cs491.lodestar.VR.PanoramaView
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="300dp">
+
+
+    </com.lodestarapp.cs491.lodestar.VR.PanoramaView>
+
+    <RelativeLayout
+        android:id="@+id/relativelayout"
+        android:layout_width="match_parent"
+        android:layout_height="300dp">
+
+        <ImageView
+            android:id="@+id/close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_close"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:onClick="goSmall"
+            android:layout_alignParentStart="true" />
+
+        <ImageView
+            android:id="@+id/full"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_fullscreen"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:onClick="goFullscreen"/>
+
+    </RelativeLayout>
+
+
+
+
 </android.support.constraint.ConstraintLayout>

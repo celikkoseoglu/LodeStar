@@ -138,27 +138,20 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
         return view;
     }
 
-    public void onWindowFocusChanged(boolean hasFocus) {
+    public void onWindowFocusChanged(boolean hasFocus, int w) {
         // TODO Auto-generated method stub
-        updateSizeInfo();
+        updateSizeInfo(w);
     }
-    private void updateSizeInfo() {
-        LinearLayout linearLayout = null;
-        if(getView() != null) {
-            linearLayout = (LinearLayout) getView().findViewById(R.id.row3);
-
-            int w = linearLayout.getWidth();
-
-            int valueInPixels = (int) getResources().getDimension(R.dimen.icon_size);
-
-            backgroundImageWidth = linearLayout.getWidth();
+    public void updateSizeInfo(int width) {
+        if (getView() != null) {
+            backgroundImageWidth = width;
             //Toast toast =  Toast.makeText(getApplicationContext(), backgroundImageWidth + "", Toast.LENGTH_LONG);
             //toast.show();
 
             Button bt = getView().findViewById(R.id.living);
             ViewGroup.LayoutParams params = bt.getLayoutParams();
             //Button new width
-            params.height = (w - 15) / 3;
+            params.height = (width - 15) / 3;
             bt.setLayoutParams(params);
 
             Button bt1 = getView().findViewById(R.id.places);
@@ -184,9 +177,7 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
 
             Button bt8 = getView().findViewById(R.id.restaurants);
             bt8.setLayoutParams(params);
-
         }
-
     }
 
 

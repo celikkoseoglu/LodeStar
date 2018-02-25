@@ -7,12 +7,15 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:textColor="@android:color/background_light"
+        >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@android:color/background_light">
 
         <android.support.v7.widget.Toolbar
         android:id="@+id/the_toolbar"
@@ -22,7 +25,6 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:background="?attr/colorPrimary"
-        android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:contentInsetLeft="7dp"
@@ -82,7 +84,17 @@
             android:drawableLeft="@drawable/blue"
             android:paddingLeft="10dp"
             android:checked="true"
-            android:typeface="sans" />
+            android:typeface="sans"
+            android:theme="@style/mySwitch"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="48dp"
+            android:layout_marginTop="1dp"
+            android:background="@android:color/darker_gray"
+            android:layout_marginStart="48dp" />
+
 
         <Button
             android:id="@+id/button4"
@@ -97,7 +109,17 @@
             android:drawableLeft="@drawable/blue"
             android:paddingLeft="10dp"
             android:typeface="sans"
+            android:stateListAnimator="@null"
             />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="48dp"
+            android:layout_marginTop="1dp"
+            android:background="@android:color/darker_gray"
+            android:layout_marginStart="48dp" />
+
         <Button
             android:id="@+id/button5"
             android:layout_width="match_parent"
@@ -108,10 +130,20 @@
             android:background="@android:color/background_light"
             android:gravity="left|center_vertical"
             android:drawableRight="@drawable/ic_arrow_right"
-            android:drawableLeft="@drawable/blue"
+            android:drawableLeft="@drawable/green"
             android:paddingLeft="10dp"
             android:typeface="sans"
+            android:stateListAnimator="@null"
+
             />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="48dp"
+            android:layout_marginTop="1dp"
+            android:background="@android:color/darker_gray"
+            android:layout_marginStart="48dp" />
 
         <Button
             android:id="@+id/button6"
@@ -123,9 +155,11 @@
             android:background="@android:color/background_light"
             android:gravity="left|center_vertical"
             android:drawableRight="@drawable/ic_arrow_right"
-            android:drawableLeft="@drawable/blue"
+            android:drawableLeft="@drawable/green"
             android:paddingLeft="10dp"
             android:typeface="sans"
+            android:stateListAnimator="@null"
+
             />
 
         <TextView
@@ -156,7 +190,17 @@
             android:drawableLeft="@drawable/blue"
             android:paddingLeft="10dp"
             android:typeface="sans"
+            android:stateListAnimator="@null"
+
             />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="48dp"
+            android:layout_marginTop="1dp"
+            android:background="@android:color/darker_gray"
+            android:layout_marginStart="48dp" />
 
         <Button
             android:id="@+id/button8"
@@ -168,9 +212,11 @@
             android:background="@android:color/background_light"
             android:gravity="left|center_vertical"
             android:drawableRight="@drawable/ic_arrow_right"
-            android:drawableLeft="@drawable/blue"
+            android:drawableLeft="@drawable/red"
             android:paddingLeft="10dp"
             android:typeface="sans"
+            android:stateListAnimator="@null"
+
             />
 
         <TextView
@@ -197,7 +243,16 @@
             android:gravity="left|center_vertical"
             android:drawableLeft="@drawable/blue"
             android:paddingLeft="10dp"
-            android:typeface="sans"/>
+            android:typeface="sans"
+            android:theme="@style/mySwitch"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="48dp"
+            android:layout_marginTop="1dp"
+            android:background="@android:color/darker_gray"
+            android:layout_marginStart="48dp" />
 
         <Button
             android:id="@+id/button10"
@@ -212,6 +267,8 @@
             android:drawableLeft="@drawable/blue"
             android:paddingLeft="10dp"
             android:typeface="sans"
+            android:stateListAnimator="@null"
+
             />
 
         <TextView
@@ -227,13 +284,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="    Log Out"
+            android:text="Log Out"
             android:textColor="@color/colorRed"
             android:textAllCaps="false"
             android:textAlignment="center"
             android:background="@android:color/background_light"
             android:gravity="center_vertical"
             android:typeface="sans"
+            android:stateListAnimator="@null"
+
             />
 
 

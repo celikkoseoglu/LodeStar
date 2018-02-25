@@ -145,8 +145,8 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
             case MotionEvent.ACTION_MOVE:
                 //mIsCardboardTriggered = true;
 
-                Toast toast =  Toast.makeText(getApplicationContext(), "touched", Toast.LENGTH_SHORT);
-                toast.show();
+                //Toast toast =  Toast.makeText(getApplicationContext(), "touched", Toast.LENGTH_SHORT);
+                //toast.show();
         }
 
         return true;

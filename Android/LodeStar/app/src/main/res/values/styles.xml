@@ -26,5 +26,15 @@
         <item name="tabPaddingEnd">0dp</item>
     </style>
 
+    <style name="mySwitch" parent="Theme.AppCompat.Light">
+        <!-- active thumb & track color (30% transparency) -->
+        <item name="colorControlActivated">#3dff64</item>
+        <item name="colorSwitchThumbNormal">#f1f1f1
+        </item>
+
+        <item name="android:colorForeground">#42221f1f
+        </item>
+    </style>
+
 
 </resources>

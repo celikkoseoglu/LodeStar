@@ -26,10 +26,21 @@ public class TabActivity extends AppCompatActivity {
     TripActivity trip = new TripActivity();
     boolean exit = false;
 
+    TabLayout.Tab homeTab;
+    TabLayout.Tab tripTab;
+    TabLayout.Tab histTab;
+    TabLayout.Tab favTab;
+    TabLayout.Tab userTab;
+
+    int width;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tab);
+
+        width = getResources().getDisplayMetrics().widthPixels;
+
 
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
@@ -39,11 +50,12 @@ public class TabActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
 
 
-        tabLayout.getTabAt(0).setIcon(R.drawable.ic_004_homepage);
-        tabLayout.getTabAt(1).setIcon(R.drawable.ic_003_departures);
-        tabLayout.getTabAt(2).setIcon(R.drawable.ic_001_time);
-        tabLayout.getTabAt(3).setIcon(R.drawable.ic_002_star);
-        tabLayout.getTabAt(4).setIcon(R.drawable.ic_003_me);
+        homeTab = tabLayout.getTabAt(0).setIcon(R.drawable.ic_004_homepage);
+        tripTab = tabLayout.getTabAt(1).setIcon(R.drawable.ic_003_departures);
+        histTab = tabLayout.getTabAt(2).setIcon(R.drawable.ic_001_time);
+        favTab = tabLayout.getTabAt(3).setIcon(R.drawable.ic_002_star);
+        userTab = tabLayout.getTabAt(4).setIcon(R.drawable.ic_003_me);
+
 
 
 
@@ -98,6 +110,8 @@ public class TabActivity extends AppCompatActivity {
             public void onPageSelected(int position) {
                 switch (position) {
                     case 0:
+                        homeTab.select();
+                        trip.updateSizeInfo(width);
                         tabLayout.getTabAt(0).getIcon().setAlpha(255);
                         tabLayout.getTabAt(1).getIcon().setAlpha(90);
                         tabLayout.getTabAt(2).getIcon().setAlpha(90);
@@ -105,6 +119,8 @@ public class TabActivity extends AppCompatActivity {
                         tabLayout.getTabAt(4).getIcon().setAlpha(90);
                         break;
                     case 1:
+                        tripTab.select();
+                        trip.updateSizeInfo(width);
                         tabLayout.getTabAt(0).getIcon().setAlpha(90);
                         tabLayout.getTabAt(1).getIcon().setAlpha(255);
                         tabLayout.getTabAt(2).getIcon().setAlpha(90);
@@ -112,6 +128,8 @@ public class TabActivity extends AppCompatActivity {
                         tabLayout.getTabAt(4).getIcon().setAlpha(90);
                         break;
                     case 2:
+                        histTab.select();
+                        trip.updateSizeInfo(width);
                         tabLayout.getTabAt(0).getIcon().setAlpha(90);
                         tabLayout.getTabAt(1).getIcon().setAlpha(90);
                         tabLayout.getTabAt(2).getIcon().setAlpha(255);
@@ -119,17 +137,23 @@ public class TabActivity extends AppCompatActivity {
                         tabLayout.getTabAt(4).getIcon().setAlpha(90);
                         break;
                     case 3:
+                        favTab.select();
+                        trip.updateSizeInfo(width);
                         tabLayout.getTabAt(0).getIcon().setAlpha(90);
                         tabLayout.getTabAt(1).getIcon().setAlpha(90);
                         tabLayout.getTabAt(2).getIcon().setAlpha(90);
                         tabLayout.getTabAt(3).getIcon().setAlpha(255);
                         tabLayout.getTabAt(4).getIcon().setAlpha(90);
+                        break;
                     case 4:
+                        userTab.select();
+                        trip.updateSizeInfo(width);
                         tabLayout.getTabAt(0).getIcon().setAlpha(90);
                         tabLayout.getTabAt(1).getIcon().setAlpha(90);
                         tabLayout.getTabAt(2).getIcon().setAlpha(90);
                         tabLayout.getTabAt(3).getIcon().setAlpha(90);
                         tabLayout.getTabAt(4).getIcon().setAlpha(255);
+                        break;
                 }
             }
 
@@ -230,7 +254,7 @@ public class TabActivity extends AppCompatActivity {
         }
 
         if(trip instanceof MyOnFocusListenable) {
-            ((MyOnFocusListenable) trip).onWindowFocusChanged(hasFocus);
+            ((MyOnFocusListenable) trip).onWindowFocusChanged(hasFocus,width);
         }
     }
     public void weatherStart(View view){
