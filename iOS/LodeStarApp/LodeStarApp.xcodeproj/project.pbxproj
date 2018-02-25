@@ -31,6 +31,9 @@
 		8D22B2622030C7DF00ACFBD7 /* user.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 8D22B24E2030C7DF00ACFBD7 /* user.pdf */; };
 		8D22B2632030C7DF00ACFBD7 /* weather.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8D22B24F2030C7DF00ACFBD7 /* weather.jpg */; };
 		8D22B2642030C7DF00ACFBD7 /* weather.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 8D22B2502030C7DF00ACFBD7 /* weather.pdf */; };
+		8D26FA0C2042FE400011E5BE /* SmallWeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D26FA0B2042FE400011E5BE /* SmallWeatherCell.swift */; };
+		8D26FA0E20433DE50011E5BE /* LivingExpensesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D26FA0D20433DE50011E5BE /* LivingExpensesViewController.swift */; };
+		8D26FA102043407E0011E5BE /* FoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D26FA0F2043407E0011E5BE /* FoodCell.swift */; };
 		8D2A6C2F1FDE71F600AA44E7 /* TravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2A6C2E1FDE71F600AA44E7 /* TravelViewController.swift */; };
 		8D2A6C331FDE781C00AA44E7 /* CollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2A6C321FDE781C00AA44E7 /* CollectionCell.swift */; };
 		8D2A6C351FDE7E1600AA44E7 /* LodeStarLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2A6C341FDE7E1600AA44E7 /* LodeStarLayout.swift */; };
@@ -99,6 +102,9 @@
 		8D22B24E2030C7DF00ACFBD7 /* user.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = user.pdf; sourceTree = "<group>"; };
 		8D22B24F2030C7DF00ACFBD7 /* weather.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = weather.jpg; sourceTree = "<group>"; };
 		8D22B2502030C7DF00ACFBD7 /* weather.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = weather.pdf; sourceTree = "<group>"; };
+		8D26FA0B2042FE400011E5BE /* SmallWeatherCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmallWeatherCell.swift; sourceTree = "<group>"; };
+		8D26FA0D20433DE50011E5BE /* LivingExpensesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LivingExpensesViewController.swift; sourceTree = "<group>"; };
+		8D26FA0F2043407E0011E5BE /* FoodCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodCell.swift; sourceTree = "<group>"; };
 		8D2A6C2E1FDE71F600AA44E7 /* TravelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TravelViewController.swift; sourceTree = "<group>"; };
 		8D2A6C321FDE781C00AA44E7 /* CollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionCell.swift; sourceTree = "<group>"; };
 		8D2A6C341FDE7E1600AA44E7 /* LodeStarLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LodeStarLayout.swift; sourceTree = "<group>"; };
@@ -201,7 +207,10 @@
 				8D6F76BE1F961993004824B0 /* AppDelegate.swift */,
 				8D6F76DE1F961B40004824B0 /* SelectNationViewController.swift */,
 				8D6F76C21F961993004824B0 /* Main.storyboard */,
+				8D26FA0F2043407E0011E5BE /* FoodCell.swift */,
+				8D26FA0D20433DE50011E5BE /* LivingExpensesViewController.swift */,
 				8D302A8320387E6D00710A78 /* WeatherCell.swift */,
+				8D26FA0B2042FE400011E5BE /* SmallWeatherCell.swift */,
 				8D11715C200F74FE0032860E /* LoginViewController.swift */,
 				8D3D437E200A3CDA0091CCEB /* ProfileViewController.swift */,
 				8D3D437C200A3AD30091CCEB /* LogCell.swift */,
@@ -429,7 +438,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D6F76BF1F961993004824B0 /* AppDelegate.swift in Sources */,
+				8D26FA102043407E0011E5BE /* FoodCell.swift in Sources */,
 				8D2F8FEE1FD57C7600334A86 /* SwiftyJSON.swift in Sources */,
+				8D26FA0C2042FE400011E5BE /* SmallWeatherCell.swift in Sources */,
 				8D3D437F200A3CDA0091CCEB /* ProfileViewController.swift in Sources */,
 				8DC4DCB72021CBAC00DBF943 /* FlightInformationViewController.swift in Sources */,
 				8D302A8420387E6D00710A78 /* WeatherCell.swift in Sources */,
@@ -439,6 +450,7 @@
 				8D3D437B200A2FDC0091CCEB /* TransportViewController.swift in Sources */,
 				8D2EAC792007735A000819DA /* WeatherViewController.swift in Sources */,
 				8D6F76DF1F961B40004824B0 /* SelectNationViewController.swift in Sources */,
+				8D26FA0E20433DE50011E5BE /* LivingExpensesViewController.swift in Sources */,
 				8D2A6C2F1FDE71F600AA44E7 /* TravelViewController.swift in Sources */,
 				8D11715D200F74FE0032860E /* LoginViewController.swift in Sources */,
 			);

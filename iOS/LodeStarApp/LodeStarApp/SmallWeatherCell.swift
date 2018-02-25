@@ -9,23 +9,21 @@
 import Foundation
 import UIKit
 
-class WeatherCell: UICollectionViewCell {
+class SmallWeatherCell: UICollectionViewCell {
     
-    @IBOutlet weak var locationText: UILabel!
     @IBOutlet weak var weatherText: UILabel!
-    @IBOutlet weak var humidityComment: UILabel!
-    @IBOutlet weak var humidity: UILabel!
-    @IBOutlet weak var feelsLikeTemperature: UILabel!
     @IBOutlet weak var temperature: UILabel!
-    @IBOutlet weak var dayText: UILabel!
-    @IBOutlet weak var weatherPic: UIImageView!
+    @IBOutlet weak var feelsLikeTemperature: UILabel!
+    @IBOutlet weak var humidity: UILabel!
+    @IBOutlet weak var humidityComment: UILabel!
     
-
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+    }
     
-    func displayContent(weatherPic: UIImage, dayText: String, temperature: Int, feelsLikeTemperature: Int, humidity: Int, humidityComment: String, weatherText: String) {
+    func displayContent(temperature: Int, feelsLikeTemperature: Int, humidity: Int, humidityComment: String, weatherText: String) {
         
-        self.weatherPic.image = weatherPic
-        self.dayText.text = dayText
         self.temperature.text = String(temperature)  + "°"
         self.feelsLikeTemperature.text = "feels like " + String(feelsLikeTemperature)  + "°"
         self.humidity.text = String(humidity)
@@ -36,9 +34,5 @@ class WeatherCell: UICollectionViewCell {
         
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
     
 }
