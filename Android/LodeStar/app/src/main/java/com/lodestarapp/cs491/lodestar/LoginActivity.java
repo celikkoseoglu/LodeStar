@@ -1,21 +1,24 @@
 package com.lodestarapp.cs491.lodestar;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookSdk;
+import com.facebook.LoggingBehavior;
+import com.facebook.Profile;
+import com.facebook.ProfileTracker;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
@@ -27,8 +30,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.auth.FirebaseAuth;
-import com.lodestarapp.cs491.lodestar.Models.WeatherInformation;
 
 import static android.widget.Toast.LENGTH_LONG;
 
@@ -43,22 +44,47 @@ public class LoginActivity extends AppCompatActivity implements
     private GoogleSignInClient googleSignInClient;
     private GoogleApiClient mGoogleApiClient;
     private FirebaseAuth mAuth;
+  //  private SignUpActivity signUpManager = new SignUpActivity();
 
     private SignInButton signInButton;
 
     private Button signInWithEmail;
+    private CallbackManager callbackManager;
 
     // private TextView alreadySignedInQuestion;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        FacebookSdk.setApplicationId(getString(R.string.facebook_app_id));
+        //initialize Facebook SDK
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        if (BuildConfig.DEBUG) {
+            FacebookSdk.setIsDebugEnabled(true);
+            FacebookSdk.addLoggingBehavior(LoggingBehavior.INCLUDE_ACCESS_TOKENS);
+        }
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
 
         signInWithEmail = (Button) findViewById(R.id.button_email);
+        callbackManager = CallbackManager.Factory.create();
+
+        ProfileTracker profileTracker = new ProfileTracker() {
+            @Override
+            protected void onCurrentProfileChanged(
+                    Profile oldProfile,
+                    Profile currentProfile) {
+                // App code
+
+                Toast.makeText(LoginActivity.this, currentProfile.getFirstName(), LENGTH_LONG).show();
+
+            }
+        };
 
         //  alreadySignedInQuestion = (TextView) findViewById(R.id.login_text);
         // alreadySignedInQuestion.setOnClickListener(this);
@@ -95,8 +121,9 @@ public class LoginActivity extends AppCompatActivity implements
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
-        Log.w(TAG, "Kobe0 ");
+       // Log.w(TAG, "Kobe0 ");
     }
+
 
 //    @Override
 //    protected void onStart() {
@@ -113,6 +140,7 @@ public class LoginActivity extends AppCompatActivity implements
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data){
+        callbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode == RC_SIGN_IN){
@@ -200,8 +228,8 @@ public class LoginActivity extends AppCompatActivity implements
     /**
      * Weather
      */
-    public void weatherStart(View view){
-        Intent intent = new Intent(this, WeatherInformationActivity.class);
+    public void panoStart(View view){
+        Intent intent = new Intent(this, PanoramaActivity.class);
         startActivity(intent);
     }
 
@@ -224,6 +252,13 @@ public class LoginActivity extends AppCompatActivity implements
         Intent intent = new Intent(this, UserPage.class);
         startActivity(intent);
     }
+
+    public void VRstart(View view){
+        Intent intent = new Intent(this, VRActivity.class);
+        startActivity(intent);
+    }
+
+
 
 
 

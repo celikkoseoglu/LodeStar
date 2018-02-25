@@ -107,13 +107,13 @@ public class WeatherInformationAdapter extends RecyclerView.Adapter<RecyclerView
                         get(0).getDescription());
                 ((TodaysWeatherViewHolder) holder).temperatureView.setText(String.format("%s°C",
                         String.format("%s",
-                                weatherInformationList.get(0).getTemperature())));
+                                (int)weatherInformationList.get(0).getTemperature())));
                 ((TodaysWeatherViewHolder) holder).feelsLikeView.setText(String.format("%s°C",
                         String.format("%s", "feels like " +
-                                weatherInformationList.get(0).getFeelsLikeTemperature())));
+                                (int)weatherInformationList.get(0).getFeelsLikeTemperature())));
                 ((TodaysWeatherViewHolder) holder).humidityView.setText(String.format("%s%%",
                         String.format("%s",
-                                weatherInformationList.get(0).getHumidity())));
+                                (int)weatherInformationList.get(0).getHumidity())));
                 ((TodaysWeatherViewHolder) holder).cityNameView.
                         setText(String.format("in %s", weatherInformationList.get(0).getCity()));
                 ((TodaysWeatherViewHolder) holder).weatherTodayView.
@@ -127,10 +127,10 @@ public class WeatherInformationAdapter extends RecyclerView.Adapter<RecyclerView
                         weatherInformationList.get(position).getDate(), weatherInformationList.
                         get(position).getDescription()));
                 ((OtherDaysViewHolder) holder).humidityView.setText(String.format("%s%%",
-                        String.format("%s", weatherInformationList.get(position).getHumidity())));
+                        String.format("%s", (int)weatherInformationList.get(position).getHumidity())));
                 ((OtherDaysViewHolder) holder).temperatureView.setText(String.format("%s°C",
                         String.format("%s",
-                                weatherInformationList.get(position).getFeelsLikeTemperature())));
+                                (int)weatherInformationList.get(position).getFeelsLikeTemperature())));
                 ((OtherDaysViewHolder) holder).weatherView.setImageResource(this.context.
                         getResources().getIdentifier(weatherIconMap.get(weatherInformationList
                                 .get(position).getWeatherId() / 100).toString(),

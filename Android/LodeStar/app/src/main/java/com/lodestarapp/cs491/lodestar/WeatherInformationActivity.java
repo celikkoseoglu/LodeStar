@@ -1,5 +1,9 @@
 package com.lodestarapp.cs491.lodestar;
 
+import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -44,11 +48,21 @@ public class WeatherInformationActivity extends AppCompatActivity {
 
     private static final String TAG = "theMessage";
 
+    private ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
 
+        findViewById(R.id.weather_progress_bar).setVisibility(View.GONE);
+
+        progressDialog = new ProgressDialog(WeatherInformationActivity.this);
+        progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        progressDialog.setTitle("Loading...");
+        progressDialog.setMessage("Retrieving weather information from the server");
+        progressDialog.show();
+        
         weatherIconMap = new SparseArray();
         weatherIconMap.append(2, "p200");
         weatherIconMap.append(5, "p500");
@@ -141,6 +155,8 @@ public class WeatherInformationActivity extends AppCompatActivity {
 
         mAdapter.notifyDataSetChanged();
         findViewById(R.id.weather_progress_bar).setVisibility(View.GONE);
+
+        progressDialog.dismiss();
 
     }
 }

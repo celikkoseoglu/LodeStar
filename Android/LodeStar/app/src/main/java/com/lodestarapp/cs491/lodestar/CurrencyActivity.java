@@ -27,10 +27,12 @@ public class CurrencyActivity extends AppCompatActivity {
 
     public void sendRequest() {
         String curr = "";
+        final String local = "TRY";
+        final String fore = "EUR";
 
         TextView tx1 = findViewById(R.id.tx0);
 
-        cc.getCurrencyRates("TRY","EUR", this, new CurrencyController.VolleyCallback1(){
+        cc.getCurrencyRates(local,fore, this, new CurrencyController.VolleyCallback1(){
             @Override
             public void onSuccess(JSONObject result){
 
@@ -41,12 +43,29 @@ public class CurrencyActivity extends AppCompatActivity {
                     String lb1 = result.getString("foreignOverLocal");
                     TextView tx1 = findViewById(R.id.textView2);
                     if(lb1 != null)
-                        tx1.setText("1 TL="+lb1 + " EUR");
+                        tx1.setText("1 "+local+" = "+lb1 + " " + fore);
 
                     String lb2 = result.getString("localOverForeign");
                     TextView tx2 = findViewById(R.id.textView3);
                     if(lb2 != null)
-                        tx2.setText("1 EUR="+lb2 + " TL");
+                        tx2.setText("1 "+fore+" = "+lb2 + " "+ local);
+
+                    String lb3 = result.getString("localCurrencySymbol");
+                    TextView tx4 = findViewById(R.id.textView21);
+                    if(lb3 != null)
+                        tx4.setText(lb3);
+
+                    String lb4 = result.getString("foreignCurrencySymbol");
+                    TextView tx5 = findViewById(R.id.textView23);
+                    if(lb4 != null)
+                        tx5.setText(lb4);
+
+                    TextView tx6 = findViewById(R.id.textView20);
+                    tx6.setText("Symbol for " + local);
+
+                    TextView tx7 = findViewById(R.id.textView22);
+                    tx7.setText("Symbol for " + fore);
+
 
 
                     findViewById(R.id.ll1).setVisibility(View.GONE);

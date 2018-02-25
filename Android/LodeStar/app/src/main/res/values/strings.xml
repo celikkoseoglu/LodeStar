@@ -38,4 +38,7 @@
     <string name="user_trip_logs_count">##</string>
     <string name="user_trip_count">##</string>
     <string name="user_last_trip_to">Miami</string>
+    <string name="facebook_app_id">1613576188710987</string>
+    <string name="fb_login_protocol_scheme">fb1613576188710987</string>
+
 </resources>

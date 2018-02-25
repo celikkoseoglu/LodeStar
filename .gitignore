@@ -63,24 +63,28 @@ obj/
 /out/
 
 # User-specific configurations
-.idea/libraries/
-.idea/workspace.xml
-.idea/tasks.xml
-.idea/.name
-.idea/compiler.xml
-.idea/copyright/profiles_settings.xml
-.idea/encodings.xml
-.idea/misc.xml
-.idea/modules.xml
-.idea/scopes/scope_settings.xml
-.idea/dictionaries
-.idea/vcs.xml
-.idea/jsLibraryMappings.xml
-.idea/datasources.xml
-.idea/dataSources.ids
-.idea/sqlDataSources.xml
-.idea/dynamic.xml
-.idea/uiDesigner.xml
+*.idea/libraries/
+*.idea/workspace.xml
+*.idea/tasks.xml
+*.idea/.name
+*.idea/compiler.xml
+*.idea/copyright/profiles_settings.xml
+*.idea/encodings.xml
+*.idea/misc.xml
+*.idea/modules.xml
+*.idea/scopes/scope_settings.xml
+*.idea/dictionaries
+*.idea/vcs.xml
+*.idea/jsLibraryMappings.xml
+*.idea/datasources.xml
+*.idea/dataSources.ids
+*.idea/sqlDataSources.xml
+*.idea/dynamic.xml
+*.idea/uiDesigner.xml
+Android/LodeStar/.idea/libraries/
+Android/LodeStar/.idea/modules.xml
+Server/LodeStarFoursquare/.idea/
+
 
 # OS-specific files
 .DS_Store
@@ -130,3 +134,31 @@ fabric.properties
 
 
 # End of https://www.gitignore.io/api/androidstudio
+
+# Xcode
+#
+# gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
+
+## User settings
+xcuserdata/
+
+## compatibility with Xcode 8 and earlier (ignoring not required starting Xcode 9)
+*.xcscmblueprint
+*.xccheckout
+
+## compatibility with Xcode 3 and earlier (ignoring not required starting Xcode 4)
+build/
+DerivedData/
+*.moved-aside
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+
+## exclude node_modules. Use package.json npm install instead
+
+node_modules/

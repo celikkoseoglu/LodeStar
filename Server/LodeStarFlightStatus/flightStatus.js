@@ -7,7 +7,7 @@ var mockResponse = "{\"ident\":\"THY26\",\"airline\":\"THY\",\"airline_iata\":\"
 
 app.get('/', (req, res) => {
 
-		/*var flightData;
+		var flightData;
 
         var originAirportCode = req.query.originAirportCode;
         var destinationAirportCode = req.query.destinationAirportCode;
@@ -41,13 +41,6 @@ app.get('/', (req, res) => {
         	}
         };
 
-        var weatherConditionsArgs = {
-            parameters: {
-                airport_code: originAirportCode,
-                howMany: 1
-            }
-        };
-
         client.methods.flightInfoStatus(flightInfoStatusArgs, function (flightData, response) {
 
         	delete flightData.FlightInfoStatusResult.flights[0].faFlightID;
@@ -57,6 +50,13 @@ app.get('/', (req, res) => {
 
             responseData = flightData.FlightInfoStatusResult.flights[0];
 
+            var weatherConditionsArgs = {
+                parameters: {
+                    airport_code: originAirportCode,
+                    howMany: 1
+                }
+            };
+
             client.methods.weatherConditions(weatherConditionsArgs, function (weatherData, response) {
 
 	            delete weatherData.WeatherConditionsResult.conditions[0].airport_code;
@@ -64,10 +64,10 @@ app.get('/', (req, res) => {
 	            delete weatherData.WeatherConditionsResult.conditions[0].temp_dewpoint;
 	            delete weatherData.WeatherConditionsResult.conditions[0].wind_speed_gust;
 	            delete weatherData.WeatherConditionsResult.conditions[0].raw_data;
-	            responseData.weather = weatherData.WeatherConditionsResult.conditions[0];
+	            responseData.originWeather = weatherData.WeatherConditionsResult.conditions[0];
 	            res.send(responseData);
         	});
-        });*/
+        });
 
         res.send(mockResponse);
 });

@@ -76,8 +76,8 @@
             android:layout_alignParentTop="true"
             android:paddingBottom="8dp"
             android:layout_marginTop="3dp"
-            android:layout_marginLeft="3dp"
-            android:layout_marginRight="3dp">
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -285,7 +285,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:textSize="25sp"
-                    android:text="-------------------------------------"
+                    android:text="-----------------------------------"
                     android:layout_marginTop="125dp"
                     />
 
@@ -299,8 +299,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/cardView1"
             android:layout_marginTop="3dp"
-            android:layout_marginLeft="3dp"
-            android:layout_marginRight="3dp">
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -418,8 +418,8 @@
             android:layout_below="@+id/cardView2"
             android:layout_marginTop="3dp"
             android:layout_marginBottom="3dp"
-            android:layout_marginLeft="3dp"
-            android:layout_marginRight="3dp">
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
