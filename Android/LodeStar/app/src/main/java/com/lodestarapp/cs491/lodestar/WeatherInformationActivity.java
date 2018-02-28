@@ -62,7 +62,7 @@ public class WeatherInformationActivity extends AppCompatActivity {
         progressDialog.setTitle("Loading...");
         progressDialog.setMessage("Retrieving weather information from the server");
         progressDialog.show();
-        
+
         weatherIconMap = new SparseArray();
         weatherIconMap.append(2, "p200");
         weatherIconMap.append(5, "p500");

@@ -94,5 +94,15 @@
         android:layout_gravity="center"
         android:layout_marginTop="11dp" />
 
+    <Button
+        android:id="@+id/button9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button10"
+        android:layout_alignLeft="@+id/button10"
+        android:layout_alignStart="@+id/button10"
+        android:onClick="placesToSeeStart"
+        android:text="PlacesToSee" />
+
 
 </RelativeLayout>

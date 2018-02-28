@@ -187,7 +187,6 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
         startActivity(intent);
     }
 
-
     private static final String TAG = "theMessage";
 
     public void sendRequest() {

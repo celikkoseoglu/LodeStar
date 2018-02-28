@@ -238,6 +238,11 @@ public class LoginActivity extends AppCompatActivity implements
         startActivity(intent);
     }
 
+    public void placesToSeeStart(View view){
+        Intent intent = new Intent(this, PlacesToSeeActivity.class);
+        startActivity(intent);
+    }
+
     public void signUpStart(View view) {
         Intent intent = new Intent(this, SignInActivity.class);
         startActivity(intent);
