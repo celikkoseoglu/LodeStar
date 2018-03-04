@@ -87,19 +87,19 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     private void retrieveDBValues() {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("users");
-        ref.addListenerForSingleValueEvent(
-                new com.google.firebase.database.ValueEventListener() {
-                    @Override
-                    public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
-                        userList.add("" + dataSnapshot.getRef());
-                    }
+        ref.addListenerForSingleValueEvent(new com.google.firebase.database.ValueEventListener() {
+            @Override
+            public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
+                ArrayList<String> list = new ArrayList<String>();
+            }
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
-                    }
-                }
-    });
+            }
+        });
+
+
     }
 
 
