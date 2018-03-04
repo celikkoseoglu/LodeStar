@@ -26,6 +26,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.lodestarapp.cs491.lodestar.Adapters.User;
 
 import java.util.ArrayList;
@@ -41,6 +42,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private FirebaseAuth authManager;
    // private DatabaseReference mDatabase,mDatabase2;
     private EditText uName;
+    private ArrayList<String> userList = new ArrayList<String>();
+
     //   private boolean isDBAuthanticated; //Check if DB is authenticated
 
     private DatabaseReference mDatabase;
@@ -78,24 +81,25 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         registerButton.setOnClickListener(this);
         txtViewSignIn.setOnClickListener(this);
-        
+        retrieveDBValues();
 
     }
 
     private void retrieveDBValues() {
-        DatabaseReference ref = mDatabase.child("users");
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("users");
+        ref.addListenerForSingleValueEvent(
+                new com.google.firebase.database.ValueEventListener() {
+                    @Override
+                    public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
+                        userList.add("" + dataSnapshot.getRef());
+                    }
 
-        ref.addListenerForSingleValueEvent(new com.google.firebase.database.ValueEventListener() {
-            @Override
-            public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
-                Log.i("lol",dataSnapshot.getPriority().toString());
-            }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+                    }
+                }
+    });
     }
 
 
