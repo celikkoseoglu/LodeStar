@@ -55,6 +55,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
+
         // isDBAuthanticated = false;
         initializeDB();
         authManager = FirebaseAuth.getInstance();
@@ -77,9 +78,27 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         registerButton.setOnClickListener(this);
         txtViewSignIn.setOnClickListener(this);
-
+        
 
     }
+
+    private void retrieveDBValues() {
+        DatabaseReference ref = mDatabase.child("users");
+
+        ref.addListenerForSingleValueEvent(new com.google.firebase.database.ValueEventListener() {
+            @Override
+            public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
+                Log.i("lol",dataSnapshot.getPriority().toString());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
 //
 //        Firebase ref = new Firebase("https://fir-lodestar.firebaseio.com/");
 //
@@ -162,7 +181,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     Toast.makeText(SignUpActivity.this,u.getEmail(),Toast.LENGTH_SHORT).show();
                     u.uid = t.getResult().getUser().getUid();
                     writeNewUser(u.getUid(),u.getName(),u.getEmail());
-                    createNewUser(u);
+                 //   createNewUser(u);
                     //  startActivity(new Intent(this,UserLoginActivity.class));
                    // finish();
                     startActivity(new Intent(getApplicationContext(),LoginActivity.class));
