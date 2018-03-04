@@ -39,7 +39,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private Button registerButton;
     private TextView txtViewSignIn;
     private FirebaseAuth authManager;
-    private DatabaseReference mDatabase,mDatabase2;
+ //   private DatabaseReference mDatabase,mDatabase2;
     private EditText uName;
     //   private boolean isDBAuthanticated; //Check if DB is authenticated
 
@@ -67,7 +67,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         //Set Listeners
 
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+     //   mDatabase = FirebaseDatabase.getInstance().getReference();
 
         registerButton.setOnClickListener(this);
         txtViewSignIn.setOnClickListener(this);
@@ -92,7 +92,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
 
 
-    private void writeNewUser(String uid, String userName, String email) {
+    /*private void writeNewUser(String uid, String userName, String email) {
 
         User toBeWrittenToDB = new User(userName,email);
         mDatabase.child("users").child(uid).setValue(toBeWrittenToDB);
@@ -100,7 +100,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         userNames.add(userName);
         mDatabase.child("usernamelist").setValue(userNames);
         Toast.makeText(this,"AROG",Toast.LENGTH_LONG).show();
-    }
+    }*/
 
     @Override
     public void onClick(View v) {
@@ -167,25 +167,25 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
 
 
-        Toast.makeText(this,"AROG",Toast.LENGTH_LONG).show();
-        final String a;
-        String t;
-        int i = 0;
-        mDatabase.child("users");
-        mDatabase.addValueEventListener(new com.google.firebase.database.ValueEventListener() {
-            @Override
-            public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
-                final String a;
-                a = "" + dataSnapshot.getChildrenCount();
-                Log.d(TAG,"whatever it takes" + a);
+//        Toast.makeText(this,"AROG",Toast.LENGTH_LONG).show();
+//        final String a;
+//        String t;
+//        int i = 0;
+//        //mDatabase.child("users");
+//        mDatabase.addValueEventListener(new com.google.firebase.database.ValueEventListener() {
+//            @Override
+//            public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
+//                final String a;
+//                a = "" + dataSnapshot.getChildrenCount();
+//                Log.d(TAG,"whatever it takes" + a);
+//
+//            }
 
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+      //  });
 
 
         return 1;
@@ -247,7 +247,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         User user = new User(username, email);
 
-        mDatabase.child("users").child(userId).setValue(user);
+       // mDatabase.child("users").child(userId).setValue(user);
 
         Toast.makeText(SignUpActivity.this,"Databse ekledim ",Toast.LENGTH_SHORT).show();
 

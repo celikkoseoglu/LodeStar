@@ -220,7 +220,7 @@ public class LoginActivity extends AppCompatActivity implements
     }
     public void userSearchStart(View v) {
         Toast.makeText(LoginActivity.this, "LOLOL", LENGTH_LONG).show();
-        Intent intent = new Intent(this, SearchUserActivity.class);
+        Intent intent = new Intent(LoginActivity.this, SearchUserActivity.class);
         startActivity(intent);
     }
 

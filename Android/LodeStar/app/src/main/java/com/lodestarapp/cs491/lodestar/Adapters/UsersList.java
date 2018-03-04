@@ -24,7 +24,7 @@ public class UsersList extends ArrayAdapter<User> {
     private List<User> userlist;
 
     public UsersList(Activity context2, List<User> userList2) {
-        super(context2, R.layout.activity_search_user,userList2);
+        super(context2, R.layout.activity_search_user2,userList2);
         userlist = userList2;
         context = context2;
 
@@ -36,7 +36,7 @@ public class UsersList extends ArrayAdapter<User> {
      //   return super.getView(position, convertView, parent);
         LayoutInflater inf = context.getLayoutInflater();
 
-        View listViewItem = inf.inflate(R.layout.activity_search_user,null,true);
+        View listViewItem = inf.inflate(R.layout.activity_search_user2,null,true);
 
         TextView userName = (TextView) listViewItem.findViewById(R.id.textName);
         TextView userEmail = (TextView) listViewItem.findViewById(R.id.textEmail);

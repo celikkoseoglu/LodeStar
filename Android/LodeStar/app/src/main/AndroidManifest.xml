@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.NFC" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <!--<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>!-->
+    <!-- <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>! -->
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -52,11 +52,9 @@
         <meta-data
             android:name="com.google.android.gms.vision.DEPENDENCIES"
             android:value="barcode" />
-
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAdM81VI3shYcZkHVBBQA2WCjR1GU25Vac" />
@@ -74,8 +72,12 @@
         <activity android:name=".ForgotPasswordActivity" />
         <activity android:name=".VRActivity" />
         <activity android:name=".PanoramaActivity" />
-        <activity android:name=".PreferencesActivity"></activity>
+        <activity android:name=".PreferencesActivity" />
         <activity android:name=".PlacesToSeeActivity" />
+        <activity
+            android:name=".SearchUserActivity"
+            android:label="@string/title_activity_search_user"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
