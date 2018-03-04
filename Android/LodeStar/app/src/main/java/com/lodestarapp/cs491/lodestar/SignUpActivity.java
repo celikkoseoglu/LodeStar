@@ -39,9 +39,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private Button registerButton;
     private TextView txtViewSignIn;
     private FirebaseAuth authManager;
- //   private DatabaseReference mDatabase,mDatabase2;
+   // private DatabaseReference mDatabase,mDatabase2;
     private EditText uName;
     //   private boolean isDBAuthanticated; //Check if DB is authenticated
+
+    private DatabaseReference mDatabase;
+
 
 
 
@@ -49,6 +52,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         //Toast.makeText(this,"Nerdesin gozum",Toast.LENGTH_LONG).show();
         super.onCreate(savedInstanceState);
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child("users").child("1233").child("username").setValue("efe");
         // isDBAuthanticated = false;
         initializeDB();
         authManager = FirebaseAuth.getInstance();
@@ -67,7 +73,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         //Set Listeners
 
 
-     //   mDatabase = FirebaseDatabase.getInstance().getReference();
+        //mDatabase = FirebaseDatabase.getInstance().getReference();
 
         registerButton.setOnClickListener(this);
         txtViewSignIn.setOnClickListener(this);
@@ -92,15 +98,15 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
 
 
-    /*private void writeNewUser(String uid, String userName, String email) {
+    private void writeNewUser(String uid, String userName, String email) {
 
         User toBeWrittenToDB = new User(userName,email);
-        mDatabase.child("users").child(uid).setValue(toBeWrittenToDB);
+      //  mDatabase.child("users").child(uid).setValue(toBeWrittenToDB);
         ArrayList<String> userNames = new ArrayList<>();
         userNames.add(userName);
-        mDatabase.child("usernamelist").setValue(userNames);
+       // mDatabase.child("usernamelist").setValue(userNames);
         Toast.makeText(this,"AROG",Toast.LENGTH_LONG).show();
-    }*/
+    }
 
     @Override
     public void onClick(View v) {
@@ -150,11 +156,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onComplete(@NonNull Task<AuthResult> t) {
                 if(t.isSuccessful()) {
-                    Toast.makeText(SignUpActivity.this,"Zaaa",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this,u.getEmail(),Toast.LENGTH_SHORT).show();
                     u.uid = t.getResult().getUser().getUid();
+
                     createNewUser(u);
                     //  startActivity(new Intent(this,UserLoginActivity.class));
-                    finish();
+                   // finish();
                     startActivity(new Intent(getApplicationContext(),LoginActivity.class));
                 }
                 else {
@@ -171,7 +178,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 //        final String a;
 //        String t;
 //        int i = 0;
-//        //mDatabase.child("users");
+//        mDatabase.child("users");
 //        mDatabase.addValueEventListener(new com.google.firebase.database.ValueEventListener() {
 //            @Override
 //            public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
@@ -180,12 +187,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 //                Log.d(TAG,"whatever it takes" + a);
 //
 //            }
-
+//
 //            @Override
 //            public void onCancelled(DatabaseError databaseError) {
 //
 //            }
-      //  });
+//        });
 
 
         return 1;
@@ -247,7 +254,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         User user = new User(username, email);
 
-       // mDatabase.child("users").child(userId).setValue(user);
+      //
+        //  mDatabase.child("users").child(userId).setValue(user);
 
         Toast.makeText(SignUpActivity.this,"Databse ekledim ",Toast.LENGTH_SHORT).show();
 

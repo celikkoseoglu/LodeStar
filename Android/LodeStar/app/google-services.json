@@ -1,7 +1,9 @@
 {
   "project_info": {
     "project_number": "991682754007",
-    "project_id": "firebase-lodestar"
+    "firebase_url": "https://fir-lodestar.firebaseio.com",
+    "project_id": "firebase-lodestar",
+    "storage_bucket": "firebase-lodestar.appspot.com"
   },
   "client": [
     {
@@ -13,16 +15,20 @@
       },
       "oauth_client": [
         {
-          "client_id": "991682754007-uoqeg5btuo8kob0nkkl7ffh7l228jdo4.apps.googleusercontent.com",
-          "client_type": 3
-        },
-        {
-          "client_id": "991682754007-bqm2cnbto720osdvrognfevmgs3k9ei5.apps.googleusercontent.com",
+          "client_id": "991682754007-bclkp6kqljpt54nik55tpior7uuodqp9.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "bilkent.cs491.lodestar",
             "certificate_hash": "6b7a9875f8eedd4c5af002b2a2bbf6cac7899381"
           }
+        },
+        {
+          "client_id": "991682754007-dgc9vp5dfqh338qsagsoaog1tb29vmnc.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "991682754007-uoqeg5btuo8kob0nkkl7ffh7l228jdo4.apps.googleusercontent.com",
+          "client_type": 3
         }
       ],
       "api_key": [
@@ -35,11 +41,16 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "991682754007-dgc9vp5dfqh338qsagsoaog1tb29vmnc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
-          "status": 1
+          "status": 2
         }
       }
     }
