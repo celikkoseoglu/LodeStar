@@ -56,7 +56,9 @@ dependencies {
     implementation 'com.android.support:design:27.0.2'
     implementation 'com.android.support:gridlayout-v7:27.0.2'
     implementation 'com.google.protobuf.nano:protobuf-javanano:3.1.0'
+    implementation 'com.google.firebase:firebase-database:11.8.0'
     implementation 'com.google.android.gms:play-services-maps:11.8.0'
+    implementation 'com.firebase:firebase-client-android:2.5.0'
 }
 
 

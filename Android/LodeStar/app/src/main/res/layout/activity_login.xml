@@ -15,6 +15,15 @@
         android:layout_below="@+id/button3"
         android:layout_marginTop="12dp" />
 
+    <Button
+        android:id="@+id/userSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:onClick="userSearchStart"
+        android:text="Search For Users" />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"

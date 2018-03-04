@@ -45,7 +45,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 //        }
 
         //Intialize Everything
-       // reEnter = (EditText) findViewById(R.id.reTypePassword2);
+        // reEnter = (EditText) findViewById(R.id.reTypePassword2);
         //butt4 = (Button) findViewById(R.id.RegButton3);
         emailF = (EditText) findViewById(R.id.emailEdit2);
         signButton = (Button) findViewById(R.id.RegButton2);
@@ -54,11 +54,11 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         pDialog= new ProgressDialog(this);
 
         signButton.setOnClickListener(this);
-       // butt4.setOnClickListener(this);
+        // butt4.setOnClickListener(this);
         txtViewtoSignUp.setOnClickListener(this);
 
         emailF.setTextColor(Color.WHITE);
-     //   reEnter.setTextColor(Color.WHITE);
+        //   reEnter.setTextColor(Color.WHITE);
         passwordF.setTextColor(Color.WHITE);
         txtViewtoSignUp.setTextColor(Color.WHITE);
 
@@ -68,7 +68,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
 
-     //   String str1 = String.valueOf(reEnter.getText());
+        //   String str1 = String.valueOf(reEnter.getText());
         String str2 = String.valueOf(passwordF.getText());
 
      /*   if(!str1.equals(str2)) {

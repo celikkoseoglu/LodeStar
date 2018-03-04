@@ -49,6 +49,7 @@ public class LoginActivity extends AppCompatActivity implements
     private SignInButton signInButton;
 
     private Button signInWithEmail;
+    private Button userSearchButton;
     private CallbackManager callbackManager;
 
     // private TextView alreadySignedInQuestion;
@@ -56,6 +57,8 @@ public class LoginActivity extends AppCompatActivity implements
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        Toast.makeText(LoginActivity.this, "HaVELSAn", LENGTH_LONG).show();
 
         FacebookSdk.setApplicationId(getString(R.string.facebook_app_id));
         //initialize Facebook SDK
@@ -72,6 +75,7 @@ public class LoginActivity extends AppCompatActivity implements
         mAuth = FirebaseAuth.getInstance();
 
         signInWithEmail = (Button) findViewById(R.id.button_email);
+        userSearchButton = (Button) findViewById(R.id.userSearch);
         callbackManager = CallbackManager.Factory.create();
 
         ProfileTracker profileTracker = new ProfileTracker() {
@@ -214,7 +218,11 @@ public class LoginActivity extends AppCompatActivity implements
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         Log.d(TAG, "onConnectionFailed:" + connectionResult);
     }
-
+    public void userSearchStart(View v) {
+        Toast.makeText(LoginActivity.this, "LOLOL", LENGTH_LONG).show();
+        Intent intent = new Intent(this, SearchUserActivity.class);
+        startActivity(intent);
+    }
 
     /**
      * Unity Try

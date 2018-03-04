@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,19 +14,33 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.lodestarapp.cs491.lodestar.Adapters.User;
+
+import java.util.ArrayList;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private static final String TAG = "asasa";
     //Declerations
     private ProgressDialog dialog; //To be used after registering
     private EditText emailField,passwordField,reTypeField;
     private Button registerButton;
     private TextView txtViewSignIn;
     private FirebaseAuth authManager;
+    private DatabaseReference mDatabase,mDatabase2;
+    private EditText uName;
     //   private boolean isDBAuthanticated; //Check if DB is authenticated
 
 
@@ -41,6 +56,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_sign_up);
 
         //Bind Buttons & EditText & TextViews & bars
+        uName = (EditText) findViewById(R.id.userName);
         registerButton = (Button) findViewById(R.id.RegButton);
         txtViewSignIn = (TextView) findViewById(R.id.textSignin);
         reTypeField = (EditText) findViewById(R.id.reTypePassword);
@@ -49,10 +65,41 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         dialog = new ProgressDialog(this);
 
         //Set Listeners
+
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
         registerButton.setOnClickListener(this);
         txtViewSignIn.setOnClickListener(this);
 
 
+    }
+//
+//        Firebase ref = new Firebase("https://fir-lodestar.firebaseio.com/");
+//
+//        ref.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot snapshot) {
+//                Log.e("Count " ,""+snapshot.getChildrenCount());
+//
+//            }
+//            @Override
+//            public void onCancelled(FirebaseError firebaseError) {
+//                Log.e("The read failed: " ,firebaseError.getMessage());
+//            }
+//        });
+
+
+
+
+    private void writeNewUser(String uid, String userName, String email) {
+
+        User toBeWrittenToDB = new User(userName,email);
+        mDatabase.child("users").child(uid).setValue(toBeWrittenToDB);
+        ArrayList<String> userNames = new ArrayList<>();
+        userNames.add(userName);
+        mDatabase.child("usernamelist").setValue(userNames);
+        Toast.makeText(this,"AROG",Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -84,12 +131,18 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         String passwordStr = passwordField.getText().toString().trim();
         String emailStr = emailField.getText().toString().trim();
 
+
         if (TextUtils.isEmpty(emailStr) || TextUtils.isEmpty(passwordStr)) {
 
             Toast.makeText(this,"Please make sure you enter the credentials correctly",Toast.LENGTH_LONG).show();
             return -27; //Finish the function, cannot register
 
         }
+        String myUName = String.valueOf(uName.getText());
+
+        String myemail = String.valueOf(emailField.getText());
+        final User u;
+        u = new User(myUName,myemail);
 
         dialog.setMessage("Please wait :) ");
         dialog.show();
@@ -97,7 +150,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onComplete(@NonNull Task<AuthResult> t) {
                 if(t.isSuccessful()) {
-                    Toast.makeText(SignUpActivity.this,"Congrats! You can now explore anywhere with LodeStar!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this,"Zaaa",Toast.LENGTH_SHORT).show();
+                    u.uid = t.getResult().getUser().getUid();
+                    createNewUser(u);
                     //  startActivity(new Intent(this,UserLoginActivity.class));
                     finish();
                     startActivity(new Intent(getApplicationContext(),LoginActivity.class));
@@ -109,6 +164,30 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             }
         }); // Inster to database
         dialog.dismiss();
+
+
+
+        Toast.makeText(this,"AROG",Toast.LENGTH_LONG).show();
+        final String a;
+        String t;
+        int i = 0;
+        mDatabase.child("users");
+        mDatabase.addValueEventListener(new com.google.firebase.database.ValueEventListener() {
+            @Override
+            public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
+                final String a;
+                a = "" + dataSnapshot.getChildrenCount();
+                Log.d(TAG,"whatever it takes" + a);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
         return 1;
     } //returns a positive number if registered successfully
 
@@ -125,15 +204,26 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         }
 
         dialog.setMessage("Please wait :) ");
+
+        String myUName = String.valueOf(uName.getText());
+
+        String myemail = String.valueOf(emailField.getText());
+        final User u;
+        u = new User(myUName,myemail);
+
         dialog.show();
         authManager.createUserWithEmailAndPassword(emailStr,passwordStr).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> t) {
                 if(t.isSuccessful()) {
-                    Toast.makeText(SignUpActivity.this,"Congrats! You can now explore anywhere with LodeStar!",Toast.LENGTH_SHORT).show();
+
                     //  startActivity(new Intent(this,UserLoginActivity.class));
+
+                    u.uid = t.getResult().getUser().getUid();
+                    createNewUser(u);
                     finish();
                     startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+
                 }
                 else {
                     Toast.makeText(SignUpActivity.this,"Oooops Please Try Again :( ",Toast.LENGTH_SHORT).show();
@@ -149,6 +239,19 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         //  fa = FirebaseAuth.getInstance();
         //      isDBAuthanticated = true;
     } //Initializes the database
+
+    private void createNewUser(User userFromRegistration) {
+        String username = String.valueOf(uName.getText());
+        String email = userFromRegistration.getEmail();
+        String userId = userFromRegistration.getUid();
+
+        User user = new User(username, email);
+
+        mDatabase.child("users").child(userId).setValue(user);
+
+        Toast.makeText(SignUpActivity.this,"Databse ekledim ",Toast.LENGTH_SHORT).show();
+
+    }
 
 
 }
