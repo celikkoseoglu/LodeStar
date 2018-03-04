@@ -54,7 +54,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.child("users").child("1233").child("username").setValue("efe");
+
         // isDBAuthanticated = false;
         initializeDB();
         authManager = FirebaseAuth.getInstance();
@@ -100,12 +100,15 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     private void writeNewUser(String uid, String userName, String email) {
 
-        User toBeWrittenToDB = new User(userName,email);
-      //  mDatabase.child("users").child(uid).setValue(toBeWrittenToDB);
-        ArrayList<String> userNames = new ArrayList<>();
-        userNames.add(userName);
-       // mDatabase.child("usernamelist").setValue(userNames);
-        Toast.makeText(this,"AROG",Toast.LENGTH_LONG).show();
+        mDatabase.child("users").child(uid).child("username").setValue(userName);
+        mDatabase.child("users").child(uid).child("e-mail").setValue(email);
+
+//        User toBeWrittenToDB = new User(userName,email);
+//      //  mDatabase.child("users").child(uid).setValue(toBeWrittenToDB);
+//        ArrayList<String> userNames = new ArrayList<>();
+//        userNames.add(userName);
+//       // mDatabase.child("usernamelist").setValue(userNames);
+//        Toast.makeText(this,"AROG",Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -158,7 +161,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 if(t.isSuccessful()) {
                     Toast.makeText(SignUpActivity.this,u.getEmail(),Toast.LENGTH_SHORT).show();
                     u.uid = t.getResult().getUser().getUid();
-
+                    writeNewUser(u.getUid(),u.getName(),u.getEmail());
                     createNewUser(u);
                     //  startActivity(new Intent(this,UserLoginActivity.class));
                    // finish();
