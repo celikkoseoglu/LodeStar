@@ -58,7 +58,7 @@ public class LoginActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        Toast.makeText(LoginActivity.this, "HaVELSAn", LENGTH_LONG).show();
+
 
         FacebookSdk.setApplicationId(getString(R.string.facebook_app_id));
         //initialize Facebook SDK

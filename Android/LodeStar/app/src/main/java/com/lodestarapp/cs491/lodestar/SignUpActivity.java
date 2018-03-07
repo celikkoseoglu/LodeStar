@@ -90,7 +90,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         ref.addListenerForSingleValueEvent(new com.google.firebase.database.ValueEventListener() {
             @Override
             public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
-                ArrayList<String> list = new ArrayList<String>();
+              // list.add("")
+                userList.add("" + dataSnapshot.child("users").getChildrenCount());
+                Log.i("lol",userList.get(0));
+
             }
 
             @Override
