@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/place_cardview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageButton
+                    android:id="@+id/imageButtonPlace"
+                    android:layout_width="125dp"
+                    android:layout_height="125dp"
+                    android:background="@null"
+                    app:srcCompat="@color/colorForestGreen" />
+
+                <TextView
+                    android:id="@+id/place_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="19dp"
+                    android:layout_marginStart="19dp"
+                    android:layout_toEndOf="@+id/imageButtonPlace"
+                    android:layout_toRightOf="@+id/imageButtonPlace"
+                    android:text="@string/place_name"
+                    android:textSize="24sp" />
+
+                <ImageView
+                    android:id="@+id/place_type_icon"
+                    android:layout_width="15dp"
+                    android:layout_height="20dp"
+                    android:layout_alignLeft="@+id/place_name"
+                    android:layout_alignStart="@+id/place_name"
+                    android:layout_below="@+id/place_name"
+                    android:layout_marginTop="5dp"
+                    app:srcCompat="@color/colorPrimaryDark" />
+
+                <TextView
+                    android:id="@+id/place_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/place_type_icon"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_toEndOf="@+id/place_type_icon"
+                    android:layout_toRightOf="@+id/place_type_icon"
+                    android:text="@string/place_type" />
+
+                <ImageView
+                    android:id="@+id/place_icon"
+                    android:layout_width="15dp"
+                    android:layout_height="20dp"
+                    android:layout_below="@id/place_type_icon"
+                    android:layout_marginTop="5dp"
+                    android:layout_alignLeft="@id/place_type_icon"
+                    app:srcCompat="@color/colorRedd"
+                    android:layout_alignStart="@id/place_type_icon" />
+
+                <TextView
+                    android:id="@+id/place_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/place_icon"
+                    android:layout_alignLeft="@+id/place_type"
+                    android:layout_alignStart="@+id/place_type"
+                    android:text="@string/place_location" />
+
+                <ImageView
+                    android:id="@+id/place_stars_image"
+                    android:layout_width="50dp"
+                    android:layout_height="20dp"
+                    android:layout_below="@id/place_icon"
+                    android:layout_marginTop="5dp"
+                    android:layout_alignLeft="@id/place_icon"
+                    app:srcCompat="@android:color/holo_orange_dark"
+                    android:layout_alignStart="@id/place_icon" />
+
+                <TextView
+                    android:id="@+id/place_number_of_reviews"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/place_stars_image"
+                    android:layout_alignEnd="@+id/place_location"
+                    android:layout_alignRight="@+id/place_location"
+                    android:text="@string/number_of_reviews" />
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

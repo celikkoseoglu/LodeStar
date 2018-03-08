@@ -41,5 +41,10 @@
     <string name="facebook_app_id">1613576188710987</string>
     <string name="fb_login_protocol_scheme">fb1613576188710987</string>
     <string name="title_activity_search_user">SearchUserActivity</string>
+    <string name="places_to_see_activity">Places To See</string>
+    <string name="place_name">Place Name</string>
+    <string name="place_type">Place Type</string>
+    <string name="place_location">Place Location</string>
+    <string name="number_of_reviews">Reviews</string>
 
 </resources>
