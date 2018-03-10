@@ -30,6 +30,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import static android.widget.Toast.LENGTH_LONG;
 
@@ -51,6 +54,7 @@ public class LoginActivity extends AppCompatActivity implements
     private Button signInWithEmail;
     private Button userSearchButton;
     private CallbackManager callbackManager;
+    private DatabaseReference mDatabase;
 
     // private TextView alreadySignedInQuestion;
 
@@ -58,7 +62,7 @@ public class LoginActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         FacebookSdk.setApplicationId(getString(R.string.facebook_app_id));
         //initialize Facebook SDK
@@ -272,7 +276,26 @@ public class LoginActivity extends AppCompatActivity implements
     }
 
 
+    private void retrieveDBValues() {
 
+
+        mDatabase.addValueEventListener(new com.google.firebase.database.ValueEventListener() {
+            @Override
+            public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
+                for (com.google.firebase.database.DataSnapshot child : dataSnapshot.getChildren()) {
+                    for (com.google.firebase.database.DataSnapshot child2 : child.getChildren()) {
+                        Log.i("aga", child2.child("e-mail").toString());
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
 
 
 }

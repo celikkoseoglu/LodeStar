@@ -86,13 +86,16 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void retrieveDBValues() {
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("users");
-        ref.addListenerForSingleValueEvent(new com.google.firebase.database.ValueEventListener() {
+
+
+        mDatabase.addValueEventListener(new com.google.firebase.database.ValueEventListener() {
             @Override
             public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
-              // list.add("")
-                userList.add("" + dataSnapshot.child("users").getChildrenCount());
-                Log.i("lol",userList.get(0));
+                for (com.google.firebase.database.DataSnapshot child : dataSnapshot.getChildren()) {
+                    for (com.google.firebase.database.DataSnapshot child2 : child.getChildren()) {
+                        Log.i("aga",child2.child("e-mail").toString());
+                    }
+                }
 
             }
 
@@ -101,6 +104,22 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
             }
         });
+
+//        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("users");
+//        ref.addListenerForSingleValueEvent(new com.google.firebase.database.ValueEventListener() {
+//            @Override
+//            public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
+//              // list.add("")
+//                userList.add("" + dataSnapshot.child("users").getChildrenCount() + 1);
+//                Log.i("lol",userList.get(0));
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
 
 
     }
@@ -128,13 +147,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         mDatabase.child("users").child(uid).child("username").setValue(userName);
         mDatabase.child("users").child(uid).child("e-mail").setValue(email);
-
-//        User toBeWrittenToDB = new User(userName,email);
-//      //  mDatabase.child("users").child(uid).setValue(toBeWrittenToDB);
-//        ArrayList<String> userNames = new ArrayList<>();
-//        userNames.add(userName);
-//       // mDatabase.child("usernamelist").setValue(userNames);
-//        Toast.makeText(this,"AROG",Toast.LENGTH_LONG).show();
     }
 
     @Override
