@@ -57,8 +57,8 @@ public class LoginActivity extends AppCompatActivity implements
     private Button signInWithEmail;
     private Button userSearchButton;
     private CallbackManager callbackManager;
-    private DatabaseReference mDatabase;
-    ArrayList<User> userList;
+   // private DatabaseReference mDatabase;
+    public ArrayList<User> userList;
 
 
     // private TextView alreadySignedInQuestion;
@@ -67,7 +67,7 @@ public class LoginActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+      //  mDatabase = FirebaseDatabase.getInstance().getReference();
 
         userList = new ArrayList<User>();
 
@@ -136,7 +136,7 @@ public class LoginActivity extends AppCompatActivity implements
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
-       retrieveDBValues();
+
     }
 
 
@@ -283,16 +283,16 @@ public class LoginActivity extends AppCompatActivity implements
     }
 
 
-    private void retrieveDBValues() {
-
-
+//    private void retrieveDBValues() {
+//
+//
 //        mDatabase.addValueEventListener(new com.google.firebase.database.ValueEventListener() {
 //            @Override
 //            public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
 //                for (com.google.firebase.database.DataSnapshot child : dataSnapshot.getChildren()) {
 //                    for (com.google.firebase.database.DataSnapshot child2 : child.getChildren()) {
 //                        userList.add(new User(child2.child("username").toString(),child2.child("e-mail").toString()));
-//                        Log.i("aga", child2.child("e-mail").getValue().toString());
+//                       // Log.i("aga", child2.child("e-mail").getValue().toString());
 //                    }
 //                }
 //
@@ -303,7 +303,7 @@ public class LoginActivity extends AppCompatActivity implements
 //
 //            }
 //        });
-    }
+//}
 
 
 }
