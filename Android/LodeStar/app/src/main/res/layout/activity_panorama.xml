@@ -17,6 +17,10 @@
     </com.lodestarapp.cs491.lodestar.VR.PanoramaView>
 
     <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <RelativeLayout
         android:id="@+id/relativelayout"
         android:layout_width="match_parent"
         android:layout_height="300dp">
@@ -32,6 +36,18 @@
             android:layout_alignParentStart="true" />
 
         <ImageView
+            android:id="@+id/vrSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_cardboard3"
+            android:layout_toLeftOf="@+id/full"
+            android:layout_marginRight="5dp"
+            android:layout_alignParentBottom="true"
+            android:onClick="goVr"
+            android:layout_toStartOf="@+id/full"
+            android:layout_marginEnd="5dp" />
+
+        <ImageView
             android:id="@+id/full"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -43,7 +59,18 @@
 
     </RelativeLayout>
 
+        <ImageView
+            android:id="@+id/vrBig"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:onClick="goVr"
+            app:srcCompat="@drawable/ic_cardboard3" />
 
-
+    </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

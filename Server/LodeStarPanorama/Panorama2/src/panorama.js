@@ -19,6 +19,7 @@ const rl = readline.createInterface({
 var id;
 var tiles = [];
 
+var radius = 350;
 var currentX = 0;
 var totalX = 7;
 var currentY = 0;
@@ -33,9 +34,9 @@ rl.question('Enter longitude: ', (longitude) => {
 	//var lat = 47.85783227207914;
       	//var lng = 2.295226175151347;
 
-        let request = https.request("https://maps.googleapis.com/maps/api/streetview/metadata?" +
-            "size=600x300&location=" + longitude + "," + latitude + "&heading=-45&pitch=42&fov=110&key=" +
-    API, function (response) {
+        let request = https.request("https://cbk0.google.com/cbk?output=json&" +
+           "ll=" + latitude + "," + longitude + "&radius=" + radius
+    , function (response) {
 
             let replyMessage = "";
             let json;
@@ -48,12 +49,19 @@ rl.question('Enter longitude: ', (longitude) => {
                 json = JSON.parse(replyMessage);
                 //console.log(JSON.stringify(json, null, 4));
 
-                //console.log(json.pano_id);
-		id = json.pano_id;
-		if (fs.existsSync(id+'.jpeg')) {
+
+                console.log("id: " + json.Location.panoId);
+                console.log("angle: " + json.Location.best_view_direction_deg);
+		id = json.Location.panoId;
+		if (fs.existsSync(id+'.jpg')) {
 		    return;
 		}
 
+		for(i in json.Links){
+			console.log("link to: " + json.Links[i].panoId);
+			console.log("by  degree: " + json.Links[i].yawDeg);
+		}
+			
 
 		getNextTile();
 		
@@ -84,7 +92,7 @@ function getNextTile(){
 		tiles[totalX*totalY+1] =  ''+totalX + 'x' + totalY;
 		tiles[totalX*totalY+2] =  '-geometry';
 		tiles[totalX*totalY+3] = '+0+0';
-		tiles[totalX*totalY+4] =  id + '.jpeg';
+		tiles[totalX*totalY+4] =  id + '.jpg';
 		sim.montage(tiles,
 		function(err, metadata){
 		  if (err) throw err
@@ -108,15 +116,15 @@ function getNextTile(){
 		});                                                                         
 
 		response.on('end', function() {                                             
-		fs.writeFileSync(name+ '.jpeg', data.read());       
+		fs.writeFileSync(name+ '.jpg', data.read());       
 		
 		im.resize({
-		srcPath: name + '.jpeg',
+		srcPath: name + '.jpg',
 		dstPath: name + '-small.jpg',
 		width:   350
 		}, function(err, stdout, stderr){
 		if (err) throw err
-			fs.unlinkSync(name + '.jpeg');
+			fs.unlinkSync(name + '.jpg');
 			tiles[totalX*j+i] = name + '-small.jpg';
 			//console.log(totalX*j+i);
 				

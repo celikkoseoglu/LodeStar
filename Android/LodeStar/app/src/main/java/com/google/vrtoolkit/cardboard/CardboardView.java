@@ -238,7 +238,7 @@ public class CardboardView extends GLSurfaceView {
         return this.mUiLayer.onTouchEvent(e) || super.onTouchEvent(e);
     }
     
-    private class RendererHelper implements GLSurfaceView.Renderer {
+    public class RendererHelper implements GLSurfaceView.Renderer {
         private final HeadTransform mHeadTransform;
         private final Eye mMonocular;
         private final Eye mLeftEye;

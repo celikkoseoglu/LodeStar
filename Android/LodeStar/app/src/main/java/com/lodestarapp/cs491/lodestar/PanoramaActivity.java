@@ -1,5 +1,6 @@
 package com.lodestarapp.cs491.lodestar;
 
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorListener;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.lodestarapp.cs491.lodestar.VR.PanoramaView;
 
@@ -20,8 +22,10 @@ public class PanoramaActivity extends AppCompatActivity {
     SensorManager sManager;
     Sensor rotationVectorSensor;
     Sensor gyroscopeSensor;
+    Sensor gameRotatiton;
 
-
+    Sensor accelSensor;
+    Sensor magnSensor;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,24 +36,32 @@ public class PanoramaActivity extends AppCompatActivity {
         ImageView im = findViewById(R.id.close);
         im.setVisibility(View.GONE);
 
+        ImageView im2 = findViewById(R.id.vrBig);
+        im2.setVisibility(View.GONE);
+
         sManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 
         gyroscopeSensor = sManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+        accelSensor = sManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        magnSensor = sManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
         rotationVectorSensor = sManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
+
+        gameRotatiton = sManager.getDefaultSensor(Sensor.TYPE_GAME_ROTATION_VECTOR);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        sManager.registerListener(pv,gyroscopeSensor, SensorManager.SENSOR_DELAY_FASTEST);
+        sManager.registerListener(pv.pr,gameRotatiton, SensorManager.SENSOR_DELAY_GAME);
+        //sManager.registerListener(pv.pr,magnSensor, SensorManager.SENSOR_DELAY_NORMAL);
 
 
     }
 
     @Override
     protected void onStop() {
-        sManager.unregisterListener(pv);
+        sManager.unregisterListener(pv.pr);
 
         super.onStop();
     }
@@ -66,6 +78,12 @@ public class PanoramaActivity extends AppCompatActivity {
 
         ImageView im1 = findViewById(R.id.close);
         im1.setVisibility(View.VISIBLE);
+
+        ImageView im2 = findViewById(R.id.vrBig);
+        im2.setVisibility(View.VISIBLE);
+
+        ImageView im3 = findViewById(R.id.vrSmall);
+        im3.setVisibility(View.GONE);
     }
 
     public void goSmall(View view){
@@ -82,6 +100,18 @@ public class PanoramaActivity extends AppCompatActivity {
 
         ImageView im1 = findViewById(R.id.close);
         im1.setVisibility(View.GONE);
+
+        ImageView im2 = findViewById(R.id.vrBig);
+        im2.setVisibility(View.GONE);
+
+        ImageView im3 = findViewById(R.id.vrSmall);
+        im3.setVisibility(View.VISIBLE);
+
+    }
+
+    public void goVr(View view) {
+        Intent intent = new Intent(this, VRActivity.class);
+        startActivity(intent);
 
     }
 }

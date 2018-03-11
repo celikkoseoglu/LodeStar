@@ -19,8 +19,9 @@
         android:id="@+id/userSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/button2"
+        android:layout_alignLeft="@+id/textView"
+        android:layout_alignStart="@+id/textView"
         android:onClick="userSearchStart"
         android:text="Search For Users" />
 
@@ -83,16 +84,6 @@
         android:onClick="tabStart"
         android:text="TABS" />
 
-    <Button
-        android:id="@+id/button10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/button2"
-        android:layout_alignEnd="@+id/button2"
-        android:layout_alignRight="@+id/button2"
-        android:onClick="VRstart"
-        android:text="VR" />
-
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/login_button"
@@ -107,9 +98,9 @@
         android:id="@+id/button9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button10"
-        android:layout_alignLeft="@+id/button10"
-        android:layout_alignStart="@+id/button10"
+        android:layout_above="@+id/userSearch"
+        android:layout_alignLeft="@+id/login_text"
+        android:layout_alignStart="@+id/login_text"
         android:onClick="placesToSeeStart"
         android:text="PlacesToSee" />
 

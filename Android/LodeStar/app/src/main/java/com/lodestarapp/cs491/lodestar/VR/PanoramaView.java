@@ -14,8 +14,11 @@ import android.os.Bundle;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.SurfaceHolder;
 import android.widget.Toast;
 
+import com.google.vrtoolkit.cardboard.CardboardView;
+import com.google.vrtoolkit.cardboard.DistortionRenderer;
 import com.google.vrtoolkit.cardboard.sensors.SensorEventProvider;
 import com.lodestarapp.cs491.lodestar.R;
 import com.lodestarapp.cs491.lodestar.VR.MatrixCalculator;
@@ -28,7 +31,7 @@ import static android.content.Context.SENSOR_SERVICE;
 import static android.opengl.GLES20.glViewport;
 import static android.opengl.Matrix.multiplyMM;
 
-public class PanoramaView extends GLSurfaceView implements SensorEventListener{
+public class PanoramaView extends GLSurfaceView{
     com.lodestarapp.cs491.lodestar.VR.Renderer renderer;
 
     private final float[] mCamera = new float[16];
@@ -44,7 +47,7 @@ public class PanoramaView extends GLSurfaceView implements SensorEventListener{
     private float[] mView = new float[16];
     private int mCurrentPhotoPos = 0;
     Context c;
-    PanoRenderer pr;
+    public PanoRenderer pr;
     private float xBefore;
     private float yBefore;
     private float degBefore;
@@ -58,7 +61,7 @@ public class PanoramaView extends GLSurfaceView implements SensorEventListener{
         setEGLContextClientVersion(2);
 
         setRenderer(pr = new PanoRenderer());
-        setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
+        setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
     }
 
     public PanoramaView(Context context, AttributeSet attrs) {
@@ -67,7 +70,7 @@ public class PanoramaView extends GLSurfaceView implements SensorEventListener{
         setEGLContextClientVersion(2);
 
         setRenderer(pr = new PanoRenderer());
-        setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
+        setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
     }
 
 
@@ -95,18 +98,19 @@ public class PanoramaView extends GLSurfaceView implements SensorEventListener{
                     {
                         float deltaX = (x - xBefore) / this.getWidth() * 360;
                         float deltaY = (y - yBefore) / this.getHeight() * 360;
-                        pr.mDeltaY += -deltaX*0.2;
 
-                        deltaY=0;
-                        if(Math.abs(pr.totDeltaX) + deltaY>60)
-                            deltaY = 0;
 
-                        pr.mDeltaX += -deltaY*0.2;
-                        pr.totDeltaX += pr.mDeltaX;
+                        pr.mDeltaY += -deltaX*0.2 * (3.14159265 / 180.0);
+                        pr.mDeltaX += deltaY*0.2 * (3.14159265 / 180.0);
+
+                        if(pr.mDeltaX > 3.1415f / 2)
+                            pr.mDeltaX = 3.1415f / 2;
+                        else if(pr.mDeltaX < -3.1415f / 2)
+                            pr.mDeltaX = -3.1415f / 2;
 
                         String TAG = "pano ";
 
-                        //Log.d(TAG, "" +pr.totDeltaX );
+                        //Log.d(TAG, "" +pr.mDeltaX );
 
                     }
                 }
@@ -119,44 +123,12 @@ public class PanoramaView extends GLSurfaceView implements SensorEventListener{
         return true;
     }
 
-
-    @Override
-    public void onSensorChanged(SensorEvent sensorEvent) {
-
-        if (pr != null) {
-            String TAG="pano";
-            pr.roll = sensorEvent.values[2];     //x
-            pr.pitch = sensorEvent.values[1];   //y
-            pr.yaw = sensorEvent.values[0];     //z
-
-            /*SensorManager.getRotationMatrixFromVector(
-                    rotationMatrix, sensorEvent.values);
-
-            SensorManager.remapCoordinateSystem(rotationMatrix,
-                    SensorManager.AXIS_X,
-                    SensorManager.AXIS_Z,
-                    remappedRotationMatrix);
-
-
-            SensorManager.getOrientation(remappedRotationMatrix, orientations);
-            for(int i = 0; i < 3; i++) {
-                orientations[i] = (float)(Math.toDegrees(orientations[i]));
-            }*/
-            Log.i(TAG,Float.toString(sensorEvent.values[0])+" "+Float.toString(sensorEvent.values[1])
-                    +" "+Float.toString(sensorEvent.values[2]));
-        }
-
-    }
-
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int i) {
-
-    }
-
-    private class PanoRenderer implements Renderer {
+    private class PanoRenderer implements Renderer, SensorEventListener{
         volatile public float mDeltaX, mDeltaY, mDeltaZ;
         volatile public float roll,pitch,yaw;
-        volatile public float totDeltaX;
+        volatile boolean sensorRead= false;
+
+        DistortionRenderer dr;
 
 
         @Override
@@ -167,6 +139,8 @@ public class PanoramaView extends GLSurfaceView implements SensorEventListener{
 
             Matrix.setLookAtM(mCamera, 0, 0.0f, 0.0f, CAMERA_Z, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
             Matrix.setIdentityM(accRotation, 0);
+
+            this.dr = new DistortionRenderer();
         }
 
         @Override
@@ -181,18 +155,11 @@ public class PanoramaView extends GLSurfaceView implements SensorEventListener{
         public void onDrawFrame(GL10 gl10) {
             Matrix.setIdentityM(mIdentity, 0);
 
-
             Matrix.setIdentityM(curRotation, 0);
 
-            Matrix.rotateM(curRotation, 0, mDeltaX, 1.0f, 0.0f, 0.0f);
-            Matrix.rotateM(curRotation, 0, mDeltaY, 0.0f, 1.0f, 0.0f);
-            Matrix.rotateM(curRotation, 0, mDeltaZ, 0.0f, 0.0f, 1.0f);
 
-            //Matrix.multiplyMM(curRotation,0,curRotation,0,rotationMatrix,0);
+            Matrix.setLookAtM(mCamera, 0, 0.0f, 0.0f,  CAMERA_Z, (float)Math.sin(mDeltaY), ((float)Math.sin(mDeltaX)) + 0.2f, (float) -Math.cos(mDeltaY), 0.0f, 1.0f, 0.0f);
 
-            mDeltaX = 0.0f;
-            mDeltaY = 0.0f;
-            mDeltaZ = 0.0f;
 
             Matrix.multiplyMM(temp, 0, curRotation, 0, accRotation, 0);
             System.arraycopy(temp, 0, accRotation, 0, 16);
@@ -200,9 +167,17 @@ public class PanoramaView extends GLSurfaceView implements SensorEventListener{
             Matrix.multiplyMM(temp, 0, mIdentity, 0, accRotation, 0);
             System.arraycopy(temp, 0, mIdentity, 0, 16);
 
-            Matrix.rotateM(mIdentity, 0, pr.roll, 1.0f, 0.0f, 0.0f);
-            Matrix.rotateM(mIdentity, 0, pr.pitch, 0.0f, 1.0f, 0.0f);
-            Matrix.rotateM(mIdentity, 0, pr.yaw, 0.0f, 0.0f, 1.0f);
+            //Matrix.rotateM(mIdentity, 0, roll, 1.0f, 0.0f, 0.0f);
+            //Matrix.rotateM(mIdentity, 0, pitch, 0.0f, 1.0f, 0.0f);
+            //Matrix.rotateM(mIdentity, 0, yaw, 0.0f, 0.0f, 1.0f);
+            if(sensorRead){
+                Matrix.rotateM(rotationMatrix, 0, 90, 1.0f, 0.0f, 0.0f);
+                Matrix.rotateM(rotationMatrix, 0, -90, 0.0f, 1.0f, 0.0f);
+                Matrix.multiplyMM(mIdentity,0,mIdentity,0,rotationMatrix,0);
+
+                sensorRead = true;
+            }
+
 
 
 
@@ -217,6 +192,61 @@ public class PanoramaView extends GLSurfaceView implements SensorEventListener{
             renderer.draw(mViewProjectionMatrix);
 
             //checkGLError("onDrawEye");
+        }
+
+
+        private float[] mLastAccelerometer = new float[3];
+        private float[] mLastMagnetometer = new float[3];
+        private boolean mLastAccelerometerSet = false;
+        private boolean mLastMagnetometerSet = false;
+        @Override
+        public void onSensorChanged(SensorEvent sensorEvent) {
+            if (pr != null) {
+                String TAG="pano";
+
+                if (sensorEvent.sensor.getType() == Sensor.TYPE_GAME_ROTATION_VECTOR) {
+                    sensorRead = true;
+                    SensorManager.getRotationMatrixFromVector(rotationMatrix , sensorEvent.values);
+                    SensorManager.getOrientation(rotationMatrix, orientations);
+                    //Matrix.invertM(rotationMatrix,0,rotationMatrix,0);
+
+                    float theta = (float) (Math.acos(sensorEvent.values[3])*2);
+                    float sinv = (float) Math.sin(theta/2);
+
+                    roll = sensorEvent.values[2]/sinv;     //x
+                    pitch = sensorEvent.values[1]/sinv;   //y
+                    yaw = sensorEvent.values[0]/sinv;     //z
+
+                }
+
+
+                /*if (sensorEvent.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+                    System.arraycopy(sensorEvent.values, 0, mLastAccelerometer, 0, sensorEvent.values.length);
+                    mLastAccelerometerSet = true;
+
+                } else if (sensorEvent.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD) {
+                    System.arraycopy(sensorEvent.values, 0, mLastMagnetometer, 0, sensorEvent.values.length);
+                    mLastMagnetometerSet = true;
+                }
+                if (mLastAccelerometerSet && mLastMagnetometerSet) {
+                    SensorManager.getRotationMatrix(rotationMatrix, null, mLastAccelerometer, mLastMagnetometer);
+                    SensorManager.getOrientation(rotationMatrix, orientations);
+
+                    yaw = (float) (orientations[0] * 180 / Math.PI);
+                    pitch = (float) (orientations[1]* 180 / Math.PI);
+                    roll = (float) (orientations[2]* 180 / Math.PI);
+                }*/
+
+
+                Log.i(TAG,Float.toString(roll)+" "+Float.toString(pitch)
+                        +" "+Float.toString(yaw));
+
+            }
+        }
+
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int i) {
+
         }
     }
 }
