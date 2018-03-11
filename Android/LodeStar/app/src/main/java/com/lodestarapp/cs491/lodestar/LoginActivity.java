@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -33,7 +34,6 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.lodestarapp.cs491.lodestar.Adapters.User;
 
 import java.util.ArrayList;
 
@@ -57,8 +57,10 @@ public class LoginActivity extends AppCompatActivity implements
     private Button signInWithEmail;
     private Button userSearchButton;
     private CallbackManager callbackManager;
-   // private DatabaseReference mDatabase;
-    public ArrayList<User> userList;
+    private DatabaseReference mDatabase;
+    public ArrayList<String> userList = new ArrayList<String>();
+
+    private static String[] strListUser;
 
 
     // private TextView alreadySignedInQuestion;
@@ -67,9 +69,8 @@ public class LoginActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-      //  mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        userList = new ArrayList<User>();
 
         FacebookSdk.setApplicationId(getString(R.string.facebook_app_id));
         //initialize Facebook SDK
@@ -136,7 +137,19 @@ public class LoginActivity extends AppCompatActivity implements
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
+        retrieveDBValues();
 
+        strListUser = changeListToArray();
+
+        //Log.i("aga",strListUser[0]);
+
+
+
+
+    }
+
+    public static String[] getArray() {
+        return strListUser;
     }
 
 
@@ -230,7 +243,7 @@ public class LoginActivity extends AppCompatActivity implements
         Log.d(TAG, "onConnectionFailed:" + connectionResult);
     }
     public void userSearchStart(View v) {
-        Toast.makeText(LoginActivity.this, "LOLOL", LENGTH_LONG).show();
+        //Toast.makeText(LoginActivity.this, "LOLOL", LENGTH_LONG).show();
         Intent intent = new Intent(LoginActivity.this, SearchUserActivity.class);
         startActivity(intent);
     }
@@ -304,6 +317,65 @@ public class LoginActivity extends AppCompatActivity implements
 //            }
 //        });
 //}
+
+    private void retrieveDBValues() {
+
+        //Toast.makeText(this, "U here",Toast.LENGTH_LONG).show();
+        mDatabase.addValueEventListener(new com.google.firebase.database.ValueEventListener() {
+            @Override
+            public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
+                for (com.google.firebase.database.DataSnapshot child : dataSnapshot.getChildren()) {
+                    for (com.google.firebase.database.DataSnapshot child2 : child.getChildren()) {
+                        userList.add("Oh yea:  ");
+                        Log.i("aga","PartyMe:  " + userList.get(0));
+                        //child2.child("e-mail").toString()
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+//        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("users");
+//        ref.addListenerForSingleValueEvent(new com.google.firebase.database.ValueEventListener() {
+//            @Override
+//            public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
+//              // list.add("")
+//                userList.add("" + dataSnapshot.child("users").getChildrenCount() + 1);
+//                Log.i("lol",userList.get(0));
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
+
+
+    }
+
+
+
+    private String[] changeListToArray() {
+
+        String[] tmp = new String[userList.size()];
+        Log.i("aga",":((()))" + userList.size());
+
+        for (int i = 0; i < userList.size(); i++) {
+            Log.i("aga","kkkkkkkkkk---kkkkkk");
+            tmp[i] = userList.get(i);
+            Toast.makeText(this, "Burda2",Toast.LENGTH_LONG).show();
+            Log.i("a","sup" + tmp[i]);
+        }
+
+        return tmp;
+    }
+
 
 
 }

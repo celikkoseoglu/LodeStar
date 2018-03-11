@@ -5,6 +5,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -28,13 +29,21 @@ public class SearchUserActivity extends AppCompatActivity {
     DatabaseReference dref2;
     FirebaseUser userMe;
     private DatabaseReference mDatabase;
-    final ArrayList<String> userList = new ArrayList<String>();;
+    final ArrayList<String> userList = new ArrayList<String>();
     ArrayAdapter<String> arrayAdapter;
+
+    private String[] lolol =
+            {"djdoj","dhıjpş","cdxs"};
+
+    private String[] tmp;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+
+        //Toast.makeText(this, "Time",Toast.LENGTH_LONG).show();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_user);
@@ -43,50 +52,85 @@ public class SearchUserActivity extends AppCompatActivity {
 
         userListView = findViewById(R.id.myListe);
 
+        //retrieveDBValues();
+
+        //tmp = new String[userList.size()];
+
+        Toast.makeText(this,""+  LoginActivity.getArray().length,Toast.LENGTH_LONG).show();
+
+//        for (int i = 0; i < userList.size(); i++) {
+//            tmp[i] = userList.get(i);
+//            Toast.makeText(this, "Burda2",Toast.LENGTH_LONG).show();
+//            Log.i("a","sup" + tmp[i]);
+//        }
+
+
+
         arrayAdapter = new ArrayAdapter<String>
-                (this, R.layout.activity_search_user, userList);
+                (this, android.R.layout.simple_list_item_1, android.R.id.text1, LoginActivity.getArray());
+
+
 
         userListView.setAdapter(arrayAdapter);
-
-
 
         userMe = FirebaseAuth.getInstance().getCurrentUser();
 
         if (userMe != null) {
             String name = userMe.getDisplayName();
             String email = userMe.getEmail();
-            Toast.makeText(this,userMe.getEmail(),Toast.LENGTH_LONG).show();
+           // Toast.makeText(this,userMe.getEmail(),Toast.LENGTH_LONG).show();
         }
 
-        arrayAdapter.add("Eric");
+       // arrayAdapter.add("Eric");
+        Log.i("aga","kobe");
 
-        retrieveDBValues();
+
+
+
+
         arrayAdapter.notifyDataSetChanged();
     }
 
 
     private void retrieveDBValues() {
 
+//        Toast.makeText(this, "U here",Toast.LENGTH_LONG).show();
+//        mDatabase.addValueEventListener(new com.google.firebase.database.ValueEventListener() {
+//            @Override
+//            public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
+//                for (com.google.firebase.database.DataSnapshot child : dataSnapshot.getChildren()) {
+//                    for (com.google.firebase.database.DataSnapshot child2 : child.getChildren()) {
+//                        userList.add("Oh yea:  " + child2.child("e-mail").toString());
+//                        Log.i("aga","Oh yea2222:  " + child2.child("e-mail").toString());
+//                    }
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
 
-        mDatabase.addValueEventListener(new com.google.firebase.database.ValueEventListener() {
-            @Override
-            public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
-                for (com.google.firebase.database.DataSnapshot child : dataSnapshot.getChildren()) {
-                    for (com.google.firebase.database.DataSnapshot child2 : child.getChildren()) {
-                        userList.add((child2.child("username").toString() + " -----" + child2.child("e-mail").toString()));
-                        // Log.i("aga", child2.child("e-mail").getValue().toString());
-                    }
-                }
+//        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("users");
+//        ref.addListenerForSingleValueEvent(new com.google.firebase.database.ValueEventListener() {
+//            @Override
+//            public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
+//              // list.add("")
+//                userList.add("" + dataSnapshot.child("users").getChildrenCount() + 1);
+//                Log.i("lol",userList.get(0));
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
 
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
     }
-
 
 
 }
