@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="17D102" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="fyl-VK-i37">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="g3x-Px-4IN">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -451,11 +451,11 @@
                         <viewControllerLayoutGuide type="bottom" id="3Dz-1p-0Cz"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="zod-w2-3W9">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="whereCelikWent" translatesAutoresizingMaskIntoConstraints="NO" id="OyL-jN-ACp">
-                                <rect key="frame" x="0.0" y="0.0" width="413" height="298"/>
+                                <rect key="frame" x="0.0" y="0.0" width="413" height="272"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <gestureRecognizers/>
                             </imageView>
@@ -474,7 +474,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="aJm-rV-4IS">
-                                <rect key="frame" x="0.0" y="309" width="414" height="378"/>
+                                <rect key="frame" x="0.0" y="280" width="414" height="343"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="2" minimumInteritemSpacing="2" id="dJw-at-88o">
@@ -484,7 +484,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="transport" reuseIdentifier="tripCell" id="sFt-Af-K3q" customClass="CollectionCell" customModule="LodeStarApp" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" restorationIdentifier="transport" reuseIdentifier="tripCell" id="sFt-Af-K3q" customClass="CollectionCell" customModule="LodeStarApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="110" height="130"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -569,7 +569,7 @@
                         <viewControllerLayoutGuide type="bottom" id="xHF-PA-qd3"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8Md-MI-KzB">
-                        <rect key="frame" x="0.0" y="64" width="414" height="672"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="nqt-bT-t0n">
@@ -583,7 +583,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" restorationIdentifier="flightInformation" reuseIdentifier="FlightInfoCell" id="Rh5-QF-yV6" customClass="CollectionCell" customModule="LodeStarApp" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" misplaced="YES" restorationIdentifier="flightInformation" reuseIdentifier="FlightInfoCell" id="Rh5-QF-yV6" customClass="CollectionCell" customModule="LodeStarApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="241"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -693,7 +693,7 @@
                                         <color key="backgroundColor" red="0.98431372549999996" green="0.98431372549999996" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
                                         <size key="customSize" width="414" height="241"/>
                                     </collectionViewCell>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" restorationIdentifier="weatherInformation" reuseIdentifier="WeatherInfoCell" id="d1k-tP-Mjx" customClass="CollectionCell" customModule="LodeStarApp" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" misplaced="YES" restorationIdentifier="weatherInformation" reuseIdentifier="WeatherInfoCell" id="d1k-tP-Mjx" customClass="CollectionCell" customModule="LodeStarApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="243" width="414" height="241"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -758,7 +758,7 @@
                                         <color key="backgroundColor" red="0.98431372549999996" green="0.98431372549999996" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
                                         <size key="customSize" width="414" height="241"/>
                                     </collectionViewCell>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" restorationIdentifier="technicalInformation" reuseIdentifier="TechnicalDetailsCell" id="Mao-yb-TGo" customClass="CollectionCell" customModule="LodeStarApp" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" misplaced="YES" restorationIdentifier="technicalInformation" reuseIdentifier="TechnicalDetailsCell" id="Mao-yb-TGo" customClass="CollectionCell" customModule="LodeStarApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="486" width="414" height="241"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -862,7 +862,7 @@
                         <viewControllerLayoutGuide type="bottom" id="d2h-bE-0rP"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="NMU-Ow-kbi">
-                        <rect key="frame" x="0.0" y="64" width="414" height="672"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Pf8-54-hDZ">
@@ -999,7 +999,7 @@
                         <viewControllerLayoutGuide type="bottom" id="ntL-fe-ox1"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="1au-qp-byW">
-                        <rect key="frame" x="0.0" y="64" width="414" height="672"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ogA-i0-MLL">
@@ -1013,8 +1013,8 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="weatherCell" reuseIdentifier="weatherCell" id="w49-Ef-t2T" userLabel="weatherCell" customClass="WeatherCell" customModule="LodeStarApp" customModuleProvider="target">
-                                        <rect key="frame" x="9" y="0.0" width="397" height="253"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" restorationIdentifier="weatherCell" reuseIdentifier="weatherCell" id="w49-Ef-t2T" userLabel="weatherCell" customClass="WeatherCell" customModule="LodeStarApp" customModuleProvider="target">
+                                        <rect key="frame" x="8.6666666666666661" y="0.0" width="397" height="253"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="397" height="253"/>
@@ -1086,8 +1086,8 @@
                                             <outlet property="weatherText" destination="vSk-NX-tLJ" id="KBL-OM-EPz"/>
                                         </connections>
                                     </collectionViewCell>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="smallWeatherCell" reuseIdentifier="smallWeatherCell" id="91j-YH-aQw" userLabel="smallWeatherCell" customClass="SmallWeatherCell" customModule="LodeStarApp" customModuleProvider="target">
-                                        <rect key="frame" x="9" y="263" width="397" height="115"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" restorationIdentifier="smallWeatherCell" reuseIdentifier="smallWeatherCell" id="91j-YH-aQw" userLabel="smallWeatherCell" customClass="SmallWeatherCell" customModule="LodeStarApp" customModuleProvider="target">
+                                        <rect key="frame" x="8.6666666666666661" y="263" width="397" height="115"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="397" height="115"/>
@@ -1150,7 +1150,7 @@
                     <navigationItem key="navigationItem" title="Weather Information" id="6fG-Ga-cfl">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="ja5-Kb-aTi">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="wya-WO-gGl">
-                                <rect key="frame" x="20" y="5" width="41" height="33"/>
+                                <rect key="frame" x="20" y="5.6666666666666679" width="41" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Back"/>
@@ -1250,7 +1250,7 @@
                         <viewControllerLayoutGuide type="bottom" id="JiJ-ns-QrY"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="RWY-a2-yyl">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="facebook" translatesAutoresizingMaskIntoConstraints="NO" id="pGY-4u-nUA">
@@ -1277,56 +1277,56 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Lastest logs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bjm-rn-ikB">
-                                <rect key="frame" x="19" y="312" width="377" height="21"/>
+                                <rect key="frame" x="19" y="284" width="377" height="21"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Trip Logs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ig-MR-Fgp">
-                                <rect key="frame" x="143" y="221" width="128" height="21"/>
+                                <rect key="frame" x="143" y="201" width="128" height="21"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Trip" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M0F-jr-I2P">
-                                <rect key="frame" x="15" y="221" width="120" height="21"/>
+                                <rect key="frame" x="15" y="201" width="120" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Last Trip" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U1j-0v-a0v">
-                                <rect key="frame" x="279" y="221" width="119" height="21"/>
+                                <rect key="frame" x="279" y="201" width="119" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="365" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dBh-B8-QCo">
-                                <rect key="frame" x="20" y="246" width="115" height="30"/>
+                                <rect key="frame" x="20" y="224" width="115" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1081" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H8H-0J-y7o">
-                                <rect key="frame" x="143" y="247" width="128" height="30"/>
+                                <rect key="frame" x="143" y="225" width="128" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Uganda" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Rr-AY-LEF">
-                                <rect key="frame" x="279" y="247" width="119" height="30"/>
+                                <rect key="frame" x="279" y="225" width="119" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="n13-Sn-xd0">
-                                <rect key="frame" x="0.0" y="343" width="414" height="331"/>
+                                <rect key="frame" x="0.0" y="313" width="414" height="302"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="lyA-kL-UMC">
@@ -1336,8 +1336,8 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="logCell" reuseIdentifier="logCell" id="Plp-Qp-cYU" customClass="LogCell" customModule="LodeStarApp" customModuleProvider="target">
-                                        <rect key="frame" x="34" y="0.0" width="347" height="225"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" restorationIdentifier="logCell" reuseIdentifier="logCell" id="Plp-Qp-cYU" customClass="LogCell" customModule="LodeStarApp" customModuleProvider="target">
+                                        <rect key="frame" x="33.666666666666664" y="0.0" width="347" height="225"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="347" height="225"/>
@@ -1534,7 +1534,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fyl-VK-i37" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Kxe-Xp-R1Q">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.54901960780000003" green="0.71372549019999998" blue="0.77647058820000003" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>

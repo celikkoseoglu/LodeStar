@@ -1,7 +1,17 @@
 {
   "name": "LodeStarFoursqaure",
   "version": "0.0.1",
+  "description": "Retrieves venue listings",
+  "main": "venueOrganizer.js",
+  "scripts": {
+    "start": "node venueOrganizer.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Celik Koseoglu <celikkoseoglu@me.com>",
+  "license": "MIT",
   "dependencies": {
+    "node-rest-client": "^3.1.0",
+    "express": "^4.16.2",
     "request": "^2.83.0"
   }
 }

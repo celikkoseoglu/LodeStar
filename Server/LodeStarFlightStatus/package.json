@@ -2,9 +2,9 @@
   "name": "LodeStarFlightStatus",
   "version": "1.0.0",
   "description": "Retrieves flight status for specific flight number",
-  "main": "app.js",
+  "main": "flightStatus.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "node flightStatus.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Celik Koseoglu <celikkoseoglu@me.com>",

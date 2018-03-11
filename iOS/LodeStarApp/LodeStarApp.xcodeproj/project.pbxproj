@@ -306,7 +306,7 @@
 				TargetAttributes = {
 					8D6F76BA1F961992004824B0 = {
 						CreatedOnToolsVersion = 8.2;
-						DevelopmentTeam = 9WCG59W5KE;
+						DevelopmentTeam = 84BN7PWNQH;
 						ProvisioningStyle = Automatic;
 					};
 					8D6F76CE1F961993004824B0 = {
@@ -604,7 +604,7 @@
 			baseConfigurationReference = 2E1BD3D5549A92F56E0B6398 /* Pods-LodeStarApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 9WCG59W5KE;
+				DEVELOPMENT_TEAM = 84BN7PWNQH;
 				INFOPLIST_FILE = LodeStarApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.BerkEvrenAbbasoglu.LodeStarApp;
@@ -618,7 +618,7 @@
 			baseConfigurationReference = E0296F5819E422DCEF19640A /* Pods-LodeStarApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 9WCG59W5KE;
+				DEVELOPMENT_TEAM = 84BN7PWNQH;
 				INFOPLIST_FILE = LodeStarApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.BerkEvrenAbbasoglu.LodeStarApp;
