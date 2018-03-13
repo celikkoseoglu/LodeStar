@@ -52,11 +52,21 @@ public class SearchUserActivity extends AppCompatActivity {
 
         userListView = findViewById(R.id.myListe);
 
+        Bundle extras = getIntent().getExtras();
+        String[] value;
+        if (extras != null) {
+            value = extras.getStringArray("key");
+            //The key argument here must match that used in the other activity
+        }
+        else {
+            value = new String[5];
+        }
+
         //retrieveDBValues();
 
         //tmp = new String[userList.size()];
 
-        Toast.makeText(this,""+  LoginActivity.getArray().length,Toast.LENGTH_LONG).show();
+        Toast.makeText(this,""+  "forever" + value,Toast.LENGTH_LONG).show();
 
 //        for (int i = 0; i < userList.size(); i++) {
 //            tmp[i] = userList.get(i);
@@ -67,7 +77,7 @@ public class SearchUserActivity extends AppCompatActivity {
 
 
         arrayAdapter = new ArrayAdapter<String>
-                (this, android.R.layout.simple_list_item_1, android.R.id.text1, LoginActivity.getArray());
+                (this, android.R.layout.simple_list_item_1, android.R.id.text1, value);
 
 
 

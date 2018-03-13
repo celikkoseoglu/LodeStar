@@ -15,6 +15,9 @@ import com.facebook.FacebookSdk;
 import com.facebook.LoggingBehavior;
 import com.facebook.Profile;
 import com.facebook.ProfileTracker;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -39,10 +42,13 @@ import java.util.ArrayList;
 
 import static android.widget.Toast.LENGTH_LONG;
 
-
+//Reference: Facebook login-signin documentation and how-do-i-pass-data-between-activities-in-android-application question in stackoverflow is used in some parts of the code
 public class LoginActivity extends AppCompatActivity implements
         GoogleApiClient.OnConnectionFailedListener,
         View.OnClickListener {
+
+    private String[] lolol =
+            {"my Heart","my SOul","lolol"};
 
     private static final String TAG = "consoleMessage";
     private static final int RC_SIGN_IN = 9001;
@@ -50,6 +56,7 @@ public class LoginActivity extends AppCompatActivity implements
     private GoogleSignInClient googleSignInClient;
     private GoogleApiClient mGoogleApiClient;
     private FirebaseAuth mAuth;
+    private int dbitemcouner = 0;
   //  private SignUpActivity signUpManager = new SignUpActivity();
 
     private SignInButton signInButton;
@@ -57,8 +64,8 @@ public class LoginActivity extends AppCompatActivity implements
     private Button signInWithEmail;
     private Button userSearchButton;
     private CallbackManager callbackManager;
-    private DatabaseReference mDatabase;
-    public ArrayList<String> userList = new ArrayList<String>();
+    private DatabaseReference mDatabase,mDatabase2;
+    public ArrayList<String> userList;
 
     private static String[] strListUser;
 
@@ -70,6 +77,7 @@ public class LoginActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase2 = mDatabase.child("users");
 
 
         FacebookSdk.setApplicationId(getString(R.string.facebook_app_id));
@@ -137,9 +145,9 @@ public class LoginActivity extends AppCompatActivity implements
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
-        retrieveDBValues();
+       // retrieveDBValues();
 
-        strListUser = changeListToArray();
+       // strListUser = changeListToArray();
 
         //Log.i("aga",strListUser[0]);
 
@@ -148,7 +156,7 @@ public class LoginActivity extends AppCompatActivity implements
 
     }
 
-    public static String[] getArray() {
+    public  String[] getArray() {
         return strListUser;
     }
 
@@ -245,6 +253,10 @@ public class LoginActivity extends AppCompatActivity implements
     public void userSearchStart(View v) {
         //Toast.makeText(LoginActivity.this, "LOLOL", LENGTH_LONG).show();
         Intent intent = new Intent(LoginActivity.this, SearchUserActivity.class);
+        userList = new ArrayList<String>();
+       // retrieveDBValues();
+        Log.i("aga",dbitemcouner + "counter");
+        intent.putExtra("key",retrieveDBValues2());
         startActivity(intent);
     }
 
@@ -318,7 +330,46 @@ public class LoginActivity extends AppCompatActivity implements
 //        });
 //}
 
-    private void retrieveDBValues() {
+//    public void retrieveDBValues() {
+//        Log.i("aga","gimme an angel");
+//        //Toast.makeText(this, "U here",Toast.LENGTH_LONG).show();
+//        mDatabase2.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(FirebaseError firebaseError) {
+//
+//            }
+//
+//
+////        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("users");
+////        ref.addListenerForSingleValueEvent(new com.google.firebase.database.ValueEventListener() {
+////            @Override
+////            public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
+////              // list.add("")
+////                userList.add("" + dataSnapshot.child("users").getChildrenCount() + 1);
+////                Log.i("lol",userList.get(0));
+////
+////            }
+////
+////            @Override
+////            public void onCancelled(DatabaseError databaseError) {
+////
+////            }
+////        });
+//
+//
+//    });
+//    }
+
+    public String[] retrieveDBValues2() {
+
+         final String[] whataboutus = new String[8];
+        final int[] tmpcounter = {0};
+
 
         //Toast.makeText(this, "U here",Toast.LENGTH_LONG).show();
         mDatabase.addValueEventListener(new com.google.firebase.database.ValueEventListener() {
@@ -326,11 +377,15 @@ public class LoginActivity extends AppCompatActivity implements
             public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
                 for (com.google.firebase.database.DataSnapshot child : dataSnapshot.getChildren()) {
                     for (com.google.firebase.database.DataSnapshot child2 : child.getChildren()) {
-                        userList.add("Oh yea:  ");
-                        Log.i("aga","PartyMe:  " + userList.get(0));
+                        whataboutus[tmpcounter[0]++] = "ojh yea";
+                        //dbitemcouner++;
+                        //   userList.add("Oh yea: ");
+                        // Log.i("aga","PartyMe:  " + userList.get(0));
                         //child2.child("e-mail").toString()
                     }
                 }
+
+
 
             }
 
@@ -340,6 +395,13 @@ public class LoginActivity extends AppCompatActivity implements
             }
         });
 
+        Log.i("aga",   "basla");
+        for(int i = 0; i < whataboutus.length; i++) {
+            whataboutus[i] = "take my heart";
+            Log.i("aga",whataboutus[i] + "noldu");
+        }
+
+return  whataboutus;
 //        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("users");
 //        ref.addListenerForSingleValueEvent(new com.google.firebase.database.ValueEventListener() {
 //            @Override
