@@ -53,7 +53,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        app:srcCompat="@drawable/ic_001_key"></ImageView>
+        app:srcCompat="@drawable/ic_003_user"></ImageView>
 
 
     <EditText
