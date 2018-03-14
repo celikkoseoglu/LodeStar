@@ -33,6 +33,7 @@ public class SearchUserActivity extends AppCompatActivity {
      ArrayList<String> userList = new ArrayList<String>();
     ArrayAdapter<String> arrayAdapter;
     private DatabaseReference databaseReacher;
+    String tmp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +58,6 @@ public class SearchUserActivity extends AppCompatActivity {
 
         Toast.makeText(this,""+  "forever" + value,Toast.LENGTH_LONG).show();
 
-        Log.i("aga","zaazaaa");
         retrieveDBValues();
 
     }
@@ -68,21 +68,24 @@ public class SearchUserActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot noteSnapshot: dataSnapshot.getChildren()){
-                    userList.add(noteSnapshot.getValue() + "");
-                    arrayAdapter = new ArrayAdapter<String>
-                            (SearchUserActivity.this, android.R.layout.simple_list_item_1, userList);
+                    tmp = noteSnapshot.getValue() + "";
+                    tmp = tmp.substring(1, tmp.length() - 1);
+                    userList.add(tmp);
 
-                    userListView.setAdapter(arrayAdapter);
-
-                    userMe = FirebaseAuth.getInstance().getCurrentUser();
-
-                    if (userMe != null) {
-                        String name = userMe.getDisplayName();
-                        String email = userMe.getEmail();
-                    }
-
-                    arrayAdapter.notifyDataSetChanged();
                 }
+                arrayAdapter = new ArrayAdapter<String>
+                        (SearchUserActivity.this, android.R.layout.simple_list_item_1, userList);
+
+                userListView.setAdapter(arrayAdapter);
+
+                userMe = FirebaseAuth.getInstance().getCurrentUser();
+
+                if (userMe != null) {
+                    String name = userMe.getDisplayName();
+                    String email = userMe.getEmail();
+                }
+
+                arrayAdapter.notifyDataSetChanged();
             }
 
             @Override
