@@ -105,7 +105,7 @@ public class SearchUserActivity extends AppCompatActivity {
 
                         diyalogOlusturucu.setMessage("Would you like to navigate to the user's page?")
                                 .setCancelable(false)
-                                .setNegativeButton("YES!", new DialogInterface.OnClickListener() {
+                                .setNegativeButton("NO :(", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         dialog.dismiss();
