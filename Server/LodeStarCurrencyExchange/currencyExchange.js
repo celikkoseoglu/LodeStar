@@ -13,7 +13,6 @@ var obj;
 fs.readFile('common-currency.json', 'utf8', function (err, data) {
     if (err) throw err;
     obj = JSON.parse(data);
-    console.log(data);
 });
 
 app.get('/', (req, res) => {
