@@ -8,10 +8,13 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -37,12 +40,14 @@ public class SearchUserActivity extends AppCompatActivity {
      ArrayList<String> userList = new ArrayList<String>();
     ArrayAdapter<String> arrayAdapter;
     private DatabaseReference databaseReacher;
+    EditText inputSearch;
     String tmp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
+
         databaseReacher = mDatabase.child("users");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_user);
@@ -64,12 +69,14 @@ public class SearchUserActivity extends AppCompatActivity {
 
         retrieveDBValues();
 
+
+
     }
 
 
     private void retrieveDBValues() {
 
-
+        inputSearch = (EditText) findViewById(R.id.kobeSearch);
 
         databaseReacher.addValueEventListener(new ValueEventListener() {
             @Override
@@ -93,6 +100,8 @@ public class SearchUserActivity extends AppCompatActivity {
                 }
 
                 arrayAdapter.notifyDataSetChanged();
+
+
 
                 userList.add("OMG");
 
@@ -125,6 +134,26 @@ public class SearchUserActivity extends AppCompatActivity {
                     }
                 });
 
+                        inputSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                SearchUserActivity.this.arrayAdapter.getFilter().filter(s);
+                arrayAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+
+
             }
 
             @Override
@@ -141,3 +170,4 @@ public class SearchUserActivity extends AppCompatActivity {
 
 //Reference: This class uses some of codes of the tutorial on https://www.codeproject.com/Articles/1170499/Firebase-Realtime-Database-By-Example-with-Android
 // and the tutorial of turkcell on https://gelecegiyazanlar.turkcell.com.tr/konu/android/egitim/android-201/listview-kullanimi
+// and the tutorial of https://www.thecrazyprogrammer.com/2016/01/android-simple-listview-with-search-functionality-example.html (for search functionality)
