@@ -19,11 +19,16 @@ import android.widget.ImageView;
 
 import com.lodestarapp.cs491.lodestar.Adapters.UserPageAdapter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class UserPage extends android.support.v4.app.Fragment {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+
+    private List<String> userInfoWithPosts = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,11 +53,18 @@ public class UserPage extends android.support.v4.app.Fragment {
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new UserPageAdapter();
+        mAdapter = new UserPageAdapter(userInfoWithPosts);
         mRecyclerView.setAdapter(mAdapter);
+
+        takeTheUser();
 
         return view;
 
+    }
+
+    public void takeTheUser(){
+        userInfoWithPosts.add("efe");
+        mAdapter.notifyDataSetChanged();
     }
 }
 

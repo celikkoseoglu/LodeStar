@@ -33,7 +33,7 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
 
     private float CAMERA_Z = 0.5f;
     private float[] mView = new float[16];
-    private int[] mResourceId = {R.drawable.airport, R.drawable.photo_sphere_2 };
+    private int[] mResourceId = {R.drawable.airport1 };
     private int mCurrentPhotoPos = 0;
     private boolean mIsCardboardTriggered;
 
@@ -86,7 +86,7 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
     @Override
     public void onNewFrame(HeadTransform headTransform) {
         Matrix.setLookAtM(mCamera, 0, 0.0f, 0.0f, CAMERA_Z, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
-        //checkGLError("onReadyToDraw");
+        checkGLError("onReadyToDraw");
     }
 
 
@@ -100,7 +100,7 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
 
         renderer.draw(mViewProjectionMatrix);
 
-        //checkGLError("onDrawEye");
+        checkGLError("onDrawEye");
 
         if (mIsCardboardTriggered) {
             mIsCardboardTriggered = false;
@@ -120,9 +120,9 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
 
     private void resetTexture() {
         renderer.deleteCurrentTexture();
-        //checkGLError("after deleting texture");
+        checkGLError("after deleting texture");
         renderer.loadTexture(this, getPhotoIndex());
-        //checkGLError("loading texture");
+        checkGLError("loading texture");
     }
 
     private int getPhotoIndex() {

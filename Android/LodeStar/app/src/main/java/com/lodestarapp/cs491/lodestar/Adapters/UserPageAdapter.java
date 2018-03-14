@@ -9,10 +9,18 @@ import android.widget.TextView;
 
 import com.lodestarapp.cs491.lodestar.R;
 
+import java.util.List;
+
 public class UserPageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final int PROFILE = 0;
     private static final int POSTS = 1;
+
+    List<String> userInfoWithPosts;
+
+    public UserPageAdapter(List<String> userInfoWithPosts){
+        this.userInfoWithPosts = userInfoWithPosts;
+    }
 
     static class UserPageProfile extends RecyclerView.ViewHolder {
 
@@ -76,7 +84,16 @@ public class UserPageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        switch (holder.getItemViewType()){
+            case PROFILE:
 
+                ((UserPageProfile) holder).realNameView.setText(userInfoWithPosts.get(0));
+
+                break;
+            case POSTS:
+
+                break;
+        }
     }
 
     @Override

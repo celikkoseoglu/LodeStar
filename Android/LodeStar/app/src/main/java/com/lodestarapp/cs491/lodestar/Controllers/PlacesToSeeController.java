@@ -33,7 +33,7 @@ public class PlacesToSeeController {
 
         if(this.locationPermissionGiven){
             //Server part not implemented
-            this.requestFromUrl = "http://lodestarapp.com:3008/?location="+location.getLatitude()+
+            this.requestFromUrl = "http://lodestarapp.com:3009/?location="+location.getLatitude()+
             ","+location.getLongitude()+"&limit=5";
 
             Log.i(TAG, this.requestFromUrl);

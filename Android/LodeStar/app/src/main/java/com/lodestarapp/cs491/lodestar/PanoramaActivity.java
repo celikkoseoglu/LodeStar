@@ -53,7 +53,7 @@ public class PanoramaActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        sManager.registerListener(pv.pr,gameRotatiton, SensorManager.SENSOR_DELAY_GAME);
+        //sManager.registerListener(pv.pr,gameRotatiton, SensorManager.SENSOR_DELAY_GAME);
         //sManager.registerListener(pv.pr,magnSensor, SensorManager.SENSOR_DELAY_NORMAL);
 
 

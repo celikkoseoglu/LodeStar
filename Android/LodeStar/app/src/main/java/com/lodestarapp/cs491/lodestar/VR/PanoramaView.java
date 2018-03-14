@@ -135,7 +135,7 @@ public class PanoramaView extends GLSurfaceView{
         public void onSurfaceCreated(GL10 gl10, EGLConfig eglConfig) {
             GLES20.glClearColor(1f, 1f, 1f, 1f);
             renderer = new com.lodestarapp.cs491.lodestar.VR.Renderer(c, 50, 5f);
-            renderer.loadTexture(c, R.drawable.airport);
+            renderer.loadTexture(c, R.drawable.airport1);
 
             Matrix.setLookAtM(mCamera, 0, 0.0f, 0.0f, CAMERA_Z, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
             Matrix.setIdentityM(accRotation, 0);
