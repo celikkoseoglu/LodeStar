@@ -94,6 +94,7 @@ public class WeatherInformationAdapter extends RecyclerView.Adapter<RecyclerView
                         inflate(R.layout.cards_weather,
                                 parent, false);
                 viewHolder = new OtherDaysViewHolder(otherDaysView);
+                break;
         }
 
         return viewHolder;
