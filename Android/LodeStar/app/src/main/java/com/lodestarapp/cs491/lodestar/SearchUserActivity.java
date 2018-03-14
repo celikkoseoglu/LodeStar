@@ -83,7 +83,8 @@ public class SearchUserActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot noteSnapshot: dataSnapshot.getChildren()){
                     tmp = noteSnapshot.getValue() + "";
-                    tmp = tmp.substring(1, tmp.length() - 1);
+                    tmp = tmp.substring(10, tmp.length() - 1);
+                    tmp = tmp.replace("e-mail=","");
                     userList.add(tmp);
 
                 }
