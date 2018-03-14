@@ -11,6 +11,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.firebase.client.ChildEventListener;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.Query;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -21,7 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.lodestarapp.cs491.lodestar.Adapters.User;
 
 import java.util.ArrayList;
-
+//This class uses some of codes of the tutorial on https://www.codeproject.com/Articles/1170499/Firebase-Realtime-Database-By-Example-with-Android
 public class SearchUserActivity extends AppCompatActivity {
     ListView userListView;
 
@@ -29,8 +33,10 @@ public class SearchUserActivity extends AppCompatActivity {
     DatabaseReference dref2;
     FirebaseUser userMe;
     private DatabaseReference mDatabase;
-    final ArrayList<String> userList = new ArrayList<String>();
+     ArrayList<String> userList = new ArrayList<String>();
     ArrayAdapter<String> arrayAdapter;
+    private DatabaseReference journalCloudEndPoint;
+    //private Firebase fbase;
 
     private String[] lolol =
             {"djdoj","dhıjpş","cdxs"};
@@ -41,10 +47,13 @@ public class SearchUserActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        Log.i("aga","----------------------------celtics----------------------------");
+      //  fbase = new Firebase("https://fir-lodestar.firebaseio.com/users");
+        Log.i("aga","----------------------------geldim abiii----------------------------");
 
         //Toast.makeText(this, "Time",Toast.LENGTH_LONG).show();
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        journalCloudEndPoint = mDatabase.child("users");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_user);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -53,13 +62,13 @@ public class SearchUserActivity extends AppCompatActivity {
         userListView = findViewById(R.id.myListe);
 
         Bundle extras = getIntent().getExtras();
-        String[] value;
+        ArrayList<String> value;
         if (extras != null) {
-            value = extras.getStringArray("key");
+            value = extras.getStringArrayList("key");
             //The key argument here must match that used in the other activity
         }
         else {
-            value = new String[5];
+            value = null;
         }
 
         //retrieveDBValues();
@@ -73,32 +82,9 @@ public class SearchUserActivity extends AppCompatActivity {
 //            Toast.makeText(this, "Burda2",Toast.LENGTH_LONG).show();
 //            Log.i("a","sup" + tmp[i]);
 //        }
+        Log.i("aga","zaazaaa");
+        retrieveDBValues();
 
-
-
-        arrayAdapter = new ArrayAdapter<String>
-                (this, android.R.layout.simple_list_item_1, android.R.id.text1, value);
-
-
-
-        userListView.setAdapter(arrayAdapter);
-
-        userMe = FirebaseAuth.getInstance().getCurrentUser();
-
-        if (userMe != null) {
-            String name = userMe.getDisplayName();
-            String email = userMe.getEmail();
-           // Toast.makeText(this,userMe.getEmail(),Toast.LENGTH_LONG).show();
-        }
-
-       // arrayAdapter.add("Eric");
-        Log.i("aga","kobe");
-
-
-
-
-
-        arrayAdapter.notifyDataSetChanged();
     }
 
 
@@ -138,6 +124,52 @@ public class SearchUserActivity extends AppCompatActivity {
 //
 //            }
 //        });
+
+
+        journalCloudEndPoint.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot noteSnapshot: dataSnapshot.getChildren()){
+                    Log.i("aga","-------ooo yeaaaa--------" + noteSnapshot.getValue());
+                    userList.add("kobee");
+                    userList.add(noteSnapshot.getValue() + "");
+
+                    Log.i("aga","zaazaaa2");
+                    userList.add("ooo");
+
+                    arrayAdapter = new ArrayAdapter<String>
+                            (SearchUserActivity.this, android.R.layout.simple_list_item_1, userList);
+
+
+
+                    userListView.setAdapter(arrayAdapter);
+
+                    userMe = FirebaseAuth.getInstance().getCurrentUser();
+
+                    if (userMe != null) {
+                        String name = userMe.getDisplayName();
+                        String email = userMe.getEmail();
+                        // Toast.makeText(this,userMe.getEmail(),Toast.LENGTH_LONG).show();
+                    }
+
+                    // arrayAdapter.add("Eric");
+                    Log.i("aga","kobe");
+
+
+
+
+
+                    arrayAdapter.notifyDataSetChanged();
+                    //JournalEntry note = noteSnapshot.getValue(JournalEntry.class);
+                    //mJournalEntries.add(note);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+               // Log.d(LOG_TAG, databaseError.getMessage());
+            }
+        });
 
 
     }

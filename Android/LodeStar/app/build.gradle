@@ -49,6 +49,7 @@ dependencies {
 
     implementation 'com.android.volley:volley:1.1.0'
 
+
     //compile project(":BrickBreaker")
 
     testImplementation 'junit:junit:4.12'
@@ -59,6 +60,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:11.8.0'
     implementation 'com.google.android.gms:play-services-maps:11.8.0'
     implementation 'com.firebase:firebase-client-android:2.5.0'
+    implementation 'com.firebaseui:firebase-ui-database:1.0.1'
 }
 
 

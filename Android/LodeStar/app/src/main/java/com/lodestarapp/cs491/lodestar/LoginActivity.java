@@ -2,6 +2,7 @@ package com.lodestarapp.cs491.lodestar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -15,7 +16,9 @@ import com.facebook.FacebookSdk;
 import com.facebook.LoggingBehavior;
 import com.facebook.Profile;
 import com.facebook.ProfileTracker;
+import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 import com.google.android.gms.auth.api.Auth;
@@ -38,7 +41,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.AbstractSequentialList;
 import java.util.ArrayList;
+import java.util.Map;
 
 import static android.widget.Toast.LENGTH_LONG;
 
@@ -66,6 +71,8 @@ public class LoginActivity extends AppCompatActivity implements
     private CallbackManager callbackManager;
     private DatabaseReference mDatabase,mDatabase2;
     public ArrayList<String> userList;
+    private Firebase fbase;
+    String str = "";
 
     private static String[] strListUser;
 
@@ -78,6 +85,8 @@ public class LoginActivity extends AppCompatActivity implements
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mDatabase2 = mDatabase.child("users");
+
+        //fbase = new Firebase("https://fir-lodestar.firebaseio.com/heynow");
 
 
         FacebookSdk.setApplicationId(getString(R.string.facebook_app_id));
@@ -146,6 +155,9 @@ public class LoginActivity extends AppCompatActivity implements
                 .build();
 
        // retrieveDBValues();
+      //  retrieveDBValues2();
+
+
 
        // strListUser = changeListToArray();
 
@@ -255,8 +267,9 @@ public class LoginActivity extends AppCompatActivity implements
         Intent intent = new Intent(LoginActivity.this, SearchUserActivity.class);
         userList = new ArrayList<String>();
        // retrieveDBValues();
+        //justAnotherMethod();
         Log.i("aga",dbitemcouner + "counter");
-        intent.putExtra("key",retrieveDBValues2());
+      //  intent.putExtra("key",userList);
         startActivity(intent);
     }
 
@@ -365,50 +378,24 @@ public class LoginActivity extends AppCompatActivity implements
 //    });
 //    }
 
-    public String[] retrieveDBValues2() {
-
-         final String[] whataboutus = new String[8];
-        final int[] tmpcounter = {0};
-
-
-        //Toast.makeText(this, "U here",Toast.LENGTH_LONG).show();
-        mDatabase.addValueEventListener(new com.google.firebase.database.ValueEventListener() {
-            @Override
-            public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
-                for (com.google.firebase.database.DataSnapshot child : dataSnapshot.getChildren()) {
-                    for (com.google.firebase.database.DataSnapshot child2 : child.getChildren()) {
-                        whataboutus[tmpcounter[0]++] = "ojh yea";
-                        //dbitemcouner++;
-                        //   userList.add("Oh yea: ");
-                        // Log.i("aga","PartyMe:  " + userList.get(0));
-                        //child2.child("e-mail").toString()
-                    }
-                }
+    public void retrieveDBValues2() {
 
 
 
-            }
+        return;
+    }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
 
-            }
-        });
 
-        Log.i("aga",   "basla");
-        for(int i = 0; i < whataboutus.length; i++) {
-            whataboutus[i] = "take my heart";
-            Log.i("aga",whataboutus[i] + "noldu");
-        }
-
-return  whataboutus;
-//        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("users");
+        
+//        Log.i("aga","mywings");
+//                DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("users");
 //        ref.addListenerForSingleValueEvent(new com.google.firebase.database.ValueEventListener() {
 //            @Override
 //            public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
 //              // list.add("")
 //                userList.add("" + dataSnapshot.child("users").getChildrenCount() + 1);
-//                Log.i("lol",userList.get(0));
+//                Log.i("aga",userList.get(0));
 //
 //            }
 //
@@ -418,8 +405,6 @@ return  whataboutus;
 //            }
 //        });
 
-
-    }
 
 
 
