@@ -27,8 +27,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f59c3f32-748f-48a3-b824-3ce3ed232808" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/lodestarapp/cs491/lodestar/SearchUserActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/lodestarapp/cs491/lodestar/SearchUserActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_search_user.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_search_user.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -103,19 +101,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="card_me.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/card_me.xml">
-          <provider selected="true" editor-type-id="android-designer2">
-            <state />
-          </provider>
-          <provider editor-type-id="text-editor">
-            <state relative-caret-position="690">
-              <caret line="46" column="58" lean-forward="false" selection-start-line="46" selection-start-column="58" selection-end-line="46" selection-end-column="58" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="UserPage.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lodestarapp/cs491/lodestar/UserPage.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -143,12 +128,12 @@
       </file>
       <file leaf-file-name="activity_search_user.xml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_search_user.xml">
-          <provider editor-type-id="android-designer2">
+          <provider selected="true" editor-type-id="android-designer2">
             <state />
           </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="58" column="44" lean-forward="false" selection-start-line="58" selection-start-column="44" selection-end-line="58" selection-end-column="44" />
+          <provider editor-type-id="text-editor">
+            <state relative-caret-position="179">
+              <caret line="40" column="31" lean-forward="false" selection-start-line="40" selection-start-column="31" selection-end-line="40" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -181,6 +166,7 @@
       <list>
         <option value="Class" />
         <option value="layoutResourceFile" />
+        <option value="resourceFile" />
       </list>
     </option>
   </component>
@@ -1915,6 +1901,7 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/lodestarapp/cs491/lodestar/LoginActivity.java" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/lodestarapp/cs491/lodestar/SearchUserActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/color/cardview_light_blue.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_search_user.xml" />
       </list>
     </option>
@@ -2180,7 +2167,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1521035461008" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1521035783850" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -2228,7 +2215,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1521035461008" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1521035783851" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -2390,7 +2377,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1521035461010" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1521035783852" />
       </method>
     </configuration>
     <list size="1">
@@ -2534,7 +2521,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lodestarapp/cs491/lodestar/SearchUserActivity23.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_trip.xml">
       <provider editor-type-id="android-designer2">
         <state />
@@ -2916,13 +2902,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/color/cardview_light_blue.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_search_user.xml">
-      <provider editor-type-id="android-designer2">
+      <provider selected="true" editor-type-id="android-designer2">
         <state />
       </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="58" column="44" lean-forward="false" selection-start-line="58" selection-start-column="44" selection-end-line="58" selection-end-column="44" />
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="179">
+          <caret line="40" column="31" lean-forward="false" selection-start-line="40" selection-start-column="31" selection-end-line="40" selection-end-column="31" />
           <folding />
         </state>
       </provider>
