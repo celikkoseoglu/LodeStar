@@ -1,12 +1,16 @@
 package com.lodestarapp.cs491.lodestar;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -56,7 +60,7 @@ public class SearchUserActivity extends AppCompatActivity {
             value = null;
         }
 
-        Toast.makeText(this,""+  "forever" + value,Toast.LENGTH_LONG).show();
+        //Toast.makeText(this,""+  "forever" + value,Toast.LENGTH_LONG).show();
 
         retrieveDBValues();
 
@@ -64,6 +68,9 @@ public class SearchUserActivity extends AppCompatActivity {
 
 
     private void retrieveDBValues() {
+
+
+
         databaseReacher.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -86,6 +93,38 @@ public class SearchUserActivity extends AppCompatActivity {
                 }
 
                 arrayAdapter.notifyDataSetChanged();
+
+                userList.add("OMG");
+
+
+                userListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        AlertDialog.Builder diyalogOlusturucu =
+                                new AlertDialog.Builder(SearchUserActivity.this);
+
+                        diyalogOlusturucu.setMessage("Would you like to navigate to the user's page?")
+                                .setCancelable(false)
+                                .setNegativeButton("YES!", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                })
+                                .setPositiveButton("YES!", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Intent intent = new Intent(SearchUserActivity.this, SearchUserActivity.class);
+                                        startActivity(intent);
+                                    }
+                                });
+
+
+                        diyalogOlusturucu.create().show();
+
+                    }
+                });
+
             }
 
             @Override
