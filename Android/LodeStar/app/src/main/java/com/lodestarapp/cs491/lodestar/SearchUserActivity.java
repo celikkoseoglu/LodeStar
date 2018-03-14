@@ -2,6 +2,7 @@ package com.lodestarapp.cs491.lodestar;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,10 +13,12 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.client.ChildEventListener;
@@ -89,7 +92,22 @@ public class SearchUserActivity extends AppCompatActivity {
 
                 }
                 arrayAdapter = new ArrayAdapter<String>
-                        (SearchUserActivity.this, android.R.layout.simple_list_item_1, userList);
+                        (SearchUserActivity.this, android.R.layout.simple_list_item_1, userList){
+
+                    //Reference: This method code is taken from the stackoverflow: https://android--code.blogspot.com.tr/2015/08/android-listview-text-color.html
+                    @Override
+                    public View getView(int position, View convertView, ViewGroup parent){
+
+                        View view = super.getView(position, convertView, parent);
+
+                        TextView tv = (TextView) view.findViewById(android.R.id.text1);
+
+
+                        tv.setTextColor(Color.WHITE);
+
+                        return view;
+                    }
+                };
 
                 userListView.setAdapter(arrayAdapter);
 
@@ -103,22 +121,22 @@ public class SearchUserActivity extends AppCompatActivity {
                 arrayAdapter.notifyDataSetChanged();
 
 
-
-                userList.add("OMG");
-
-
                 userListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         AlertDialog.Builder diyalogOlusturucu =
                                 new AlertDialog.Builder(SearchUserActivity.this);
 
+
+
                         diyalogOlusturucu.setMessage("Would you like to navigate to the user's page?")
                                 .setCancelable(false)
                                 .setNegativeButton("NO :(", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
+                                        //Log.i("agam","laalalal" + userListView.getSelectedItem());
                                         dialog.dismiss();
+
                                     }
                                 })
                                 .setPositiveButton("YES!", new DialogInterface.OnClickListener() {
@@ -172,3 +190,4 @@ public class SearchUserActivity extends AppCompatActivity {
 //Reference: This class uses some of codes of the tutorial on https://www.codeproject.com/Articles/1170499/Firebase-Realtime-Database-By-Example-with-Android
 // and the tutorial of turkcell on https://gelecegiyazanlar.turkcell.com.tr/konu/android/egitim/android-201/listview-kullanimi
 // and the tutorial of https://www.thecrazyprogrammer.com/2016/01/android-simple-listview-with-search-functionality-example.html (for search functionality)
+// and https://android--code.blogspot.com.tr/2015/08/android-listview-text-color.html
