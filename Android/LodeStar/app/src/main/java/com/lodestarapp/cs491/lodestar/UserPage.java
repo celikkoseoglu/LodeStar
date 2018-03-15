@@ -85,11 +85,11 @@ public class UserPage extends android.support.v4.app.Fragment {
             str = currentUser.getEmail();
             String[] tmp = str.split("----");
             currentUserName = tmp[tmp.length -1];
-            Log.i("agam","every step that I take " + currentUserName);
-            //Toast.makeText(UserPage.this, "lolol", LENGTH_LONG).show();
-            // User logged in
+
         }
     }
+
+    //Reference to retrieving current user: https://stackoverflow.com/questions/35112204/get-current-user-firebase-android
 
     public void takeTheUser(){
         userInfoWithPosts.add("efe");

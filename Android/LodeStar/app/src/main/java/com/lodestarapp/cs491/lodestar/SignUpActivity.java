@@ -305,3 +305,5 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
 
 }
+
+//Some ideas mentioned in https://stackoverflow.com/questions/35112204/get-current-user-firebase-android are used
