@@ -83,22 +83,58 @@
                     android:text="@string/place_location" />
 
                 <ImageView
-                    android:id="@+id/place_stars_image"
-                    android:layout_width="50dp"
+                    android:id="@+id/place_stars_image1"
+                    android:layout_width="10dp"
                     android:layout_height="20dp"
+                    android:layout_alignLeft="@id/place_icon"
+                    android:layout_alignStart="@id/place_icon"
                     android:layout_below="@id/place_icon"
                     android:layout_marginTop="5dp"
-                    android:layout_alignLeft="@id/place_icon"
-                    app:srcCompat="@android:color/holo_orange_dark"
-                    android:layout_alignStart="@id/place_icon" />
+                    app:srcCompat="@android:color/holo_orange_dark" />
+
+                <ImageView
+                    android:id="@+id/place_stars_image2"
+                    android:layout_width="10dp"
+                    android:layout_height="20dp"
+                    android:layout_alignTop="@+id/place_stars_image1"
+                    android:layout_toEndOf="@+id/place_stars_image1"
+                    android:layout_toRightOf="@+id/place_stars_image1"
+                    app:srcCompat="@android:color/holo_blue_dark" />
+
+                <ImageView
+                    android:id="@+id/place_stars_image3"
+                    android:layout_width="10dp"
+                    android:layout_height="20dp"
+                    android:layout_alignTop="@+id/place_stars_image2"
+                    android:layout_toEndOf="@+id/place_stars_image2"
+                    android:layout_toRightOf="@+id/place_stars_image2"
+                    app:srcCompat="@android:color/holo_green_light" />
+
+                <ImageView
+                    android:id="@+id/place_stars_image4"
+                    android:layout_width="10dp"
+                    android:layout_height="20dp"
+                    android:layout_alignTop="@+id/place_stars_image3"
+                    android:layout_toEndOf="@+id/place_stars_image3"
+                    android:layout_toRightOf="@+id/place_stars_image3"
+                    app:srcCompat="@android:color/black" />
+
+                <ImageView
+                    android:id="@+id/place_stars_image5"
+                    android:layout_width="10dp"
+                    android:layout_height="20dp"
+                    android:layout_alignTop="@+id/place_stars_image4"
+                    android:layout_toEndOf="@+id/place_stars_image4"
+                    android:layout_toRightOf="@+id/place_stars_image4"
+                    app:srcCompat="@android:color/holo_red_dark" />
 
                 <TextView
                     android:id="@+id/place_number_of_reviews"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/place_stars_image"
                     android:layout_alignEnd="@+id/place_location"
                     android:layout_alignRight="@+id/place_location"
+                    android:layout_alignTop="@+id/place_stars_image1"
                     android:text="@string/number_of_reviews" />
 
             </RelativeLayout>

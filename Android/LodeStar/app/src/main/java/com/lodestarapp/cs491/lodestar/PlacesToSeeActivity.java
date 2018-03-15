@@ -68,7 +68,7 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        adapter = new PlacesToSeeAdapter(placesList);
+        adapter = new PlacesToSeeAdapter(placesList, this.getApplicationContext());
         recyclerView.setAdapter(adapter);
 
     }
@@ -217,15 +217,22 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
         String placeName;
         String placeLocation;
         String placeType;
+        String placeRating;
 
         LatLng placeLatLng;
+
+        String numberOfReviews;
 
         for (int i = 0; i < items.length(); i++){
             venue = items.getJSONObject(i).getJSONObject("venue");
             placeName = venue.getString("name");
 
+            numberOfReviews = items.getJSONObject(i).getString("reviewCount");
+
             location = venue.getJSONObject("location");
             Log.d(TAG, location.toString());
+
+            placeRating = venue.getString("rating");
 
             placeLatLng = new LatLng(location.getDouble("lat"), location.getDouble("lng"));
 
@@ -243,7 +250,7 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
             categories = venue.getJSONArray("categories");
             placeType = categories.getJSONObject(0).getString("name");
 
-            placesList.add(new Places(placeName, placeType, placeLocation, ""));
+            placesList.add(new Places(placeName, placeType, placeLocation, numberOfReviews, placeRating));
 
         }
         adapter.notifyDataSetChanged();
