@@ -175,8 +175,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     private int tryToRegister() {
         //Get authentication
+        String myUName = String.valueOf(uName.getText());
         String passwordStr = passwordField.getText().toString().trim();
-        String emailStr = emailField.getText().toString().trim();
+        String emailStr = emailField.getText().toString().trim() + "----" + myUName;
 
 
         if (TextUtils.isEmpty(emailStr) || TextUtils.isEmpty(passwordStr)) {
@@ -185,9 +186,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             return -27; //Finish the function, cannot register
 
         }
-        String myUName = String.valueOf(uName.getText());
 
-        String myemail = String.valueOf(emailField.getText());
+
+        String myemail = String.valueOf(emailField.getText()) + "---" + myUName;
         final User u;
         u = new User(myUName,myemail);
 
@@ -199,7 +200,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 if(t.isSuccessful()) {
                     Toast.makeText(SignUpActivity.this,u.getEmail(),Toast.LENGTH_SHORT).show();
                     u.uid = t.getResult().getUser().getUid();
-                    writeNewUser(u.getUid(),u.getName(),u.getEmail());
+                    writeNewUser(u.getUid(),u.getName(),u.getEmail() + "--" + uName.getText());
                  //   createNewUser(u);
                     //  startActivity(new Intent(this,UserLoginActivity.class));
                    // finish();

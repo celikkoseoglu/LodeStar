@@ -114,7 +114,7 @@ public class LoginActivity extends AppCompatActivity implements
                     Profile currentProfile) {
                 // App code
 
-                Toast.makeText(LoginActivity.this, currentProfile.getFirstName(), LENGTH_LONG).show();
+
 
             }
         };
