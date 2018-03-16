@@ -145,19 +145,59 @@
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
+            android:id="@+id/place_panorama_cardview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/place_expand_cardview">
 
-            <com.lodestarapp.cs491.lodestar.VR.PanoramaView
-                android:id="@+id/layout"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="150dp">
 
+                <com.lodestarapp.cs491.lodestar.VR.PanoramaView
+                    android:id="@+id/layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp">
 
-            </com.lodestarapp.cs491.lodestar.VR.PanoramaView>
+                </com.lodestarapp.cs491.lodestar.VR.PanoramaView>
+
+                <ImageView
+                    android:id="@+id/vrSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_toLeftOf="@+id/full"
+                    android:layout_toStartOf="@+id/full"
+                    android:onClick="goVr"
+                    app:srcCompat="@drawable/ic_cardboard3" />
+
+                <ImageView
+                    android:id="@+id/full"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:onClick="goFullscreen"
+                    app:srcCompat="@drawable/ic_fullscreen" />
+
+            </RelativeLayout>
 
         </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/place_reviews_cardview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/place_panorama_cardview"
+            >
+
+
+
+        </android.support.v7.widget.CardView>
+
 
     </RelativeLayout>
 
