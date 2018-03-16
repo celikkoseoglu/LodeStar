@@ -20,7 +20,14 @@ public class Places {
         this.placeNumberOfReviews = placeNumberOfReviews;
         this.rating = rating;
 
-        int rate = Integer.parseInt(rating.substring(0, rating.indexOf('.')));
+        int rate;
+        int pointPart = Integer.parseInt(rating.substring(rating.indexOf('.') + 1));
+
+        if(pointPart >= 5)
+            rate = Integer.parseInt(rating.substring(0, rating.indexOf('.')) + 1);
+        else
+            rate = Integer.parseInt(rating.substring(0, rating.indexOf('.')));
+
         this.numberOfStars = rate / 2;
         halfStar = rate % 2 != 0;
 
