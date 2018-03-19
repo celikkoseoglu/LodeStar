@@ -94,7 +94,7 @@
                 </TableRow>
 
                 <TableRow
-                    android:id="@id/expand_third_row"
+                    android:id="@+id/expand_third_row"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/expand_second_row"
@@ -121,7 +121,7 @@
                     android:id="@+id/expand_fourth_row"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/expand_third_row"
+                    android:layout_below="@id/expand_third_row"
                     android:layout_marginTop="3dp"
                     >
 
