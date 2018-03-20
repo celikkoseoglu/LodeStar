@@ -26,7 +26,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon, android:theme">
-
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -78,6 +77,10 @@
         <activity
             android:name=".SearchUserActivity"
             android:label="@string/title_activity_search_user"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ChangePasswordActivity"
+            android:label="@string/title_activity_change_password"
             android:theme="@style/AppTheme"></activity>
     </application>
 

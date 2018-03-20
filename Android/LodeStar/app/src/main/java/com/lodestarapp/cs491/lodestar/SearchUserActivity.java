@@ -46,6 +46,7 @@ public class SearchUserActivity extends AppCompatActivity {
     EditText inputSearch;
     String tmp;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
