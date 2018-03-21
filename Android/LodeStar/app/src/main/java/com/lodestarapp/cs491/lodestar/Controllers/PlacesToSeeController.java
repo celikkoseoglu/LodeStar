@@ -1,13 +1,17 @@
 package com.lodestarapp.cs491.lodestar.Controllers;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.location.Location;
 import android.util.Log;
+import android.widget.ImageView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
@@ -25,6 +29,8 @@ public class PlacesToSeeController {
     private String keyword;
     private Location location;
 
+    //Default Constructor
+    public PlacesToSeeController(){}
 
     public PlacesToSeeController(String keyword, boolean locationPermissionGiven, Location location){
         this.keyword = keyword;
@@ -68,6 +74,33 @@ public class PlacesToSeeController {
             }
         });
         requestQueue.add(jsonObjectRequest);
+    }
+
+    public void getVenueImage(String imageURL, Context context, final LodeStarServerCallback lodeStarServerCallback){
+
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        final Bitmap[] imageMap = new Bitmap[1];
+
+        ImageRequest imageRequest = new ImageRequest(imageURL, new Response.Listener<Bitmap>() {
+            @Override
+            public void onResponse(Bitmap response) {
+                if (response != null) {
+                    imageMap[0] = response;
+                    lodeStarServerCallback.onPlaceImageSuccess(imageMap[0]);
+                }
+
+            }
+        }, 0, 0, ImageView.ScaleType.CENTER_CROP, Bitmap.Config.RGB_565,
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        imageMap[0] = null;
+                        Log.i(TAG, "Failed to get venue image");
+                    }
+                });
+
+        requestQueue.add(imageRequest);
+
     }
 
     public String getKeyword() {

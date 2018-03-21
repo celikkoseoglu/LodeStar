@@ -2,6 +2,7 @@ package com.lodestarapp.cs491.lodestar;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -95,6 +96,9 @@ public class WeatherInformationActivity extends AppCompatActivity {
                     public void onSuccess(JSONArray jsonArray, JSONObject jsonObject) {
                         parseTheJSONResponse(jsonArray);
                     }
+
+                    @Override
+                    public void onPlaceImageSuccess(Bitmap bitmap) {}
                 });
     }
 

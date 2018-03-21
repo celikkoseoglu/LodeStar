@@ -23,8 +23,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <ImageButton
-                    android:id="@+id/imageButtonPlace"
+                <ImageView
+                    android:id="@+id/imageButtonView"
                     android:layout_width="125dp"
                     android:layout_height="125dp"
                     android:background="@null"
@@ -37,8 +37,8 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="19dp"
                     android:layout_marginStart="19dp"
-                    android:layout_toEndOf="@+id/imageButtonPlace"
-                    android:layout_toRightOf="@+id/imageButtonPlace"
+                    android:layout_toEndOf="@+id/imageButtonView"
+                    android:layout_toRightOf="@+id/imageButtonView"
                     android:text="@string/place_name"
                     android:textSize="24sp" />
 
@@ -132,10 +132,12 @@
                     android:id="@+id/place_number_of_reviews"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignEnd="@+id/place_location"
-                    android:layout_alignRight="@+id/place_location"
-                    android:layout_alignTop="@+id/place_stars_image1"
-                    android:text="@string/number_of_reviews" />
+                    android:layout_marginLeft="20dp"
+                    android:layout_alignLeft="@id/place_stars_image5"
+                    android:layout_alignTop="@+id/place_stars_image5"
+                    android:text="@string/number_of_reviews"
+                    android:layout_marginStart="20dp"
+                    android:layout_alignStart="@id/place_stars_image5" />
 
             </RelativeLayout>
 

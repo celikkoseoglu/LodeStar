@@ -26,7 +26,7 @@ public class PlacesToSeeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     static class PlacesViewHolder extends RecyclerView.ViewHolder {
 
-        ImageButton placePictureButton;
+        ImageView placePictureView;
         TextView placeNameView;
         TextView placeTypeView;
         TextView placeLocationView;
@@ -44,7 +44,7 @@ public class PlacesToSeeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         public PlacesViewHolder(View itemView) {
             super(itemView);
 
-            this.placePictureButton = itemView.findViewById(R.id.imageButtonPlace);
+            this.placePictureView = itemView.findViewById(R.id.imageButtonView);
             this.placeNameView = itemView.findViewById(R.id.place_name);
             this.placeTypeView = itemView.findViewById(R.id.place_type);
             this.placeLocationView = itemView.findViewById(R.id.place_location);
@@ -74,7 +74,7 @@ public class PlacesToSeeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        //TODO: Place Image and Number of Stars Image
+        //TODO: Place Image
 
         //Set Number of Stars Image
         int noOfStars = placesList.get(position).getNumberOfStars();
@@ -88,6 +88,10 @@ public class PlacesToSeeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         if(halfStar)
             ((PlacesViewHolder) holder).placeStarImages[i].setImageResource(this.context.getResources()
                     .getIdentifier("ic_star_half_full", "drawable", this.context.getPackageName()));
+
+        //Set Place Image
+        ((PlacesViewHolder) holder).placePictureView.
+                setImageBitmap(placesList.get(position).getPlaceImage());
 
         //Set Place Name
         ((PlacesViewHolder) holder).placeNameView.setText(placesList.get(position)

@@ -1,7 +1,10 @@
 package com.lodestarapp.cs491.lodestar.Models;
 
+import android.graphics.Bitmap;
+
 public class Places {
 
+    private Bitmap placeImage;
     private String placeName;
     private String placeType;
     private String placeLocation;
@@ -12,8 +15,9 @@ public class Places {
     private boolean halfStar;
 
     //TODO: places star and picture
-    public Places(String placeName, String placeType, String placeLocation, String placeNumberOfReviews,
+    public Places(Bitmap placeImage, String placeName, String placeType, String placeLocation, String placeNumberOfReviews,
                   String rating){
+        this.placeImage = placeImage;
         this.placeName = placeName;
         this.placeType = placeType;
         this.placeLocation = placeLocation;
@@ -24,7 +28,7 @@ public class Places {
         int pointPart = Integer.parseInt(rating.substring(rating.indexOf('.') + 1));
 
         if(pointPart >= 5)
-            rate = Integer.parseInt(rating.substring(0, rating.indexOf('.')) + 1);
+            rate = Integer.parseInt(rating.substring(0, rating.indexOf('.'))) + 1;
         else
             rate = Integer.parseInt(rating.substring(0, rating.indexOf('.')));
 
@@ -59,5 +63,13 @@ public class Places {
 
     public boolean isHalfStar() {
         return halfStar;
+    }
+
+    public Bitmap getPlaceImage() {
+        return placeImage;
+    }
+
+    public void setPlaceImage(Bitmap placeImage){
+        this.placeImage = placeImage;
     }
 }

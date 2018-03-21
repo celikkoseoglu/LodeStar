@@ -3,6 +3,7 @@ package com.lodestarapp.cs491.lodestar;
 import android.*;
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -50,6 +51,8 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
 
     private List<Places> placesList = new ArrayList<>();
 
+    private String[] venueImageURL = new String[5];
+
     private static final String TAG = "placesToSeeMessage";
 
     public void onCreate(Bundle savedInstanceState) {
@@ -87,6 +90,7 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
             getLastKnowLocation();
         } else {
             requestPermissionForLocation();
+            getLastKnowLocation();
         }
     }
 
@@ -129,6 +133,9 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
                                         e.printStackTrace();
                                     }
                                 }
+
+                                @Override
+                                public void onPlaceImageSuccess(Bitmap bitmap) {}
                             });
                 }
                 //complete else
@@ -140,14 +147,14 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
 
     private boolean checkForLocationPermission() {
         int locationPermissionCheck = ContextCompat.checkSelfPermission(getApplicationContext(),
-                Manifest.permission.ACCESS_COARSE_LOCATION);
+                Manifest.permission.ACCESS_FINE_LOCATION);
 
         return locationPermissionCheck == PackageManager.PERMISSION_GRANTED;
     }
 
     private void requestPermissionForLocation() {
         ActivityCompat.requestPermissions(PlacesToSeeActivity.this,
-                new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST_LOCATION);
+                new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
     }
 
     @Override
@@ -182,6 +189,9 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
                                                     e.printStackTrace();
                                                 }
                                             }
+
+                                            @Override
+                                            public void onPlaceImageSuccess(Bitmap bitmap) {}
                                         });
                             }
                             //complete else
@@ -223,6 +233,8 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
 
         String numberOfReviews;
 
+        String photoURL;
+
         for (int i = 0; i < items.length(); i++){
             venue = items.getJSONObject(i).getJSONObject("venue");
             placeName = venue.getString("name");
@@ -250,9 +262,31 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
             categories = venue.getJSONArray("categories");
             placeType = categories.getJSONObject(0).getString("name");
 
-            placesList.add(new Places(placeName, placeType, placeLocation, numberOfReviews, placeRating));
+            photoURL = items.getJSONObject(i).getString("venueImage");
+            this.venueImageURL[i] = photoURL;
+
+            placesList.add(new Places(null, placeName, placeType, placeLocation, numberOfReviews, placeRating));
 
         }
         adapter.notifyDataSetChanged();
+
+        getPlaceImage();
+    }
+
+    private void getPlaceImage() {
+        for (int i = 0; i < 5; i++) {
+            final int finalI = i;
+            Log.d(TAG, this.venueImageURL[i]);
+            placesToSeeController.getVenueImage(this.venueImageURL[i], getApplicationContext(), new LodeStarServerCallback() {
+                @Override
+                public void onSuccess(JSONArray jsonArray, JSONObject jsonObject) {}
+
+                @Override
+                public void onPlaceImageSuccess(Bitmap bitmap) {
+                    placesList.get(finalI).setPlaceImage(bitmap);
+                    adapter.notifyDataSetChanged();
+                }
+            });
+        }
     }
 }
