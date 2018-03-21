@@ -143,47 +143,49 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
         updateSizeInfo();
     }
     private void updateSizeInfo() {
-        LinearLayout linearLayout = (LinearLayout) getView().findViewById(R.id.row3);
+        LinearLayout linearLayout = null;
+        if(getView() != null) {
+            linearLayout = (LinearLayout) getView().findViewById(R.id.row3);
 
-        int w = linearLayout.getWidth();
+            int w = linearLayout.getWidth();
 
-        int valueInPixels = (int) getResources().getDimension(R.dimen.icon_size);
+            int valueInPixels = (int) getResources().getDimension(R.dimen.icon_size);
 
-        backgroundImageWidth = linearLayout.getWidth();
-        //Toast toast =  Toast.makeText(getApplicationContext(), backgroundImageWidth + "", Toast.LENGTH_LONG);
-        //toast.show();
+            backgroundImageWidth = linearLayout.getWidth();
+            //Toast toast =  Toast.makeText(getApplicationContext(), backgroundImageWidth + "", Toast.LENGTH_LONG);
+            //toast.show();
 
-        Button bt = getView().findViewById(R.id.living);
-        ViewGroup.LayoutParams params = bt.getLayoutParams();
-        //Button new width
-        params.height = (w-15)/3;
-        bt.setLayoutParams(params);
+            Button bt = getView().findViewById(R.id.living);
+            ViewGroup.LayoutParams params = bt.getLayoutParams();
+            //Button new width
+            params.height = (w - 15) / 3;
+            bt.setLayoutParams(params);
 
-        Button bt1 = getView().findViewById(R.id.places);
-        bt1.setLayoutParams(params);
+            Button bt1 = getView().findViewById(R.id.places);
+            bt1.setLayoutParams(params);
 
-        Button bt2 = getView().findViewById(R.id.accomodation);
-        bt2.setLayoutParams(params);
+            Button bt2 = getView().findViewById(R.id.accomodation);
+            bt2.setLayoutParams(params);
 
-        Button bt3 = getView().findViewById(R.id.transport);
-        bt3.setLayoutParams(params);
+            Button bt3 = getView().findViewById(R.id.transport);
+            bt3.setLayoutParams(params);
 
-        Button bt4 = getView().findViewById(R.id.weather);
-        bt4.setLayoutParams(params);
+            Button bt4 = getView().findViewById(R.id.weather);
+            bt4.setLayoutParams(params);
 
-        Button bt5 = getView().findViewById(R.id.flightinfo);
-        bt5.setLayoutParams(params);
+            Button bt5 = getView().findViewById(R.id.flightinfo);
+            bt5.setLayoutParams(params);
 
-        Button bt6 = getView().findViewById(R.id.shopping);
-        bt6.setLayoutParams(params);
+            Button bt6 = getView().findViewById(R.id.shopping);
+            bt6.setLayoutParams(params);
 
-        Button bt7 = getView().findViewById(R.id.lounge);
-        bt7.setLayoutParams(params);
+            Button bt7 = getView().findViewById(R.id.lounge);
+            bt7.setLayoutParams(params);
 
-        Button bt8 = getView().findViewById(R.id.restaurants);
-        bt8.setLayoutParams(params);
+            Button bt8 = getView().findViewById(R.id.restaurants);
+            bt8.setLayoutParams(params);
 
-
+        }
 
     }
 
@@ -293,59 +295,59 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
 
     }
 
-    public void sendImageRequestOrig(){
+    public void sendImageRequestOrig() {
         final Context c = getActivity();
-        trp.getTripCity(origCity,c, new TripController.VolleyCallback4() {
-            @Override
-            public void onSuccess(JSONObject result) {
-                try {
-                    JSONArray x = result.getJSONArray("results");
-                    JSONObject jo = x.getJSONObject(0);
+        if (getView() != null) {
+            trp.getTripCity(origCity, c, new TripController.VolleyCallback4() {
+                @Override
+                public void onSuccess(JSONObject result) {
+                    try {
+                        JSONArray x = result.getJSONArray("results");
+                        JSONObject jo = x.getJSONObject(0);
 
-                    JSONArray photos = jo.getJSONArray("photos");
-                    JSONObject photo = photos.getJSONObject(0);
-                    photoReferenceOrig = photo.getString("photo_reference");
+                        JSONArray photos = jo.getJSONArray("photos");
+                        JSONObject photo = photos.getJSONObject(0);
+                        photoReferenceOrig = photo.getString("photo_reference");
 
-                    //Toast toast =  Toast.makeText(getApplicationContext(), photoReference, Toast.LENGTH_LONG);
-                    //toast.show();
-
-                    final ImageView orig = getView().findViewById(R.id.orig);
-
-                    if(ImageStorage.checkIfImageExists(origCity))
-                    {
-                        File file = ImageStorage.getImage("/"+origCity+".png");
-                        assert file != null;
-                        String p = file.getAbsolutePath();
-                        Bitmap b = BitmapFactory.decodeFile(p);
-                        orig.setImageBitmap(b);
-
-                        //Toast toast =  Toast.makeText(c, backgroundImageWidth, Toast.LENGTH_LONG);
+                        //Toast toast =  Toast.makeText(getApplicationContext(), photoReference, Toast.LENGTH_LONG);
                         //toast.show();
-                        getView().findViewById(R.id.ll1).setVisibility(View.GONE);
-                        getView().findViewById(R.id.flipper).setVisibility(View.VISIBLE);
 
-                    } else {
-                        trp.getBackgroundImage(photoReferenceOrig, backgroundImageWidth, c, new TripController.VolleyCallback5() {
-                            @Override
-                            public void onSuccess(Bitmap result) {
-                                orig.setImageBitmap(result);
-                                ImageStorage.saveToSdCard(result, origCity);
+                        final ImageView orig = getView().findViewById(R.id.orig);
 
-                                getView().findViewById(R.id.ll1).setVisibility(View.GONE);
-                                getView().findViewById(R.id.flipper).setVisibility(View.VISIBLE);
-                            }
-                        });
+                        if (ImageStorage.checkIfImageExists(origCity)) {
+                            File file = ImageStorage.getImage("/" + origCity + ".png");
+                            assert file != null;
+                            String p = file.getAbsolutePath();
+                            Bitmap b = BitmapFactory.decodeFile(p);
+                            orig.setImageBitmap(b);
+
+                            //Toast toast =  Toast.makeText(c, backgroundImageWidth, Toast.LENGTH_LONG);
+                            //toast.show();
+                            getView().findViewById(R.id.ll1).setVisibility(View.GONE);
+                            getView().findViewById(R.id.flipper).setVisibility(View.VISIBLE);
+
+                        } else {
+                            trp.getBackgroundImage(photoReferenceOrig, backgroundImageWidth, c, new TripController.VolleyCallback5() {
+                                @Override
+                                public void onSuccess(Bitmap result) {
+                                    orig.setImageBitmap(result);
+                                    ImageStorage.saveToSdCard(result, origCity);
+
+                                    getView().findViewById(R.id.ll1).setVisibility(View.GONE);
+                                    getView().findViewById(R.id.flipper).setVisibility(View.VISIBLE);
+                                }
+                            });
+                        }
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
 
 
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
-
-
-            }
-        });
+            });
+        }
     }
 
     public void sendImageRequestDest(){

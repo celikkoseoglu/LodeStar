@@ -41,7 +41,8 @@
                 android:layout_marginRight="10dp"
                 android:background="@null"
                 app:srcCompat="@drawable/ic_settings"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentEnd="true"
+                android:onClick="prefStart"/>
 
         </android.support.v7.widget.Toolbar>
 

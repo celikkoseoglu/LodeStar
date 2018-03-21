@@ -7,6 +7,7 @@ import android.opengl.Matrix;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.Toast;
 
@@ -78,8 +79,17 @@ public class PanoramaView extends GLSurfaceView {
                     {
                         float deltaX = (x - xBefore) / this.getWidth() * 360;
                         float deltaY = (y - yBefore) / this.getHeight() * 360;
-                        pr.mDeltaY += -deltaX*0.1;
+                        pr.mDeltaY += -deltaX*0.2;
                         pr.mDeltaX = 0;
+                        /*
+                        if(pr.mDeltaX >= Math.PI )
+                            deltaY = 0;
+
+                        pr.mDeltaX += -deltaY*0.2;
+
+                        String TAG = "pano ";
+
+                        Log.d(TAG, "" +pr.mDeltaX );*/
 
                     }
                 }

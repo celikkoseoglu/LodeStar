@@ -64,7 +64,8 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".ForgotPasswordActivity" />
         <activity android:name=".VRActivity" />
-        <activity android:name=".PanoramaActivity"></activity>
+        <activity android:name=".PanoramaActivity" />
+        <activity android:name=".PreferencesActivity"></activity>
     </application>
 
 </manifest>

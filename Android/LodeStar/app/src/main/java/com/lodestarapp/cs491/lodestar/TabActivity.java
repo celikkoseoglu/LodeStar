@@ -41,25 +41,34 @@ public class TabActivity extends AppCompatActivity {
 
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_004_homepage);
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_003_departures);
-        tabLayout.getTabAt(2).setIcon(R.drawable.ic_002_star);
-        tabLayout.getTabAt(3).setIcon(R.drawable.ic_003_me);
+        tabLayout.getTabAt(2).setIcon(R.drawable.ic_001_time);
+        tabLayout.getTabAt(3).setIcon(R.drawable.ic_002_star);
+        tabLayout.getTabAt(4).setIcon(R.drawable.ic_003_me);
+
+
 
 
         tabLayout.getTabAt(0).getIcon().setAlpha(255);
         tabLayout.getTabAt(1).getIcon().setAlpha(90);
         tabLayout.getTabAt(2).getIcon().setAlpha(90);
         tabLayout.getTabAt(3).getIcon().setAlpha(90);
+        tabLayout.getTabAt(4).getIcon().setAlpha(90);
 
         TextView tabFour = (TextView) LayoutInflater.from(this).inflate(R.layout.my_tab, null);
         tabFour.setText("Me");
         tabFour.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_003_me, 0, 0);
-        tabLayout.getTabAt(3).setCustomView(tabFour);
+        tabLayout.getTabAt(4).setCustomView(tabFour);
 
 
         TextView tabThree = (TextView) LayoutInflater.from(this).inflate(R.layout.my_tab, null);
         tabThree.setText("Favorites");
         tabThree.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_002_star, 0, 0);
-        tabLayout.getTabAt(2).setCustomView(tabThree);
+        tabLayout.getTabAt(3).setCustomView(tabThree);
+
+        TextView tabFive = (TextView) LayoutInflater.from(this).inflate(R.layout.my_tab, null);
+        tabFive.setText("History");
+        tabFive.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_001_time, 0, 0);
+        tabLayout.getTabAt(2).setCustomView(tabFive);
 
 
         TextView tabTwo = (TextView) LayoutInflater.from(this).inflate(R.layout.my_tab, null);
@@ -93,24 +102,34 @@ public class TabActivity extends AppCompatActivity {
                         tabLayout.getTabAt(1).getIcon().setAlpha(90);
                         tabLayout.getTabAt(2).getIcon().setAlpha(90);
                         tabLayout.getTabAt(3).getIcon().setAlpha(90);
+                        tabLayout.getTabAt(4).getIcon().setAlpha(90);
                         break;
                     case 1:
                         tabLayout.getTabAt(0).getIcon().setAlpha(90);
                         tabLayout.getTabAt(1).getIcon().setAlpha(255);
                         tabLayout.getTabAt(2).getIcon().setAlpha(90);
                         tabLayout.getTabAt(3).getIcon().setAlpha(90);
+                        tabLayout.getTabAt(4).getIcon().setAlpha(90);
                         break;
                     case 2:
                         tabLayout.getTabAt(0).getIcon().setAlpha(90);
                         tabLayout.getTabAt(1).getIcon().setAlpha(90);
                         tabLayout.getTabAt(2).getIcon().setAlpha(255);
                         tabLayout.getTabAt(3).getIcon().setAlpha(90);
+                        tabLayout.getTabAt(4).getIcon().setAlpha(90);
                         break;
                     case 3:
                         tabLayout.getTabAt(0).getIcon().setAlpha(90);
                         tabLayout.getTabAt(1).getIcon().setAlpha(90);
                         tabLayout.getTabAt(2).getIcon().setAlpha(90);
                         tabLayout.getTabAt(3).getIcon().setAlpha(255);
+                        tabLayout.getTabAt(4).getIcon().setAlpha(90);
+                    case 4:
+                        tabLayout.getTabAt(0).getIcon().setAlpha(90);
+                        tabLayout.getTabAt(1).getIcon().setAlpha(90);
+                        tabLayout.getTabAt(2).getIcon().setAlpha(90);
+                        tabLayout.getTabAt(3).getIcon().setAlpha(90);
+                        tabLayout.getTabAt(4).getIcon().setAlpha(255);
                 }
             }
 
@@ -159,8 +178,10 @@ public class TabActivity extends AppCompatActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new HomeActivity(), "Home");
         adapter.addFragment(trip, "Trip");
+        adapter.addFragment(new HistoryFragment(), "History");
         adapter.addFragment(new FavoritesFragment(), "Favorites");
         adapter.addFragment(new UserPage(), "Me");
+
         viewPager.setAdapter(adapter);
     }
 
@@ -227,6 +248,16 @@ public class TabActivity extends AppCompatActivity {
         Intent intent = new Intent(this, LivingExpensesActivity.class);
         startActivity(intent);
     }
+
+    public void prefStart(View view){
+        Intent intent = new Intent(this, PreferencesActivity.class);
+        startActivity(intent);
+    }
+    public void meStart(View view){
+        finish();
+    }
+
+
 
 
 }

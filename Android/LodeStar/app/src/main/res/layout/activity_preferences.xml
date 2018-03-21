@@ -52,7 +52,8 @@
             android:textAllCaps="false"
             android:textSize="16sp"
             android:textColor="@android:color/holo_blue_bright"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:onClick="meStart"/>
     </android.support.v7.widget.Toolbar>
 
         <TextView
@@ -66,7 +67,8 @@
             android:paddingRight="10dp"
             android:paddingStart="10dp"
             android:paddingTop="10dp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:background="#eaeaea"/>
 
         <Switch
             android:id="@+id/switch1"
@@ -138,6 +140,7 @@
             android:paddingStart="10dp"
             android:paddingTop="10dp"
             android:typeface="sans"
+            android:background="#eaeaea"
             />
 
         <Button
@@ -180,7 +183,8 @@
             android:paddingBottom="10dp"
             android:paddingRight="10dp"
             android:paddingStart="10dp"
-            android:paddingTop="10dp"/>
+            android:paddingTop="10dp"
+            android:background="#eaeaea"/>
 
         <Switch
             android:id="@+id/switch2"
@@ -215,7 +219,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="  "
-            android:textSize="10sp"/>
+            android:textSize="10sp"
+            android:background="#eaeaea"/>
 
         <Button
             android:id="@+id/button11"
