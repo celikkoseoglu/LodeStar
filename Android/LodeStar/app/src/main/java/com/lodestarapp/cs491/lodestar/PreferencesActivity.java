@@ -90,17 +90,25 @@ public class PreferencesActivity extends AppCompatActivity {
                             String myArr[] = str.split("e-mail=");
                             String tmp = myArr[myArr.length - 1];
                             tmp = removeLastCh(tmp); //Removes the last characther
-
-                            if(true) {
+                            tmp = tmp.substring(0,tmp.length()-2);
+                            Log.i("agam","-----------" + returnCurrentEmailofTheUserUnparsed() + " vs " + tmp.substring(0,tmp.length()));
+                            if(tmp.equals(returnCurrentEmailofTheUserUnparsed())) {
                                 //Get the key
                                 tmpKey = str;
                                 tmpKey = tmpKey.substring(tmpKey.indexOf("key = ") + 1);
                                 tmpKey = tmpKey.substring(0, tmpKey.indexOf(", value ="));
+                                tmpKey = tmpKey.substring(5,tmpKey.length());
                                 Log.i("agam","oo yea" + tmpKey);
+
+                                databaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(tmpKey).child("username");
+                                Log.i("agam","key: " + tmpKey);
+                                databaseReference.setValue("bymyside");
 
                             }
 
-                            changeUNAME();
+
+
+
 
 
                         }
