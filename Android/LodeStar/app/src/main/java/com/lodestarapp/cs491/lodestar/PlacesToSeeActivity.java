@@ -2,9 +2,12 @@ package com.lodestarapp.cs491.lodestar;
 
 import android.*;
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -49,6 +52,9 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
 
+    private LocationManager locationManager;
+    private LocationListener locationListener;
+
     private List<Places> placesList = new ArrayList<>();
 
     private String[] venueImageURL = new String[5];
@@ -64,6 +70,42 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
         MapFragment mapFragment = (MapFragment) getFragmentManager()
                 .findFragmentById(R.id.fragment_map);
         mapFragment.getMapAsync(this);
+
+        //Reference: https://developer.android.com/guide/topics/location/strategies.html
+        locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        locationListener = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                getLastKnowLocation(true, location);
+            }
+
+            @Override
+            public void onStatusChanged(String s, int i, Bundle bundle) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String s) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String s) {
+
+            }
+        };
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
 
         recyclerView = findViewById(R.id.places_to_see_recycler_view);
         recyclerView.setHasFixedSize(true);
@@ -87,62 +129,93 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
 
         if (locationPermissionGiven) {
             this.googleMap.setMyLocationEnabled(true);
-            getLastKnowLocation();
+            getLastKnowLocation(false, null);
         } else {
             requestPermissionForLocation();
-            getLastKnowLocation();
+            getLastKnowLocation(false, null);
         }
     }
 
-    private void getLastKnowLocation() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        final Task<Location> locationResult = fusedLocationProviderClient.getLastLocation();
-        final Location[] myLocation = new Location[1];
-        final boolean[] done = {false};
-        locationResult.addOnCompleteListener(this, new OnCompleteListener() {
-            @Override
-            public void onComplete(@NonNull Task task) {
-                if(task.isSuccessful()){
-                    done[0] = true;
-                    myLocation[0] = locationResult.getResult();
-                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(
-                            myLocation[0].getLatitude(), myLocation[0].getLongitude()), 14));
-
-                    googleMap.addMarker((new MarkerOptions().
-                            position(new LatLng(myLocation[0].getLatitude(), myLocation[0].getLongitude()))
-                            .title("Marker")));
-
-                    placesToSeeController = new PlacesToSeeController("", true, myLocation[0]);
-                    placesToSeeController.getPlacesToSeeInformation(placesToSeeController.getRequestFromUrl(),
-                            getApplicationContext(), new LodeStarServerCallback() {
-                                @Override
-                                public void onSuccess(JSONArray jsonArray, JSONObject jsonObject) {
-                                    Log.d(TAG, "cccc");
-                                    try {
-                                        parseTheJSONObject(jsonObject);
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-
-                                @Override
-                                public void onPlaceImageSuccess(Bitmap bitmap) {}
-                            });
-                }
-                //complete else
+    private void getLastKnowLocation(boolean which, Location location) {
+        if (!which) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
             }
-        });
+            final Task<Location> locationResult = fusedLocationProviderClient.getLastLocation();
+            final Location[] myLocation = new Location[1];
+            final boolean[] done = {false};
+            locationResult.addOnCompleteListener(this, new OnCompleteListener() {
+                @Override
+                public void onComplete(@NonNull Task task) {
+                    if (task.isSuccessful()) {
+                        done[0] = true;
+                        myLocation[0] = locationResult.getResult();
+                        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(
+                                myLocation[0].getLatitude(), myLocation[0].getLongitude()), 14));
 
+                        googleMap.addMarker((new MarkerOptions().
+                                position(new LatLng(myLocation[0].getLatitude(), myLocation[0].getLongitude()))
+                                .title("You are Here")));
 
+                        placesToSeeController = new PlacesToSeeController("", true, myLocation[0]);
+                        placesToSeeController.getPlacesToSeeInformation(placesToSeeController.getRequestFromUrl(),
+                                getApplicationContext(), new LodeStarServerCallback() {
+                                    @Override
+                                    public void onSuccess(JSONArray jsonArray, JSONObject jsonObject) {
+                                        Log.d(TAG, "cccc");
+                                        try {
+                                            parseTheJSONObject(jsonObject);
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onPlaceImageSuccess(Bitmap bitmap) {
+                                    }
+                                });
+                    }
+                    //complete else
+                }
+            });
+
+        }
+        else{
+            final Location[] myLocation = new Location[1];
+            myLocation[0] = location;
+
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(
+                    myLocation[0].getLatitude(), myLocation[0].getLongitude()), 14));
+
+            googleMap.addMarker((new MarkerOptions().
+                    position(new LatLng(myLocation[0].getLatitude(), myLocation[0].getLongitude()))
+                    .title("You are Here")));
+
+            placesToSeeController = new PlacesToSeeController("", true, myLocation[0]);
+            placesToSeeController.getPlacesToSeeInformation(placesToSeeController.getRequestFromUrl(),
+                    getApplicationContext(), new LodeStarServerCallback() {
+                        @Override
+                        public void onSuccess(JSONArray jsonArray, JSONObject jsonObject) {
+                            Log.d(TAG, "cccc");
+                            try {
+                                parseTheJSONObject(jsonObject);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        @Override
+                        public void onPlaceImageSuccess(Bitmap bitmap) {
+                        }
+                    });
+        }
     }
 
     private boolean checkForLocationPermission() {
@@ -176,6 +249,10 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
                                 myLocation[0] = locationResult.getResult();
                                 googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(
                                         myLocation[0].getLatitude(), myLocation[0].getLongitude()), 14));
+
+                                googleMap.addMarker((new MarkerOptions().
+                                        position(new LatLng(myLocation[0].getLatitude(), myLocation[0].getLongitude()))
+                                        .title("You are Here")));
 
                                 placesToSeeController = new PlacesToSeeController("", true, myLocation[0]);
                                 placesToSeeController.getPlacesToSeeInformation(placesToSeeController.getRequestFromUrl(),
@@ -235,6 +312,8 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
 
         String photoURL;
 
+        final Bitmap[] imgBitmap = new Bitmap[1];
+
         for (int i = 0; i < items.length(); i++){
             venue = items.getJSONObject(i).getJSONObject("venue");
             placeName = venue.getString("name");
@@ -265,12 +344,38 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
             photoURL = items.getJSONObject(i).getString("venueImage");
             this.venueImageURL[i] = photoURL;
 
-            placesList.add(new Places(null, placeName, placeType, placeLocation, numberOfReviews, placeRating));
+
+            //for (int j = 0; j < 5; j++) {
+                final int finalI = i;
+                Log.d(TAG, this.venueImageURL[i]);
+            final String finalPlaceName = placeName;
+            final String finalPlaceType = placeType;
+            final String finalPlaceLocation = placeLocation;
+            final String finalNumberOfReviews = numberOfReviews;
+            final String finalPlaceRating = placeRating;
+            placesToSeeController.getVenueImage(this.venueImageURL[i], getApplicationContext(), new LodeStarServerCallback() {
+                    @Override
+                    public void onSuccess(JSONArray jsonArray, JSONObject jsonObject) {}
+
+                    @Override
+                    public void onPlaceImageSuccess(Bitmap bitmap) {
+                        imgBitmap[0] = bitmap;
+                        placesList.add(new Places(imgBitmap[0], finalPlaceName, finalPlaceType, finalPlaceLocation, finalNumberOfReviews, finalPlaceRating));
+                        adapter.notifyDataSetChanged();
+                        //placesList.get(finalI).setPlaceImage(bitmap);
+                        //adapter.notifyDataSetChanged();
+                    }
+                });
+            //}
+
+            //placesList.add(new Places(imgBitmap[0], placeName, placeType, placeLocation, numberOfReviews, placeRating));
 
         }
-        adapter.notifyDataSetChanged();
 
-        getPlaceImage();
+        //getPlaceImage();
+
+
+
     }
 
     private void getPlaceImage() {
@@ -284,7 +389,7 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
                 @Override
                 public void onPlaceImageSuccess(Bitmap bitmap) {
                     placesList.get(finalI).setPlaceImage(bitmap);
-                    adapter.notifyDataSetChanged();
+                    //adapter.notifyDataSetChanged();
                 }
             });
         }
