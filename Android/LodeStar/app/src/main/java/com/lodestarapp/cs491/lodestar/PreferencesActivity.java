@@ -1,6 +1,7 @@
 package com.lodestarapp.cs491.lodestar;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,7 +11,7 @@ import android.widget.Toast;
 public class PreferencesActivity extends AppCompatActivity {
 
 
-    Button changePassword;
+    Button changePassword, aboutLDSTR;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +24,21 @@ public class PreferencesActivity extends AppCompatActivity {
         changePassword.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
              changePasswordPref();
+            }
+        });
+
+        aboutLDSTR= (Button) findViewById(R.id.aboutLodeStar);
+
+
+
+        aboutLDSTR.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //retrieved these three lines from stackoverflow.com
+                Intent websiteIntent = new Intent("android.intent.action.VIEW",
+                                Uri.parse("http://lodestarapp.com/"));
+                startActivity(websiteIntent);
             }
         });
 
