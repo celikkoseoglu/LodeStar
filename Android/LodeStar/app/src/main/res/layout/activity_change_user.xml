@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/thy_lounge_background">
+
+    <TextView
+        android:id="@+id/usernameChangeView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tableLayout3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="35dp"
+        android:text="Change Username"
+        android:textColor="@android:color/background_light"
+        android:textSize="32sp" />
+
+
+    <TableLayout
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/shape_sign_up"
+        android:alpha="0.4"
+        android:id="@+id/tableLayout3"
+        >
+
+        <TableRow>
+
+            <ImageView
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:scaleType="center"
+                app:srcCompat="@drawable/ic_003_user" />
+
+            <EditText
+                android:id="@+id/usernameChangeEditTxt"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:hint="Change Username"
+                android:inputType="textEmailAddress"
+                android:maxLength="256"
+                android:maxLines="1"
+                android:shadowColor="@color/colorWhite"
+                android:textColor="@color/colorWhite"
+                android:textColorHint="@color/cardview_light_background" />
+
+        </TableRow>
+
+
+
+
+    </TableLayout>
+
+    <Button
+        android:id="@+id/usernameChangeButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tableLayout3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="27dp"
+        android:background="#ba2d1d"
+        android:text="Click to Change Your Username"
+        android:textAllCaps="false"
+        android:textColor="@android:color/background_light" />
+
+
+
+
+
+</RelativeLayout>

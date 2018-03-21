@@ -188,7 +188,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         }
 
 
-        String myemail = String.valueOf(emailField.getText()) + "---" + myUName;
+        String myemail = String.valueOf(emailField.getText());
         final User u;
         u = new User(myUName,myemail);
 
@@ -200,7 +200,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 if(t.isSuccessful()) {
                     Toast.makeText(SignUpActivity.this,u.getEmail(),Toast.LENGTH_SHORT).show();
                     u.uid = t.getResult().getUser().getUid();
-                    writeNewUser(u.getUid(),u.getName(),u.getEmail() + "--" + uName.getText());
+                    writeNewUser(u.getUid(),u.getName(),u.getEmail() + "----" + uName.getText());
                  //   createNewUser(u);
                     //  startActivity(new Intent(this,UserLoginActivity.class));
                    // finish();

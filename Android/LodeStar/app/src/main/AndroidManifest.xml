@@ -81,6 +81,14 @@
         <activity
             android:name=".ChangePasswordActivity"
             android:label="@string/title_activity_change_password"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".changeUserActivity"
+            android:label="@string/title_activity_change_user"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ChangeUserActivity"
+            android:label="@string/title_activity_change_user"
             android:theme="@style/AppTheme"></activity>
     </application>
 

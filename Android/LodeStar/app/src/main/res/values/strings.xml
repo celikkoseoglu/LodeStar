@@ -47,5 +47,6 @@
     <string name="place_location">Place Location</string>
     <string name="number_of_reviews">Reviews</string>
     <string name="title_activity_change_password">ChangePasswordActivity</string>
+    <string name="title_activity_change_user">changeUserActivity</string>
 
 </resources>

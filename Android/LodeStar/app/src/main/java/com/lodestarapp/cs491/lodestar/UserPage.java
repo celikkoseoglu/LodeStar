@@ -77,10 +77,7 @@ public class UserPage extends android.support.v4.app.Fragment {
     public void onStart() {
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser == null) {
-
-            // No user is signed in
-        } else {
+        if (currentUser != null) {
             String str;
             str = currentUser.getEmail();
             String[] tmp = str.split("----");
