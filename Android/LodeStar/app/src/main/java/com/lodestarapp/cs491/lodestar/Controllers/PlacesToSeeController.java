@@ -39,8 +39,11 @@ public class PlacesToSeeController {
 
         if(this.locationPermissionGiven){
             //Server part not implemented
-            this.requestFromUrl = "http://lodestarapp.com:3009/?location="+location.getLatitude()+
-            ","+location.getLongitude()+"&limit=5";
+
+            this.requestFromUrl = "http://lodestarapp.com:3010/";
+
+            // this.requestFromUrl = "http://lodestarapp.com:3009/?location="+location.getLatitude()+
+            //","+location.getLongitude()+"&limit=5";
 
             Log.i(TAG, this.requestFromUrl);
         }
@@ -54,14 +57,14 @@ public class PlacesToSeeController {
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
 
-        final JSONObject[] responseFromServer = new JSONObject[1];
+        final JSONArray[] responseFromServer = new JSONArray[1];
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
-                requestFromUrl, null, new Response.Listener<JSONObject>() {
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET,
+                requestFromUrl, null, new Response.Listener<JSONArray>() {
             @Override
-            public void onResponse(JSONObject response) {
+            public void onResponse(JSONArray response) {
                 responseFromServer[0] = response;
-                lodeStarServerCallback.onSuccess(null, responseFromServer[0]);
+                lodeStarServerCallback.onSuccess(responseFromServer[0], null);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -73,10 +76,10 @@ public class PlacesToSeeController {
                 responseFromServer[0] = null;
             }
         });
-        requestQueue.add(jsonObjectRequest);
+        requestQueue.add(jsonArrayRequest);
     }
 
-    public void getVenueImage(String imageURL, Context context, final LodeStarServerCallback lodeStarServerCallback){
+    public void getPlaceImage(String imageURL, Context context, final LodeStarServerCallback lodeStarServerCallback){
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         final Bitmap[] imageMap = new Bitmap[1];

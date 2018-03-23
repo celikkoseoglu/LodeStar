@@ -28,8 +28,11 @@ public class PlacesToSeeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         ImageView placePictureView;
         TextView placeNameView;
-        TextView placeTypeView;
+        //TextView placeTypeView;
         TextView placeLocationView;
+
+        ImageView placeTypeIcon;
+        TextView placePhotoAttributionView;
 
         //ImageView ??? Number of stars???
         ImageView[] placeStarImages = new ImageView[5];
@@ -39,16 +42,18 @@ public class PlacesToSeeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         ImageView placeStarImage4;
         ImageView placeStarImage5;*/
 
-        TextView placeNumberOfReviewsView;
+        //TextView placeNumberOfReviewsView;
 
         public PlacesViewHolder(View itemView) {
             super(itemView);
 
             this.placePictureView = itemView.findViewById(R.id.imageButtonView);
             this.placeNameView = itemView.findViewById(R.id.place_name);
-            this.placeTypeView = itemView.findViewById(R.id.place_type);
+            //this.placeTypeView = itemView.findViewById(R.id.place_type);
             this.placeLocationView = itemView.findViewById(R.id.place_location);
-            this.placeNumberOfReviewsView = itemView.findViewById(R.id.place_number_of_reviews);
+            //this.placeNumberOfReviewsView = itemView.findViewById(R.id.place_number_of_reviews);
+            this.placeTypeIcon = itemView.findViewById(R.id.place_icon_from_api);
+            this.placePhotoAttributionView = itemView.findViewById(R.id.photo_attribution);
 
             this.placeStarImages[0] = itemView.findViewById(R.id.place_stars_image1);
             this.placeStarImages[1] = itemView.findViewById(R.id.place_stars_image2);
@@ -81,13 +86,13 @@ public class PlacesToSeeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         boolean halfStar = placesList.get(position).isHalfStar();
         int i;
 
-        for ( i = 0; i < noOfStars; i++) {
+        /*for ( i = 0; i < noOfStars; i++) {
             ((PlacesViewHolder) holder).placeStarImages[i].setImageResource(this.context.getResources()
             .getIdentifier("ic_star_full", "drawable", this.context.getPackageName()));
         }
         if(halfStar)
             ((PlacesViewHolder) holder).placeStarImages[i].setImageResource(this.context.getResources()
-                    .getIdentifier("ic_star_half_full", "drawable", this.context.getPackageName()));
+                    .getIdentifier("ic_star_half_full", "drawable", this.context.getPackageName()));*/
 
         //Set Place Image
         ((PlacesViewHolder) holder).placePictureView.
@@ -98,16 +103,23 @@ public class PlacesToSeeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 .getPlaceName());
 
         //Set Place Type
-        ((PlacesViewHolder) holder).placeTypeView.setText(placesList.get(position)
-                .getPlaceType());
+        //((PlacesViewHolder) holder).placeTypeView.setText(placesList.get(position)
+        //        .getPlaceType());
 
         //Set Place Location
         ((PlacesViewHolder) holder).placeLocationView.setText(placesList.get(position)
                 .getPlaceLocation());
 
         //Set Place Number of Reviews
-        ((PlacesViewHolder) holder).placeNumberOfReviewsView.setText(placesList.get(position)
-                .getPlaceNumberOfReviews());
+        //((PlacesViewHolder) holder).placeNumberOfReviewsView.setText(placesList.get(position)
+        //        .getPlaceNumberOfReviews());
+
+        //Set Photo Attribution
+        ((PlacesViewHolder) holder).placePhotoAttributionView.setText(placesList.get(position)
+                .getAttribution());
+
+        ((PlacesViewHolder) holder).placeTypeIcon.
+                setImageBitmap(placesList.get(position).getPlaceIconImage());
     }
 
     @Override

@@ -42,7 +42,7 @@
                     android:text="@string/place_name"
                     android:textSize="24sp" />
 
-                <ImageView
+                <!--<ImageView
                     android:id="@+id/place_type_icon"
                     android:layout_width="15dp"
                     android:layout_height="20dp"
@@ -61,26 +61,28 @@
                     android:layout_marginStart="12dp"
                     android:layout_toEndOf="@+id/place_type_icon"
                     android:layout_toRightOf="@+id/place_type_icon"
-                    android:text="@string/place_type" />
+                    android:text="@string/place_type" />!-->
 
                 <ImageView
                     android:id="@+id/place_icon"
                     android:layout_width="15dp"
                     android:layout_height="20dp"
-                    android:layout_below="@id/place_type_icon"
-                    android:layout_marginTop="5dp"
-                    android:layout_alignLeft="@id/place_type_icon"
+                    android:layout_below="@id/place_name"
+                    android:layout_marginTop="15dp"
+                    android:layout_alignLeft="@id/place_name"
                     app:srcCompat="@color/colorRedd"
-                    android:layout_alignStart="@id/place_type_icon" />
+                    android:layout_alignStart="@id/place_name" />
 
                 <TextView
                     android:id="@+id/place_location"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
                     android:layout_alignBottom="@+id/place_icon"
-                    android:layout_alignLeft="@+id/place_type"
-                    android:layout_alignStart="@+id/place_type"
-                    android:text="@string/place_location" />
+                    android:layout_alignLeft="@+id/place_icon"
+                    android:layout_alignStart="@+id/place_icon"
+                    android:text="@string/place_location"
+                    android:layout_marginStart="20dp" />
 
                 <ImageView
                     android:id="@+id/place_stars_image1"
@@ -89,7 +91,7 @@
                     android:layout_alignLeft="@id/place_icon"
                     android:layout_alignStart="@id/place_icon"
                     android:layout_below="@id/place_icon"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="15dp"
                     app:srcCompat="@android:color/holo_orange_dark" />
 
                 <ImageView
@@ -128,7 +130,18 @@
                     android:layout_toRightOf="@+id/place_stars_image4"
                     app:srcCompat="@android:color/holo_red_dark" />
 
-                <TextView
+                <ImageView
+                    android:id="@+id/place_icon_from_api"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_alignBottom="@+id/place_name"
+                    android:layout_marginLeft="27dp"
+                    android:layout_marginStart="27dp"
+                    android:layout_toEndOf="@+id/place_name"
+                    android:layout_toRightOf="@+id/place_name"
+                    app:srcCompat="@color/colorPrimary" />
+
+                <!--<TextView
                     android:id="@+id/place_number_of_reviews"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -137,7 +150,17 @@
                     android:layout_alignTop="@+id/place_stars_image5"
                     android:text="@string/number_of_reviews"
                     android:layout_marginStart="20dp"
-                    android:layout_alignStart="@id/place_stars_image5" />
+                    android:layout_alignStart="@id/place_stars_image5" />!-->
+
+                <TextView
+                    android:id="@+id/photo_attribution"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/place_stars_image5"
+                    android:layout_toLeftOf="@+id/place_icon_from_api"
+                    android:layout_toStartOf="@+id/place_icon_from_api"
+                    android:text="@string/place_photo_attribution"
+                    android:textSize="10sp" />
 
             </RelativeLayout>
 

@@ -58,6 +58,8 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
     private List<Places> placesList = new ArrayList<>();
 
     private String[] venueImageURL = new String[5];
+    private ArrayList<String> photoReferences = new ArrayList<>();
+    private ArrayList<String> iconURL = new ArrayList<>();
 
     private static final String TAG = "placesToSeeMessage";
 
@@ -72,8 +74,8 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
         mapFragment.getMapAsync(this);
 
         //Reference: https://developer.android.com/guide/topics/location/strategies.html
-        locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-        locationListener = new LocationListener() {
+        //locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        /*locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
                 getLastKnowLocation(true, location);
@@ -93,7 +95,7 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
             public void onProviderDisabled(String s) {
 
             }
-        };
+        };*/
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -105,16 +107,13 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+        //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
 
         recyclerView = findViewById(R.id.places_to_see_recycler_view);
         recyclerView.setHasFixedSize(true);
 
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-
-        adapter = new PlacesToSeeAdapter(placesList, this.getApplicationContext());
-        recyclerView.setAdapter(adapter);
 
     }
 
@@ -171,7 +170,7 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
                                     public void onSuccess(JSONArray jsonArray, JSONObject jsonObject) {
                                         Log.d(TAG, "cccc");
                                         try {
-                                            parseTheJSONObject(jsonObject);
+                                            parseTheJSONObject(jsonArray);
                                         } catch (JSONException e) {
                                             e.printStackTrace();
                                         }
@@ -205,7 +204,7 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
                         public void onSuccess(JSONArray jsonArray, JSONObject jsonObject) {
                             Log.d(TAG, "cccc");
                             try {
-                                parseTheJSONObject(jsonObject);
+                                parseTheJSONObject(jsonArray);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -261,7 +260,7 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
                                             public void onSuccess(JSONArray jsonArray, JSONObject jsonObject) {
                                                 Log.d(TAG, "aaaa");
                                                 try {
-                                                    parseTheJSONObject(jsonObject);
+                                                    parseTheJSONObject(jsonArray);
                                                 } catch (JSONException e) {
                                                     e.printStackTrace();
                                                 }
@@ -285,10 +284,69 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
         }
     }
 
-    private void parseTheJSONObject(JSONObject jsonObject) throws JSONException {
+    private void parseTheJSONObject(JSONArray jsonArray) throws JSONException {
         //Log.d(TAG, "bbb");
-        Log.d(TAG, jsonObject.toString());
+        Log.d(TAG, jsonArray.toString());
 
+
+        String placeName;
+        String placeAddress;
+        String placeRating;
+
+        JSONObject place;
+
+        JSONObject geometry;
+        JSONObject location;
+        JSONObject viewport;
+
+        JSONArray photos;
+
+        LatLng placeLatLng;
+
+        //VR Photo???
+        LatLng placeViewPort;
+
+        String photoAttribution;
+
+        for (int i = 0; i < jsonArray.length() ; i++) {
+            place = jsonArray.getJSONObject(i);
+
+            geometry = place.getJSONObject("geometry");
+            location = geometry.getJSONObject("location");
+            viewport = geometry.getJSONObject("viewport");
+
+            photos = place.getJSONArray("photos");
+
+            placeName = place.getString("name");
+            placeAddress = place.getString("formatted_address");
+            placeRating = place.getString("rating");
+
+            placeLatLng = new LatLng(location.getDouble("lat"), location.getDouble("lng"));
+
+            iconURL.add(place.getString("icon"));
+
+            photoReferences.add(photos.getJSONObject(0).getString("photo_reference"));
+
+            photoAttribution = photos.getJSONObject(0)
+                    .getJSONArray("html_attributions").toString();
+
+            //Add marker to google maps
+            googleMap.addMarker(new MarkerOptions()
+                    .position(placeLatLng)
+                    .title(placeName));
+
+            placesList.add(new Places(null, placeName, placeAddress,
+                    placeRating, null, photoAttribution));
+
+        }
+
+        getPlacesPhotos(photoReferences);
+        getPlacesIcons(iconURL);
+
+        adapter = new PlacesToSeeAdapter(placesList, this.getApplicationContext());
+        recyclerView.setAdapter(adapter);
+
+        /*
 
         JSONArray groups = jsonObject.getJSONArray("groups");
         JSONArray items = groups.getJSONObject(0).getJSONArray("items");
@@ -375,10 +433,56 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
         //getPlaceImage();
 
 
-
+*/
     }
 
-    private void getPlaceImage() {
+    private void getPlacesIcons(ArrayList<String> iconURL) {
+        for (int i = 0; i < iconURL.size(); i++) {
+            final int finalI = i;
+            Log.d(TAG, this.iconURL.get(i));
+            placesToSeeController.getPlaceImage(iconURL.get(i), getApplicationContext(),
+                    new LodeStarServerCallback() {
+                        @Override
+                        public void onSuccess(JSONArray jsonArray, JSONObject jsonObject) {}
+
+                        @Override
+                        public void onPlaceImageSuccess(Bitmap bitmap) {
+                            placesList.get(finalI).setPlaceIconImage(bitmap);
+                        }
+                    });
+        }
+    }
+
+    private void getPlacesPhotos(ArrayList<String> photoReferences) {
+        StringBuilder requestFromURL = new StringBuilder("");
+
+        for (int i = 0; i < photoReferences.size(); i++){
+            final int finalI = i;
+            //Log.d(TAG, "Photo");
+            //Log.d(TAG, this.photoReferences.get(i));
+
+            requestFromURL.append("https://maps.googleapis.com/maps/api/place/photo" +
+                    "?maxwidth=125&photoreference=");
+
+            requestFromURL.append(photoReferences.get(i));
+            requestFromURL.append("&key=" + "AIzaSyAKnThPPshmgffk3DNPNkXd2glEQaH1Rlw");
+
+            placesToSeeController.getPlaceImage(requestFromURL.toString(), getApplicationContext(),
+                    new LodeStarServerCallback() {
+                        @Override
+                        public void onSuccess(JSONArray jsonArray, JSONObject jsonObject) {}
+
+                        @Override
+                        public void onPlaceImageSuccess(Bitmap bitmap) {
+                            placesList.get(finalI).setPlaceImage(bitmap);
+                        }
+                    });
+
+            requestFromURL.setLength(0);
+        }
+    }
+
+    /*private void getPlaceImage() {
         for (int i = 0; i < 5; i++) {
             final int finalI = i;
             Log.d(TAG, this.venueImageURL[i]);
@@ -393,5 +497,5 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
                 }
             });
         }
-    }
+    }*/
 }
