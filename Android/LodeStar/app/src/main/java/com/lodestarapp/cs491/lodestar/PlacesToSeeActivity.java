@@ -308,7 +308,7 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
 
         String photoAttribution;
 
-        for (int i = 0; i < jsonArray.length() ; i++) {
+        for (int i = 0; i < 5 ; i++) {
             place = jsonArray.getJSONObject(i);
 
             geometry = place.getJSONObject("geometry");
@@ -437,7 +437,7 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
     }
 
     private void getPlacesIcons(ArrayList<String> iconURL) {
-        for (int i = 0; i < iconURL.size(); i++) {
+        for (int i = 0; i < 5; i++) {
             final int finalI = i;
             Log.d(TAG, this.iconURL.get(i));
             placesToSeeController.getPlaceImage(iconURL.get(i), getApplicationContext(),
@@ -456,7 +456,7 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
     private void getPlacesPhotos(ArrayList<String> photoReferences) {
         StringBuilder requestFromURL = new StringBuilder("");
 
-        for (int i = 0; i < photoReferences.size(); i++){
+        for (int i = 0; i < 5; i++){
             final int finalI = i;
             //Log.d(TAG, "Photo");
             //Log.d(TAG, this.photoReferences.get(i));
