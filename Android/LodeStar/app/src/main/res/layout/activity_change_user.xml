@@ -37,7 +37,7 @@
                 app:srcCompat="@drawable/ic_003_user" />
 
             <EditText
-                android:id="@+id/usernameChangeEditTxt"
+                android:id="@+id/usernameChangeEditTxtw"
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
                 android:hint="Change Username"

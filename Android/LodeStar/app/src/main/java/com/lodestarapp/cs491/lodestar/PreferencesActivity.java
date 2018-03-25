@@ -44,7 +44,7 @@ public class PreferencesActivity extends AppCompatActivity {
 
         changePassword.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
-             changePasswordPref();
+                changePasswordPref();
             }
         });
 
@@ -58,7 +58,7 @@ public class PreferencesActivity extends AppCompatActivity {
 
                 //retrieved these three lines from stackoverflow.com
                 Intent websiteIntent = new Intent("android.intent.action.VIEW",
-                                Uri.parse("http://lodestarapp.com/"));
+                        Uri.parse("http://lodestarapp.com/"));
                 startActivity(websiteIntent);
             }
         });
@@ -91,8 +91,27 @@ public class PreferencesActivity extends AppCompatActivity {
                             String tmp = myArr[myArr.length - 1];
                             tmp = removeLastCh(tmp); //Removes the last characther
                             tmp = tmp.substring(0,tmp.length()-2);
-                            Log.i("agam","-----------" + returnCurrentEmailofTheUserUnparsed() + " vs " + tmp.substring(0,tmp.length()));
-                            if(tmp.equals(returnCurrentEmailofTheUserUnparsed())) {
+                            int foccurence = returnCurrentEmailofTheUserUnparsed().indexOf("-");
+                            int foccurence2 = tmp.substring(0,tmp.length()).indexOf("-");
+
+                            String subString = null,substring2 = null;
+                            //Used code in https://stackoverflow.com/questions/7683448/in-java-how-to-get-substring-from-a-string-till-a-character-c for parsing
+                            if (foccurence != -1)
+                            {
+                                subString= returnCurrentEmailofTheUserUnparsed().substring(0 , foccurence);
+                            }
+
+                            if(foccurence2 != -1) {
+                                substring2 = returnCurrentEmailofTheUserUnparsed().substring(0 , foccurence2);
+                            }
+
+
+
+                            Log.i("agam","-----------" + subString + " vs " + substring2);
+
+                            //Return the string value until "-" is encountered
+
+                            if(subString.equals(substring2)) {
                                 //Get the key
                                 tmpKey = str;
                                 tmpKey = tmpKey.substring(tmpKey.indexOf("key = ") + 1);
@@ -100,12 +119,13 @@ public class PreferencesActivity extends AppCompatActivity {
                                 tmpKey = tmpKey.substring(5,tmpKey.length());
                                 Log.i("agam","oo yea" + tmpKey);
 
-                                databaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(tmpKey).child("username");
+                                //   databaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(tmpKey).child("username");
                                 Log.i("agam","key: " + tmpKey);
-                                databaseReference.setValue("bymyside");
+                                //    databaseReference.setValue("bymyside");
 
                             }
 
+                            changeUNAME();
 
 
 
