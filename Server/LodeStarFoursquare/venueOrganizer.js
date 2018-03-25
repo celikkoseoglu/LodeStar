@@ -4,7 +4,6 @@ const async = require('async');
 //const http = require('http');
 const app = express();
 
-
 /*
  * Jing'an sculpture park coordinates: 31.2339463,121.46388509999997
  * Jing'an Sculpture park venue_id 4c8b49986418a143bff1e7ce
@@ -58,6 +57,7 @@ function foursqaureRequest(query, res) {
             if (foursqaureErr) {
                 console.error(foursqaureErr);
             } else {
+
                 let data = JSON.parse(foursquareBody); //this step is required for making modifications on JSON data.
 
                 let numberOfVenuesInResponse = data.response.groups[0].items.length;
@@ -106,7 +106,6 @@ function foursqaureRequest(query, res) {
                 }
 
                 async.map(imageRequests, requestImage, imageRequestsDone);
-
 
                 //crazy complicated sh1te
                 function requestReview(reviewQueryIter, callback) {
@@ -164,8 +163,24 @@ app.get('/imagesWithVenueID', (req, res) => {
     res.send('not ready yet');
 });
 
+app.get('/test', (req, res) => {
+    //Cloning the template. Should not modify it because the venue_id replacement header is needed for future requests to be correct.
+    let venueSearchQueryClone = clone(requestQuery);
+
+    venueSearchQueryClone.url = venueSearchURL;
+
+    venueSearchQueryClone.qs.query = 'coffee'; // coming from request parameter query
+    venueSearchQueryClone.qs.ll = req.query.location; // coming from request parameter location
+    venueSearchQueryClone.qs.limit = req.query.limit; // return only specified number of results from the query
+
+    foursqaureRequest(venueSearchQueryClone, res);
+});
+
+
 app.listen(3009, () => console.log('LodeStar Foursquare Server listening on port 3009!'));
 
 function clone(a) {
     return JSON.parse(JSON.stringify(a));
 }
+
+//sehire göre intrinsics...

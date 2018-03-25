@@ -54,7 +54,6 @@ h6 {
 
 section {
     padding-top: 0px;
-
     background-color: rgba(252,251,250,0.9);
     box-shadow: 0 19px 38px rgba(0,0,0,0.30); /* material casts shadow */
     margin-left: 5%;
@@ -143,11 +142,6 @@ img::-moz-selection {
     border: 0;
     background-color: #fed136;
     font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-}
-
-#mainNav .navbar-brand {
-    color: #fed136;
-    font-family: 'Kaushan Script', 'Helvetica Neue', Helvetica, Arial, cursive;
 }
 
 #mainNav .navbar-brand.active, #mainNav .navbar-brand:active, #mainNav .navbar-brand:focus, #mainNav .navbar-brand:hover {
@@ -414,7 +408,6 @@ img::-moz-selection {
 footer {
     padding: 25px;
     text-align: center;
-    background: #131b1f;
 }
 
 footer span.copyright {
@@ -448,5 +441,5 @@ ul.social-buttons li a {
     color: white;
     border-radius: 100%;
     outline: none;
-    background-color: #212529;
+    background-color: #1d4456;
 }

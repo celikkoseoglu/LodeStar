@@ -49,8 +49,8 @@ $( window ).resize(function() {
 // All the scenes for the experience
 var scenes = {
     thy_lounge: {
-        image: 'images/thy_lounge_stereo.jpg',
-        preview: 'images/thy_lounge_stereo.jpg'
+        image: 'images/panoramas/kiz-kulesi-360_sh1te.jpg',
+        preview: 'images/panoramas/kiz-kulesi-360_sh1te.jpg'
     },
     christTheRedeemer: {
         image: 'christ-redeemer.jpg',
@@ -73,7 +73,7 @@ var scenes = {
 function onLoad() {
     vrView = new VRView.Player('#vrview', {
         image: 'blank.png',
-        is_stereo: true,
+        is_stereo: false,
         is_autopan_off: true,
         is_vr_off: false
     });
