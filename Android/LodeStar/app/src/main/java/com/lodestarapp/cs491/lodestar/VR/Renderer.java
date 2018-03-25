@@ -3,6 +3,7 @@ package com.lodestarapp.cs491.lodestar.VR;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.opengl.GLES10;
 import android.opengl.GLES20;
 import android.opengl.GLUtils;
 
@@ -15,8 +16,14 @@ import java.io.InputStreamReader;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.microedition.khronos.opengles.GL;
+import javax.microedition.khronos.opengles.GL10;
+
+import static java.lang.Math.sin;
 
 public class Renderer {
 
@@ -45,9 +52,36 @@ public class Renderer {
     private int mPositionHandle;
     private int programHandle;
     private int mTextureCoordinateHandle;
-    private int mTextureDataHandle0[] = new int[1];
+    private int mTextureDataHandle0[] = new int[2];
     private final int vertexStride = CORDS_PER_VERTEX * 4;
 
+    static float triangleCoords[] = {
+            -0.0f,  -0.622008459f/2-2, -0.9f-2, // top
+            -0.5f, -0.311004243f/2-2, 0.0f-2, // bottom left
+            0.5f, -0.311004243f/2-2, 0.0f-2  // bottom right
+    };
+
+    static float triangleCoords2[] = {
+            -0.0f,  -0.622008459f/2-2, -2.85f, // top
+            -0.5f, -0.311004243f/2-2, -1.955f, // bottom left
+            0.5f, -0.311004243f/2-2, -1.95f  // bottom right
+    };
+
+    float textureCoords[] = {
+            0.5f, 1.0f,
+            0.15f, 0.05f,
+            0.9f, 0.05f,
+            0.9f, 1.0f // t right
+            };
+
+
+
+    float straight[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+    float color[] = { 0.188f, 0.345f, 0.906f, 1.0f };
+    private FloatBuffer vertexBuffer;
+    private FloatBuffer vertexBuffer1;
+    private FloatBuffer colorBuffer;
+    private FloatBuffer arrowBuffer;
 
     public Renderer(final Context context, final int depth, final float radius) {
 
@@ -57,7 +91,7 @@ public class Renderer {
         final int vertexShaderHandle = ShaderHelper.compileShader(GLES20.GL_VERTEX_SHADER, vertexShader);
         final int fragmentShaderHandle = ShaderHelper.compileShader(GLES20.GL_FRAGMENT_SHADER, fragmentShader);
 
-        programHandle = ShaderHelper.createAndLinkProgram(vertexShaderHandle,fragmentShaderHandle, new String[]{"a_Position","a_TexCoordinate"});
+        programHandle = ShaderHelper.createAndLinkProgram(vertexShaderHandle,fragmentShaderHandle, new String[]{"a_Position","a_TexCoordinate","a_alpha"});
         GLES20.glUseProgram(programHandle);
 
         final int d = Math.max(1, Math.min(MAXIMUM_ALLOWED_DEPTH, depth));
@@ -78,9 +112,9 @@ public class Renderer {
             azimuth = stripNum * azimuthStepAngle;
 
             for (int vertexNum = 0; vertexNum < numVerticesPerStrip; vertexNum += 2) {
-                y = radius * Math.sin(altitude);
+                y = radius * sin(altitude);
                 h = radius * Math.cos(altitude);
-                z = h * Math.sin(azimuth);
+                z = h * sin(azimuth);
                 x = h * Math.cos(azimuth);
                 vertices[vertexPos++] = (float) x;
                 vertices[vertexPos++] = (float) y;
@@ -91,9 +125,9 @@ public class Renderer {
 
                 altitude -= altitudeStepAngle;
                 azimuth -= azimuthStepAngle / 2.0;
-                y = radius * Math.sin(altitude);
+                y = radius * sin(altitude);
                 h = radius * Math.cos(altitude);
-                z = h * Math.sin(azimuth);
+                z = h * sin(azimuth);
                 x = h * Math.cos(azimuth);
                 vertices[vertexPos++] = (float) x;
                 vertices[vertexPos++] = (float) y;
@@ -122,6 +156,87 @@ public class Renderer {
             fb.position(0);
             this.mTextureBuffer.add(fb);
         }
+
+        int vertexCount = 30;
+        float r = 1.0f;
+        float center_x = 1.0f;
+        float center_y = -2.0f;
+        float center_z = 1.0f;
+        float buffer[] = new float[vertexCount*3]; // (x,y) for each vertex
+        int idx = 0;
+
+        buffer[idx++] = center_x;
+        buffer[idx++] = center_y;
+        buffer[idx++] = center_z;
+
+// Outer vertices of the circle
+        int outerVertexCount = vertexCount-1;
+
+        for (int i = 0; i < outerVertexCount; ++i){
+            float percent = (i / (float) (outerVertexCount-1));
+            float rad = percent * (float)Math.PI;
+
+            //Vertex position
+            float outer_x = (float) (center_x + radius * Math.cos(rad));
+            float outer_y = (float) (center_y + radius * sin(rad));
+            float outer_z = (float) (center_z + radius * Math.cos(rad));
+
+
+            buffer[idx++] = outer_x;
+            buffer[idx++] = outer_y;
+            buffer[idx++] = outer_z;
+        }
+
+
+
+
+        ByteBuffer bb = ByteBuffer.allocateDirect(triangleCoords.length * 4);
+
+        bb.order(ByteOrder.nativeOrder());
+
+        vertexBuffer = bb.asFloatBuffer();
+
+        vertexBuffer.put(triangleCoords);
+
+        vertexBuffer.position(0);
+
+        ByteBuffer bb2 = ByteBuffer.allocateDirect(triangleCoords2.length * 4);
+
+        bb2.order(ByteOrder.nativeOrder());
+
+        vertexBuffer1 = bb2.asFloatBuffer();
+
+        vertexBuffer1.put(triangleCoords2);
+
+        vertexBuffer1.position(0);
+
+
+
+
+        ByteBuffer bb1 = ByteBuffer.allocateDirect(color.length * 4);
+
+        bb1.order(ByteOrder.nativeOrder());
+
+        colorBuffer = bb1.asFloatBuffer();
+
+        colorBuffer.put(straight);
+
+        colorBuffer.position(0);
+
+        ByteBuffer bb3 = ByteBuffer.allocateDirect(textureCoords.length * 4);
+
+        bb3.order(ByteOrder.nativeOrder());
+
+        arrowBuffer = bb3.asFloatBuffer();
+
+        arrowBuffer.put(textureCoords);
+
+        arrowBuffer.position(0);
+
+
+
+
+
     }
 
     public static String readShader(final Context context, final int resourceId)
@@ -166,9 +281,10 @@ public class Renderer {
     }
 
     public static int[] getTexture(final Context c, final int rid) {
-        final int[] textureHandle = new int[1];
+        final int[] textureHandle = new int[2];
 
-        GLES20.glGenTextures(1, textureHandle, 0);
+        GLES20.glGenTextures(2, textureHandle, 0);
+
 
         if (textureHandle[0] != 0) {
             final BitmapFactory.Options options = new BitmapFactory.Options();
@@ -180,6 +296,21 @@ public class Renderer {
 
             GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_NEAREST);
             GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_NEAREST);
+
+            GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bitmap, 0);
+            bitmap.recycle();
+        }
+
+        if (textureHandle[1] != 0) {
+            final BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inScaled = false;
+
+            final Bitmap bitmap = BitmapFactory.decodeResource(c.getResources(), R.drawable.up_triangle, options);
+            GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureHandle[1]);
+
+            GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_NEAREST);
+            GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_NEAREST);
+
 
             GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bitmap, 0);
             bitmap.recycle();
@@ -198,12 +329,14 @@ public class Renderer {
 
         mPositionHandle = GLES20.glGetAttribLocation(programHandle,"a_Position");
         mTextureCoordinateHandle = GLES20.glGetAttribLocation(programHandle,"a_TexCoordinate");
+        int tl = GLES20.glGetAttribLocation(programHandle,"a_alpha");
+
 
         GLES20.glEnable(GLES20.GL_CULL_FACE);
         GLES20.glCullFace(GLES20.GL_FRONT);
         GLES20.glFrontFace(GLES20.GL_CW);
 
-        GLES20.glActiveTexture(GLES20.GL_TEXTURE1);
+        GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, mTextureDataHandle0[0]);
         GLES20.glUniform1i(mTextureCoordinateHandle, 0);
 
@@ -214,18 +347,63 @@ public class Renderer {
 
             GLES20.glEnableVertexAttribArray(mPositionHandle);
 
-
             GLES20.glVertexAttribPointer(mTextureCoordinateHandle,AMOUNT_OF_NUMBERS_PER_TEXTURE_POINT, GLES20.GL_FLOAT, false, 0,mTextureBuffer.get(i));
 
             GLES20.glEnableVertexAttribArray(mTextureCoordinateHandle);
 
             GLES20.glUniformMatrix4fv(mMVPMatrixHandle, 1, false, mvpMatrix, 0);
 
+
+
             GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, this.mVertices.get(i).length / AMOUNT_OF_NUMBERS_PER_VERTEX_POINT);
 
         }
+        GLES20.glVertexAttribPointer(mPositionHandle, CORDS_PER_VERTEX, GLES20.GL_FLOAT, false, vertexStride, vertexBuffer1);
+        GLES20.glEnableVertexAttribArray(mPositionHandle);
+        GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, 3);
+
+
+
+        GLES20.glVertexAttribPointer(mTextureCoordinateHandle,AMOUNT_OF_NUMBERS_PER_TEXTURE_POINT, GLES20.GL_FLOAT, false, 0,arrowBuffer);
+
+        GLES20.glEnableVertexAttribArray(mTextureCoordinateHandle);
+
+
+        GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, mTextureDataHandle0[1]);
+        GLES20.glUniform1i(mTextureCoordinateHandle, 1);
+
+
+
+
+
+        //GLES20.glUniform4fv(tl, 1, color, 0);
+        GLES20.glVertexAttribPointer(tl,4, GLES20.GL_FLOAT, true,1 , colorBuffer);
+        GLES20.glEnableVertexAttribArray(tl);
+
+
+
+
+
+        //GLES20.glColorMask(true,true,true,false);
+        GLES20.glVertexAttribPointer(mPositionHandle, CORDS_PER_VERTEX, GLES20.GL_FLOAT, false, vertexStride, vertexBuffer);
+        GLES20.glEnableVertexAttribArray(mPositionHandle);
+
+        GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, 3);
+        GLES20.glDisableVertexAttribArray(tl);
+
+
+
+
+
+
+
+
         GLES20.glDisableVertexAttribArray(mPositionHandle);
         GLES20.glDisable(GLES20.GL_CULL_FACE);
+
+
+
 
     }
 
@@ -245,9 +423,6 @@ public class Renderer {
 
         return p;
     }
-
-
-
 
 
 

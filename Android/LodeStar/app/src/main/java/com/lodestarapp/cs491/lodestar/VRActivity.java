@@ -16,6 +16,10 @@ import com.google.vrtoolkit.cardboard.Viewport;
 import com.lodestarapp.cs491.lodestar.VR.MatrixCalculator;
 import com.lodestarapp.cs491.lodestar.VR.Renderer;
 
+import java.nio.FloatBuffer;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.microedition.khronos.egl.EGLConfig;
 
 import static android.opengl.GLES20.glViewport;
