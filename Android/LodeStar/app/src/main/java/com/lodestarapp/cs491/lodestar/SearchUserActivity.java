@@ -89,7 +89,32 @@ public class SearchUserActivity extends AppCompatActivity {
                     tmp = noteSnapshot.getValue() + "";
                     tmp = tmp.substring(10, tmp.length() - 1);
                     tmp = tmp.replace("e-mail=","");
-                    userList.add(tmp);
+
+                    int foccurence = tmp.substring(0,tmp.length()).indexOf(",");
+
+                    String subString = null,substring2 = "check";
+                    //Used code in https://stackoverflow.com/questions/7683448/in-java-how-to-get-substring-from-a-string-till-a-character-c for parsing
+                    if (foccurence != -1)
+                    {
+                        subString= tmp.substring(0 , foccurence);
+                    }
+
+
+                    //Goes here if password is changed
+                    if(subString.contains("/")) {
+                        int focc = subString.indexOf("/");
+
+                        if(focc != -1) {
+                            substring2 = subString.substring(0,focc);
+                        }
+                    }
+
+                    //Check if the password is changed
+
+                    if(substring2.equals("check"))
+                        userList.add(subString);
+                    else
+                        userList.add(subString);
 
                 }
                 arrayAdapter = new ArrayAdapter<String>
