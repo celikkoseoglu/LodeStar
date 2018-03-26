@@ -53,11 +53,28 @@ h6 {
 }
 
 section {
-    padding-top: 0px;
+    padding-top: 0;
     background-color: rgba(252,251,250,0.9);
     box-shadow: 0 19px 38px rgba(0,0,0,0.30); /* material casts shadow */
     margin-left: 5%;
     margin-right: 5%;
+}
+
+
+/* MOBILE */
+@media screen and (max-width: 768px) {
+    section {
+        margin-left: 2%;
+        margin-right: 2%;
+    }
+}
+
+/* DESKTOP */
+@media screen and (min-width: 768px) {
+    section {
+        margin-left: 5%;
+        margin-right: 5%;
+    }
 }
 
 section h2.section-heading {
@@ -389,8 +406,9 @@ img::-moz-selection {
 }
 
 .team-member img {
-    width: 175px;
-    height: 175px;
+    /*width: 175px;
+    height: 175px;*/
+    margin: auto;
     border: 7px solid #fff;
     box-shadow: 0 19px 38px rgba(0,0,0,0.20);
 }

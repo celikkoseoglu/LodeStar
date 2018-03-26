@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 
 import UIKit
 
@@ -68,8 +69,6 @@ extension FlightViewController : UICollectionViewDelegateFlowLayout {
 
 
 class FlightViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
-
-    
     
     @IBOutlet weak var collectionView: UICollectionView!
     //@IBOutlet weak var tripLabel: UILabel!
@@ -86,6 +85,8 @@ class FlightViewController: UIViewController, UICollectionViewDelegate, UICollec
         
         self.collectionView.isScrollEnabled = true
         
+        jsonparse(originAirportCode: "IST", destinationAirportCode: "PVG", flightNumber: "THY26")
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -99,6 +100,33 @@ class FlightViewController: UIViewController, UICollectionViewDelegate, UICollec
         let controller = storyboard?.instantiateViewController(withIdentifier: "flightInformationNAV")
         self.present(controller!, animated: true, completion: nil)
         
+    }
+    
+    
+    func jsonparse(originAirportCode: String, destinationAirportCode: String, flightNumber: String) {
+        
+        var requestTemplate = "http://lodestarapp.com:3006/?originAirportCode=#originAirportCode&destinationAirportCode=#destinationAirportCode&flightNumber=#flightNumber"
+        
+        requestTemplate = requestTemplate.replacingOccurrences(of: "#originAirportCode", with: originAirportCode)
+        requestTemplate = requestTemplate.replacingOccurrences(of: "#destinationAirportCode", with: destinationAirportCode)
+        requestTemplate = requestTemplate.replacingOccurrences(of: "#flightNumber", with: flightNumber)
+        
+        Alamofire.request(requestTemplate).responseJSON { response in
+            //print("Request: \(String(describing: response.request))")   // original url request
+            //print("Response: \(String(describing: response.response))") // http url response
+            print("Result: \(response.result)")                         // response serialization result
+            
+            if let json = response.result.value {
+                print("JSON: \(json)") // serialized json response
+                //let JSON = response.result.value as? NSDictionary
+                //let id = JSON?["aircrafttype"] as! String
+                //print("Aircraft Type: \(id)")
+            }
+            
+            /*if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+             print("Data: \(utf8Text)") // original server data as UTF8 string
+             }*/
+        }
     }
     
 }
