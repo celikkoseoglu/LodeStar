@@ -22,7 +22,7 @@ let placeDetailsRequestQuery = {
         placeid: "",
         key: API_KEY
     }
-}
+};
 
 app.get('/', (req, res) => {
 
