@@ -57,9 +57,9 @@ public class HistoryFragment extends Fragment {
 
         //Write History Activity Here
 
-       // tripListView = myView.findViewById(R.id.olalala);
+        // tripListView = myView.findViewById(R.id.olalala);
 
-        tripListView = getActivity().findViewById(R.id.olalala);
+       // tripListView = getActivity().findViewById(R.id.olalala);
 
 
 
