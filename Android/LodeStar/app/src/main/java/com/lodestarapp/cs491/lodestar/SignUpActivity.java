@@ -105,40 +105,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             }
         });
 
-//        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("users");
-//        ref.addListenerForSingleValueEvent(new com.google.firebase.database.ValueEventListener() {
-//            @Override
-//            public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
-//              // list.add("")
-//                userList.add("" + dataSnapshot.child("users").getChildrenCount() + 1);
-//                Log.i("lol",userList.get(0));
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
 
 
     }
 
 
-//
-//        Firebase ref = new Firebase("https://fir-lodestar.firebaseio.com/");
-//
-//        ref.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot snapshot) {
-//                Log.e("Count " ,""+snapshot.getChildrenCount());
-//
-//            }
-//            @Override
-//            public void onCancelled(FirebaseError firebaseError) {
-//                Log.e("The read failed: " ,firebaseError.getMessage());
-//            }
-//        });
+
 
 
 
@@ -177,7 +149,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         //Get authentication
         String myUName = String.valueOf(uName.getText());
         String passwordStr = passwordField.getText().toString().trim();
-        String emailStr = emailField.getText().toString().trim() + "----" + myUName;
+        //String emailStr = emailField.getText().toString().trim() + "----" + myUName;
+        String emailStr = emailField.getText().toString().trim();
 
 
         if (TextUtils.isEmpty(emailStr) || TextUtils.isEmpty(passwordStr)) {
@@ -200,7 +173,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 if(t.isSuccessful()) {
                     Toast.makeText(SignUpActivity.this,u.getEmail(),Toast.LENGTH_SHORT).show();
                     u.uid = t.getResult().getUser().getUid();
-                    writeNewUser(u.getUid(),u.getName(),u.getEmail() + "----" + uName.getText());
+                    writeNewUser(u.getUid(),u.getName(),u.getEmail()); // removed writing to the username too
                  //   createNewUser(u);
                     //  startActivity(new Intent(this,UserLoginActivity.class));
                    // finish();
@@ -214,27 +187,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         }); // Inster to database
         dialog.dismiss();
 
-
-
-//        Toast.makeText(this,"AROG",Toast.LENGTH_LONG).show();
-//        final String a;
-//        String t;
-//        int i = 0;
-//        mDatabase.child("users");
-//        mDatabase.addValueEventListener(new com.google.firebase.database.ValueEventListener() {
-//            @Override
-//            public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
-//                final String a;
-//                a = "" + dataSnapshot.getChildrenCount();
-//                Log.d(TAG,"whatever it takes" + a);
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
 
 
         return 1;
