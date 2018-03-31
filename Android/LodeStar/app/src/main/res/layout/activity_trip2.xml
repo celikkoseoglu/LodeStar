@@ -423,7 +423,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:alpha="0.7"
-                        android:drawableTop="@drawable/ic_003_hotel"
+                        android:drawableTop="@drawable/asset_accomodation"
                         android:text="Accommodation"
                         android:textAllCaps="false"
                         android:background="@drawable/button_state_list_animator"
