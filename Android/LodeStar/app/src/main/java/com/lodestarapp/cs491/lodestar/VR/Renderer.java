@@ -5,7 +5,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.opengl.GLES10;
 import android.opengl.GLES20;
+import android.opengl.GLU;
 import android.opengl.GLUtils;
+import android.opengl.Matrix;
+import android.util.Log;
 
 import com.lodestarapp.cs491.lodestar.R;
 
@@ -18,12 +21,15 @@ import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.microedition.khronos.opengles.GL;
 import javax.microedition.khronos.opengles.GL10;
 
 import static java.lang.Math.sin;
+
+
 
 public class Renderer {
 
@@ -69,10 +75,11 @@ public class Renderer {
 
     float textureCoords[] = {
             0.5f, 1.0f,
-            0.15f, 0.05f,
-            0.9f, 0.05f,
+            0.1f, 0.05f,
+            0.87f, 0.05f,
             0.9f, 1.0f // t right
-            };
+    };
+
 
 
 
@@ -82,6 +89,8 @@ public class Renderer {
     private FloatBuffer vertexBuffer1;
     private FloatBuffer colorBuffer;
     private FloatBuffer arrowBuffer;
+
+    Arrow arr;
 
     public Renderer(final Context context, final int depth, final float radius) {
 
@@ -235,8 +244,6 @@ public class Renderer {
 
 
 
-
-
     }
 
     public static String readShader(final Context context, final int resourceId)
@@ -358,9 +365,18 @@ public class Renderer {
             GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, this.mVertices.get(i).length / AMOUNT_OF_NUMBERS_PER_VERTEX_POINT);
 
         }
+
+
+        //GLES20.glUniform4fv(tl, 1, color, 0);
+        GLES20.glVertexAttribPointer(tl,4, GLES20.GL_FLOAT, true,1 , colorBuffer);
+        GLES20.glEnableVertexAttribArray(tl);
+
         GLES20.glVertexAttribPointer(mPositionHandle, CORDS_PER_VERTEX, GLES20.GL_FLOAT, false, vertexStride, vertexBuffer1);
         GLES20.glEnableVertexAttribArray(mPositionHandle);
         GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, 3);
+        GLES20.glDisableVertexAttribArray(tl);
+
+
 
 
 
@@ -369,17 +385,11 @@ public class Renderer {
         GLES20.glEnableVertexAttribArray(mTextureCoordinateHandle);
 
 
-        GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
+        //GLES20.glActiveTexture(GLES20.GL_TEXTURE0);   // 1?
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, mTextureDataHandle0[1]);
         GLES20.glUniform1i(mTextureCoordinateHandle, 1);
 
 
-
-
-
-        //GLES20.glUniform4fv(tl, 1, color, 0);
-        GLES20.glVertexAttribPointer(tl,4, GLES20.GL_FLOAT, true,1 , colorBuffer);
-        GLES20.glEnableVertexAttribArray(tl);
 
 
 
@@ -390,7 +400,6 @@ public class Renderer {
         GLES20.glEnableVertexAttribArray(mPositionHandle);
 
         GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, 3);
-        GLES20.glDisableVertexAttribArray(tl);
 
 
 
@@ -425,18 +434,130 @@ public class Renderer {
     }
 
 
+    public int testTouch(float width, float height, float xTouch, float yTouch, float[] mModelView, float[] mProjection){
+        Ray r = new Ray((int)width, (int)height, xTouch, yTouch, mModelView, mProjection);
+
+        int coordCount = triangleCoords.length;
+        float[] convertedSquare = new float[coordCount];
+        float[] resultVector = new float[4];
+        float[] inputVector = new float[4];
+
+        for(int i = 0; i < coordCount; i = i + 3){
+            inputVector[0] = triangleCoords[i];
+            inputVector[1] = triangleCoords[i+1];
+            inputVector[2] = triangleCoords[i+2];
+            inputVector[3] = 1;
+            Matrix.multiplyMV(resultVector, 0, mModelView, 0, inputVector,0);
+            convertedSquare[i] = resultVector[0]/resultVector[3];
+            convertedSquare[i+1] = resultVector[1]/resultVector[3];
+            convertedSquare[i+2] = resultVector[2]/resultVector[3];
+        }
+
+        float v0[] = {convertedSquare[0],convertedSquare[1],convertedSquare[2]};
+        float v1[] = {convertedSquare[3],convertedSquare[4],convertedSquare[5]};
+        float v2[] = {convertedSquare[6],convertedSquare[7],convertedSquare[8]};
+        float I[] = new float[3];
+        return intersectRayAndTriangle(r,v0,v1,v2,I);
+
+    }
+
+    public static int intersectRayAndTriangle(Ray R, float[] v0, float[] v1, float[] v2, float[] I)
+    {
+        float[] u, v, n;
+        float[] dir, w0, w;
+        float r, a, b;
+
+        u = Vector.minus(v1, v0);
+        v =  Vector.minus(v2, v0);
+        n =  Vector.crossProduct(u, v);
+
+        if (Arrays.equals(n, new float[]{0.0f,0.0f,0.0f})){           // triangle is degenerate
+            return -1;                 // do not deal with this case
+        }
+        dir =  Vector.minus(R.P1, R.P0);             // ray direction vector
+        w0 = Vector.minus( R.P0 , v0);
+        a = - Vector.dot(n,w0);
+        b =  Vector.dot(n,dir);
+        if (Math.abs(b) <  0.00000001f) {     // ray is parallel to triangle plane
+            if (a == 0){                // ray lies in triangle plane
+                return 2;
+            }else{
+                return 0;             // ray disjoint from plane
+            }
+        }
+
+        // get intersect point of ray with triangle plane
+        r = a / b;
+        if (r < 0.0f){                   // ray goes away from triangle
+            return 0;                  // => no intersect
+        }
+        // for a segment, also test if (r > 1.0) => no intersect
+
+        float[] tempI =  Vector.addition(R.P0,  Vector.scalarProduct(r, dir));   // intersect point of ray and plane
+        I[0] = tempI[0];
+        I[1] = tempI[1];
+        I[2] = tempI[2];
+
+        // is I inside T?
+        float    uu, uv, vv, wu, wv, D;
+        uu =  Vector.dot(u,u);
+        uv =  Vector.dot(u,v);
+        vv =  Vector.dot(v,v);
+        w =  Vector.minus(I,v0);
+        wu =  Vector.dot(w,u);
+        wv = Vector.dot(w,v);
+        D = (uv * uv) - (uu * vv);
+
+        // get and test parametric coords
+        float s, t;
+        s = ((uv * wv) - (vv * wu)) / D;
+        if (s < 0.0f || s > 1.0f)        // I is outside T
+            return 0;
+        t = (uv * wu - uu * wv) / D;
+        if (t < 0.0f || (s + t) > 1.0f)  // I is outside T
+            return 0;
+
+        return 1;                      // I is in T
+    }
 
 
 
 
+    private class Ray {
+        float [] P0, P1;
 
+        public Ray(int width, int height, float xTouch, float yTouch, float[] mModelView, float[] mProjection) {
+            int[] viewport = {0, 0, width, height};
 
+            float[] nearCoOrds = new float[3];
+            float[] farCoOrds = new float[3];
+            float[] temp = new float[4];
+            float[] temp2 = new float[4];
 
+            float winx = xTouch, winy = (float) viewport[3] - yTouch;
 
+            int result = GLU.gluUnProject(winx, winy, 0.0f, mModelView, 0, mProjection, 0, viewport, 0, temp, 0);
 
+            Matrix.multiplyMV(temp2, 0, mModelView, 0, temp, 0);
+            if (result == GL10.GL_TRUE) {
+                nearCoOrds[0] = temp2[0] / temp2[3];
+                nearCoOrds[1] = temp2[1] / temp2[3];
+                nearCoOrds[2] = temp2[2] / temp2[3];
+            }
 
-
-
+            result = GLU.gluUnProject(winx, winy, 1.0f, mModelView, 0, mProjection, 0, viewport, 0, temp, 0);
+            Matrix.multiplyMV(temp2, 0, mModelView, 0, temp, 0);
+            if (result == GL10.GL_TRUE) {
+                farCoOrds[0] = temp2[0] / temp2[3];
+                farCoOrds[1] = temp2[1] / temp2[3];
+                farCoOrds[2] = temp2[2] / temp2[3];
+            }
+            this.P0 = farCoOrds;
+            this.P1 = nearCoOrds;
+        }
+    }
 
 
 }
+
+
