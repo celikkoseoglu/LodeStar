@@ -36,7 +36,6 @@
         <activity android:name=".BrickBreakerActivity" />
         <activity android:name=".SignInActivity" />
         <activity android:name=".SignUpActivity" />
-
         <activity android:name=".WeatherInformationActivity" />
         <activity android:name=".FlightInfoActivity" />
         <activity android:name=".CurrencyActivity" />
@@ -54,7 +53,6 @@
 
         <activity android:name=".LivingExpensesActivity" />
         <activity android:name=".TabActivity" />
-
         <activity android:name=".ForgotPasswordActivity" />
         <activity android:name=".VRActivity" />
         <activity android:name=".PanoramaActivity" />
@@ -68,11 +66,14 @@
             android:name=".ChangePasswordActivity"
             android:label="@string/title_activity_change_password"
             android:theme="@style/AppTheme" />
-
         <activity
             android:name=".ChangeUserActivity"
             android:label="@string/title_activity_change_user"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ManualDestinationActivity"
+            android:label="@string/title_activity_manual_destination"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

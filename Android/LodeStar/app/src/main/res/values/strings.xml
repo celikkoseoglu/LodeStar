@@ -49,5 +49,6 @@
     <string name="title_activity_change_password">ChangePasswordActivity</string>
     <string name="title_activity_change_user">changeUserActivity</string>
     <string name="place_photo_attribution">Attribution</string>
+    <string name="title_activity_manual_destination">ManualDestinationActivity</string>
 
 </resources>
