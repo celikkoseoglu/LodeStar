@@ -20,8 +20,6 @@ class WeatherCell: UICollectionViewCell {
     @IBOutlet weak var dayText: UILabel!
     @IBOutlet weak var weatherPic: UIImageView!
     
-
-    
     func displayContent(weatherPic: UIImage, dayText: String, temperature: Int, feelsLikeTemperature: Int, humidity: Int, humidityComment: String, weatherText: String) {
         
         self.weatherPic.image = weatherPic

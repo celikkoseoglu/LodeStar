@@ -24,8 +24,6 @@ fileprivate var humidities = [88, 86, 85, 99, 42, 56]
 fileprivate var humidityComments = ["Highly humid", "Highly humid", "Highly humid", "Highly humid", "Highly humid", "Highly humid"]
 fileprivate var weatherTexts2 = ["Today it is", "Today it is", "Today it is", "Today it is", "Today it is", "Today it is"]
 
-
-
 // MARK: - UICollectionViewDataSource
 extension WeatherViewController {
     
@@ -131,6 +129,8 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate, UIColle
         self.collectionView.isScrollEnabled = true
         //self.navigationController?.navigationBar.isTranslucent = false
         
+        jsonparse()
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -138,7 +138,7 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate, UIColle
         // Dispose of any resources that can be recreated.
     }
     
-    /*func jsonparse() {
+    func jsonparse() {
        Alamofire.request("http://lodestarapp.com:3005/?city=Ankara&units=metric").responseJSON { response in
             //print("Request: \(String(describing: response.request))")   // original url request
             //print("Response: \(String(describing: response.response))") // http url response
@@ -146,20 +146,19 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate, UIColle
                 
                 //print("JSON: \(json)") // serialized json response
                 let JSON = response.result.value as? NSDictionary
-                let id = JSON?["main"] as! NSDictionary
-                var temp = id["temp"] as! Double
+                //let id = JSON?["main"] as! NSDictionary
+                //var temp = id["temp"] as! Double
                 
-                temp = temp - 273
-                let tempInt = Int(temp)
+                //temp = temp - 273
+                //let tempInt = Int(temp)
                 
-                temperatures[0] = tempInt
+                //temperatures[0] = tempInt
         }
     
             /*if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
              print("Data: \(utf8Text)") // original server data as UTF8 string
              }*/
     }
- */
     
     // MARK: Actions
     @IBAction func backButtonTapAction(_ sender: UIButton) {

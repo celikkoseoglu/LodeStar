@@ -62,7 +62,7 @@ footer {
 }
 
 /* MOBILE */
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 768px) {
     iframe {
         height: 400px;
     }
@@ -71,15 +71,24 @@ footer {
     }
 }
 
+/* No greater than 900px, no less than 400px */
+@media (max-width:1270px) and (min-width:768px) {
+    .container-fluid .col-md-2 {
+        padding-left: 6px !important;
+        padding-right: 6px; !important;
+    }
+}​
+
 /* DESKTOP */
-@media screen and (min-width: 700px) {
+@media screen and (min-width: 1280px) {
     iframe {
-        min-height: 700px;
+        min-height: 768px;
     }
     .hero-padding {
-        min-height: 700px;
+        min-height: 768px;
     }
 }
+
 
 .about-the-project {
     color: #FFFFFF;

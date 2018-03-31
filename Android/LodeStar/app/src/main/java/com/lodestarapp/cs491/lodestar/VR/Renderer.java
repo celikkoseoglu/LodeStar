@@ -29,6 +29,8 @@ import javax.microedition.khronos.opengles.GL10;
 
 import static java.lang.Math.sin;
 
+
+
 public class Renderer {
 
     private static final int MAXIMUM_ALLOWED_DEPTH = 5;
@@ -73,10 +75,11 @@ public class Renderer {
 
     float textureCoords[] = {
             0.5f, 1.0f,
-            0.15f, 0.05f,
-            0.9f, 0.05f,
+            0.1f, 0.05f,
+            0.87f, 0.05f,
             0.9f, 1.0f // t right
-            };
+    };
+
 
 
 
@@ -556,3 +559,5 @@ public class Renderer {
 
 
 }
+
+
