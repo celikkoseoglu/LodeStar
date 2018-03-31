@@ -129,7 +129,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         String str2 = String.valueOf(passwordField.getText());
 
         if(!str1.equals(str2)) {
-            Toast.makeText(this,"Please check the password!",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Passwords Do Not Match",Toast.LENGTH_LONG).show();
         }
         int isRegisteredSuccessfully = 0;
         if(v == registerButton) {
@@ -148,9 +148,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private int tryToRegister() {
         //Get authentication
         String myUName = String.valueOf(uName.getText());
-        String passwordStr = passwordField.getText().toString().trim();
+        final String passwordStr = passwordField.getText().toString().trim();
         //String emailStr = emailField.getText().toString().trim() + "----" + myUName;
-        String emailStr = emailField.getText().toString().trim();
+        final String emailStr = emailField.getText().toString().trim();
 
 
         if (TextUtils.isEmpty(emailStr) || TextUtils.isEmpty(passwordStr)) {
@@ -167,9 +167,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         dialog.setMessage("Please wait :) ");
         dialog.show();
+        final String myTMp = emailStr;
+        final String pswrdSTR = passwordStr;
         authManager.createUserWithEmailAndPassword(emailStr,passwordStr).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> t) {
+
                 if(t.isSuccessful()) {
                     Toast.makeText(SignUpActivity.this,u.getEmail(),Toast.LENGTH_SHORT).show();
                     u.uid = t.getResult().getUser().getUid();
@@ -180,7 +183,22 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     startActivity(new Intent(getApplicationContext(),LoginActivity.class));
                 }
                 else {
-                    Toast.makeText(SignUpActivity.this,"Oooops Please Try Again :( ",Toast.LENGTH_SHORT).show();
+                    if(!myTMp.contains("@") || !myTMp.contains(".") )
+                        Toast.makeText(SignUpActivity.this,"Please Correct the E-mail Structure",Toast.LENGTH_SHORT).show();
+                    if(pswrdSTR.length() < 9)
+                        Toast.makeText(SignUpActivity.this,"Please Correct the Length of The Password",Toast.LENGTH_SHORT).show();
+                    if(pswrdSTR.equals(pswrdSTR.toLowerCase()))
+                        Toast.makeText(SignUpActivity.this,"Please Make Sure You Use Uppercase Letters in your Password",Toast.LENGTH_SHORT).show();
+                    if(pswrdSTR.equals(pswrdSTR.toUpperCase()))
+                        Toast.makeText(SignUpActivity.this,"Please Make Sure You Use Lowercase Letters in your Password",Toast.LENGTH_SHORT).show();
+                    if(!pswrdSTR.matches(".*\\d+.*"))
+                        Toast.makeText(SignUpActivity.this,"Please Make Sure You Use Numbers in your Password",Toast.LENGTH_SHORT).show();
+                    else{
+                        Toast.makeText(SignUpActivity.this,"Please check your internet connection and be sure to not use the same E-mail adress for different accounts",Toast.LENGTH_SHORT).show();
+                    }
+
+
+
                 }
 
             }
@@ -195,7 +213,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     public int tryToRegister2(String password1,String email1) {
         //Get authentication
         String passwordStr = password1;
-        String emailStr = email1;
+        final String emailStr = email1;
 
         if (TextUtils.isEmpty(emailStr) || TextUtils.isEmpty(passwordStr)) {
 
@@ -227,7 +245,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
                 }
                 else {
-                    Toast.makeText(SignUpActivity.this,"Oooops Please Try Again :( ",Toast.LENGTH_SHORT).show();
+                    if(!emailStr.contains("@"))
+                        Toast.makeText(SignUpActivity.this,"Please Correct the E-mail Structure",Toast.LENGTH_SHORT).show();
                 }
 
             }
