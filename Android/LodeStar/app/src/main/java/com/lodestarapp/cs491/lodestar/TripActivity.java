@@ -1,50 +1,30 @@
 package com.lodestarapp.cs491.lodestar;
 
-import android.*;
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Point;
-import android.net.Uri;
-import android.os.AsyncTask;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.Toolbar;
-import android.util.AttributeSet;
 import android.util.Log;
-import android.view.Display;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ViewFlipper;
-import android.widget.ViewSwitcher;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-import com.google.android.gms.vision.text.Line;
 import com.lodestarapp.cs491.lodestar.Controllers.FlightInfoController;
-import com.lodestarapp.cs491.lodestar.Controllers.LivingExpensesController;
 import com.lodestarapp.cs491.lodestar.Controllers.TripController;
 import com.lodestarapp.cs491.lodestar.Interfaces.MyOnFocusListenable;
 import com.lodestarapp.cs491.lodestar.Models.FlightInfo;
@@ -56,9 +36,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.net.URL;
-import java.net.URLConnection;
 
 public class TripActivity extends Fragment implements MyOnFocusListenable {
     public ViewFlipper view_flipper;
@@ -69,24 +46,20 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
     private String origCity;
     private String destCity;
     private FlightInfoController flc = new FlightInfoController();
-    private TripController trp =  new TripController();
+    private TripController trp = new TripController();
     private String photoReferenceOrig;
     private String photoReferenceDest;
 
     private int backgroundImageWidth;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
     }
 
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.activity_trip2, container, false);
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_trip2, container, false);
 
         view.findViewById(R.id.flipper).setVisibility(View.GONE);
 
@@ -94,8 +67,7 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
         bt5.setClickable(false);
 
         //String requestFromTheUrl = "http://10.0.2.2:3006?dataType=flightInfo";
-        //String requestFromTheUrl = "http://10.0.2.2:3006?dataType=flightInfo";
-        if(isStoragePermissionGranted())
+        if (isStoragePermissionGranted())
             sendRequest();
 
         Bundle data = getActivity().getIntent().getExtras();
@@ -103,7 +75,7 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
             qrCodeInfo = data.getParcelable("QRCodeInfo");
         }
 
-        Button bt = (Button)view.findViewById(R.id.flightinfo);
+        Button bt = view.findViewById(R.id.flightinfo);
         bt.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -112,14 +84,15 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
             }
         });
 
-        view_flipper =   (ViewFlipper) view.findViewById(R.id.flipper);
+        view_flipper = view.findViewById(R.id.flipper);
 
-        CardView card = (CardView) view.findViewById(R.id.my_card);
-        firstView= view.findViewById(R.id.view1);
+        CardView card = view.findViewById(R.id.my_card);
+        firstView = view.findViewById(R.id.view1);
         secondView = view.findViewById(R.id.view2);
+
         card.setOnTouchListener(new OnSwipeTouchListener(this.getActivity()) {
             public void onSwipeLeft() {
-                if (view_flipper.getCurrentView() != secondView){
+                if (view_flipper.getCurrentView() != secondView) {
                     view_flipper.setInAnimation(TripActivity.this.getActivity(), R.anim.left_enter);
                     view_flipper.setOutAnimation(TripActivity.this.getActivity(), R.anim.left_out);
                     view_flipper.showNext();
@@ -127,7 +100,7 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
             }
 
             public void onSwipeRight() {
-                if (view_flipper.getCurrentView() != firstView){
+                if (view_flipper.getCurrentView() != firstView) {
                     view_flipper.setOutAnimation(TripActivity.this.getActivity(), R.anim.right_out);
                     view_flipper.setInAnimation(TripActivity.this.getActivity(), R.anim.right_enter);
                     view_flipper.showPrevious();
@@ -139,11 +112,12 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
     }
 
     public void onWindowFocusChanged(boolean hasFocus, int w) {
-        // TODO Auto-generated method stub
         updateSizeInfo(w);
     }
+
     public void updateSizeInfo(int width) {
         if (getView() != null) {
+
             backgroundImageWidth = width;
             //Toast toast =  Toast.makeText(getApplicationContext(), backgroundImageWidth + "", Toast.LENGTH_LONG);
             //toast.show();
@@ -177,11 +151,20 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
 
             Button bt8 = getView().findViewById(R.id.restaurants);
             bt8.setLayoutParams(params);
+
+            Button bt9 = getView().findViewById(R.id.landmarks);
+            bt9.setLayoutParams(params);
+
+            Button bt10 = getView().findViewById(R.id.sim);
+            bt10.setLayoutParams(params);
+
+            Button bt11 = getView().findViewById(R.id.na);
+            bt11.setLayoutParams(params);
         }
     }
 
 
-    public void flightInfoStart(View view){
+    public void flightInfoStart(View view) {
         Intent intent = new Intent(getActivity(), FlightInfoActivity.class);
         intent.putExtra("FLIGHT_INFO", flightInfo);
         startActivity(intent);
@@ -190,7 +173,7 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
     private static final String TAG = "theMessage";
 
     public void sendRequest() {
-        String flight = "THY26";
+        String flight = "THY26"; //bunun binis kartından alınması gerekmiyo mu??????
 
         flc.getFlightInfo(flight, getActivity(), new FlightInfoController.VolleyCallback2() {
             @Override
@@ -208,16 +191,16 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
 
                     flightInfo.setLink("https://flightaware.com/live/flight/" + info);
 
-                    JSONObject or = result.getJSONObject("origin");
+                    JSONObject origin = result.getJSONObject("origin");
                     JSONObject des = result.getJSONObject("destination");
 
 
                     TextView view2 = getView().findViewById(R.id.info_text5);
-                    view2.setText(or.getString("city"));
-                    flightInfo.setOrig(or.getString("city"));
-                    flightInfo.setOrig_airport(or.getString("airport_name"));
+                    view2.setText(origin.getString("city"));
+                    flightInfo.setOrig(origin.getString("city"));
+                    flightInfo.setOrig_airport(origin.getString("airport_name"));
 
-                    origCity = or.getString("city");
+                    origCity = origin.getString("city");
                     destCity = des.getString("city");
 
                     TextView view4 = getView().findViewById(R.id.info_text6);
@@ -230,9 +213,9 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
                     view5.setText("Swipe left to see information about " + des.getString("city").toString());
 
                     TextView view3 = getView().findViewById(R.id.info_text4);
-                    view3.setText("Swipe right to see information about " + or.getString("city").toString());
+                    view3.setText("Swipe right to see information about " + origin.getString("city").toString());
 
-                    Log.i(TAG, info.toString());
+                    Log.i(TAG, info);
 
                     JSONObject depTime = result.getJSONObject("filed_departure_time");
                     flightInfo.setOrig_localtime(depTime.getString("time") + " " + depTime.getString("tz"));
@@ -340,9 +323,9 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
         }
     }
 
-    public void sendImageRequestDest(){
+    public void sendImageRequestDest() {
         final Context c = getActivity();
-        trp.getTripCity(destCity,c, new TripController.VolleyCallback4() {
+        trp.getTripCity(destCity, c, new TripController.VolleyCallback4() {
             @Override
             public void onSuccess(JSONObject result) {
                 try {
@@ -357,10 +340,8 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
                     //toast.show();
                     final ImageView dest = getView().findViewById(R.id.dest);
 
-
-                    if(ImageStorage.checkIfImageExists(destCity))
-                    {
-                        File file = ImageStorage.getImage("/"+destCity+".png");
+                    if (ImageStorage.checkIfImageExists(destCity)) {
+                        File file = ImageStorage.getImage("/" + destCity + ".png");
                         assert file != null;
                         String p = file.getAbsolutePath();
                         Bitmap b = BitmapFactory.decodeFile(p);
@@ -436,21 +417,20 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
         }
     }
 
-    public  boolean isStoragePermissionGranted() {
+    public boolean isStoragePermissionGranted() {
         if (Build.VERSION.SDK_INT >= 23) {
             if (getActivity().checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     == PackageManager.PERMISSION_GRANTED) {
-                Log.v(TAG,"Permission is granted");
+                Log.v(TAG, "Permission is granted");
                 return true;
             } else {
 
-                Log.v(TAG,"Permission is revoked");
+                Log.v(TAG, "Permission is revoked");
                 ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
                 return false;
             }
-        }
-        else { //permission is automatically granted on sdk<23 upon installation
-            Log.v(TAG,"Permission is granted");
+        } else { //permission is automatically granted on sdk<23 upon installation
+            Log.v(TAG, "Permission is granted");
             return true;
         }
     }

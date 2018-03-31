@@ -101,31 +101,42 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
-                        android:text="You will be boarding from"
-                        android:layout_marginTop="40dp"
-                        android:textColor="@android:color/background_light"
                         android:layout_centerHorizontal="true"
-                        android:textSize="13sp"/>
+                        android:layout_marginTop="40dp"
+                        android:text="You will be boarding from"
+                        android:textColor="@android:color/background_light"
+                        android:textSize="13sp"
+                        android:shadowColor="#000000"
+                        android:shadowDx="1"
+                        android:shadowDy="1"
+                        android:shadowRadius="2"/>
 
                     <TextView
                         android:id="@+id/info_text5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
                         android:text="Istanbul"
-                        android:layout_marginTop="55dp"
-                        android:layout_centerHorizontal="true"
                         android:textColor="@android:color/background_light"
-                        android:textSize="25sp"/>
+                        android:textSize="36sp"
+                        android:shadowColor="#000000"
+                        android:shadowDx="1"
+                        android:shadowDy="1"
+                        android:shadowRadius="2"/>
 
                     <TextView
                         android:id="@+id/info_text2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="170dp"
+                        android:shadowColor="#000000"
+                        android:shadowDx="1"
+                        android:shadowDy="1"
+                        android:shadowRadius="2"
                         android:text="Swipe left to see information about"
                         android:textColor="@android:color/background_light"
-                        android:textSize="13sp"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="170dp"/>
+                        android:textSize="14sp" />
 
 
 
@@ -256,7 +267,7 @@
                         android:layout_marginLeft="3dp"
                         android:layout_marginRight="3dp"
                         android:layout_marginTop="3dp"
-                        android:paddingTop="10dp"
+                        android:paddingTop="20dp"
                         android:paddingBottom="5dp"
                         android:layout_marginBottom="5dp"
                         />
@@ -278,7 +289,7 @@
                         android:layout_marginTop="3dp"
                         android:elevation="5dp"
                         android:stateListAnimator="@null"
-                        android:paddingTop="10dp"
+                        android:paddingTop="20dp"
                         />
 
                     <Button
@@ -298,7 +309,7 @@
                         android:layout_marginTop="3dp"
                         android:elevation="5dp"
                         android:stateListAnimator="@null"
-                        android:paddingTop="10dp"
+                        android:paddingTop="20dp"
                         />
                 </LinearLayout>
 
@@ -327,7 +338,7 @@
                         android:layout_marginRight="3dp"
                         android:elevation="5dp"
                         android:stateListAnimator="@null"
-                        android:paddingTop="10dp"
+                        android:paddingTop="20dp"
                         android:paddingBottom="5dp"
                         />
 
@@ -347,7 +358,7 @@
                         android:layout_marginRight="3dp"
                         android:elevation="5dp"
                         android:stateListAnimator="@null"
-                        android:paddingTop="10dp"
+                        android:paddingTop="20dp"
                         android:paddingBottom="5dp"/>
 
                     <Button
@@ -365,7 +376,7 @@
                         android:layout_marginRight="3dp"
                         android:elevation="5dp"
                         android:stateListAnimator="@null"
-                        android:paddingTop="10dp"
+                        android:paddingTop="20dp"
                         android:paddingBottom="5dp"/>
 
                 </LinearLayout>
@@ -396,7 +407,7 @@
                         android:layout_marginRight="2dp"
                         android:elevation="5dp"
                         android:stateListAnimator="@null"
-                        android:paddingTop="10dp"
+                        android:paddingTop="20dp"
                         android:paddingBottom="5dp"/>
 
                     <Button
@@ -414,7 +425,7 @@
                         android:layout_marginRight="2dp"
                         android:elevation="5dp"
                         android:stateListAnimator="@null"
-                        android:paddingTop="10dp"
+                        android:paddingTop="20dp"
                         android:paddingBottom="5dp"/>
 
                     <Button
@@ -432,8 +443,74 @@
                         android:layout_marginRight="2dp"
                         android:elevation="5dp"
                         android:stateListAnimator="@null"
-                        android:paddingTop="10dp"
+                        android:paddingTop="20dp"
                         android:paddingBottom="5dp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/row4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal"
+
+
+                    >
+
+                    <Button
+                        android:id="@+id/landmarks"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginRight="2dp"
+                        android:layout_weight="1"
+                        android:alpha="0.7"
+                        android:background="@drawable/button_state_list_animator"
+                        android:drawableTop="@drawable/ic_001_landmark"
+                        android:elevation="5dp"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="20dp"
+                        android:stateListAnimator="@null"
+                        android:text="Landmarks"
+                        android:textAllCaps="false" />
+
+                    <Button
+                        android:id="@+id/sim"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginRight="2dp"
+                        android:layout_weight="1"
+                        android:alpha="0.7"
+                        android:background="@drawable/button_state_list_animator"
+                        android:drawableTop="@drawable/ic_sim_card"
+                        android:elevation="5dp"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="20dp"
+                        android:stateListAnimator="@null"
+                        android:text="Get a SIM Card"
+                        android:textAllCaps="false" />
+
+                    <Button
+                        android:id="@+id/na"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginRight="2dp"
+                        android:layout_weight="1"
+                        android:alpha="0.7"
+                        android:background="@drawable/button_state_list_animator"
+                        android:drawableTop="@drawable/ic_001_not_available"
+                        android:elevation="5dp"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="20dp"
+                        android:stateListAnimator="@null"
+                        android:text="Not Available"
+                        android:textAllCaps="false" />
 
                 </LinearLayout>
 
