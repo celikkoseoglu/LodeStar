@@ -81,7 +81,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
             startActivity(new Intent(this,ForgotPasswordActivity.class));
         }
         else if(v == signButton) {
-            Toast.makeText(this,"LOL",Toast.LENGTH_LONG).show();
+           // Toast.makeText(this,"LOL",Toast.LENGTH_LONG).show();
             tryToLogIn();
         }
 
@@ -91,9 +91,10 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     private void tryToLogIn() {
         String passwordStr = passwordF.getText().toString().trim();
         String emailStr = emailF.getText().toString().trim();
+        Toast.makeText(this,emailStr + "/" + passwordStr,Toast.LENGTH_LONG).show();
         if (TextUtils.isEmpty(emailStr) || TextUtils.isEmpty(passwordStr)) {
             Toast.makeText(this,"Please make sure you enter the credentials correctly",Toast.LENGTH_LONG).show();
-            return; //Finish the function, cannot register
+            return;
         }
         pDialog.setMessage("Loading...");
         pDialog.show();
