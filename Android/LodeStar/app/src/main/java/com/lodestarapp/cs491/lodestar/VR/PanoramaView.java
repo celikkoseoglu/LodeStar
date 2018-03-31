@@ -24,10 +24,17 @@ import com.lodestarapp.cs491.lodestar.R;
 import com.lodestarapp.cs491.lodestar.VR.MatrixCalculator;
 import com.lodestarapp.cs491.lodestar.VR.Renderer;
 
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
 import static android.content.Context.SENSOR_SERVICE;
+import static android.opengl.GLES20.GL_TEXTURE0;
+import static android.opengl.GLES20.GL_TEXTURE_2D;
+import static android.opengl.GLES20.glBlendEquationSeparate;
+import static android.opengl.GLES20.glEnable;
 import static android.opengl.GLES20.glViewport;
 import static android.opengl.Matrix.multiplyMM;
 
@@ -51,6 +58,8 @@ public class PanoramaView extends GLSurfaceView{
     private float xBefore;
     private float yBefore;
     private float degBefore;
+    String TAG = "pano ";
+
 
     float[] rotationMatrix = new float[16];
     float[] remappedRotationMatrix = new float[16];
@@ -73,6 +82,12 @@ public class PanoramaView extends GLSurfaceView{
         setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
     }
 
+    float readX=0;
+    float readY=0;
+    float renderWidth;
+    float renderHeight;
+    boolean clicked;
+
 
     @Override
     public void onPause(){
@@ -92,6 +107,17 @@ public class PanoramaView extends GLSurfaceView{
                 float x = event.getX();
                 float y = event.getY();
 
+                if (event.getAction() == MotionEvent.ACTION_DOWN){
+                    readY = y;
+                    readX = x;
+
+                    renderHeight = this.getHeight();
+                    renderWidth = this.getWidth();
+                    clicked = true;
+
+
+                }
+
                 if (event.getAction() == MotionEvent.ACTION_MOVE)
                 {
                     if (pr != null)
@@ -108,9 +134,8 @@ public class PanoramaView extends GLSurfaceView{
                         else if(pr.mDeltaX < -3.1415f / 2)
                             pr.mDeltaX = -3.1415f / 2;
 
-                        String TAG = "pano ";
 
-                        //Log.d(TAG, "" +pr.mDeltaX );
+                        //Log.d(TAG, "" +pr.mDeltaY );
 
                     }
                 }
@@ -190,6 +215,18 @@ public class PanoramaView extends GLSurfaceView{
             multiplyMM(mViewProjectionMatrix, 0, mProjectionMatrix, 0, mView, 0);
 
             renderer.draw(mViewProjectionMatrix);
+
+            if(clicked){
+                clicked = false;
+                int x = renderer.testTouch(renderWidth,renderHeight,readX,readY,mView,mProjectionMatrix);
+                Log.i("Check:",x + "");
+                if(x>0){
+                    renderer.deleteCurrentTexture();
+                    renderer.loadTexture(c, R.drawable.photo_sphere);
+
+                }
+            }
+
 
             //checkGLError("onDrawEye");
         }
