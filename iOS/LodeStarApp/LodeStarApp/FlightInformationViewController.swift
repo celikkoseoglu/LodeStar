@@ -42,6 +42,14 @@ extension FlightViewController {
         cell.clipsToBounds = false
         cell.layer.masksToBounds = false
         
+        
+        if (index.row == 0) {
+            cell.originAirportNameLabel.text =
+        }
+        
+        
+        
+        
         let text = reuseIdentifiers[index.row]
         
         return cell
@@ -80,12 +88,14 @@ class FlightViewController: UIViewController, UICollectionViewDelegate, UICollec
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        jsonparse(originAirportCode: "IST", destinationAirportCode: "PVG", flightNumber: "THY26")
+        
         collectionView.dataSource = self
         collectionView.delegate = self
         
         self.collectionView.isScrollEnabled = true
         
-        jsonparse(originAirportCode: "IST", destinationAirportCode: "PVG", flightNumber: "THY26")
+        
         
     }
     
@@ -114,11 +124,21 @@ class FlightViewController: UIViewController, UICollectionViewDelegate, UICollec
         Alamofire.request(requestTemplate).responseJSON { response in
             //print("Request: \(String(describing: response.request))")   // original url request
             //print("Response: \(String(describing: response.response))") // http url response
-            print("Result: \(response.result)")                         // response serialization result
+            //print("Result: \(response.result)")
+            
+            
             
             if let json = response.result.value {
-                print("JSON: \(json)") // serialized json response
-                //let JSON = response.result.value as? NSDictionary
+                //print("JSON: \(json)") // serialized json response
+
+                let json_dictionary = json as? NSDictionary
+                let destinationInfo = json_dictionary!["destination"] as! NSDictionary
+                let destinationAirportName = destinationInfo["airport_name"]
+                
+                print(destinationAirportName)
+                
+                
+                
                 //let id = JSON?["aircrafttype"] as! String
                 //print("Aircraft Type: \(id)")
             }

@@ -12,8 +12,10 @@ import UIKit
 
 class CollectionCell: UICollectionViewCell {
     
+    @IBOutlet weak var departureTimeOffsetLabel: UILabel!
     @IBOutlet weak var cellImage: UIImageView!
     @IBOutlet weak var title: UILabel!
+    @IBOutlet weak var originAirportNameLabel: UILabel!
     
     func displayContent(title: String, cellImage: UIImage) {
         self.title.text = title
