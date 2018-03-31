@@ -1,12 +1,16 @@
 package com.lodestarapp.cs491.lodestar;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
 
 
 public class HistoryFragment extends Fragment {
@@ -14,6 +18,10 @@ public class HistoryFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private ListView tripListView;
+    View myView;
+    ArrayAdapter<String> arrayAdapter;
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -22,6 +30,7 @@ public class HistoryFragment extends Fragment {
 
     public HistoryFragment() {
         // Required empty public constructor
+
     }
 
     /**
@@ -44,6 +53,16 @@ public class HistoryFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
+
+        //Write History Activity Here
+
+       // tripListView = myView.findViewById(R.id.olalala);
+
+        tripListView = getActivity().findViewById(R.id.olalala);
+
+
+
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
@@ -55,7 +74,15 @@ public class HistoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_history, container, false);
+        myView = inflater.inflate(R.layout.fragment_history, container, false);
+
+
+        String tmpStr = "(Stockholm-Ankara)";
+
+
+
+        return myView;
+
     }
 
 
