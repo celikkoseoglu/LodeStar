@@ -97,7 +97,7 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
             }
         };*/
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        //if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
@@ -105,8 +105,8 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
+          //  return;
+        //}
         //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
 
         recyclerView = findViewById(R.id.places_to_see_recycler_view);
@@ -114,6 +114,11 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
 
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+
+        adapter = new PlacesToSeeAdapter(placesList, this.getApplicationContext());
+        recyclerView.setAdapter(adapter);
+
+        Log.d(TAG, "lol");
 
     }
 
@@ -130,6 +135,7 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
             this.googleMap.setMyLocationEnabled(true);
             getLastKnowLocation(false, null);
         } else {
+            Log.d(TAG, "ARE YOU HERE");
             requestPermissionForLocation();
             getLastKnowLocation(false, null);
         }
@@ -137,7 +143,7 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
 
     private void getLastKnowLocation(boolean which, Location location) {
         if (!which) {
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 // TODO: Consider calling
                 //    ActivityCompat#requestPermissions
                 // here to request the missing permissions, and then overriding
@@ -145,8 +151,10 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
                 //                                          int[] grantResults)
                 // to handle the case where the user grants the permission. See the documentation
                 // for ActivityCompat#requestPermissions for more details.
+                Log.d(TAG, "not given");
                 return;
             }
+            Log.d(TAG, "given");
             final Task<Location> locationResult = fusedLocationProviderClient.getLastLocation();
             final Location[] myLocation = new Location[1];
             final boolean[] done = {false};
@@ -225,7 +233,8 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
     }
 
     private void requestPermissionForLocation() {
-        ActivityCompat.requestPermissions(PlacesToSeeActivity.this,
+        Log.d(TAG, "request");
+        ActivityCompat.requestPermissions(this,
                 new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
     }
 
@@ -234,9 +243,10 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
                                            @NonNull String permissions[], @NonNull int[] grantResults) {
         switch (requestCode) {
             case REQUEST_LOCATION:
+                Log.d(TAG, "requesting permission");
                 if (grantResults.length > 0) {
                     //https://developers.google.com/maps/documentation/android-api/current-place-tutorial#get-the-location-of-the-android-device-and-position-the-map
-                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                         return;
                     }
                     final Task<Location> locationResult = fusedLocationProviderClient.getLastLocation();
@@ -343,8 +353,7 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
         getPlacesPhotos(photoReferences);
         getPlacesIcons(iconURL);
 
-        adapter = new PlacesToSeeAdapter(placesList, this.getApplicationContext());
-        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
 
         /*
 
