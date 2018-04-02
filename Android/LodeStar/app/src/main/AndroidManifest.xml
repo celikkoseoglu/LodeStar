@@ -79,6 +79,7 @@
             android:name=".ManualDestinationActivity"
             android:label="@string/title_activity_manual_destination"
             android:theme="@style/AppTheme"></activity>
+        <activity android:name=".PlacesToSeeExpandedActivity" />
     </application>
 
 </manifest>
