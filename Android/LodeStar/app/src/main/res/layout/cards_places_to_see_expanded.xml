@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <android.support.v7.widget.CardView
+       <!-- <android.support.v7.widget.CardView
             android:id="@+id/place_expand_cardview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -186,15 +186,12 @@
             </RelativeLayout>
 
         </android.support.v7.widget.CardView>
-
+!-->
         <android.support.v7.widget.CardView
             android:id="@+id/place_reviews_cardview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/place_panorama_cardview"
-            >
-
-
+            android:layout_height="match_parent" >
+            <!--android:layout_below="@id/place_panorama_cardview"!-->
 
         </android.support.v7.widget.CardView>
 
