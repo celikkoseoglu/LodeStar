@@ -64,13 +64,16 @@ public class WeatherInformationAdapter extends RecyclerView.Adapter<RecyclerView
         TextView weatherInfoView;
         TextView temperatureView;
         TextView humidityView;
+        TextView feelsLikeView;
+
 
         OtherDaysViewHolder(View itemView) {
             super(itemView);
 
-            this.weatherView = itemView.findViewById(R.id.weather_picture);
+            this.weatherView = itemView.findViewById(R.id.weather_picture_today);
             this.weatherInfoView = itemView.findViewById(R.id.weather_info);
-            this.temperatureView = itemView.findViewById(R.id.weather_feels_like);
+            this.temperatureView = itemView.findViewById(R.id.temperatureToday);
+            this.feelsLikeView = itemView.findViewById(R.id.weather_feels_like);
             this.humidityView = itemView.findViewById(R.id.weather_humidity);
 
         }
@@ -131,7 +134,11 @@ public class WeatherInformationAdapter extends RecyclerView.Adapter<RecyclerView
                         String.format("%s", (int)weatherInformationList.get(position).getHumidity())));
                 ((OtherDaysViewHolder) holder).temperatureView.setText(String.format("%s°C",
                         String.format("%s",
+                                (int)weatherInformationList.get(position).getTemperature())));
+                ((OtherDaysViewHolder) holder).feelsLikeView.setText(String.format("%s",
+                        String.format("feels like %s",
                                 (int)weatherInformationList.get(position).getFeelsLikeTemperature())));
+
                 ((OtherDaysViewHolder) holder).weatherView.setImageResource(this.context.
                         getResources().getIdentifier(weatherIconMap.get(weatherInformationList
                                 .get(position).getWeatherId() / 100).toString(),

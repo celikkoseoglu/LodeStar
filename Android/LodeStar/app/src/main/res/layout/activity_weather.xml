@@ -7,7 +7,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#cecece">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar7"
@@ -30,6 +31,23 @@
             android:textColor="@color/colorWhite"
             android:text="@string/weather_activity"
             />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_gravity="left"
+            android:background="@android:color/transparent"
+            android:drawableLeft="@drawable/arrow_left"
+            android:gravity="left|center_vertical"
+            android:minWidth="0dp"
+            android:onClick="tripBack"
+            android:padding="0dp"
+            android:text=" Trip"
+            android:textAllCaps="false"
+            android:textColor="@android:color/holo_blue_bright"
+            android:textSize="16sp" />
     </android.support.v7.widget.Toolbar>
 
     <android.support.v7.widget.RecyclerView

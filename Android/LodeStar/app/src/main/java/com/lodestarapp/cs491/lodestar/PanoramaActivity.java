@@ -14,6 +14,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.vrtoolkit.cardboard.sensors.DeviceSensorLooper;
+import com.google.vrtoolkit.cardboard.sensors.HeadTracker;
+import com.google.vrtoolkit.cardboard.sensors.SystemClock;
 import com.lodestarapp.cs491.lodestar.VR.PanoramaView;
 
 public class PanoramaActivity extends AppCompatActivity {
@@ -26,6 +29,7 @@ public class PanoramaActivity extends AppCompatActivity {
 
     Sensor accelSensor;
     Sensor magnSensor;
+    HeadTracker ht;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

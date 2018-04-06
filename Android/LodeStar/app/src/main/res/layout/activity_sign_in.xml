@@ -11,8 +11,9 @@
         android:id="@+id/textSigUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="140dp"
+        android:layout_above="@+id/tableLayout3"
+        android:layout_marginBottom="100dp"
+        android:layout_centerInParent="true"
         android:layout_centerHorizontal="true"
         android:text="@string/app_name_sign_in"
         android:textColor="@android:color/background_light"
@@ -22,12 +23,13 @@
 
     <TableLayout
         android:layout_width="250dp"
-        android:layout_height="135dp"
+        android:layout_height="90dp"
         android:layout_centerInParent="true"
         android:background="@drawable/shape_sign_up"
         android:alpha="0.4"
         android:id="@+id/tableLayout3"
         >
+        <!--
         <TableRow>
 
             <ImageView
@@ -48,6 +50,7 @@
                 android:textColor="@color/colorWhite" />
 
         </TableRow>
+        -->
 
         <TableRow>
             <ImageView
@@ -117,7 +120,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tableLayout3"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="35dp"
         android:background="#ba2d1d"
         android:onClick="registerButtonMe"
         android:text="Sign In!"

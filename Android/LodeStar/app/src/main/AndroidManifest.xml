@@ -39,8 +39,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".BrickBreakerActivity" />
-        <activity android:name=".SignInActivity" />
-        <activity android:name=".SignUpActivity" />
+        <activity android:name=".SignInActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize"/>
+        <activity android:name=".SignUpActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize"
+            />
         <activity android:name=".WeatherInformationActivity" />
         <activity android:name=".FlightInfoActivity" />
         <activity android:name=".CurrencyActivity" />

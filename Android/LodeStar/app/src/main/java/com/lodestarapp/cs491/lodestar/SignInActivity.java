@@ -91,7 +91,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     private void tryToLogIn() {
         String passwordStr = passwordF.getText().toString().trim();
         String emailStr = emailF.getText().toString().trim();
-        Toast.makeText(this,emailStr + "/" + passwordStr,Toast.LENGTH_LONG).show();
+        //Toast.makeText(this,emailStr + "/" + passwordStr,Toast.LENGTH_LONG).show();
         if (TextUtils.isEmpty(emailStr) || TextUtils.isEmpty(passwordStr)) {
             Toast.makeText(this,"Please make sure you enter the credentials correctly",Toast.LENGTH_LONG).show();
             return;
@@ -103,7 +103,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
             public void onComplete(@NonNull Task<AuthResult> t) {
                 pDialog.dismiss();
                 if(t.isSuccessful()) {
-                    startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+                    startActivity(new Intent(getApplicationContext(),TabActivity.class));
                 }
             }
         });

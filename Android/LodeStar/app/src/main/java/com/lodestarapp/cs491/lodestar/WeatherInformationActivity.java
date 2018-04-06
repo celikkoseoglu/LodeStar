@@ -35,6 +35,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 public class WeatherInformationActivity extends AppCompatActivity {
 
@@ -65,12 +66,12 @@ public class WeatherInformationActivity extends AppCompatActivity {
         progressDialog.show();
 
         weatherIconMap = new SparseArray();
-        weatherIconMap.append(2, "p200");
-        weatherIconMap.append(5, "p500");
-        weatherIconMap.append(6, "p600");
-        weatherIconMap.append(7, "p700");
+        weatherIconMap.append(2, "storm");
+        weatherIconMap.append(5, "rain");
+        weatherIconMap.append(6, "snow");
+        weatherIconMap.append(7, "fog");
         
-        weatherIconMap.append(8, "p800");
+        weatherIconMap.append(8, "broken_cloud");
 
         mRecyclerView = findViewById(R.id.my_weather_recycler_view);
         mRecyclerView.setHasFixedSize(true);
@@ -118,15 +119,16 @@ public class WeatherInformationActivity extends AppCompatActivity {
             JSONObject main;
             JSONArray weather;
 
-            SimpleDateFormat simpleInputDate = new SimpleDateFormat("yyyy-mm-dd");
+            SimpleDateFormat simpleInputDate = new SimpleDateFormat("yyyy-mm-dd", Locale.US);
             Date dateToConvertToFullName;
-            SimpleDateFormat simpleOutputDate = new SimpleDateFormat("EEEE");
+            SimpleDateFormat simpleOutputDate = new SimpleDateFormat("EEEE", Locale.US);
 
             String date;
             double temp;
             double humidity;
             String weatherDescription;
             int weatherID;
+            double feelsLike;
 
             for (int i = 0; i < 5; i++) {
                 process = weatherInformationFromServer.getJSONObject(i);
@@ -136,8 +138,18 @@ public class WeatherInformationActivity extends AppCompatActivity {
                 date = process.getString("dt_txt");
                 temp = main.getDouble("temp");
                 humidity = main.getDouble("humidity");
+                feelsLike = main.getDouble("perceived_temp");
 
                 weatherDescription = weather.getJSONObject(0).getString("description");
+                String wth = "";
+                for(int j = 0; j< weatherDescription.length();j++)
+                    if(j == 0)
+                        wth += Character.toUpperCase(weatherDescription.charAt(0));
+                    else if(weatherDescription.charAt(j-1) == ' ')
+                        wth +=  Character.toUpperCase(weatherDescription.charAt(j));
+                    else
+                        wth += weatherDescription.charAt(j);
+
                 weatherID = Integer.parseInt(weather.getJSONObject(0).getString("id"));
 
                 Log.d(TAG, "........ " + weatherID);
@@ -151,7 +163,7 @@ public class WeatherInformationActivity extends AppCompatActivity {
 
                 weatherInformationList.add(i,
                         new WeatherInformation(weatherInformationController.getCity(),
-                                date, weatherDescription, temp, temp, humidity, weatherID));
+                                date, wth, temp, feelsLike, humidity, weatherID));
             }
         }catch (JSONException jsonException){
             Log.e(TAG, "JSON Parsing error");
@@ -162,5 +174,9 @@ public class WeatherInformationActivity extends AppCompatActivity {
 
         progressDialog.dismiss();
 
+    }
+
+    public void tripBack(View view) {
+        finish();
     }
 }

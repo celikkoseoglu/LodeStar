@@ -11,12 +11,12 @@
         android:id="@+id/textSignin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="140dp"
+        android:layout_above="@+id/tableLayout2"
+        android:layout_marginBottom="10dp"
+        android:layout_centerInParent="true"
         android:text="@string/app_name_sign_up"
         android:textColor="@android:color/background_light"
-        android:textSize="24sp" />
+        android:textSize="32sp" />
 
     <TableLayout
         android:layout_width="250dp"
@@ -140,6 +140,19 @@
 
     </TableLayout>
 
+    <TextView
+        android:id="@+id/textPassword1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tableLayout2"
+        android:layout_marginBottom="10dp"
+        android:layout_centerInParent="true"
+        android:text="Enter a combination of 8 characters containing \n uppercase and lowercase letters and a symbol    "
+        android:textColor="#bebebe"
+        android:textSize="12sp"
+        android:alpha="0.9"
+        android:layout_marginTop="5dp"/>
+
 
     <Button
         android:id="@+id/RegButton"
@@ -147,7 +160,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tableLayout2"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="45dp"
         android:background="#ba2d1d"
         android:onClick="signUpPlease"
         android:text="Sign Up!"

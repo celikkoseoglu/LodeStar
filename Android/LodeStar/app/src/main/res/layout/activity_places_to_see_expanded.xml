@@ -13,7 +13,7 @@
             android:id="@+id/place_panorama_cardview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/place_general">
+            android:layout_below="@+id/place_general">
 
             <RelativeLayout
                 android:layout_width="match_parent"

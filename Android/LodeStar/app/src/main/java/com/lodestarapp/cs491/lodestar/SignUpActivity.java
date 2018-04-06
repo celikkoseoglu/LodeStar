@@ -29,6 +29,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.lodestarapp.cs491.lodestar.Adapters.User;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
@@ -48,8 +50,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     private DatabaseReference mDatabase;
 
-
-
+    public TextView passwordText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +74,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         emailField = (EditText) findViewById(R.id.emailEdit);
         passwordField = (EditText) findViewById(R.id.textPassword);
         dialog = new ProgressDialog(this);
-
+        passwordText = (TextView) findViewById(R.id.textPassword1);
+        passwordText.setVisibility((View.GONE));
         //Set Listeners
 
 
@@ -82,6 +84,28 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         registerButton.setOnClickListener(this);
         txtViewSignIn.setOnClickListener(this);
         retrieveDBValues();
+
+        passwordField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if (hasFocus) {
+                    passwordText.setVisibility((View.VISIBLE));
+                } else {
+                    passwordText.setVisibility((View.GONE));
+                }
+            }
+        });
+
+        reTypeField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if (hasFocus) {
+                    passwordText.setVisibility((View.VISIBLE));
+                } else {
+                    passwordText.setVisibility((View.GONE));
+                }
+            }
+        });
 
     }
 
@@ -137,8 +161,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             isRegisteredSuccessfully = tryToRegister();
         }
         else if(v == txtViewSignIn) {
-            Toast.makeText(this,".(",Toast.LENGTH_LONG).show();
-            startActivity(new Intent(this,LoginActivity.class));
+            //Toast.makeText(this,".(",Toast.LENGTH_LONG).show();
+            //startActivity(new Intent(this,LoginActivity.class));
         }
 
 
@@ -174,13 +198,13 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             public void onComplete(@NonNull Task<AuthResult> t) {
 
                 if(t.isSuccessful()) {
-                    Toast.makeText(SignUpActivity.this,u.getEmail(),Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(SignUpActivity.this,u.getEmail(),Toast.LENGTH_SHORT).show();
                     u.uid = t.getResult().getUser().getUid();
                     writeNewUser(u.getUid(),u.getName(),u.getEmail()); // removed writing to the username too
                  //   createNewUser(u);
                     //  startActivity(new Intent(this,UserLoginActivity.class));
                    // finish();
-                    startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+                    startActivity(new Intent(getApplicationContext(),TabActivity.class));
                 }
                 else {
                     if(!myTMp.contains("@") || !myTMp.contains(".") )
@@ -241,7 +265,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     u.uid = t.getResult().getUser().getUid();
                     createNewUser(u);
                     finish();
-                    startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+                    startActivity(new Intent(getApplicationContext(),SignUpActivity.class));
 
                 }
                 else {

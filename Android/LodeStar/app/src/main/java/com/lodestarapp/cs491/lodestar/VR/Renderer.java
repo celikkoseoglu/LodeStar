@@ -44,6 +44,11 @@ public class Renderer {
     public static final double ONE_TWENTY_DEGREES = THREE_SIXTY_DEGREES / 3;
     public static final double NINETY_DEGREES = Math.PI / 2;
 
+
+    private float[] mRotationMatrix = new float[16];
+
+
+
     private static final long POWER_CLAMP = 0x00000000ffffffffL;
 
     private final List<FloatBuffer> mVertexBuffer = new ArrayList<FloatBuffer>();
@@ -367,6 +372,35 @@ public class Renderer {
         }
 
 
+
+
+
+        drawArrow(tl, mvpMatrix, 90);
+
+
+
+
+
+
+
+
+
+
+        GLES20.glDisableVertexAttribArray(mPositionHandle);
+        GLES20.glDisable(GLES20.GL_CULL_FACE);
+    }
+
+    public void drawArrow(int tl, float[] mvpMatrix, float angle){
+
+        Matrix.setIdentityM(mRotationMatrix, 0);
+        //Matrix.translateM(mRotationMatrix, 0, 0, -2.46f, -1.6f);
+        Matrix.rotateM(mRotationMatrix, 0, angle, 0, 1.0f, 0);
+        //Matrix.translateM(mRotationMatrix, 0, 0, 2.46f, 1.6f);
+
+        Matrix.multiplyMM(mvpMatrix, 0, mvpMatrix, 0, mRotationMatrix, 0);
+        GLES20.glUniformMatrix4fv(mMVPMatrixHandle, 1, false, mvpMatrix, 0);
+
+
         //GLES20.glUniform4fv(tl, 1, color, 0);
         GLES20.glVertexAttribPointer(tl,4, GLES20.GL_FLOAT, true,1 , colorBuffer);
         GLES20.glEnableVertexAttribArray(tl);
@@ -401,19 +435,6 @@ public class Renderer {
 
         GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, 3);
 
-
-
-
-
-
-
-
-        GLES20.glDisableVertexAttribArray(mPositionHandle);
-        GLES20.glDisable(GLES20.GL_CULL_FACE);
-
-
-
-
     }
 
     public static int power(final int base, final int raise) {
@@ -434,7 +455,13 @@ public class Renderer {
     }
 
 
-    public int testTouch(float width, float height, float xTouch, float yTouch, float[] mModelView, float[] mProjection){
+    public int testTouch(float width, float height, float xTouch, float yTouch, float[] mModelView, float[] mProjection, float angle){
+        Matrix.setIdentityM(mRotationMatrix, 0);
+        //Matrix.translateM(mRotationMatrix, 0, 0, -2.46f, -1.6f);
+        Matrix.rotateM(mRotationMatrix, 0, angle, 0, 1.0f, 0);
+        Matrix.multiplyMM(mModelView, 0, mModelView, 0, mRotationMatrix, 0);
+
+
         Ray r = new Ray((int)width, (int)height, xTouch, yTouch, mModelView, mProjection);
 
         int coordCount = triangleCoords.length;

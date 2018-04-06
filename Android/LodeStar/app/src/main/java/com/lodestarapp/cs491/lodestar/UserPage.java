@@ -73,6 +73,7 @@ public class UserPage extends android.support.v4.app.Fragment {
 
     }
 
+
     @Override
     public void onStart() {
         super.onStart();
@@ -82,7 +83,7 @@ public class UserPage extends android.support.v4.app.Fragment {
             str = currentUser.getEmail();
             String[] tmp = str.split("----");
             currentUserName = tmp[tmp.length -1];
-
+            Log.d("user", currentUser.getDisplayName());   //?
         }
     }
 

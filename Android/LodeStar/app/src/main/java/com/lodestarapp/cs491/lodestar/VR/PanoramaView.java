@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.google.vrtoolkit.cardboard.CardboardView;
 import com.google.vrtoolkit.cardboard.DistortionRenderer;
+import com.google.vrtoolkit.cardboard.sensors.HeadTracker;
 import com.google.vrtoolkit.cardboard.sensors.SensorEventProvider;
 import com.lodestarapp.cs491.lodestar.R;
 import com.lodestarapp.cs491.lodestar.VR.MatrixCalculator;
@@ -59,10 +60,11 @@ public class PanoramaView extends GLSurfaceView{
     private float yBefore;
     private float degBefore;
     String TAG = "pano ";
+    HeadTracker ht;
 
 
     float[] rotationMatrix = new float[16];
-    float[] remappedRotationMatrix = new float[16];
+    float[] rotMatrix  = new float[16];
     float[] orientations = new float[3];
     public PanoramaView(Context context) {
         super(context);
@@ -71,6 +73,7 @@ public class PanoramaView extends GLSurfaceView{
 
         setRenderer(pr = new PanoRenderer());
         setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
+        ht = HeadTracker.createFromContext(c);
     }
 
     public PanoramaView(Context context, AttributeSet attrs) {
@@ -80,6 +83,7 @@ public class PanoramaView extends GLSurfaceView{
 
         setRenderer(pr = new PanoRenderer());
         setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
+        ht = HeadTracker.createFromContext(c);
     }
 
     float readX=0;
@@ -92,11 +96,12 @@ public class PanoramaView extends GLSurfaceView{
     @Override
     public void onPause(){
         super.onPause();
-
+        ht.stopTracking();
     }
 
     @Override
     public void onResume(){
+        ht.startTracking();
     }
 
     @Override
@@ -114,6 +119,10 @@ public class PanoramaView extends GLSurfaceView{
                     renderHeight = this.getHeight();
                     renderWidth = this.getWidth();
                     clicked = true;
+
+                    ht.getLastHeadView(rotMatrix,0);
+                    Log.d("head view:", floatToString(rotMatrix));
+
 
 
                 }
@@ -192,6 +201,7 @@ public class PanoramaView extends GLSurfaceView{
             Matrix.multiplyMM(temp, 0, mIdentity, 0, accRotation, 0);
             System.arraycopy(temp, 0, mIdentity, 0, 16);
 
+
             //Matrix.rotateM(mIdentity, 0, roll, 1.0f, 0.0f, 0.0f);
             //Matrix.rotateM(mIdentity, 0, pitch, 0.0f, 1.0f, 0.0f);
             //Matrix.rotateM(mIdentity, 0, yaw, 0.0f, 0.0f, 1.0f);
@@ -218,7 +228,7 @@ public class PanoramaView extends GLSurfaceView{
 
             if(clicked){
                 clicked = false;
-                int x = renderer.testTouch(renderWidth,renderHeight,readX,readY,mView,mProjectionMatrix);
+                int x = renderer.testTouch(renderWidth,renderHeight,readX,readY,mView,mProjectionMatrix,90);
                 Log.i("Check:",x + "");
                 if(x>0){
                     renderer.deleteCurrentTexture();
@@ -285,5 +295,13 @@ public class PanoramaView extends GLSurfaceView{
         public void onAccuracyChanged(Sensor sensor, int i) {
 
         }
+    }
+
+    public static String floatToString(float arr[]){
+        String s = "";
+        for(int i=0;i<arr.length;i++)
+            s += arr[i] + " ";
+
+        return s;
     }
 }
