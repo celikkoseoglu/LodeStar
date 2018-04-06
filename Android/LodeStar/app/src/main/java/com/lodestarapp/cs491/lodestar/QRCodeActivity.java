@@ -2,6 +2,7 @@ package com.lodestarapp.cs491.lodestar;
 
 import android.*;
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.SparseArray;
@@ -41,6 +43,8 @@ public class QRCodeActivity extends AppCompatActivity{
     private boolean read = false;
 
     private QRCodeInfo qrCodeInfo;
+
+    private AlertDialog.Builder diyalogOlusturucu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,32 +115,58 @@ public class QRCodeActivity extends AppCompatActivity{
             public void receiveDetections(Detector.Detections<Barcode> detections) {
                 final SparseArray<Barcode> barcodeData = detections.getDetectedItems();
 
+                diyalogOlusturucu =
+                        new AlertDialog.Builder(QRCodeActivity.this);
+
                 QRCodeActivity.this.runOnUiThread(new Runnable() {
                     public void run() {
                         if(barcodeData.size()>0) {
                             read = true;
                             Log.d(TAG, "23423423");
 
-                            Toast.makeText(QRCodeActivity.this, barcodeData.valueAt(0).displayValue, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(QRCodeActivity.this, barcodeData.valueAt(0).displayValue , Toast.LENGTH_SHORT).show();
 
-                            Log.d(TAG, "asdfsadf");
+                            diyalogOlusturucu.setMessage("Would you like to add this flight to your History page?")
+                                    .setCancelable(true)
+                                    .setNegativeButton("NO :(", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            //Log.i("agam","laalalal" + userListView.getSelectedItem());
+                                            dialog.dismiss();
 
-                            String[] parts = barcodeData.valueAt(0).displayValue.split(" +");
+                                            Log.d(TAG, "asdfsadf");
 
-                            qrCodeInfo.setFrom(parts[2].substring(0, 3));
-                            qrCodeInfo.setTo(parts[2].substring(3, 6));
-                            qrCodeInfo.setFlightCode(parts[2].substring(6).concat(parts[3]));
+                                            String[] parts = barcodeData.valueAt(0).displayValue.split(" +");
 
-                            Log.d(TAG, "99999999999");
+                                            qrCodeInfo.setFrom(parts[2].substring(0, 3));
+                                            qrCodeInfo.setTo(parts[2].substring(3, 6));
+                                            qrCodeInfo.setFlightCode(parts[2].substring(6).concat(parts[3]));
 
-                            cameraSource.stop();
+                                            Log.d(TAG, "99999999999");
 
-                            returnToTripActivity();
+                                            cameraSource.stop();
+
+                                            returnToTripActivity();
+
+                                        }
+                                    })
+                                    .setPositiveButton("YES!", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            Intent intent = new Intent(QRCodeActivity.this, LoginActivity.class);
+                                            startActivity(intent);
+                                        }
+                                    });
+
+
+                            diyalogOlusturucu.create().show();
+
+
                         }
                     }
                 });
 
-                Log.d(TAG, "Size: " + barcodeData.size());
+                Log.d("q", "Size: " + barcodeData.size());
 
                 for (int i = 0; i < barcodeData.size(); i++){
                     Log.d(TAG, "At i: " + i + " have: " + barcodeData.valueAt(i).displayValue);
