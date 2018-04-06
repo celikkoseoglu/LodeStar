@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.NFC" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -17,6 +18,10 @@
     <uses-feature
         android:name="android.hardware.nfc"
         android:required="false" />
+
+    <uses-feature
+        android:name="android.hardware.location.gps"
+        />
 
     <application
         android:allowBackup="true"
@@ -74,6 +79,7 @@
             android:name=".ManualDestinationActivity"
             android:label="@string/title_activity_manual_destination"
             android:theme="@style/AppTheme"></activity>
+        <activity android:name=".PlacesToSeeExpandedActivity" />
     </application>
 
 </manifest>

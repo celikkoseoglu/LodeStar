@@ -1,6 +1,11 @@
 package com.lodestarapp.cs491.lodestar.Adapters;
 
+import android.app.ActivityOptions;
+import android.content.ClipData;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,8 +15,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lodestarapp.cs491.lodestar.Models.Places;
+import com.lodestarapp.cs491.lodestar.PlacesToSeeActivity;
+import com.lodestarapp.cs491.lodestar.PlacesToSeeExpandedActivity;
 import com.lodestarapp.cs491.lodestar.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PlacesToSeeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -24,7 +32,7 @@ public class PlacesToSeeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         this.context = context;
     }
 
-    static class PlacesViewHolder extends RecyclerView.ViewHolder {
+    class PlacesViewHolder extends RecyclerView.ViewHolder {
 
         ImageView placePictureView;
         TextView placeNameView;
@@ -44,8 +52,34 @@ public class PlacesToSeeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         //TextView placeNumberOfReviewsView;
 
-        public PlacesViewHolder(View itemView) {
+        //REFERENCE:https://stackoverflow.com/questions/27081787/onclicklistener-for-cardview
+        View itemView;
+
+        PlacesViewHolder(View itemView) {
             super(itemView);
+
+            this.itemView = itemView;
+
+            //REFERENCE:https://stackoverflow.com/questions/27081787/onclicklistener-for-cardview
+            //REFERENCE:https://stackoverflow.com/questions/768969/passing-a-bundle-on-startactivity
+            //REFERENCE:https://stackoverflow.com/questions/28528009/start-new-intent-from-recyclerviewadapter
+            this.itemView.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View view) {
+                    int card = getAdapterPosition();
+                    //ArrayList<String> sendInformationToNextActivity = new ArrayList<>();
+                    //sendInformationToNextActivity.add(PlacesToSeeAdapter.this.placesList.get(card).getPlaceName());
+
+                    String placeName = PlacesToSeeAdapter.this.placesList.get(card).getPlaceName();
+
+                    Intent intent = new Intent(view.getContext(), PlacesToSeeExpandedActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("place", placeName);
+
+                    intent.putExtras(bundle);
+                    view.getContext().startActivity(intent);
+                }
+            });
 
             this.placePictureView = itemView.findViewById(R.id.imageButtonView);
             this.placeNameView = itemView.findViewById(R.id.place_name);
@@ -64,6 +98,7 @@ public class PlacesToSeeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         }
     }
 
+    @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
@@ -78,13 +113,13 @@ public class PlacesToSeeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         //TODO: Place Image
 
         //Set Number of Stars Image
-        int noOfStars = placesList.get(position).getNumberOfStars();
-        boolean halfStar = placesList.get(position).isHalfStar();
-        int i;
+        //int noOfStars = placesList.get(position).getNumberOfStars();
+        //boolean halfStar = placesList.get(position).isHalfStar();
+        //int i;
 
         /*for ( i = 0; i < noOfStars; i++) {
             ((PlacesViewHolder) holder).placeStarImages[i].setImageResource(this.context.getResources()
@@ -120,6 +155,7 @@ public class PlacesToSeeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         ((PlacesViewHolder) holder).placeTypeIcon.
                 setImageBitmap(placesList.get(position).getPlaceIconImage());
+
     }
 
     @Override

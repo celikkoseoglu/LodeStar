@@ -40,7 +40,7 @@ public class PlacesToSeeController {
         if(this.locationPermissionGiven){
             //Server part not implemented
 
-            this.requestFromUrl = "http://lodestarapp.com:3010/";
+            this.requestFromUrl = "http://lodestarapp.com:3010/?city=ankara";
 
             // this.requestFromUrl = "http://lodestarapp.com:3009/?location="+location.getLatitude()+
             //","+location.getLongitude()+"&limit=5";
