@@ -11,8 +11,8 @@ import UIKit
 fileprivate let itemsPerRow: CGFloat = 3
 fileprivate let sectionInsets = UIEdgeInsets(top: 0.0, left: 6.0, bottom: 3.0, right: 6.0)
 fileprivate let reuseIdentifier = "tripCell"
-fileprivate var availableServices = ["Transport Options", "Weather", "Flight Information", "Shopping", "Lounge", "Restaurants", "Living Expenses", "Places to See", "Accomodation"]
-fileprivate var availableServiceImages = ["transport", "weather", "flight", "shopping", "lounge", "restaurants", "livingExpenses", "placesToSee", "accomodation"]
+fileprivate var availableServices = ["Transport Options", "Weather", "Flight Information", "Shopping", "Lounge", "Restaurants", "Living Expenses", "Places to See", "Accomodation", "Landmarks", "Get a SIM Card", "N/A"]
+fileprivate var availableServiceImages = ["transport", "weather", "flight", "shopping", "lounge", "restaurants", "livingExpenses", "placesToSee", "accomodation", "landmarks", "getASIMCard", "na"]
 
 protocol TravelViewControllerDelegate {
     func setDestinationInfo(_ name:String)
@@ -32,7 +32,7 @@ extension TravelViewController {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CollectionCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! FlightDetailsCell
         
         //background shadow for collectionView elements
         cell.layer.shadowColor = UIColor.black.cgColor
@@ -43,7 +43,7 @@ extension TravelViewController {
         cell.layer.masksToBounds = false
         
         let index = indexPath as NSIndexPath
-
+        
         let image = UIImage(named: availableServiceImages[index.row])
         let text = availableServices[index.row]
         cell.cellImage.image = image
@@ -56,7 +56,7 @@ extension TravelViewController {
             cell.cellImage.addGestureRecognizer(transportTap)
             
         }
-        
+            
         else if text == "Weather" {
             
             let weatherTap = UITapGestureRecognizer(target: self, action: #selector(TravelViewController.weatherTapAction(_:)))
@@ -64,7 +64,7 @@ extension TravelViewController {
             cell.cellImage.addGestureRecognizer(weatherTap)
             
         }
-        
+            
         else if text == "Flight Information" {
             
             let flightInformationTap = UITapGestureRecognizer(target: self, action: #selector(TravelViewController.flightInformationTapAction(_:)))
@@ -123,7 +123,7 @@ class TravelViewController: UIViewController, TravelViewControllerDelegate, UICo
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         collectionView.dataSource = self
         collectionView.delegate = self
         
@@ -205,7 +205,7 @@ class TravelViewController: UIViewController, TravelViewControllerDelegate, UICo
             destinationCityLabel.text = "Showing information about " + destination
             boardingInfoLabel.text = "You will be boarding PJ15396 to"
         }
-        
+            
         else {
             // update content of the labels etc for departure
             departure = name
@@ -213,8 +213,8 @@ class TravelViewController: UIViewController, TravelViewControllerDelegate, UICo
             destinationCityLabel.text = "Showing information about " + departure
             boardingInfoLabel.text = "You will be boarding PJ15396 from"
         }
-
-
+        
+        
     }
     
     // MARK: Tap Functions

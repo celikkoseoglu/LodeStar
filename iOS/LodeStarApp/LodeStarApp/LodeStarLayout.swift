@@ -13,7 +13,7 @@ protocol LodeStarLayoutDelegate: class {
 }
 
 class LodeStarLayout: UICollectionViewLayout {
-
+    
     // 1
     weak var delegate: LodeStarLayoutDelegate!
     

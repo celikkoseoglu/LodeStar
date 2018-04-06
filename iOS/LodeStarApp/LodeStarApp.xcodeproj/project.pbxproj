@@ -10,6 +10,7 @@
 		143FF65F2037088C00C462F6 /* loginBackground.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 143FF65E2037088B00C462F6 /* loginBackground.pdf */; };
 		14D03F0F202B35FF00B3B80A /* istabul.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D03F0D202B35FF00B3B80A /* istabul.png */; };
 		14D03F10202B35FF00B3B80A /* shanghai.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D03F0E202B35FF00B3B80A /* shanghai.png */; };
+		14FF11A52077D34F00D611AF /* TripCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FF11A42077D34F00D611AF /* TripCell.swift */; };
 		8D11715D200F74FE0032860E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D11715C200F74FE0032860E /* LoginViewController.swift */; };
 		8D22B2512030C7DF00ACFBD7 /* 2018-01-01-PHOTO-00001561.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8D22B23D2030C7DF00ACFBD7 /* 2018-01-01-PHOTO-00001561.jpg */; };
 		8D22B2522030C7DF00ACFBD7 /* accomodation.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 8D22B23E2030C7DF00ACFBD7 /* accomodation.pdf */; };
@@ -19,12 +20,7 @@
 		8D22B2562030C7DF00ACFBD7 /* history.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 8D22B2422030C7DF00ACFBD7 /* history.pdf */; };
 		8D22B2572030C7DF00ACFBD7 /* home.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 8D22B2432030C7DF00ACFBD7 /* home.pdf */; };
 		8D22B2582030C7DF00ACFBD7 /* livingExpenses.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8D22B2442030C7DF00ACFBD7 /* livingExpenses.jpg */; };
-		8D22B2592030C7DF00ACFBD7 /* livingExpenses.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 8D22B2452030C7DF00ACFBD7 /* livingExpenses.pdf */; };
-		8D22B25A2030C7DF00ACFBD7 /* lounge.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 8D22B2462030C7DF00ACFBD7 /* lounge.pdf */; };
-		8D22B25B2030C7DF00ACFBD7 /* placesToSee.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 8D22B2472030C7DF00ACFBD7 /* placesToSee.pdf */; };
-		8D22B25C2030C7DF00ACFBD7 /* restaurants.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 8D22B2482030C7DF00ACFBD7 /* restaurants.pdf */; };
 		8D22B25D2030C7DF00ACFBD7 /* shopping.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8D22B2492030C7DF00ACFBD7 /* shopping.jpg */; };
-		8D22B25E2030C7DF00ACFBD7 /* shopping.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 8D22B24A2030C7DF00ACFBD7 /* shopping.pdf */; };
 		8D22B25F2030C7DF00ACFBD7 /* star.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 8D22B24B2030C7DF00ACFBD7 /* star.pdf */; };
 		8D22B2602030C7DF00ACFBD7 /* transport.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 8D22B24C2030C7DF00ACFBD7 /* transport.pdf */; };
 		8D22B2612030C7DF00ACFBD7 /* trip.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 8D22B24D2030C7DF00ACFBD7 /* trip.pdf */; };
@@ -35,7 +31,7 @@
 		8D26FA0E20433DE50011E5BE /* LivingExpensesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D26FA0D20433DE50011E5BE /* LivingExpensesViewController.swift */; };
 		8D26FA102043407E0011E5BE /* FoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D26FA0F2043407E0011E5BE /* FoodCell.swift */; };
 		8D2A6C2F1FDE71F600AA44E7 /* TravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2A6C2E1FDE71F600AA44E7 /* TravelViewController.swift */; };
-		8D2A6C331FDE781C00AA44E7 /* CollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2A6C321FDE781C00AA44E7 /* CollectionCell.swift */; };
+		8D2A6C331FDE781C00AA44E7 /* FlightDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2A6C321FDE781C00AA44E7 /* FlightDetailsCell.swift */; };
 		8D2A6C351FDE7E1600AA44E7 /* LodeStarLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2A6C341FDE7E1600AA44E7 /* LodeStarLayout.swift */; };
 		8D2EAC792007735A000819DA /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2EAC782007735A000819DA /* WeatherViewController.swift */; };
 		8D2F8FEE1FD57C7600334A86 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2F8FED1FD57C7600334A86 /* SwiftyJSON.swift */; };
@@ -80,6 +76,7 @@
 		143FF65E2037088B00C462F6 /* loginBackground.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = loginBackground.pdf; sourceTree = "<group>"; };
 		14D03F0D202B35FF00B3B80A /* istabul.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = istabul.png; sourceTree = "<group>"; };
 		14D03F0E202B35FF00B3B80A /* shanghai.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shanghai.png; sourceTree = "<group>"; };
+		14FF11A42077D34F00D611AF /* TripCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripCell.swift; sourceTree = "<group>"; };
 		2E1BD3D5549A92F56E0B6398 /* Pods-LodeStarApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LodeStarApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LodeStarApp/Pods-LodeStarApp.debug.xcconfig"; sourceTree = "<group>"; };
 		8D11715C200F74FE0032860E /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8D22B23D2030C7DF00ACFBD7 /* 2018-01-01-PHOTO-00001561.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "2018-01-01-PHOTO-00001561.jpg"; sourceTree = "<group>"; };
@@ -90,12 +87,7 @@
 		8D22B2422030C7DF00ACFBD7 /* history.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = history.pdf; sourceTree = "<group>"; };
 		8D22B2432030C7DF00ACFBD7 /* home.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = home.pdf; sourceTree = "<group>"; };
 		8D22B2442030C7DF00ACFBD7 /* livingExpenses.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = livingExpenses.jpg; sourceTree = "<group>"; };
-		8D22B2452030C7DF00ACFBD7 /* livingExpenses.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = livingExpenses.pdf; sourceTree = "<group>"; };
-		8D22B2462030C7DF00ACFBD7 /* lounge.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = lounge.pdf; sourceTree = "<group>"; };
-		8D22B2472030C7DF00ACFBD7 /* placesToSee.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = placesToSee.pdf; sourceTree = "<group>"; };
-		8D22B2482030C7DF00ACFBD7 /* restaurants.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = restaurants.pdf; sourceTree = "<group>"; };
 		8D22B2492030C7DF00ACFBD7 /* shopping.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = shopping.jpg; sourceTree = "<group>"; };
-		8D22B24A2030C7DF00ACFBD7 /* shopping.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = shopping.pdf; sourceTree = "<group>"; };
 		8D22B24B2030C7DF00ACFBD7 /* star.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = star.pdf; sourceTree = "<group>"; };
 		8D22B24C2030C7DF00ACFBD7 /* transport.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = transport.pdf; sourceTree = "<group>"; };
 		8D22B24D2030C7DF00ACFBD7 /* trip.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = trip.pdf; sourceTree = "<group>"; };
@@ -106,7 +98,7 @@
 		8D26FA0D20433DE50011E5BE /* LivingExpensesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LivingExpensesViewController.swift; sourceTree = "<group>"; };
 		8D26FA0F2043407E0011E5BE /* FoodCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodCell.swift; sourceTree = "<group>"; };
 		8D2A6C2E1FDE71F600AA44E7 /* TravelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TravelViewController.swift; sourceTree = "<group>"; };
-		8D2A6C321FDE781C00AA44E7 /* CollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionCell.swift; sourceTree = "<group>"; };
+		8D2A6C321FDE781C00AA44E7 /* FlightDetailsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlightDetailsCell.swift; sourceTree = "<group>"; };
 		8D2A6C341FDE7E1600AA44E7 /* LodeStarLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LodeStarLayout.swift; sourceTree = "<group>"; };
 		8D2EAC782007735A000819DA /* WeatherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
 		8D2F8FED1FD57C7600334A86 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
@@ -160,12 +152,7 @@
 				8D22B2422030C7DF00ACFBD7 /* history.pdf */,
 				8D22B2432030C7DF00ACFBD7 /* home.pdf */,
 				8D22B2442030C7DF00ACFBD7 /* livingExpenses.jpg */,
-				8D22B2452030C7DF00ACFBD7 /* livingExpenses.pdf */,
-				8D22B2462030C7DF00ACFBD7 /* lounge.pdf */,
-				8D22B2472030C7DF00ACFBD7 /* placesToSee.pdf */,
-				8D22B2482030C7DF00ACFBD7 /* restaurants.pdf */,
 				8D22B2492030C7DF00ACFBD7 /* shopping.jpg */,
-				8D22B24A2030C7DF00ACFBD7 /* shopping.pdf */,
 				8D22B24B2030C7DF00ACFBD7 /* star.pdf */,
 				8D22B24C2030C7DF00ACFBD7 /* transport.pdf */,
 				8D22B24D2030C7DF00ACFBD7 /* trip.pdf */,
@@ -176,6 +163,15 @@
 				14D03F0E202B35FF00B3B80A /* shanghai.png */,
 			);
 			path = images;
+			sourceTree = "<group>";
+		};
+		14FF119F2077AD3F00D611AF /* FlightInformation */ = {
+			isa = PBXGroup;
+			children = (
+				8DC4DCB62021CBAC00DBF943 /* FlightInformationViewController.swift */,
+				8D2A6C321FDE781C00AA44E7 /* FlightDetailsCell.swift */,
+			);
+			path = FlightInformation;
 			sourceTree = "<group>";
 		};
 		8D6F76B21F961992004824B0 = {
@@ -202,8 +198,9 @@
 		8D6F76BD1F961993004824B0 /* LodeStarApp */ = {
 			isa = PBXGroup;
 			children = (
-				8DC4DCB62021CBAC00DBF943 /* FlightInformationViewController.swift */,
+				14FF119F2077AD3F00D611AF /* FlightInformation */,
 				8D2A6C2E1FDE71F600AA44E7 /* TravelViewController.swift */,
+				14FF11A42077D34F00D611AF /* TripCell.swift */,
 				8D6F76BE1F961993004824B0 /* AppDelegate.swift */,
 				8D6F76DE1F961B40004824B0 /* SelectNationViewController.swift */,
 				8D6F76C21F961993004824B0 /* Main.storyboard */,
@@ -217,7 +214,6 @@
 				8D3D437A200A2FDC0091CCEB /* TransportViewController.swift */,
 				8D2EAC782007735A000819DA /* WeatherViewController.swift */,
 				8D2A6C341FDE7E1600AA44E7 /* LodeStarLayout.swift */,
-				8D2A6C321FDE781C00AA44E7 /* CollectionCell.swift */,
 				8D6F76C51F961993004824B0 /* Assets.xcassets */,
 				8D6F76C71F961993004824B0 /* LaunchScreen.storyboard */,
 				8D6F76CA1F961993004824B0 /* Info.plist */,
@@ -342,12 +338,10 @@
 			files = (
 				8D22B2622030C7DF00ACFBD7 /* user.pdf in Resources */,
 				8D22B2642030C7DF00ACFBD7 /* weather.pdf in Resources */,
-				8D22B2592030C7DF00ACFBD7 /* livingExpenses.pdf in Resources */,
 				8D22B2532030C7DF00ACFBD7 /* bus.jpg in Resources */,
 				8D22B2562030C7DF00ACFBD7 /* history.pdf in Resources */,
 				8D22B2512030C7DF00ACFBD7 /* 2018-01-01-PHOTO-00001561.jpg in Resources */,
 				14D03F10202B35FF00B3B80A /* shanghai.png in Resources */,
-				8D22B25C2030C7DF00ACFBD7 /* restaurants.pdf in Resources */,
 				8D22B2542030C7DF00ACFBD7 /* flight.jpg in Resources */,
 				8D22B2582030C7DF00ACFBD7 /* livingExpenses.jpg in Resources */,
 				8D22B2572030C7DF00ACFBD7 /* home.pdf in Resources */,
@@ -360,12 +354,9 @@
 				8D22B25F2030C7DF00ACFBD7 /* star.pdf in Resources */,
 				143FF65F2037088C00C462F6 /* loginBackground.pdf in Resources */,
 				8D22B2612030C7DF00ACFBD7 /* trip.pdf in Resources */,
-				8D22B25A2030C7DF00ACFBD7 /* lounge.pdf in Resources */,
 				8D22B2552030C7DF00ACFBD7 /* flight.pdf in Resources */,
 				8D22B2522030C7DF00ACFBD7 /* accomodation.pdf in Resources */,
 				8D22B2602030C7DF00ACFBD7 /* transport.pdf in Resources */,
-				8D22B25E2030C7DF00ACFBD7 /* shopping.pdf in Resources */,
-				8D22B25B2030C7DF00ACFBD7 /* placesToSee.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,6 +429,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D6F76BF1F961993004824B0 /* AppDelegate.swift in Sources */,
+				14FF11A52077D34F00D611AF /* TripCell.swift in Sources */,
 				8D26FA102043407E0011E5BE /* FoodCell.swift in Sources */,
 				8D2F8FEE1FD57C7600334A86 /* SwiftyJSON.swift in Sources */,
 				8D26FA0C2042FE400011E5BE /* SmallWeatherCell.swift in Sources */,
@@ -445,7 +437,7 @@
 				8DC4DCB72021CBAC00DBF943 /* FlightInformationViewController.swift in Sources */,
 				8D302A8420387E6D00710A78 /* WeatherCell.swift in Sources */,
 				8D3D437D200A3AD30091CCEB /* LogCell.swift in Sources */,
-				8D2A6C331FDE781C00AA44E7 /* CollectionCell.swift in Sources */,
+				8D2A6C331FDE781C00AA44E7 /* FlightDetailsCell.swift in Sources */,
 				8D2A6C351FDE7E1600AA44E7 /* LodeStarLayout.swift in Sources */,
 				8D3D437B200A2FDC0091CCEB /* TransportViewController.swift in Sources */,
 				8D2EAC792007735A000819DA /* WeatherViewController.swift in Sources */,

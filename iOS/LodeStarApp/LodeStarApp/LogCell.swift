@@ -40,6 +40,6 @@ class LogCell: UICollectionViewCell {
         self.backgroundColor = UIColor(red: 209/255, green: 209/255, blue: 209/255, alpha: 0.8)
         
     }
-
+    
     
 }

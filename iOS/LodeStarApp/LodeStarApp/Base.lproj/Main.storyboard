@@ -484,7 +484,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" restorationIdentifier="transport" reuseIdentifier="tripCell" id="sFt-Af-K3q" customClass="CollectionCell" customModule="LodeStarApp" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" restorationIdentifier="transport" reuseIdentifier="tripCell" id="sFt-Af-K3q" customClass="FlightDetailsCell" customModule="LodeStarApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="110" height="130"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -577,27 +577,27 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="2" minimumInteritemSpacing="2" id="m22-YL-j5r">
-                                    <size key="itemSize" width="414" height="130"/>
+                                    <size key="itemSize" width="414" height="80"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" misplaced="YES" restorationIdentifier="flightInformation" reuseIdentifier="FlightInfoCell" id="Rh5-QF-yV6" customClass="CollectionCell" customModule="LodeStarApp" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" misplaced="YES" restorationIdentifier="flightInformation" reuseIdentifier="FlightInfoCell" id="Rh5-QF-yV6" customClass="FlightDetailsCell" customModule="LodeStarApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="241"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="241"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SHANGHAI, CHINA" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RgG-AX-nEk">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="originCity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RgG-AX-nEk">
                                                     <rect key="frame" x="20" y="20" width="165" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ISTANBUL, TURKEY" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pga-v6-JYe">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="arrivalCity" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pga-v6-JYe">
                                                     <rect key="frame" x="229" y="20" width="165" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="18"/>
@@ -611,14 +611,14 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ARRIVING TO TERMINAL 1" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DKb-Gz-1Tb">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="arrivalTerminal" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DKb-Gz-1Tb">
                                                     <rect key="frame" x="217" y="44" width="177" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Queen's Int'l - QN" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lAb-m4-1np">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="destinationAirportName" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lAb-m4-1np">
                                                     <rect key="frame" x="229" y="65" width="165" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -674,7 +674,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Dom Mazetti Int'l - DM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0vR-gp-uu2">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="originAirportName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0vR-gp-uu2">
                                                     <rect key="frame" x="20" y="65" width="165" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -693,15 +693,26 @@
                                         <color key="backgroundColor" red="0.98431372549999996" green="0.98431372549999996" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
                                         <size key="customSize" width="414" height="241"/>
                                         <connections>
-                                            <outlet property="departureTimeOffsetLabel" destination="fdf-XK-GB1" id="REx-bm-mQe"/>
-                                            <outlet property="originAirportNameLabel" destination="0vR-gp-uu2" id="FQU-Hv-Co1"/>
+                                            <outlet property="arrivalAirportNameLabel" destination="lAb-m4-1np" id="ZP2-NG-IK3"/>
+                                            <outlet property="arrivalArrivingToGateLabel" destination="DKb-Gz-1Tb" id="wKV-3I-0F7"/>
+                                            <outlet property="arrivalCityNameLabel" destination="Pga-v6-JYe" id="gOC-3q-Zc5"/>
+                                            <outlet property="arrivalTimeLocalLabel" destination="nxp-Es-aar" id="vgC-1U-R5U"/>
+                                            <outlet property="arrivalTimeOffSetLabel" destination="TwK-gE-oXh" id="JuD-ui-Cvb"/>
+                                            <outlet property="averageDelayLabel" destination="ghk-lT-Gek" id="uVB-Rk-mmp"/>
+                                            <outlet property="departureTimeLocalLabel" destination="YXu-5a-lUf" id="cxH-nZ-g53"/>
+                                            <outlet property="departureTimeOffsetLabel" destination="fdf-XK-GB1" id="gFg-v7-ctz"/>
+                                            <outlet property="directDistanceLabel" destination="X8m-cR-28x" id="3A9-45-g9R"/>
+                                            <outlet property="originAirportNameLabel" destination="0vR-gp-uu2" id="5Rb-YH-pj5"/>
+                                            <outlet property="originCityNameLabel" destination="RgG-AX-nEk" id="AGx-y0-Daf"/>
+                                            <outlet property="originLeavingFromGateLabel" destination="fgc-x9-jl1" id="QSa-Ue-2pr"/>
+                                            <outlet property="plannedSpeedLabel" destination="1OB-zk-qnS" id="93B-Mo-Gce"/>
                                         </connections>
                                     </collectionViewCell>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" misplaced="YES" restorationIdentifier="weatherInformation" reuseIdentifier="WeatherInfoCell" id="d1k-tP-Mjx" customClass="CollectionCell" customModule="LodeStarApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="243" width="414" height="241"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" misplaced="YES" restorationIdentifier="weatherInformation" reuseIdentifier="WeatherInfoCell" id="d1k-tP-Mjx" customClass="FlightDetailsCell" customModule="LodeStarApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="243" width="414" height="180"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="241"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="180"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="16°" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O6Q-SJ-5YP">
@@ -760,67 +771,79 @@
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" red="0.98431372549999996" green="0.98431372549999996" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
-                                        <size key="customSize" width="414" height="241"/>
+                                        <size key="customSize" width="414" height="180"/>
+                                        <connections>
+                                            <outlet property="humidityFeelsLikeLabel" destination="iZG-hT-cyc" id="cmc-iW-Pth"/>
+                                            <outlet property="humidityLabel" destination="lNn-6b-9It" id="0K8-h5-pe6"/>
+                                            <outlet property="temperatureFeelsLikeLabel" destination="WEa-8b-p9P" id="3iM-xL-U5N"/>
+                                            <outlet property="temperatureLabel" destination="O6Q-SJ-5YP" id="uNH-zE-obN"/>
+                                            <outlet property="weatherConditionLabel" destination="daa-ps-EVj" id="OCW-Xt-blI"/>
+                                            <outlet property="whenYouArriveInLabel" destination="JlI-Tp-2s3" id="WLa-in-97F"/>
+                                        </connections>
                                     </collectionViewCell>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" misplaced="YES" restorationIdentifier="technicalInformation" reuseIdentifier="TechnicalDetailsCell" id="Mao-yb-TGo" customClass="CollectionCell" customModule="LodeStarApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="486" width="414" height="241"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" restorationIdentifier="technicalInformation" reuseIdentifier="TechnicalDetailsCell" id="Mao-yb-TGo" customClass="FlightDetailsCell" customModule="LodeStarApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="425" width="414" height="140"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="241"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="140"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Aircraft Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="92k-Ha-tLc">
-                                                    <rect key="frame" x="56" y="96" width="165" height="21"/>
+                                                    <rect key="frame" x="20" y="59" width="165" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="View Aircraft Pictures Online" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z04-d1-sR2">
-                                                    <rect key="frame" x="78" y="164" width="165" height="21"/>
+                                                    <rect key="frame" x="20" y="82" width="165" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Planned Altitude" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eGS-la-IkA">
-                                                    <rect key="frame" x="40" y="30" width="165" height="21"/>
+                                                    <rect key="frame" x="20" y="36" width="165" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="BOEING 777-300ER (twin-jet)" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="axP-0z-67z">
-                                                    <rect key="frame" x="207" y="80" width="165" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <rect key="frame" x="237" y="57" width="165" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="33,000 FT" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xlY-GO-A4f">
-                                                    <rect key="frame" x="58" y="47" width="165" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <rect key="frame" x="238" y="37" width="165" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XVd-UH-lH6">
-                                                    <rect key="frame" x="305" y="163" width="46" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                                    <state key="normal" title="Tap Here"/>
-                                                </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Technical Details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zfK-2p-bEn">
-                                                    <rect key="frame" x="30" y="20" width="165" height="24"/>
+                                                    <rect key="frame" x="16" y="12" width="165" height="24"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XVd-UH-lH6">
+                                                    <rect key="frame" x="357" y="77" width="46" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <state key="normal" title="Tap Here"/>
+                                                </button>
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" red="0.98431372549999996" green="0.98431372549999996" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
-                                        <size key="customSize" width="414" height="241"/>
+                                        <size key="customSize" width="414" height="140"/>
+                                        <connections>
+                                            <outlet property="aircraftTypeLabel" destination="axP-0z-67z" id="6SJ-LC-ncq"/>
+                                            <outlet property="altitudeLabel" destination="xlY-GO-A4f" id="IhN-tk-11r"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>

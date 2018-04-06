@@ -24,6 +24,14 @@ fileprivate var humidities = [88, 86, 85, 99, 42, 56]
 fileprivate var humidityComments = ["Highly humid", "Highly humid", "Highly humid", "Highly humid", "Highly humid", "Highly humid"]
 fileprivate var weatherTexts2 = ["Today it is", "Today it is", "Today it is", "Today it is", "Today it is", "Today it is"]
 
+var jsonDay1:NSDictionary = ["": [""]]
+var jsonDay2:NSDictionary = ["": [""]]
+var jsonDay3:NSDictionary = ["": [""]]
+var jsonDay4:NSDictionary = ["": [""]]
+var jsonDay5:NSDictionary = ["": [""]]
+var jsonDay6:NSDictionary = ["": [""]]
+//var jsonDay7:NSDictionary = ["": [""]]
+
 // MARK: - UICollectionViewDataSource
 extension WeatherViewController {
     
@@ -45,26 +53,303 @@ extension WeatherViewController {
             
             let index = indexPath as NSIndexPath
             
-            cell.temperature.text = String(temperatures[index.row]) + "°"
-            cell.feelsLikeTemperature.text = "feels like " + String(feelsLikeTemperatures[index.row])
-            cell.humidity.text = String(humidities[index.row])
-            cell.humidityComment.text = humidityComments[index.row]
-            cell.weatherText.text = weatherTexts[index.row]
-            
-            cell.displayContent(weatherPic: weatherPics[index.row]!, dayText: weatherTexts2[index.row], temperature: temperatures[index.row], feelsLikeTemperature: feelsLikeTemperatures[index.row], humidity: humidities[index.row], humidityComment: humidityComments[index.row], weatherText: weatherTexts[index.row])
+            if (jsonDay1["weather"] != nil) {
+                
+                //let destinationInfo = jsonInfoFlight["destination"] as! NSDictionary
+                let destinationCityName = "Shangai"// destinationInfo["city"] as? String
+                
+                let weatherArr = jsonDay1["weather"] as! NSArray
+                let weatherDict = weatherArr[0] as! NSDictionary
+                let weatherTempHumidity = jsonDay1["main"] as! NSDictionary
+                
+                let weatherCondition = weatherDict["description"] as? String
+                let temperature = weatherTempHumidity["temp"] as? Double
+                let humidity = weatherTempHumidity["humidity"] as? Double
+                
+                cell.weatherText.text = weatherCondition
+                cell.locationText.text = "in " + destinationCityName
+                cell.temperature.text = String(Int(temperature!)) + "°"
+                cell.humidity.text = String(Int(humidity!))
+            }
+                
+            else {
+                
+                cell.temperature.text = String(temperatures[index.row]) + "°"
+                cell.feelsLikeTemperature.text = "feels like " + String(feelsLikeTemperatures[index.row])
+                cell.humidity.text = String(humidities[index.row])
+                cell.humidityComment.text = humidityComments[index.row]
+                cell.weatherText.text = weatherTexts[index.row]
+                
+                cell.displayContent(weatherPic: weatherPics[index.row]!, dayText: weatherTexts2[index.row], temperature: temperatures[index.row], feelsLikeTemperature: feelsLikeTemperatures[index.row], humidity: humidities[index.row], humidityComment: humidityComments[index.row], weatherText: weatherTexts[index.row])
+            }
             
             return cell
             
-        
+            
         }
             
-        else {
+        else if indexPath.row == 1 {
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifierSmall, for: indexPath) as! SmallWeatherCell
             
             let index = indexPath as NSIndexPath
             
-            /*//background shadow for collectionView elements
+            if (jsonDay2["weather"] != nil) {
+                
+                //let destinationInfo = jsonInfoFlight["destination"] as! NSDictionary
+                let destinationCityName = "Shangai"//destinationInfo["city"] as? String
+                
+                let weatherArr = jsonDay2["weather"] as! NSArray
+                let weatherDict = weatherArr[0] as! NSDictionary
+                let weatherTempHumidity = jsonDay2["main"] as! NSDictionary
+                
+                let weatherCondition = weatherDict["description"] as? String
+                let temperature = weatherTempHumidity["temp"] as? Double
+                let humidity = weatherTempHumidity["humidity"] as? Double
+                
+                cell.weatherText.text = weatherCondition
+                cell.temperature.text = String(Int(temperature!)) + "°"
+                cell.humidity.text = String(Int(humidity!))
+            }
+                
+            else {
+                
+                /*//background shadow for collectionView elements
+                 cell.layer.shadowColor = UIColor.black.cgColor
+                 cell.layer.shadowOffset = CGSize(width: 5, height: 5)
+                 cell.layer.shadowRadius = 5;
+                 cell.layer.shadowOpacity = 0.25;
+                 cell.clipsToBounds = false
+                 cell.layer.masksToBounds = false
+                 */
+                
+                cell.temperature.text = String(temperatures[index.row])
+                cell.feelsLikeTemperature.text = String(feelsLikeTemperatures[index.row])
+                cell.humidity.text = String(humidities[index.row])
+                cell.humidityComment.text = humidityComments[index.row]
+                cell.weatherText.text = weatherTexts[index.row]
+                
+                cell.displayContent(temperature: temperatures[index.row], feelsLikeTemperature: feelsLikeTemperatures[index.row], humidity: humidities[index.row], humidityComment: humidityComments[index.row], weatherText: weatherTexts[index.row])
+            }
+            
+            return cell
+        }
+            
+        else if indexPath.row == 2 {
+            
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifierSmall, for: indexPath) as! SmallWeatherCell
+            
+            let index = indexPath as NSIndexPath
+            
+            if (jsonDay3["weather"] != nil) {
+                
+                //let destinationInfo = jsonInfoFlight["destination"] as! NSDictionary
+                let destinationCityName = "Shangai"//destinationInfo["city"] as? String
+                
+                let weatherArr = jsonDay3["weather"] as! NSArray
+                let weatherDict = weatherArr[0] as! NSDictionary
+                let weatherTempHumidity = jsonDay3["main"] as! NSDictionary
+                
+                let weatherCondition = weatherDict["description"] as? String
+                let temperature = weatherTempHumidity["temp"] as? Double
+                let humidity = weatherTempHumidity["humidity"] as? Double
+                
+                cell.weatherText.text = weatherCondition
+                cell.temperature.text = String(Int(temperature!)) + "°"
+                cell.humidity.text = String(Int(humidity!))
+            }
+                
+            else {
+                
+                /*//background shadow for collectionView elements
+                 cell.layer.shadowColor = UIColor.black.cgColor
+                 cell.layer.shadowOffset = CGSize(width: 5, height: 5)
+                 cell.layer.shadowRadius = 5;
+                 cell.layer.shadowOpacity = 0.25;
+                 cell.clipsToBounds = false
+                 cell.layer.masksToBounds = false
+                 */
+                
+                cell.temperature.text = String(temperatures[index.row])
+                cell.feelsLikeTemperature.text = String(feelsLikeTemperatures[index.row])
+                cell.humidity.text = String(humidities[index.row])
+                cell.humidityComment.text = humidityComments[index.row]
+                cell.weatherText.text = weatherTexts[index.row]
+                
+                cell.displayContent(temperature: temperatures[index.row], feelsLikeTemperature: feelsLikeTemperatures[index.row], humidity: humidities[index.row], humidityComment: humidityComments[index.row], weatherText: weatherTexts[index.row])
+            }
+            
+            return cell
+        }
+            
+        else if indexPath.row == 3 {
+            
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifierSmall, for: indexPath) as! SmallWeatherCell
+            
+            let index = indexPath as NSIndexPath
+            
+            if (jsonDay4["weather"] != nil) {
+                
+                //let destinationInfo = jsonInfoFlight["destination"] as! NSDictionary
+                let destinationCityName = "Shangai"//destinationInfo["city"] as? String
+                
+                let weatherArr = jsonDay4["weather"] as! NSArray
+                let weatherDict = weatherArr[0] as! NSDictionary
+                let weatherTempHumidity = jsonDay4["main"] as! NSDictionary
+                
+                let weatherCondition = weatherDict["description"] as? String
+                let temperature = weatherTempHumidity["temp"] as? Double
+                let humidity = weatherTempHumidity["humidity"] as? Double
+                
+                cell.weatherText.text = weatherCondition
+                cell.temperature.text = String(Int(temperature!)) + "°"
+                cell.humidity.text = String(Int(humidity!))
+            }
+                
+            else {
+                
+                /*//background shadow for collectionView elements
+                 cell.layer.shadowColor = UIColor.black.cgColor
+                 cell.layer.shadowOffset = CGSize(width: 5, height: 5)
+                 cell.layer.shadowRadius = 5;
+                 cell.layer.shadowOpacity = 0.25;
+                 cell.clipsToBounds = false
+                 cell.layer.masksToBounds = false
+                 */
+                
+                cell.temperature.text = String(temperatures[index.row])
+                cell.feelsLikeTemperature.text = String(feelsLikeTemperatures[index.row])
+                cell.humidity.text = String(humidities[index.row])
+                cell.humidityComment.text = humidityComments[index.row]
+                cell.weatherText.text = weatherTexts[index.row]
+                
+                cell.displayContent(temperature: temperatures[index.row], feelsLikeTemperature: feelsLikeTemperatures[index.row], humidity: humidities[index.row], humidityComment: humidityComments[index.row], weatherText: weatherTexts[index.row])
+            }
+            
+            return cell
+        }
+            
+        else if indexPath.row == 4 {
+            
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifierSmall, for: indexPath) as! SmallWeatherCell
+            
+            let index = indexPath as NSIndexPath
+            
+            if (jsonDay2["weather"] != nil) {
+                
+                //let destinationInfo = jsonInfoFlight["destination"] as! NSDictionary
+                let destinationCityName = "Shangai"//destinationInfo["city"] as? String
+                
+                let weatherArr = jsonDay5["weather"] as! NSArray
+                let weatherDict = weatherArr[0] as! NSDictionary
+                let weatherTempHumidity = jsonDay5["main"] as! NSDictionary
+                
+                let weatherCondition = weatherDict["description"] as? String
+                let temperature = weatherTempHumidity["temp"] as? Double
+                let humidity = weatherTempHumidity["humidity"] as? Double
+                
+                cell.weatherText.text = weatherCondition
+                cell.temperature.text = String(Int(temperature!)) + "°"
+                cell.humidity.text = String(Int(humidity!))
+            }
+                
+            else {
+                
+                /*//background shadow for collectionView elements
+                 cell.layer.shadowColor = UIColor.black.cgColor
+                 cell.layer.shadowOffset = CGSize(width: 5, height: 5)
+                 cell.layer.shadowRadius = 5;
+                 cell.layer.shadowOpacity = 0.25;
+                 cell.clipsToBounds = false
+                 cell.layer.masksToBounds = false
+                 */
+                
+                cell.temperature.text = String(temperatures[index.row])
+                cell.feelsLikeTemperature.text = String(feelsLikeTemperatures[index.row])
+                cell.humidity.text = String(humidities[index.row])
+                cell.humidityComment.text = humidityComments[index.row]
+                cell.weatherText.text = weatherTexts[index.row]
+                
+                cell.displayContent(temperature: temperatures[index.row], feelsLikeTemperature: feelsLikeTemperatures[index.row], humidity: humidities[index.row], humidityComment: humidityComments[index.row], weatherText: weatherTexts[index.row])
+            }
+            
+            return cell
+        }
+            
+        else if indexPath.row == 5 {
+            
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifierSmall, for: indexPath) as! SmallWeatherCell
+            
+            let index = indexPath as NSIndexPath
+            
+            if (jsonDay2["weather"] != nil) {
+                
+                //let destinationInfo = jsonInfoFlight["destination"] as! NSDictionary
+                let destinationCityName = "Shangai"//destinationInfo["city"] as? String
+                
+                let weatherArr = jsonDay6["weather"] as! NSArray
+                let weatherDict = weatherArr[0] as! NSDictionary
+                let weatherTempHumidity = jsonDay6["main"] as! NSDictionary
+                
+                let weatherCondition = weatherDict["description"] as? String
+                let temperature = weatherTempHumidity["temp"] as? Double
+                let humidity = weatherTempHumidity["humidity"] as? Double
+                
+                cell.weatherText.text = weatherCondition
+                cell.temperature.text = String(Int(temperature!)) + "°"
+                cell.humidity.text = String(Int(humidity!))
+            }
+                
+            else {
+                
+                /*//background shadow for collectionView elements
+                 cell.layer.shadowColor = UIColor.black.cgColor
+                 cell.layer.shadowOffset = CGSize(width: 5, height: 5)
+                 cell.layer.shadowRadius = 5;
+                 cell.layer.shadowOpacity = 0.25;
+                 cell.clipsToBounds = false
+                 cell.layer.masksToBounds = false
+                 */
+                
+                cell.temperature.text = String(temperatures[index.row])
+                cell.feelsLikeTemperature.text = String(feelsLikeTemperatures[index.row])
+                cell.humidity.text = String(humidities[index.row])
+                cell.humidityComment.text = humidityComments[index.row]
+                cell.weatherText.text = weatherTexts[index.row]
+                
+                cell.displayContent(temperature: temperatures[index.row], feelsLikeTemperature: feelsLikeTemperatures[index.row], humidity: humidities[index.row], humidityComment: humidityComments[index.row], weatherText: weatherTexts[index.row])
+            }
+            
+            return cell
+        }
+            
+            /* else if indexPath.row == 6 {
+             
+             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifierSmall, for: indexPath) as! SmallWeatherCell
+             
+             let index = indexPath as NSIndexPath
+             
+             if (jsonDay2["weather"] != nil) {
+             
+             //let destinationInfo = jsonInfoFlight["destination"] as! NSDictionary
+             let destinationCityName = "Shangai"//destinationInfo["city"] as? String
+             
+             let weatherArr = jsonDay7["weather"] as! NSArray
+             let weatherDict = weatherArr[0] as! NSDictionary
+             let weatherTempHumidity = jsonDay7["main"] as! NSDictionary
+             
+             let weatherCondition = weatherDict["description"] as? String
+             let temperature = weatherTempHumidity["temp"] as? Double
+             let humidity = weatherTempHumidity["humidity"] as? Double
+             
+             cell.weatherText.text = weatherCondition
+             cell.temperature.text = String(Int(temperature!)) + "°"
+             cell.humidity.text = String(Int(humidity!))
+             }
+             
+             else {
+             
+             /*//background shadow for collectionView elements
              cell.layer.shadowColor = UIColor.black.cgColor
              cell.layer.shadowOffset = CGSize(width: 5, height: 5)
              cell.layer.shadowRadius = 5;
@@ -72,6 +357,24 @@ extension WeatherViewController {
              cell.clipsToBounds = false
              cell.layer.masksToBounds = false
              */
+             
+             cell.temperature.text = String(temperatures[index.row])
+             cell.feelsLikeTemperature.text = String(feelsLikeTemperatures[index.row])
+             cell.humidity.text = String(humidities[index.row])
+             cell.humidityComment.text = humidityComments[index.row]
+             cell.weatherText.text = weatherTexts[index.row]
+             
+             cell.displayContent(temperature: temperatures[index.row], feelsLikeTemperature: feelsLikeTemperatures[index.row], humidity: humidities[index.row], humidityComment: humidityComments[index.row], weatherText: weatherTexts[index.row])
+             }
+             
+             return cell
+             }
+             */
+        else {
+            
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifierSmall, for: indexPath) as! SmallWeatherCell
+            
+            let index = indexPath as NSIndexPath
             
             cell.temperature.text = String(temperatures[index.row])
             cell.feelsLikeTemperature.text = String(feelsLikeTemperatures[index.row])
@@ -80,6 +383,7 @@ extension WeatherViewController {
             cell.weatherText.text = weatherTexts[index.row]
             
             cell.displayContent(temperature: temperatures[index.row], feelsLikeTemperature: feelsLikeTemperatures[index.row], humidity: humidities[index.row], humidityComment: humidityComments[index.row], weatherText: weatherTexts[index.row])
+            //}
             
             return cell
             
@@ -122,6 +426,8 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate, UIColle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        jsonparseWeather(city: "Shangai", units: "metric")
+        
         // Do any additional setup after loading the view,  from a nib.
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -139,25 +445,25 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     
     func jsonparse() {
-       Alamofire.request("http://lodestarapp.com:3005/?city=Ankara&units=metric").responseJSON { response in
+        Alamofire.request("http://lodestarapp.com:3005/?city=Ankara&units=metric").responseJSON { response in
             //print("Request: \(String(describing: response.request))")   // original url request
             //print("Response: \(String(describing: response.response))") // http url response
             print("Result: \(response.result)")                         // response serialization result
-                
-                //print("JSON: \(json)") // serialized json response
-                let JSON = response.result.value as? NSDictionary
-                //let id = JSON?["main"] as! NSDictionary
-                //var temp = id["temp"] as! Double
-                
-                //temp = temp - 273
-                //let tempInt = Int(temp)
-                
-                //temperatures[0] = tempInt
+            
+            //print("JSON: \(json)") // serialized json response
+            let JSON = response.result.value as? NSDictionary
+            //let id = JSON?["main"] as! NSDictionary
+            //var temp = id["temp"] as! Double
+            
+            //temp = temp - 273
+            //let tempInt = Int(temp)
+            
+            //temperatures[0] = tempInt
         }
-    
-            /*if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
-             print("Data: \(utf8Text)") // original server data as UTF8 string
-             }*/
+        
+        /*if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+         print("Data: \(utf8Text)") // original server data as UTF8 string
+         }*/
     }
     
     // MARK: Actions
@@ -165,6 +471,48 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate, UIColle
         
         dismiss(animated: true, completion: nil)
         
+    }
+    
+    func jsonparseWeather(city: String, units: String) {
+        
+        var requestTemplate = "http://lodestarapp.com:3005/?city=#city&units=#units"
+        
+        requestTemplate = requestTemplate.replacingOccurrences(of: "#city", with: city)
+        requestTemplate = requestTemplate.replacingOccurrences(of: "#units", with: units)
+        
+        Alamofire.request(requestTemplate).responseJSON { response in
+            //print("Request: \(String(describing: response.request))")   // original url request
+            //print("Response: \(String(describing: response.response))") // http url response
+            //print("Result: \(response.result)")
+            
+            
+            
+            if let json = response.result.value {
+                //print("JSON: \(json)") // serialized json response
+                
+                let jsonInfoWeather = (json as? NSArray)!
+                jsonDay1 = jsonInfoWeather[0] as! NSDictionary
+                jsonDay2 = jsonInfoWeather[1] as! NSDictionary
+                jsonDay3 = jsonInfoWeather[2] as! NSDictionary
+                jsonDay4 = jsonInfoWeather[3] as! NSDictionary
+                jsonDay5 = jsonInfoWeather[4] as! NSDictionary
+                jsonDay6 = jsonInfoWeather[5] as! NSDictionary
+                //jsonDay7 = jsonInfoWeather[6] as! NSDictionary
+                
+                //print("JSON: \(jsonInfoWeatherDay1)") // serialized json response
+                
+                self.collectionView.reloadData()
+                
+                
+                
+                //let id = JSON?["aircrafttype"] as! String
+                //print("Aircraft Type: \(id)")
+            }
+            
+            /*if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+             print("Data: \(utf8Text)") // original server data as UTF8 string
+             }*/
+        }
     }
     
 }

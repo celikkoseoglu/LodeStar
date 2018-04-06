@@ -46,7 +46,6 @@ extension LivingExpensesViewController {
         cell.foodPic.image = foodPics[0]
         //CONTINUE
         
-        
         cell.displayContent(foodPic: foodPics[0]!, foodName: availableFoods[index.row], priceTarget: pricesTarget[index.row], priceHome: pricesHome[index.row], priceInYourCountry: "Price in Turkey", priceInTargetCountry: "Price in Uganda")
         
         return cell
