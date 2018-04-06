@@ -35,9 +35,6 @@ extension FlightViewController {
         let index = indexPath as NSIndexPath
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifiers[index.row], for: indexPath) as! FlightDetailsCell
         
-        //remember, remember the 6 pixel margin between consecutive cards
-        let cardMargin = 6
-        
         if (index.row == 0) {
             if(jsonInfoFlight["destination"] != nil) {
                 

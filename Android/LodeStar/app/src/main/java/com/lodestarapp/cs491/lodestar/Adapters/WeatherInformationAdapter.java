@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.lodestarapp.cs491.lodestar.Models.WeatherInformation;
 import com.lodestarapp.cs491.lodestar.R;
+
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -29,7 +30,7 @@ public class WeatherInformationAdapter extends RecyclerView.Adapter<RecyclerView
 
     private static final String TAG = "weatherAdapterMessage";
 
-    public WeatherInformationAdapter(SparseArray weatherIconMap, Context context, List<WeatherInformation> weatherInformationList){
+    public WeatherInformationAdapter(SparseArray weatherIconMap, Context context, List<WeatherInformation> weatherInformationList) {
         this.weatherIconMap = weatherIconMap;
         this.context = context;
         this.weatherInformationList = weatherInformationList;
@@ -45,7 +46,7 @@ public class WeatherInformationAdapter extends RecyclerView.Adapter<RecyclerView
         TextView cityNameView;
 
 
-        TodaysWeatherViewHolder(View itemView){
+        TodaysWeatherViewHolder(View itemView) {
             super(itemView);
 
             this.weatherTodayView = itemView.findViewById(R.id.weather_picture_today);
@@ -82,7 +83,7 @@ public class WeatherInformationAdapter extends RecyclerView.Adapter<RecyclerView
 
         RecyclerView.ViewHolder viewHolder = null;
 
-        switch (viewType){
+        switch (viewType) {
             case TODAY:
                 View todayView = LayoutInflater.from(parent.getContext()).
                         inflate(R.layout.card_weather_today,
@@ -102,19 +103,19 @@ public class WeatherInformationAdapter extends RecyclerView.Adapter<RecyclerView
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        switch (holder.getItemViewType()){
+        switch (holder.getItemViewType()) {
             case TODAY:
                 ((TodaysWeatherViewHolder) holder).weatherInfoToday.setText(weatherInformationList.
                         get(0).getDescription());
                 ((TodaysWeatherViewHolder) holder).temperatureView.setText(String.format("%s°C",
                         String.format("%s",
-                                (int)weatherInformationList.get(0).getTemperature())));
+                                (int) weatherInformationList.get(0).getTemperature())));
                 ((TodaysWeatherViewHolder) holder).feelsLikeView.setText(String.format("%s°C",
                         String.format("%s", "feels like " +
-                                (int)weatherInformationList.get(0).getFeelsLikeTemperature())));
+                                (int) weatherInformationList.get(0).getFeelsLikeTemperature())));
                 ((TodaysWeatherViewHolder) holder).humidityView.setText(String.format("%s%%",
                         String.format("%s",
-                                (int)weatherInformationList.get(0).getHumidity())));
+                                (int) weatherInformationList.get(0).getHumidity())));
                 ((TodaysWeatherViewHolder) holder).cityNameView.
                         setText(String.format("in %s", weatherInformationList.get(0).getCity()));
                 ((TodaysWeatherViewHolder) holder).weatherTodayView.
@@ -126,12 +127,12 @@ public class WeatherInformationAdapter extends RecyclerView.Adapter<RecyclerView
             case OTHER:
                 ((OtherDaysViewHolder) holder).weatherInfoView.setText(String.format("%s  -  %s",
                         weatherInformationList.get(position).getDate(), weatherInformationList.
-                        get(position).getDescription()));
+                                get(position).getDescription()));
                 ((OtherDaysViewHolder) holder).humidityView.setText(String.format("%s%%",
-                        String.format("%s", (int)weatherInformationList.get(position).getHumidity())));
+                        String.format("%s", (int) weatherInformationList.get(position).getHumidity())));
                 ((OtherDaysViewHolder) holder).temperatureView.setText(String.format("%s°C",
                         String.format("%s",
-                                (int)weatherInformationList.get(position).getFeelsLikeTemperature())));
+                                (int) weatherInformationList.get(position).getFeelsLikeTemperature())));
                 ((OtherDaysViewHolder) holder).weatherView.setImageResource(this.context.
                         getResources().getIdentifier(weatherIconMap.get(weatherInformationList
                                 .get(position).getWeatherId() / 100).toString(),
@@ -146,7 +147,7 @@ public class WeatherInformationAdapter extends RecyclerView.Adapter<RecyclerView
     }
 
     @Override
-    public int getItemViewType(int position){
+    public int getItemViewType(int position) {
         if (position == TODAY)
             return TODAY;
         return OTHER;

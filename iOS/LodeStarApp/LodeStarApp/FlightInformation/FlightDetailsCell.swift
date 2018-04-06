@@ -4,11 +4,7 @@
 
 import UIKit
 
-class FlightDetailsCell: UICollectionViewCell {
-    
-    @IBOutlet weak var cellImage: UIImageView!
-    @IBOutlet weak var title: UILabel!
-    
+class FlightDetailsCell: UICollectionViewCell {    
     //card 1
     @IBOutlet weak var originCityNameLabel: UILabel!
     @IBOutlet weak var originLeavingFromGateLabel: UILabel!
@@ -37,11 +33,6 @@ class FlightDetailsCell: UICollectionViewCell {
     // card 3
     @IBOutlet weak var altitudeLabel: UILabel!
     @IBOutlet weak var aircraftTypeLabel: UILabel!
-    
-    func displayContent(title: String, cellImage: UIImage) {
-        self.title.text = title
-        self.cellImage.image = cellImage
-    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
