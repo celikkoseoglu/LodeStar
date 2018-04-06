@@ -1,0 +1,16 @@
+{
+  "name": "LodeStarWeather",
+  "version": "1.0.0",
+  "description": "Retrieves weather conditions for a specific city",
+  "main": "weather.js",
+  "scripts": {
+    "start": "node weather.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Celik Koseoglu and Baris Poyraz <celikkoseoglu@me.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.2",
+    "heat-index": "0.0.3"
+  }
+}

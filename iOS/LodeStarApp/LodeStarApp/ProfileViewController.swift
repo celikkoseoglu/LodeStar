@@ -31,14 +31,12 @@ extension ProfileViewController {
     }
     
     //2
-    func collectionView(_ collectionView: UICollectionView,
-                        numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return date.count
     }
     
     //3
-    func collectionView(_ collectionView: UICollectionView,
-                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! LogCell
         
@@ -82,9 +80,7 @@ extension ProfileViewController : UICollectionViewDelegateFlowLayout, UICollecti
     }
     
     // 4
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return sectionInsets.left
     }
 }
@@ -94,10 +90,8 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     
     @IBAction func logoutButton(_ sender: UIButton) {
-        
         dismiss(animated: true, completion: nil)
-        dismiss(animated: true, completion: nil)
-        
+        dismiss(animated: true, completion: nil) //why 2 times? ~celik
     }
     
     override func viewDidLoad() {
@@ -107,7 +101,6 @@ class ProfileViewController: UIViewController {
         collectionView.delegate = self
         
         self.collectionView.isScrollEnabled = true
-        
     }
     
     override func didReceiveMemoryWarning() {

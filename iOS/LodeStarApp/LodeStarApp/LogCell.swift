@@ -20,7 +20,6 @@ class LogCell: UICollectionViewCell {
     @IBOutlet weak var cityName: UILabel!
     @IBOutlet weak var tapToViewCity: UILabel!
     
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -40,6 +39,4 @@ class LogCell: UICollectionViewCell {
         self.backgroundColor = UIColor(red: 209/255, green: 209/255, blue: 209/255, alpha: 0.8)
         
     }
-    
-    
 }
