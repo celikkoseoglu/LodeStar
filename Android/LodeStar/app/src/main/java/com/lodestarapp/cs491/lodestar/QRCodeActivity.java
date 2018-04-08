@@ -23,6 +23,13 @@ import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.pdf417.encoder.PDF417;
 import com.lodestarapp.cs491.lodestar.Models.QRCodeInfo;
 
@@ -46,14 +53,25 @@ public class QRCodeActivity extends AppCompatActivity{
 
     private AlertDialog.Builder diyalogOlusturucu;
 
+    private FirebaseAuth mAuth;
+
+
+    private DatabaseReference mDatabase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qrcode);
 
         surfaceView = findViewById(R.id.surfaceView);
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        mAuth = FirebaseAuth.getInstance();
+
 
         qrCodeInfo = new QRCodeInfo();
+
+
 
         checkForCameraPermission();
     }
@@ -114,6 +132,9 @@ public class QRCodeActivity extends AppCompatActivity{
             @Override
             public void receiveDetections(Detector.Detections<Barcode> detections) {
                 final SparseArray<Barcode> barcodeData = detections.getDetectedItems();
+                final FirebaseUser currentUser;
+                currentUser = mAuth.getCurrentUser();
+
 
                 diyalogOlusturucu =
                         new AlertDialog.Builder(QRCodeActivity.this);
@@ -153,6 +174,61 @@ public class QRCodeActivity extends AppCompatActivity{
                                     .setPositiveButton("YES!", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
+
+                                            String[] parts = barcodeData.valueAt(0).displayValue.split(" +");
+
+                                            qrCodeInfo.setFrom(parts[2].substring(0, 3));
+                                            qrCodeInfo.setTo(parts[2].substring(3, 6));
+                                            qrCodeInfo.setFlightCode(parts[2].substring(6).concat(parts[3]));
+
+                                            Log.d(TAG, "99999999999");
+
+                                            FirebaseDatabase.getInstance().getReference().child("users")
+                                                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                                                        @Override
+                                                        public void onDataChange(DataSnapshot dataSnapshot) {
+                                                            FirebaseDatabase.getInstance().getReference().child("users")
+                                                                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                        @Override
+                                                                        public void onDataChange(DataSnapshot dataSnapshot) {
+                                                                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                                                                String str = snapshot.getValue() + "";
+                                                                                // Log.i("ii",str);
+                                                                                if (currentUser != null) {
+                                                                                    String userEmail = currentUser.getEmail();
+
+                                                                                    //Parse the data
+                                                                                    String tmpArr[] = str.split(",");
+                                                                                    String myTMPSTR = tmpArr[1].substring(8,tmpArr[1].length()-1);
+                                                                                    Log.i("ii",myTMPSTR + " vs " + userEmail);
+                                                                                    if(userEmail.equals(myTMPSTR)) {
+
+                                                                                        mDatabase.child("users").child(snapshot.getKey()).child("trips").setValue("Flight Code: " + qrCodeInfo.getFlightCode()+ " From: " + qrCodeInfo.getFrom() + " To: " + qrCodeInfo.getTo());
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+
+                                                                        @Override
+                                                                        public void onCancelled(DatabaseError databaseError) {
+
+                                                                        }
+
+
+                                                                    });
+
+                                                        }
+
+                                                        @Override
+                                                        public void onCancelled(DatabaseError databaseError) {
+
+                                                        }
+
+
+                                                    });
+
+
+
                                             Intent intent = new Intent(QRCodeActivity.this, LoginActivity.class);
                                             startActivity(intent);
                                         }
