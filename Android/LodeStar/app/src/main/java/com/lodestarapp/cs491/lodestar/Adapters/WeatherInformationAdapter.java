@@ -121,11 +121,14 @@ public class WeatherInformationAdapter extends RecyclerView.Adapter<RecyclerView
                                 (int) weatherInformationList.get(0).getHumidity())));
                 ((TodaysWeatherViewHolder) holder).cityNameView.
                         setText(String.format("in %s", weatherInformationList.get(0).getCity()));
-                ((TodaysWeatherViewHolder) holder).weatherTodayView.
-                        setImageResource(this.context.getResources().
-                                getIdentifier(weatherIconMap.get(weatherInformationList.
-                                                get(0).getWeatherId() / 100).toString(),
-                                        "drawable", this.context.getPackageName()));
+                if(weatherInformationList.get(0).getDescription().toLowerCase().contains("clear") || weatherInformationList.get(0).getDescription().toLowerCase().contains("sun"))
+                    ((TodaysWeatherViewHolder) holder).weatherTodayView.setImageResource(R.drawable.sun);
+                else
+                    ((TodaysWeatherViewHolder) holder).weatherTodayView.setImageResource(this.context.
+                            getResources().getIdentifier(weatherIconMap.get(weatherInformationList
+                                    .get(0).getWeatherId() / 100).toString(),
+                            "drawable", this.context.getPackageName()));
+
                 break;
             case OTHER:
                 ((OtherDaysViewHolder) holder).weatherInfoView.setText(String.format("%s  -  %s",
@@ -140,10 +143,13 @@ public class WeatherInformationAdapter extends RecyclerView.Adapter<RecyclerView
                         String.format("feels like %s",
                                 (int)weatherInformationList.get(position).getFeelsLikeTemperature())));
 
-                ((OtherDaysViewHolder) holder).weatherView.setImageResource(this.context.
-                        getResources().getIdentifier(weatherIconMap.get(weatherInformationList
-                                .get(position).getWeatherId() / 100).toString(),
-                        "drawable", this.context.getPackageName()));
+                if(weatherInformationList.get(position).getDescription().toLowerCase().contains("clear") || weatherInformationList.get(position).getDescription().toLowerCase().contains("sun"))
+                    ((OtherDaysViewHolder) holder).weatherView.setImageResource(R.drawable.sun);
+                else
+                    ((OtherDaysViewHolder) holder).weatherView.setImageResource(this.context.
+                            getResources().getIdentifier(weatherIconMap.get(weatherInformationList
+                                    .get(position).getWeatherId() / 100).toString(),
+                            "drawable", this.context.getPackageName()));
                 break;
         }
     }

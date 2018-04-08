@@ -66,6 +66,9 @@ public class PanoramaView extends GLSurfaceView{
     float[] rotationMatrix = new float[16];
     float[] rotMatrix  = new float[16];
     float[] orientations = new float[3];
+
+    float angle = 80.0f;
+
     public PanoramaView(Context context) {
         super(context);
         c = context;
@@ -80,6 +83,7 @@ public class PanoramaView extends GLSurfaceView{
         super(context, attrs);
         c = context;
         setEGLContextClientVersion(2);
+        //setEGLConfigChooser(8 , 8, 8, 8, 16, 0);
 
         setRenderer(pr = new PanoRenderer());
         setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
@@ -97,6 +101,10 @@ public class PanoramaView extends GLSurfaceView{
     public void onPause(){
         super.onPause();
         ht.stopTracking();
+    }
+
+    public void setAngle(float ang){
+        angle = ang;
     }
 
     @Override
@@ -165,16 +173,18 @@ public class PanoramaView extends GLSurfaceView{
         DistortionRenderer dr;
 
 
+
         @Override
         public void onSurfaceCreated(GL10 gl10, EGLConfig eglConfig) {
             GLES20.glClearColor(1f, 1f, 1f, 1f);
             renderer = new com.lodestarapp.cs491.lodestar.VR.Renderer(c, 50, 5f);
-            renderer.loadTexture(c, R.drawable.airport1);
+            renderer.loadTexture(c, R.drawable.alan1);
 
             Matrix.setLookAtM(mCamera, 0, 0.0f, 0.0f, CAMERA_Z, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
             Matrix.setIdentityM(accRotation, 0);
 
             this.dr = new DistortionRenderer();
+            renderer.setAngle(angle);
         }
 
         @Override
@@ -187,6 +197,8 @@ public class PanoramaView extends GLSurfaceView{
 
         @Override
         public void onDrawFrame(GL10 gl10) {
+            GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
+
             Matrix.setIdentityM(mIdentity, 0);
 
             Matrix.setIdentityM(curRotation, 0);
@@ -216,7 +228,6 @@ public class PanoramaView extends GLSurfaceView{
 
 
 
-            GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
 
             multiplyMM(mView, 0, mIdentity, 0, mCamera, 0);
 
@@ -228,12 +239,24 @@ public class PanoramaView extends GLSurfaceView{
 
             if(clicked){
                 clicked = false;
-                int x = renderer.testTouch(renderWidth,renderHeight,readX,readY,mView,mProjectionMatrix,90);
+                int x = renderer.testTouch(renderWidth,renderHeight,readX,readY,mView,mProjectionMatrix,angle);
                 Log.i("Check:",x + "");
                 if(x>0){
-                    renderer.deleteCurrentTexture();
-                    renderer.loadTexture(c, R.drawable.photo_sphere);
+                    if(angle  == 80){
+                        angle = -100;
+                        renderer.setAngle(angle);
 
+                        renderer.deleteCurrentTexture();
+                        renderer.loadTexture(c, R.drawable.alan2);
+                    }
+                    else if(angle == -100){
+                        angle = 80;
+                        renderer.setAngle(angle);
+
+                        renderer.deleteCurrentTexture();
+                        renderer.loadTexture(c, R.drawable.alan1);
+
+                    }
                 }
             }
 

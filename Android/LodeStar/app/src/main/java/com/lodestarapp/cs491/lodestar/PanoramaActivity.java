@@ -30,12 +30,14 @@ public class PanoramaActivity extends AppCompatActivity {
     Sensor accelSensor;
     Sensor magnSensor;
     HeadTracker ht;
+    float angle = 80.0f;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_panorama);
         pv = findViewById(R.id.layout);
+        //pv.setAngle(angle);
 
         ImageView im = findViewById(R.id.close);
         im.setVisibility(View.GONE);
@@ -115,6 +117,8 @@ public class PanoramaActivity extends AppCompatActivity {
 
     public void goVr(View view) {
         Intent intent = new Intent(this, VRActivity.class);
+        intent.putExtra("VrAngle", angle);
+
         startActivity(intent);
 
     }

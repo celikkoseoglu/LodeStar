@@ -51,6 +51,7 @@ public class WeatherInformationActivity extends AppCompatActivity {
     private static final String TAG = "theMessage";
 
     private ProgressDialog progressDialog;
+    String city = "Ankara";
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -80,7 +81,7 @@ public class WeatherInformationActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         weatherInformationController = new
-                WeatherInformationController("London");
+                WeatherInformationController(city);
 
         sendRequestToServer(weatherInformationController);
 

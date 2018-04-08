@@ -24,9 +24,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.microedition.khronos.egl.EGL10;
+import javax.microedition.khronos.egl.EGLConfig;
+import javax.microedition.khronos.egl.EGLContext;
+import javax.microedition.khronos.egl.EGLDisplay;
 import javax.microedition.khronos.opengles.GL;
 import javax.microedition.khronos.opengles.GL10;
 
+import static android.opengl.GLES20.GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS;
 import static java.lang.Math.sin;
 
 
@@ -63,7 +68,7 @@ public class Renderer {
     private int mPositionHandle;
     private int programHandle;
     private int mTextureCoordinateHandle;
-    private int mTextureDataHandle0[] = new int[2];
+    private int mTextureDataHandle0[] = new int[3];
     private final int vertexStride = CORDS_PER_VERTEX * 4;
 
     static float triangleCoords[] = {
@@ -96,8 +101,19 @@ public class Renderer {
     private FloatBuffer arrowBuffer;
 
     Arrow arr;
+    float arrowAngle = 0.0f;
+    boolean ifEGLPresent;
 
     public Renderer(final Context context, final int depth, final float radius) {
+
+        ByteBuffer a = ByteBuffer.allocateDirect(Integer.SIZE);
+        IntBuffer a1 = a.asIntBuffer();
+        GLES20.glGetIntegerv(GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS, a1);
+        byte cc[] = a.array();
+        Log.i("max combined texture", a1.get() + "");
+        //if(a1.get()>0)
+         ifEGLPresent = true;
+
 
         final String vertexShader = getVertexShader(context);
         final String fragmentShader = getFragmentShader(context);
@@ -248,7 +264,6 @@ public class Renderer {
         arrowBuffer.position(0);
 
 
-
     }
 
     public static String readShader(final Context context, final int resourceId)
@@ -284,6 +299,10 @@ public class Renderer {
         return readShader(context, R.raw._fragment_shader);
     }
 
+    public void setAngle(float ang){
+        arrowAngle = ang;
+    }
+
     public void loadTexture(Context c, int rid) {
         mTextureDataHandle0 = getTexture(c, rid);
     }
@@ -293,9 +312,9 @@ public class Renderer {
     }
 
     public static int[] getTexture(final Context c, final int rid) {
-        final int[] textureHandle = new int[2];
+        final int[] textureHandle = new int[3];
 
-        GLES20.glGenTextures(2, textureHandle, 0);
+        GLES20.glGenTextures(3, textureHandle, 0);
 
 
         if (textureHandle[0] != 0) {
@@ -311,6 +330,8 @@ public class Renderer {
 
             GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bitmap, 0);
             bitmap.recycle();
+
+            checkGLError("texture0");
         }
 
         if (textureHandle[1] != 0) {
@@ -326,6 +347,25 @@ public class Renderer {
 
             GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bitmap, 0);
             bitmap.recycle();
+            checkGLError("texture1");
+
+        }
+
+        if (textureHandle[2] != 0) {
+            final BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inScaled = false;
+
+            final Bitmap bitmap = BitmapFactory.decodeResource(c.getResources(), R.drawable.gray, options);
+            GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureHandle[2]);
+
+            GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_NEAREST);
+            GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_NEAREST);
+
+
+            GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bitmap, 0);
+            bitmap.recycle();
+            checkGLError("texture2");
+
         }
 
         if (textureHandle[0] == 0) {
@@ -371,11 +411,10 @@ public class Renderer {
 
         }
 
+        drawArrow(tl, mvpMatrix, arrowAngle);
 
+        //drawArrow(tl, mvpMatrix, -90);
 
-
-
-        drawArrow(tl, mvpMatrix, 90);
 
 
 
@@ -393,48 +432,74 @@ public class Renderer {
     public void drawArrow(int tl, float[] mvpMatrix, float angle){
 
         Matrix.setIdentityM(mRotationMatrix, 0);
-        //Matrix.translateM(mRotationMatrix, 0, 0, -2.46f, -1.6f);
+        Matrix.translateM(mRotationMatrix, 0, 0, -0, 0.5f);
         Matrix.rotateM(mRotationMatrix, 0, angle, 0, 1.0f, 0);
-        //Matrix.translateM(mRotationMatrix, 0, 0, 2.46f, 1.6f);
+        Matrix.translateM(mRotationMatrix, 0, 0, 0, -0.5f);
 
         Matrix.multiplyMM(mvpMatrix, 0, mvpMatrix, 0, mRotationMatrix, 0);
         GLES20.glUniformMatrix4fv(mMVPMatrixHandle, 1, false, mvpMatrix, 0);
 
 
         //GLES20.glUniform4fv(tl, 1, color, 0);
+        if(!ifEGLPresent)
+            GLES20.glActiveTexture(GLES20.GL_TEXTURE2);
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, mTextureDataHandle0[2]);
+        GLES20.glUniform1i(mTextureCoordinateHandle, 2);
+
         GLES20.glVertexAttribPointer(tl,4, GLES20.GL_FLOAT, true,1 , colorBuffer);
         GLES20.glEnableVertexAttribArray(tl);
 
         GLES20.glVertexAttribPointer(mPositionHandle, CORDS_PER_VERTEX, GLES20.GL_FLOAT, false, vertexStride, vertexBuffer1);
         GLES20.glEnableVertexAttribArray(mPositionHandle);
+
+        GLES20.glVertexAttribPointer(mTextureCoordinateHandle,AMOUNT_OF_NUMBERS_PER_TEXTURE_POINT, GLES20.GL_FLOAT, false, 0,colorBuffer);
+
+        GLES20.glEnableVertexAttribArray(mTextureCoordinateHandle);
+
+
         GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, 3);
         GLES20.glDisableVertexAttribArray(tl);
 
 
+        if(!ifEGLPresent)
+            GLES20.glActiveTexture(GLES20.GL_TEXTURE1 );   // 1?
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, mTextureDataHandle0[1]);
+        GLES20.glUniform1i(mTextureCoordinateHandle, 1);
 
-
+        //GLES20.glColorMask(true,true,true,false);
+        GLES20.glVertexAttribPointer(mPositionHandle, CORDS_PER_VERTEX, GLES20.GL_FLOAT, false, vertexStride, vertexBuffer);
+        GLES20.glEnableVertexAttribArray(mPositionHandle);
 
         GLES20.glVertexAttribPointer(mTextureCoordinateHandle,AMOUNT_OF_NUMBERS_PER_TEXTURE_POINT, GLES20.GL_FLOAT, false, 0,arrowBuffer);
 
         GLES20.glEnableVertexAttribArray(mTextureCoordinateHandle);
 
 
-        //GLES20.glActiveTexture(GLES20.GL_TEXTURE0);   // 1?
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, mTextureDataHandle0[1]);
-        GLES20.glUniform1i(mTextureCoordinateHandle, 1);
-
-
-
-
-
-
-
-        //GLES20.glColorMask(true,true,true,false);
-        GLES20.glVertexAttribPointer(mPositionHandle, CORDS_PER_VERTEX, GLES20.GL_FLOAT, false, vertexStride, vertexBuffer);
-        GLES20.glEnableVertexAttribArray(mPositionHandle);
-
         GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, 3);
 
+        Matrix.setIdentityM(mRotationMatrix, 0);
+        Matrix.translateM(mRotationMatrix, 0, 0, -0, 0.5f);
+        Matrix.rotateM(mRotationMatrix, 0, -angle, 0, 1.0f, 0);
+        Matrix.translateM(mRotationMatrix, 0, 0, 0, -0.5f);
+        Matrix.multiplyMM(mvpMatrix, 0, mvpMatrix, 0, mRotationMatrix, 0);
+        GLES20.glUniformMatrix4fv(mMVPMatrixHandle, 1, false, mvpMatrix, 0);
+
+
+    }
+
+    private static void checkGLError(String label) {
+        int error;
+        while ((error = GLES20.glGetError()) != GLES20.GL_NO_ERROR) {
+            Log.e("glError: ", label + ": glError " + error);
+            //throw new RuntimeException(label + ": glError " + error);
+        }
+    }
+
+    private String byteToString(byte[] arr){
+        String s = "";
+        for(int i=0;i<arr.length ;i++)
+            s += arr[i];
+        return s;
     }
 
     public static int power(final int base, final int raise) {
@@ -457,8 +522,10 @@ public class Renderer {
 
     public int testTouch(float width, float height, float xTouch, float yTouch, float[] mModelView, float[] mProjection, float angle){
         Matrix.setIdentityM(mRotationMatrix, 0);
-        //Matrix.translateM(mRotationMatrix, 0, 0, -2.46f, -1.6f);
+        Matrix.translateM(mRotationMatrix, 0, 0, -0, 0.5f);
         Matrix.rotateM(mRotationMatrix, 0, angle, 0, 1.0f, 0);
+        Matrix.translateM(mRotationMatrix, 0, 0, 0, -0.5f);
+
         Matrix.multiplyMM(mModelView, 0, mModelView, 0, mRotationMatrix, 0);
 
 
@@ -484,6 +551,7 @@ public class Renderer {
         float v1[] = {convertedSquare[3],convertedSquare[4],convertedSquare[5]};
         float v2[] = {convertedSquare[6],convertedSquare[7],convertedSquare[8]};
         float I[] = new float[3];
+
         return intersectRayAndTriangle(r,v0,v1,v2,I);
 
     }
@@ -582,6 +650,32 @@ public class Renderer {
             this.P0 = farCoOrds;
             this.P1 = nearCoOrds;
         }
+    }
+
+    private boolean checkGL20Support( Context context )
+    {
+        EGL10 egl = (EGL10) EGLContext.getEGL();
+        EGLDisplay display = egl.eglGetDisplay(EGL10.EGL_DEFAULT_DISPLAY);
+
+        int[] version = new int[2];
+        egl.eglInitialize(display, version);
+
+        int EGL_OPENGL_ES2_BIT = 4;
+        int[] configAttribs =
+                {
+                        EGL10.EGL_RED_SIZE, 4,
+                        EGL10.EGL_GREEN_SIZE, 4,
+                        EGL10.EGL_BLUE_SIZE, 4,
+                        EGL10.EGL_SURFACE_TYPE,     EGL10.EGL_WINDOW_BIT,
+                        EGL10.EGL_RENDERABLE_TYPE,  EGL_OPENGL_ES2_BIT,
+                        EGL10.EGL_NONE
+                };
+
+        EGLConfig[] configs = new EGLConfig[10];
+        int[] num_config = new int[1];
+        egl.eglChooseConfig(display, configAttribs, configs, 10, num_config);
+        //egl.eglTerminate(display);
+        return num_config[0] > 0;
     }
 
 

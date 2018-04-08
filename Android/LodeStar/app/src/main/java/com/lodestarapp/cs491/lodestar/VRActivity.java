@@ -38,11 +38,12 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
 
     private float CAMERA_Z = 0.5f;
     private float[] mView = new float[16];
-    private int[] mResourceId = {R.drawable.airport1 , R.drawable.photo_sphere};
+    private int[] mResourceId = {R.drawable.alan1 , R.drawable.alan2};
     private int mCurrentPhotoPos = 0;
     private boolean mIsCardboardTriggered = false;
 
     float mDeltaY = 0.0f;
+    float arrowAngle = 0.0f;
 
 
     @Override
@@ -50,7 +51,14 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vr);
 
-        cv = (CardboardView) findViewById(R.id.cardboard_view);
+        Bundle data = getIntent().getExtras();
+        if (data != null) {
+            mDeltaY = data.getFloat("VrAngle");
+            arrowAngle = mDeltaY;
+        }
+
+
+            cv = (CardboardView) findViewById(R.id.cardboard_view);
         cv.setRenderer(this);
         setCardboardView(cv);
 
@@ -81,6 +89,7 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
 
         renderer = new Renderer(this, 50, 5f);
         renderer.loadTexture(this, getPhotoIndex());
+        renderer.setAngle(arrowAngle);
         checkGLError("onSurfaceCreated");
 
     }
@@ -103,10 +112,25 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
                 angles[i] = (float) Math.toDegrees((float)angles[i]);
 
             headRotatiton = angles[1];
-            if(Math.abs(headRotatiton) < 20)
-                resetTexture();
+            if(arrowAngle == 80){
+                if(Math.abs(headRotatiton) < 0 + 30){
+                    arrowAngle = -100;
+                    renderer.setAngle(arrowAngle);
+                    resetTexture();
 
-            //Log.d("eye view", floatToString(angles));
+                }
+            }
+            else if(arrowAngle == -100) {
+                if ( Math.abs(headRotatiton) > 180 -30)
+                {
+                    arrowAngle = 80;
+                    renderer.setAngle(arrowAngle);
+                    resetTexture();
+
+                }
+            }
+
+            Log.d("eye view", floatToString(angles));
         }
 
 
