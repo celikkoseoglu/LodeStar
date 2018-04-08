@@ -127,7 +127,8 @@ extension FlightViewController : UICollectionViewDelegateFlowLayout {
         else if (index.row == 2) {
             return CGSize(width: widthPerItem, height: 170)
         }
-        //else, return the default calue
+        
+        // else return the default value
         return CGSize(width: widthPerItem, height: widthPerItem)
         
     }

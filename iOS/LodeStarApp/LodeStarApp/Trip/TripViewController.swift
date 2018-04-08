@@ -73,6 +73,14 @@ extension TravelViewController {
             
         }
         
+        else if text == "Landmarks" {
+            
+            let landmarksTap = UITapGestureRecognizer(target: self, action: #selector(TravelViewController.landmarksTapAction(_:)))
+            cell.cellImage.isUserInteractionEnabled = true
+            cell.cellImage.addGestureRecognizer(landmarksTap)
+            
+        }
+        
         cell.displayContent(title: text, cellImage: image!)
         
         return cell
@@ -112,6 +120,8 @@ class TravelViewController: UIViewController, TravelViewControllerDelegate, UICo
     @IBOutlet var tapImage: UITapGestureRecognizer!
     
     @IBOutlet weak var collectionView: UICollectionView!
+    
+    @IBOutlet weak var cityImage: UIImageView!
     
     var destination = "Tap to Set"
     var departure = "Tap to Set"
@@ -174,6 +184,13 @@ class TravelViewController: UIViewController, TravelViewControllerDelegate, UICo
         
         boardingInfoLabel.text = "You will be boarding PJ15396 from"
         
+        cityImage.image = UIImage(named: "shanghai")
+        
+        var fadeAnim:CABasicAnimation = CABasicAnimation(keyPath: "contents")
+        fadeAnim.fromValue = UIImage(named: "shanghai")
+        fadeAnim.toValue   = UIImage(named: "uganda")
+        fadeAnim.duration  = 0.8;
+        
         direction = false
         
     }
@@ -188,6 +205,15 @@ class TravelViewController: UIViewController, TravelViewControllerDelegate, UICo
         destinationCityImage.addGestureRecognizer(swipeRight)
         
         boardingInfoLabel.text = "You will be boarding PJ15396 to"
+        
+        cityImage.image = UIImage(named: "uganda")
+        
+        var fadeAnim:CABasicAnimation = CABasicAnimation(keyPath: "contents")
+        fadeAnim.fromValue = UIImage(named: "uganda")
+        fadeAnim.toValue   = UIImage(named: "shanghai")
+        fadeAnim.duration  = 0.8;
+        
+        cityImage.layer.add(fadeAnim, forKey: "contents")
         
         direction = true
         
@@ -243,6 +269,14 @@ class TravelViewController: UIViewController, TravelViewControllerDelegate, UICo
         
         let storyboard = self.storyboard
         let controller = storyboard?.instantiateViewController(withIdentifier: "flightInformationNAV")
+        self.present(controller!, animated: true, completion: nil)
+        
+    }
+    
+    @IBAction func landmarksTapAction(_ sender: UITapGestureRecognizer) {
+        
+        let storyboard = self.storyboard
+        let controller = storyboard?.instantiateViewController(withIdentifier: "landmarksNAV")
         self.present(controller!, animated: true, completion: nil)
         
     }
