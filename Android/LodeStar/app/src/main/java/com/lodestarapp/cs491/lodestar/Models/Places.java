@@ -2,6 +2,8 @@ package com.lodestarapp.cs491.lodestar.Models;
 
 import android.graphics.Bitmap;
 
+import java.util.ArrayList;
+
 public class Places {
 
     private Bitmap placeImage;
@@ -11,6 +13,7 @@ public class Places {
     private String rating;
     private Bitmap placeIconImage;
     private String attribution;
+    private String placeId;
 
     private int numberOfStars;
     private boolean halfStar;
@@ -18,7 +21,7 @@ public class Places {
     //TODO: places star and picture
     public Places(Bitmap placeImage, String placeName, String placeLocation,
                   String placeType,
-                  String rating, Bitmap placeIconImage, String attribution){
+                  String rating, Bitmap placeIconImage, String attribution, String placeId){
         this.placeImage = placeImage;
         this.placeName = placeName;
         this.placeLocation = placeLocation;
@@ -26,6 +29,7 @@ public class Places {
         this.rating = rating;
         this.placeIconImage = placeIconImage;
         this.attribution = attribution;
+        this.placeId = placeId;
 
         //int rate;
         //int pointPart = Integer.parseInt(rating.substring(rating.indexOf('.') + 1));
@@ -87,4 +91,14 @@ public class Places {
     public void setPlaceType(String placeType) {
         this.placeType = placeType;
     }
+
+    public String getPlaceId() {
+        return placeId;
+    }
+
+    public void setPlaceId(String placeId) {
+        this.placeId = placeId;
+    }
+
+
 }

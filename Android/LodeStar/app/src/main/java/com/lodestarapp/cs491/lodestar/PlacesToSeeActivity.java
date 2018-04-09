@@ -303,6 +303,7 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
         String placeAddress;
         String placeRating;
         String placeType;
+        String placeId;
 
         JSONObject place;
 
@@ -334,6 +335,7 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
             placeAddress = place.getString("formatted_address");
             placeRating = place.getString("rating");
             placeType = types.getString(0);
+            placeId = place.getString("place_id");
 
             placeLatLng = new LatLng(location.getDouble("lat"), location.getDouble("lng"));
 
@@ -350,7 +352,7 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
                     .title(placeName));
 
             placesList.add(new Places(null, placeName, placeAddress, placeType,
-                    placeRating, null, photoAttribution));
+                    placeRating, null, photoAttribution, placeId));
 
         }
 
