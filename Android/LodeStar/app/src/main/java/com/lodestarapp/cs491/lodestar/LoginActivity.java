@@ -160,11 +160,11 @@ public class LoginActivity extends AppCompatActivity implements
 
         //Log.i("aga",strListUser[0]);
 
-
-       if( FirebaseAuth.getInstance().getCurrentUser() != null) {
-           Intent i = new Intent(LoginActivity.this,TabActivity.class);
-           startActivity(i);
-       }
+        //Yeni eklendi, user signed in ise tab activiye yonlederiyor
+//       if( FirebaseAuth.getInstance().getCurrentUser() != null) {
+//           Intent i = new Intent(LoginActivity.this,PreferencesActivity.class);
+//           startActivity(i);
+//       }
 
     }
 
@@ -426,3 +426,4 @@ public class LoginActivity extends AppCompatActivity implements
 
 
 }
+//Reference: https://stackoverflow.com/questions/44583834/firebase-how-to-check-if-user-is-logged-in?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa & https://firebase.google.com/docs/database/android/read-and-write
