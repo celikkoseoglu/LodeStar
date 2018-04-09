@@ -12,9 +12,9 @@ import UIKit
 class LandmarkCell: UICollectionViewCell {
     
     @IBOutlet weak var landmarkImage: UIImageView!
-    @IBOutlet weak var landmarkNameLabel: UITextField!
-    @IBOutlet weak var landmarkTypeTextLabel: UITextField!
-    @IBOutlet weak var landmarkLocationTextLabel: UITextField!
+    @IBOutlet weak var landmarkNameLabel: UILabel!
+    @IBOutlet weak var landmarkTypeTextLabel: UILabel!
+    @IBOutlet weak var landmarkLocationTextLabel: UILabel!
     
     @IBOutlet weak var landmarkTypeImage: UIImageView!
     @IBOutlet weak var landmarkLocationImage: UIImageView!

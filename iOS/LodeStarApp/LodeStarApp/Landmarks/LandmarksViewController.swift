@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import MapKit
 
 import UIKit
 
@@ -49,6 +50,25 @@ extension LandmarksViewController {
         
         let index = indexPath as NSIndexPath
         
+        if (index.row == 0) {
+            let initialLocation = CLLocation(latitude: 21.282778, longitude: -157.829444)
+            
+            let regionRadius: CLLocationDistance = 4000
+            func centerMapOnLocation(location: CLLocation) {
+                let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
+                                                                          regionRadius, regionRadius)
+                mapView.setRegion(coordinateRegion, animated: true)
+            }
+            
+            centerMapOnLocation(location: initialLocation)
+            
+            let artwork = Artwork(title: "Artwork title..",
+                                  locationName: "Waikiki Gateway Park",
+                                  discipline: "Sculpture",
+                                  coordinate: CLLocationCoordinate2D(latitude: 21.283921, longitude: -157.831661))
+            mapView.addAnnotation(artwork)
+        }
+        
         if landmarkNames[index.row] != "" {
             
             cell.displayContent(landmarkPic: UIImage(data: landmarkData[index.row])!, name: landmarkNames[index.row].uppercased(), landmarkType: UIImage(named: "type.pdf")!, type: "Park", landmarkLocation: UIImage(named: "location.pdf")!, location: landmarkAddresses[index.row], star: Int(landmarkRatings[index.row]) + 1)
@@ -82,7 +102,9 @@ extension LandmarksViewController {
 
 class LandmarksViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
+    @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var collectionView: UICollectionView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -94,7 +116,6 @@ class LandmarksViewController: UIViewController, UICollectionViewDelegate, UICol
         
         self.collectionView.isScrollEnabled = true
         //self.navigationController?.navigationBar.isTranslucent = false
-        
     }
     
     override func didReceiveMemoryWarning() {

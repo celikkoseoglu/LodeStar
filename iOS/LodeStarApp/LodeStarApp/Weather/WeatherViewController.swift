@@ -29,7 +29,7 @@ var jsonDay1:NSDictionary = ["": [""]]
 var jsonDay2:NSDictionary = ["": [""]]
 var jsonDay3:NSDictionary = ["": [""]]
 var jsonDay4:NSDictionary = ["": [""]]
-var jsonDay5:NSDictionary = ["": [""]]
+//var jsonDay5:NSDictionary = ["": [""]]
 
 extension WeatherViewController {
     
@@ -146,7 +146,7 @@ extension WeatherViewController {
                 
                 /////////
                 
-                weatherArr = jsonDay5["weather"] as! NSArray
+                /*weatherArr = jsonDay5["weather"] as! NSArray
                 weatherDict = weatherArr[0] as! NSDictionary
                 weatherTempHumidity = jsonDay5["main"] as! NSDictionary
                 
@@ -156,7 +156,7 @@ extension WeatherViewController {
                 
                 cell.weatherText4.text = weatherCondition
                 cell.temperature4.text = String(Int(temperature!)) + "°"
-                cell.humidity4.text = String(Int(humidity!)) + "%"
+                cell.humidity4.text = String(Int(humidity!)) + "%"*/
             }
                 
             else {
@@ -262,7 +262,7 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate, UIColle
                 jsonDay2 = jsonInfoWeather[2] as! NSDictionary
                 jsonDay3 = jsonInfoWeather[3] as! NSDictionary
                 jsonDay4 = jsonInfoWeather[4] as! NSDictionary
-                jsonDay5 = jsonInfoWeather[5] as! NSDictionary
+                //jsonDay5 = jsonInfoWeather[5] as! NSDictionary
                 
                 self.collectionView.reloadData()
             }
