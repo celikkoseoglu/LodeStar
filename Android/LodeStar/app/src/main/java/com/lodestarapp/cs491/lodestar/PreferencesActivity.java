@@ -21,7 +21,7 @@ import com.google.zxing.common.StringUtils;
 public class PreferencesActivity extends AppCompatActivity {
 
 
-    Button changePassword, aboutLDSTR, changeUsername;
+    Button changePassword, aboutLDSTR, changeUsername , logout;
     DatabaseReference databaseReference;
     FirebaseDatabase db;
     String currentUserName;
@@ -50,6 +50,18 @@ public class PreferencesActivity extends AppCompatActivity {
 
         aboutLDSTR= (Button) findViewById(R.id.aboutLodeStar);
 
+        logout = (Button) findViewById(R.id.logOutButton);
+
+        logout.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                Intent i = new Intent(PreferencesActivity.this,SignInActivity.class);
+                startActivity(i);
+                Toast.makeText(PreferencesActivity.this,"Succesfully logged out",Toast.LENGTH_LONG).show();
+            }
+        });
 
 
         aboutLDSTR.setOnClickListener(new View.OnClickListener() {
@@ -76,7 +88,7 @@ public class PreferencesActivity extends AppCompatActivity {
         changeUsername.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) { //Bu degişmeli çünkü db degişti
                 //Search the database for a specific user value
                 db.getReference("users").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override

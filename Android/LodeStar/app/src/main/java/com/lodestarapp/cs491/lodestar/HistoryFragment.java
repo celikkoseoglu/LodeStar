@@ -75,12 +75,6 @@ public class HistoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         myView = inflater.inflate(R.layout.fragment_history, container, false);
-
-
-        String tmpStr = "(Stockholm-Ankara)";
-
-
-
         return myView;
 
     }
