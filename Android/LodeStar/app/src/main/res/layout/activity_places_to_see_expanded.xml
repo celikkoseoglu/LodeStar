@@ -32,7 +32,7 @@
                     android:layout_below="@id/imageViewPlace">
 
                     <TextView
-                        android:id="@+id/place_name"
+                        android:id="@+id/place_name_expanded"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
 
@@ -79,7 +79,7 @@
                         app:srcCompat="@android:color/holo_red_dark" />
 
                     <TextView
-                        android:id="@+id/place_number_of_reviews"
+                        android:id="@+id/place_number_of_reviews_expanded"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/number_of_reviews" />
@@ -94,13 +94,13 @@
                     android:layout_marginTop="3dp">
 
                     <ImageView
-                        android:id="@+id/place_type_icon"
+                        android:id="@+id/place_type_icon_expanded"
                         android:layout_width="15dp"
                         android:layout_height="20dp"
                         app:srcCompat="@drawable/ic_type" />
 
                     <TextView
-                        android:id="@+id/place_type"
+                        android:id="@+id/place_type_expanded"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="12dp"
@@ -117,13 +117,13 @@
                     android:layout_marginTop="3dp">
 
                     <ImageView
-                        android:id="@+id/place_icon"
+                        android:id="@+id/place_icon_expanded"
                         android:layout_width="15dp"
                         android:layout_height="20dp"
                         app:srcCompat="@drawable/ic_location" />
 
                     <TextView
-                        android:id="@+id/place_location"
+                        android:id="@+id/place_location_expanded"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/place_location" />

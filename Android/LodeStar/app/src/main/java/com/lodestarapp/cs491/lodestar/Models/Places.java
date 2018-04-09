@@ -7,6 +7,7 @@ public class Places {
     private Bitmap placeImage;
     private String placeName;
     private String placeLocation;
+    private String placeType;
     private String rating;
     private Bitmap placeIconImage;
     private String attribution;
@@ -16,16 +17,18 @@ public class Places {
 
     //TODO: places star and picture
     public Places(Bitmap placeImage, String placeName, String placeLocation,
+                  String placeType,
                   String rating, Bitmap placeIconImage, String attribution){
         this.placeImage = placeImage;
         this.placeName = placeName;
         this.placeLocation = placeLocation;
+        this.placeType = placeType;
         this.rating = rating;
         this.placeIconImage = placeIconImage;
         this.attribution = attribution;
 
-        int rate;
-        int pointPart = Integer.parseInt(rating.substring(rating.indexOf('.') + 1));
+        //int rate;
+        //int pointPart = Integer.parseInt(rating.substring(rating.indexOf('.') + 1));
 
         //if(pointPart >= 5)
         //    rate = Integer.parseInt(rating.substring(0, rating.indexOf('.'))) + 1;
@@ -75,5 +78,13 @@ public class Places {
 
     public String getAttribution() {
         return attribution;
+    }
+
+    public String getPlaceType() {
+        return placeType;
+    }
+
+    public void setPlaceType(String placeType) {
+        this.placeType = placeType;
     }
 }

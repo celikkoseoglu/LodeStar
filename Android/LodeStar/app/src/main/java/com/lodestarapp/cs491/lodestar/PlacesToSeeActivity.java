@@ -302,6 +302,7 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
         String placeName;
         String placeAddress;
         String placeRating;
+        String placeType;
 
         JSONObject place;
 
@@ -310,6 +311,7 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
         JSONObject viewport;
 
         JSONArray photos;
+        JSONArray types;
 
         LatLng placeLatLng;
 
@@ -326,10 +328,12 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
             viewport = geometry.getJSONObject("viewport");
 
             photos = place.getJSONArray("photos");
+            types = place.getJSONArray("types");
 
             placeName = place.getString("name");
             placeAddress = place.getString("formatted_address");
             placeRating = place.getString("rating");
+            placeType = types.getString(0);
 
             placeLatLng = new LatLng(location.getDouble("lat"), location.getDouble("lng"));
 
@@ -345,15 +349,15 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
                     .position(placeLatLng)
                     .title(placeName));
 
-            placesList.add(new Places(null, placeName, placeAddress,
+            placesList.add(new Places(null, placeName, placeAddress, placeType,
                     placeRating, null, photoAttribution));
 
         }
 
+        adapter.notifyDataSetChanged();
+
         getPlacesPhotos(photoReferences);
         getPlacesIcons(iconURL);
-
-        adapter.notifyDataSetChanged();
 
         /*
 
@@ -457,6 +461,7 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
                         @Override
                         public void onPlaceImageSuccess(Bitmap bitmap) {
                             placesList.get(finalI).setPlaceIconImage(bitmap);
+                            adapter.notifyDataSetChanged();
                         }
                     });
         }
@@ -471,7 +476,7 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
             //Log.d(TAG, this.photoReferences.get(i));
 
             requestFromURL.append("https://maps.googleapis.com/maps/api/place/photo" +
-                    "?maxwidth=125&photoreference=");
+                    "?maxheight=125&photoreference=");
 
             requestFromURL.append(photoReferences.get(i));
             requestFromURL.append("&key=" + "AIzaSyAKnThPPshmgffk3DNPNkXd2glEQaH1Rlw");
@@ -484,6 +489,7 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
                         @Override
                         public void onPlaceImageSuccess(Bitmap bitmap) {
                             placesList.get(finalI).setPlaceImage(bitmap);
+                            adapter.notifyDataSetChanged();
                         }
                     });
 

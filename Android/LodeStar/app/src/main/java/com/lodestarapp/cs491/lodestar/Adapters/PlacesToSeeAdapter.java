@@ -71,10 +71,15 @@ public class PlacesToSeeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     //sendInformationToNextActivity.add(PlacesToSeeAdapter.this.placesList.get(card).getPlaceName());
 
                     String placeName = PlacesToSeeAdapter.this.placesList.get(card).getPlaceName();
+                    String placeLocation = PlacesToSeeAdapter.this.placesList.get(card).getPlaceLocation();
+                    String placeType = PlacesToSeeAdapter.this.placesList.get(card).getPlaceType();
 
                     Intent intent = new Intent(view.getContext(), PlacesToSeeExpandedActivity.class);
                     Bundle bundle = new Bundle();
-                    bundle.putString("place", placeName);
+                    bundle.putString("placeName", placeName);
+                    bundle.putString("placeLocation", placeLocation);
+                    bundle.putString("placeType", placeType);
+
 
                     intent.putExtras(bundle);
                     view.getContext().startActivity(intent);
