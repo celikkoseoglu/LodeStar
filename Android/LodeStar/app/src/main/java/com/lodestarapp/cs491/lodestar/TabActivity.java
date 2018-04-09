@@ -281,6 +281,11 @@ public class TabActivity extends AppCompatActivity {
         finish();
     }
 
+    public void landmarksStart(View view){
+        Intent intent = new Intent(this, PlacesToSeeActivity.class);
+        startActivity(intent);
+    }
+
 
 
 
