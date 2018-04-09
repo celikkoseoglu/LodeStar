@@ -161,10 +161,10 @@ public class LoginActivity extends AppCompatActivity implements
         //Log.i("aga",strListUser[0]);
 
         //Yeni eklendi, user signed in ise tab activiye yonlederiyor
-//       if( FirebaseAuth.getInstance().getCurrentUser() != null) {
-//           Intent i = new Intent(LoginActivity.this,PreferencesActivity.class);
-//           startActivity(i);
-//       }
+       if( FirebaseAuth.getInstance().getCurrentUser() != null) {
+           Intent i = new Intent(LoginActivity.this,PreferencesActivity.class);
+           startActivity(i);
+       }
 
     }
 

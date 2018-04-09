@@ -77,14 +77,14 @@ public class UserPage extends android.support.v4.app.Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser != null) {
-            String str;
-            str = currentUser.getEmail();
-            String[] tmp = str.split("----");
-            currentUserName = tmp[tmp.length -1];
-            Log.d("user", currentUser.getDisplayName());   //?
-        }
+//        FirebaseUser currentUser = mAuth.getCurrentUser();
+//        if (currentUser != null) {
+//            String str;
+//            str = currentUser.getEmail();
+//            String[] tmp = str.split("----");
+//            currentUserName = tmp[tmp.length -1];
+//            Log.d("user", currentUser.getDisplayName());   //?
+//        }
     }
 
     //Reference to retrieving current user: https://stackoverflow.com/questions/35112204/get-current-user-firebase-android

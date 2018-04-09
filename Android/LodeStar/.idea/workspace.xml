@@ -56,7 +56,7 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lodestarapp/cs491/lodestar/PreferencesActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="221">
-              <caret line="55" column="0" lean-forward="true" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+              <caret line="55" column="0" lean-forward="false" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
               <folding>
                 <element signature="e#2200#2201#0" expanded="true" />
                 <element signature="e#2244#2619#0" expanded="true" />
@@ -72,32 +72,49 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LoginActivity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="LoginActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lodestarapp/cs491/lodestar/LoginActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
-              <caret line="163" column="7" lean-forward="false" selection-start-line="163" selection-start-column="7" selection-end-line="166" selection-end-column="10" />
+            <state relative-caret-position="156">
+              <caret line="156" column="0" lean-forward="false" selection-start-line="156" selection-start-column="0" selection-end-line="156" selection-end-column="0" />
               <folding>
                 <element signature="e#3280#3315#0" expanded="true" />
                 <element signature="e#3964#4201#0" expanded="true" />
                 <element signature="e#4200#4201#0" expanded="true" />
                 <element signature="e#5227#5532#0" expanded="true" />
                 <element signature="e#5531#5532#0" expanded="true" />
-                <element signature="e#7486#7928#0" expanded="true" />
-                <element signature="e#7927#7928#0" expanded="true" />
+                <element signature="e#7478#7920#0" expanded="true" />
+                <element signature="e#7919#7920#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="activity_preferences.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_preferences.xml">
-          <provider editor-type-id="android-designer2">
-            <state />
-          </provider>
+      <file leaf-file-name="FavoritesFragment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lodestarapp/cs491/lodestar/FavoritesFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="282" column="41" lean-forward="false" selection-start-line="282" selection-start-column="41" selection-end-line="282" selection-end-column="41" />
+            <state relative-caret-position="-411">
+              <caret line="19" column="13" lean-forward="false" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserPage.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lodestarapp/cs491/lodestar/UserPage.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="93">
+              <caret line="82" column="43" lean-forward="true" selection-start-line="82" selection-start-column="43" selection-end-line="82" selection-end-column="43" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SignInActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lodestarapp/cs491/lodestar/SignInActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="183">
+              <caret line="103" column="34" lean-forward="false" selection-start-line="103" selection-start-column="34" selection-end-line="103" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -116,31 +133,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HistoryActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lodestarapp/cs491/lodestar/HistoryActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="SignUpActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lodestarapp/cs491/lodestar/SignUpActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="415">
               <caret line="59" column="8" lean-forward="false" selection-start-line="59" selection-start-column="8" selection-end-line="59" selection-end-column="66" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HistoryFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lodestarapp/cs491/lodestar/HistoryFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="855">
-              <caret line="67" column="59" lean-forward="false" selection-start-line="67" selection-start-column="59" selection-end-line="67" selection-end-column="59" />
               <folding />
             </state>
           </provider>
@@ -2218,6 +2215,7 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_preferences.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/lodestarapp/cs491/lodestar/PreferencesActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/lodestarapp/cs491/lodestar/LoginActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/lodestarapp/cs491/lodestar/UserPage.java" />
       </list>
     </option>
   </component>
@@ -2515,43 +2513,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lodestarapp/cs491/lodestar/Adapters/WeatherInformationAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1890">
-          <caret line="142" column="0" lean-forward="true" selection-start-line="142" selection-start-column="0" selection-end-line="142" selection-end-column="0" />
-          <folding>
-            <marker date="1523268881000" expanded="true" signature="7019:7126" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_places_to_see_expanded.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2805">
-          <caret line="187" column="47" lean-forward="true" selection-start-line="187" selection-start-column="47" selection-end-line="187" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lodestarapp/cs491/lodestar/WeatherInformationActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="867">
-          <caret line="86" column="17" lean-forward="false" selection-start-line="86" selection-start-column="17" selection-end-line="86" selection-end-column="17" />
-          <folding>
-            <element signature="e#7132#7133#0" expanded="false" />
-            <element signature="e#7156#7157#0" expanded="false" />
-            <marker date="1523268881000" expanded="true" signature="3019:3271" ph="{...}" />
-            <marker date="1523268881000" expanded="true" signature="3368:3877" ph="{...}" />
-            <marker date="1523268881000" expanded="true" signature="3552:3869" ph="{...}" />
-            <marker date="1523268881000" expanded="true" signature="3670:3750" ph="{...}" />
-            <marker date="1523268881000" expanded="true" signature="3957:7094" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lodestarapp/cs491/lodestar/Controllers/WeatherInformationController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -3000,7 +2961,7 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lodestarapp/cs491/lodestar/PreferencesActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
-          <caret line="55" column="0" lean-forward="true" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+          <caret line="55" column="0" lean-forward="false" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
           <folding>
             <element signature="e#2200#2201#0" expanded="true" />
             <element signature="e#2244#2619#0" expanded="true" />
@@ -3015,19 +2976,43 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lodestarapp/cs491/lodestar/SignInActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="183">
+          <caret line="103" column="34" lean-forward="false" selection-start-line="103" selection-start-column="34" selection-end-line="103" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lodestarapp/cs491/lodestar/LoginActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="163" column="7" lean-forward="false" selection-start-line="163" selection-start-column="7" selection-end-line="166" selection-end-column="10" />
+        <state relative-caret-position="156">
+          <caret line="156" column="0" lean-forward="false" selection-start-line="156" selection-start-column="0" selection-end-line="156" selection-end-column="0" />
           <folding>
             <element signature="e#3280#3315#0" expanded="true" />
             <element signature="e#3964#4201#0" expanded="true" />
             <element signature="e#4200#4201#0" expanded="true" />
             <element signature="e#5227#5532#0" expanded="true" />
             <element signature="e#5531#5532#0" expanded="true" />
-            <element signature="e#7486#7928#0" expanded="true" />
-            <element signature="e#7927#7928#0" expanded="true" />
+            <element signature="e#7478#7920#0" expanded="true" />
+            <element signature="e#7919#7920#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lodestarapp/cs491/lodestar/FavoritesFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-411">
+          <caret line="19" column="13" lean-forward="false" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lodestarapp/cs491/lodestar/UserPage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="93">
+          <caret line="82" column="43" lean-forward="true" selection-start-line="82" selection-start-column="43" selection-end-line="82" selection-end-column="43" />
+          <folding />
         </state>
       </provider>
     </entry>
