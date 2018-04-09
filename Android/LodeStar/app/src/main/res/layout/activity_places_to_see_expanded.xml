@@ -97,7 +97,7 @@
                         android:id="@+id/place_type_icon"
                         android:layout_width="15dp"
                         android:layout_height="20dp"
-                        app:srcCompat="@color/colorPrimaryDark" />
+                        app:srcCompat="@drawable/ic_type" />
 
                     <TextView
                         android:id="@+id/place_type"
@@ -120,7 +120,7 @@
                         android:id="@+id/place_icon"
                         android:layout_width="15dp"
                         android:layout_height="20dp"
-                        app:srcCompat="@color/colorRedd" />
+                        app:srcCompat="@drawable/ic_location" />
 
                     <TextView
                         android:id="@+id/place_location"
