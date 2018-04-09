@@ -8,10 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		143FF65F2037088C00C462F6 /* loginBackground.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 143FF65E2037088B00C462F6 /* loginBackground.pdf */; };
+		146ED5BB207BB475001BCD5F /* VenueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146ED5BA207BB475001BCD5F /* VenueViewController.swift */; };
 		14A1E2AB207AF60300BF1847 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A1E2AA207AF60300BF1847 /* MapKit.framework */; };
 		14BC327E207AF6A0003280C0 /* Artwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BC327D207AF6A0003280C0 /* Artwork.swift */; };
 		14D03F0F202B35FF00B3B80A /* istabul.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D03F0D202B35FF00B3B80A /* istabul.png */; };
 		14D03F10202B35FF00B3B80A /* shanghai.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D03F0E202B35FF00B3B80A /* shanghai.png */; };
+		14DA46B8207BCA05009871A8 /* grand_canyon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 14DA46B5207BCA04009871A8 /* grand_canyon.jpg */; };
+		14DA46B9207BCA05009871A8 /* sindhu_beach.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 14DA46B6207BCA04009871A8 /* sindhu_beach.jpg */; };
+		14DA46BA207BCA05009871A8 /* underwater.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 14DA46B7207BCA05009871A8 /* underwater.jpg */; };
 		14FF11A52077D34F00D611AF /* TripCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FF11A42077D34F00D611AF /* TripCell.swift */; };
 		8D11715D200F74FE0032860E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D11715C200F74FE0032860E /* LoginViewController.swift */; };
 		8D22B2512030C7DF00ACFBD7 /* 2018-01-01-PHOTO-00001561.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8D22B23D2030C7DF00ACFBD7 /* 2018-01-01-PHOTO-00001561.jpg */; };
@@ -78,10 +82,15 @@
 
 /* Begin PBXFileReference section */
 		143FF65E2037088B00C462F6 /* loginBackground.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = loginBackground.pdf; sourceTree = "<group>"; };
+		146ED5BA207BB475001BCD5F /* VenueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueViewController.swift; sourceTree = "<group>"; };
 		14A1E2AA207AF60300BF1847 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		14BC327D207AF6A0003280C0 /* Artwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artwork.swift; sourceTree = "<group>"; };
 		14D03F0D202B35FF00B3B80A /* istabul.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = istabul.png; sourceTree = "<group>"; };
 		14D03F0E202B35FF00B3B80A /* shanghai.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shanghai.png; sourceTree = "<group>"; };
+		14DA46B1207BC751009871A8 /* GVRBridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GVRBridgingHeader.h; sourceTree = "<group>"; };
+		14DA46B5207BCA04009871A8 /* grand_canyon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = grand_canyon.jpg; sourceTree = "<group>"; };
+		14DA46B6207BCA04009871A8 /* sindhu_beach.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sindhu_beach.jpg; sourceTree = "<group>"; };
+		14DA46B7207BCA05009871A8 /* underwater.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = underwater.jpg; sourceTree = "<group>"; };
 		14FF11A42077D34F00D611AF /* TripCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripCell.swift; sourceTree = "<group>"; };
 		2E1BD3D5549A92F56E0B6398 /* Pods-LodeStarApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LodeStarApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LodeStarApp/Pods-LodeStarApp.debug.xcconfig"; sourceTree = "<group>"; };
 		8D11715C200F74FE0032860E /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -174,6 +183,16 @@
 			path = images;
 			sourceTree = "<group>";
 		};
+		14DA46B4207BC9D7009871A8 /* 360 Images */ = {
+			isa = PBXGroup;
+			children = (
+				14DA46B5207BCA04009871A8 /* grand_canyon.jpg */,
+				14DA46B6207BCA04009871A8 /* sindhu_beach.jpg */,
+				14DA46B7207BCA05009871A8 /* underwater.jpg */,
+			);
+			name = "360 Images";
+			sourceTree = "<group>";
+		};
 		14FF119F2077AD3F00D611AF /* FlightInformation */ = {
 			isa = PBXGroup;
 			children = (
@@ -235,6 +254,7 @@
 		8D6F76BD1F961993004824B0 /* LodeStarApp */ = {
 			isa = PBXGroup;
 			children = (
+				14DA46B4207BC9D7009871A8 /* 360 Images */,
 				14FF11A72077E16200D611AF /* Weather */,
 				14FF11A62077DDF100D611AF /* Trip */,
 				14FF119F2077AD3F00D611AF /* FlightInformation */,
@@ -244,6 +264,7 @@
 				8D6F76C21F961993004824B0 /* Main.storyboard */,
 				8D26FA0F2043407E0011E5BE /* FoodCell.swift */,
 				8D26FA0D20433DE50011E5BE /* LivingExpensesViewController.swift */,
+				146ED5BA207BB475001BCD5F /* VenueViewController.swift */,
 				8D11715C200F74FE0032860E /* LoginViewController.swift */,
 				8D3D437E200A3CDA0091CCEB /* ProfileViewController.swift */,
 				8D3D437C200A3AD30091CCEB /* LogCell.swift */,
@@ -254,6 +275,7 @@
 				8D6F76CA1F961993004824B0 /* Info.plist */,
 				8D2F8FED1FD57C7600334A86 /* SwiftyJSON.swift */,
 				14BC327D207AF6A0003280C0 /* Artwork.swift */,
+				14DA46B1207BC751009871A8 /* GVRBridgingHeader.h */,
 			);
 			path = LodeStarApp;
 			sourceTree = "<group>";
@@ -340,6 +362,7 @@
 					8D6F76BA1F961992004824B0 = {
 						CreatedOnToolsVersion = 8.2;
 						DevelopmentTeam = 84BN7PWNQH;
+						LastSwiftMigration = 0930;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Maps.iOS = {
@@ -349,6 +372,7 @@
 					};
 					8D6F76CE1F961993004824B0 = {
 						CreatedOnToolsVersion = 8.2;
+						LastSwiftMigration = 0930;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 8D6F76BA1F961992004824B0;
 					};
@@ -392,8 +416,11 @@
 				8D6F76C91F961993004824B0 /* LaunchScreen.storyboard in Resources */,
 				8D6F76C61F961993004824B0 /* Assets.xcassets in Resources */,
 				8D6F76C41F961993004824B0 /* Main.storyboard in Resources */,
+				14DA46BA207BCA05009871A8 /* underwater.jpg in Resources */,
 				8D22B25D2030C7DF00ACFBD7 /* shopping.jpg in Resources */,
+				14DA46B9207BCA05009871A8 /* sindhu_beach.jpg in Resources */,
 				8D22B25F2030C7DF00ACFBD7 /* star.pdf in Resources */,
+				14DA46B8207BCA05009871A8 /* grand_canyon.jpg in Resources */,
 				143FF65F2037088C00C462F6 /* loginBackground.pdf in Resources */,
 				8D22B2612030C7DF00ACFBD7 /* trip.pdf in Resources */,
 				8D22B2552030C7DF00ACFBD7 /* flight.pdf in Resources */,
@@ -414,15 +441,26 @@
 /* Begin PBXShellScriptBuildPhase section */
 		2E38746824A91B619668E378 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-LodeStarApp/Pods-LodeStarApp-resources.sh",
+				"${PODS_ROOT}/GVRSDK/Resources/CardboardSDK.bundle",
+				"${PODS_ROOT}/GVRSDK/Resources/GoogleKitCore.bundle",
+				"${PODS_ROOT}/GVRSDK/Resources/GoogleKitDialogs.bundle",
+				"${PODS_ROOT}/GVRSDK/Resources/GoogleKitHUD.bundle",
+				"${PODS_ROOT}/GVRSDK/Resources/MaterialRobotoFontLoader.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/CardboardSDK.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleKitCore.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleKitDialogs.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleKitHUD.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialRobotoFontLoader.bundle",
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LodeStarApp/Pods-LodeStarApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
@@ -435,10 +473,14 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-LodeStarApp/Pods-LodeStarApp-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -485,6 +527,7 @@
 				8D2A6C331FDE781C00AA44E7 /* FlightDetailsCell.swift in Sources */,
 				8D2A6C351FDE7E1600AA44E7 /* LodeStarLayout.swift in Sources */,
 				8D3D437B200A2FDC0091CCEB /* TransportViewController.swift in Sources */,
+				146ED5BB207BB475001BCD5F /* VenueViewController.swift in Sources */,
 				8D2EAC792007735A000819DA /* WeatherViewController.swift in Sources */,
 				8D6F76DF1F961B40004824B0 /* SelectNationViewController.swift in Sources */,
 				8D26FA0E20433DE50011E5BE /* LivingExpensesViewController.swift in Sources */,
@@ -643,10 +686,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 84BN7PWNQH;
 				INFOPLIST_FILE = LodeStarApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.celikkoseoglu.LodeStarApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_OBJC_BRIDGING_HEADER = LodeStarApp/GVRBridgingHeader.h;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -657,10 +704,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 84BN7PWNQH;
 				INFOPLIST_FILE = LodeStarApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.celikkoseoglu.LodeStarApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_OBJC_BRIDGING_HEADER = LodeStarApp/GVRBridgingHeader.h;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -673,7 +724,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.BerkEvrenAbbasoglu.LodeStarAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LodeStarApp.app/LodeStarApp";
 			};
 			name = Debug;
@@ -687,7 +739,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.BerkEvrenAbbasoglu.LodeStarAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LodeStarApp.app/LodeStarApp";
 			};
 			name = Release;

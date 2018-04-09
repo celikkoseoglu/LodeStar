@@ -20,6 +20,7 @@ fileprivate let key = "AIzaSyCnY6cljLR3vRDuCSdI0yOzDVyaLyfseRI"
 
 fileprivate var landmarkNames = Array(repeating: "", count: 10)
 fileprivate var landmarkAddresses = Array(repeating: "", count: 10)
+fileprivate var landmarkCoordinates = [NSDictionary]()
 fileprivate var landmarkRatings = Array(repeating: -1.0, count: 10)
 fileprivate var landmarkData = Array(repeating: Data.init(), count: 10)
 
@@ -50,28 +51,37 @@ extension LandmarksViewController {
         
         let index = indexPath as NSIndexPath
         
-        if (index.row == 0) {
-            let initialLocation = CLLocation(latitude: 21.282778, longitude: -157.829444)
-            
-            let regionRadius: CLLocationDistance = 4000
-            func centerMapOnLocation(location: CLLocation) {
-                let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
-                                                                          regionRadius, regionRadius)
-                mapView.setRegion(coordinateRegion, animated: true)
-            }
-            
-            centerMapOnLocation(location: initialLocation)
-            
-            let artwork = Artwork(title: "Artwork title..",
-                                  locationName: "Waikiki Gateway Park",
-                                  discipline: "Sculpture",
-                                  coordinate: CLLocationCoordinate2D(latitude: 21.283921, longitude: -157.831661))
-            mapView.addAnnotation(artwork)
-        }
-        
         if landmarkNames[index.row] != "" {
             
-            cell.displayContent(landmarkPic: UIImage(data: landmarkData[index.row])!, name: landmarkNames[index.row].uppercased(), landmarkType: UIImage(named: "type.pdf")!, type: "Park", landmarkLocation: UIImage(named: "location.pdf")!, location: landmarkAddresses[index.row], star: Int(landmarkRatings[index.row]) + 1)
+            let latitude = (landmarkCoordinates[index.row]["lat"]) as! Double
+            let longitude = (landmarkCoordinates[index.row]["lng"]) as! Double
+            
+            if (index.row == 0) {
+                let initialLocation = CLLocation(latitude: latitude, longitude: longitude)
+                
+                let regionRadius: CLLocationDistance = 30000
+                func centerMapOnLocation(location: CLLocation) {
+                    let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, regionRadius, regionRadius)
+                    mapView.setRegion(coordinateRegion, animated: true)
+                }
+                
+                centerMapOnLocation(location: initialLocation)
+            }
+            
+            let landmarkType = "Park";
+            
+            //print(latitude)
+            //print(longitude)
+            
+            let artwork = Artwork(title: landmarkNames[index.row],
+                                  locationName: String((landmarkRatings[index.row])),
+                                  discipline: landmarkType,
+                                  coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
+            print(artwork)
+            mapView.addAnnotation(artwork)
+            
+            //why is there a +1 in rating??
+            cell.displayContent(landmarkPic: UIImage(data: landmarkData[index.row])!, name: landmarkNames[index.row].uppercased(), landmarkType: UIImage(named: "type.pdf")!, type: landmarkType, landmarkLocation: UIImage(named: "location.pdf")!, location: landmarkAddresses[index.row], star: Int(landmarkRatings[index.row]) + 1)
             
         }
         return cell
@@ -134,17 +144,9 @@ class LandmarksViewController: UIViewController, UICollectionViewDelegate, UICol
                 
                 let jsonInfoLandmarks = (json as? NSArray)!
                 
-                landmarksArr[0] = jsonInfoLandmarks[0] as! NSDictionary
-                landmarksArr[1] = jsonInfoLandmarks[1] as! NSDictionary
-                landmarksArr[2] = jsonInfoLandmarks[2] as! NSDictionary
-                landmarksArr[3] = jsonInfoLandmarks[3] as! NSDictionary
-                landmarksArr[4] = jsonInfoLandmarks[4] as! NSDictionary
-                
-                landmarksArr[5] = jsonInfoLandmarks[5] as! NSDictionary
-                landmarksArr[6] = jsonInfoLandmarks[6] as! NSDictionary
-                landmarksArr[7] = jsonInfoLandmarks[7] as! NSDictionary
-                landmarksArr[8] = jsonInfoLandmarks[8] as! NSDictionary
-                landmarksArr[9] = jsonInfoLandmarks[9] as! NSDictionary
+                for i in 0..<10 {
+                    landmarksArr[i] = jsonInfoLandmarks[i] as! NSDictionary
+                }
                 
                 for i in 0..<10 {
                 
@@ -155,6 +157,9 @@ class LandmarksViewController: UIViewController, UICollectionViewDelegate, UICol
                     
                     let landmarkAddress = landmarkItem["formatted_address"] as? String
                     landmarkAddresses[i] = landmarkAddress!
+                    
+                    let landmarkCoordinate = (landmarkItem["geometry"] as! NSDictionary)["location"] as! NSDictionary
+                    landmarkCoordinates.append(landmarkCoordinate)
                     
                     let landmarkRating = landmarkItem["rating"] as? Double
                     landmarkRatings[i] = landmarkRating!
@@ -172,7 +177,6 @@ class LandmarksViewController: UIViewController, UICollectionViewDelegate, UICol
                     let data = try? Data(contentsOf: url!)
                 
                     
-                    
                    /* Alamofire.request(urlTemplate).responseJSON { response in
                         //print("Request: \(String(describing: response.request))")   // original url request
                         //print("Response: \(String(describing: response.response))") // http url response
@@ -182,8 +186,6 @@ class LandmarksViewController: UIViewController, UICollectionViewDelegate, UICol
                          print("Data: \(utf8Text)") // original server data as UTF8 string
                          }
                     } */
-                    
-                    
                     
                     
                     

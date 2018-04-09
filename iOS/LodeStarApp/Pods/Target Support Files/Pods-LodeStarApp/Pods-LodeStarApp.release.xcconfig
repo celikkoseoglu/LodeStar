@@ -1,11 +1,13 @@
 ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES
-FRAMEWORK_SEARCH_PATHS = $(inherited) "$PODS_CONFIGURATION_BUILD_DIR/Alamofire"
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/Alamofire" "${PODS_CONFIGURATION_BUILD_DIR}/GTMSessionFetcher" "${PODS_CONFIGURATION_BUILD_DIR}/GoogleToolboxForMac" "${PODS_ROOT}/GVRKit/Frameworks"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/GVRKit" "${PODS_ROOT}/Headers/Public/GVRSDK"
 LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
-OTHER_CFLAGS = $(inherited) -iquote "$PODS_CONFIGURATION_BUILD_DIR/Alamofire/Alamofire.framework/Headers"
-OTHER_LDFLAGS = $(inherited) -framework "Alamofire"
+LIBRARY_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/GVRSDK/Libraries"
+OTHER_CFLAGS = $(inherited) -iquote "${PODS_CONFIGURATION_BUILD_DIR}/Alamofire/Alamofire.framework/Headers" -iquote "${PODS_CONFIGURATION_BUILD_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework/Headers" -iquote "${PODS_CONFIGURATION_BUILD_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework/Headers" -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/GVRKit" -isystem "${PODS_ROOT}/Headers/Public/GVRSDK"
+OTHER_LDFLAGS = $(inherited) -ObjC -l"GVRSDK" -l"c++" -l"z" -framework "AVFoundation" -framework "Alamofire" -framework "AudioToolbox" -framework "CoreGraphics" -framework "CoreMedia" -framework "CoreMotion" -framework "CoreText" -framework "CoreVideo" -framework "GLKit" -framework "GTMSessionFetcher" -framework "GVRKit" -framework "GoogleToolboxForMac" -framework "MediaPlayer" -framework "OpenGLES" -framework "QuartzCore"
 OTHER_SWIFT_FLAGS = $(inherited) "-D" "COCOAPODS"
-PODS_BUILD_DIR = $BUILD_DIR
-PODS_CONFIGURATION_BUILD_DIR = $PODS_BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
+PODS_BUILD_DIR = ${BUILD_DIR}
+PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
 PODS_PODFILE_DIR_PATH = ${SRCROOT}/.
 PODS_ROOT = ${SRCROOT}/Pods

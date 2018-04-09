@@ -160,7 +160,7 @@ class TravelViewController: UIViewController, TravelViewControllerDelegate, UICo
     }
     
     // function which is triggered when handleTap is called
-    func handleTap(_ sender: UITapGestureRecognizer) {
+    @objc func handleTap(_ sender: UITapGestureRecognizer) {
         
         let popupSelectNation = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "selectNation") as! SelectNationViewController
         popupSelectNation.travelViewControllerDelegate = self
@@ -171,7 +171,7 @@ class TravelViewController: UIViewController, TravelViewControllerDelegate, UICo
         
     }
     
-    func handleRightSwipe(_ sender: UISwipeGestureRecognizer) {
+    @objc func handleRightSwipe(_ sender: UISwipeGestureRecognizer) {
         
         destinationCityNameLabel.text = departure
         destinationCityLabel.text = "Showing information about " + departure
@@ -195,7 +195,7 @@ class TravelViewController: UIViewController, TravelViewControllerDelegate, UICo
         
     }
     
-    func handleLeftSwipe(_ sender: UISwipeGestureRecognizer) {
+    @objc func handleLeftSwipe(_ sender: UISwipeGestureRecognizer) {
         
         destinationCityNameLabel.text = destination
         destinationCityLabel.text = "Showing information about " + destination
@@ -280,6 +280,5 @@ class TravelViewController: UIViewController, TravelViewControllerDelegate, UICo
         self.present(controller!, animated: true, completion: nil)
         
     }
-    
 }
 
