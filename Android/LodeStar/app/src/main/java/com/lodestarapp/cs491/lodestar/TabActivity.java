@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.lodestarapp.cs491.lodestar.Interfaces.MyOnFocusListenable;
 import com.lodestarapp.cs491.lodestar.Models.QRCodeInfo;
+import com.lodestarapp.cs491.lodestar.VR.NearMeActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -283,6 +284,11 @@ public class TabActivity extends AppCompatActivity {
 
     public void landmarksStart(View view){
         Intent intent = new Intent(this, PlacesToSeeActivity.class);
+        startActivity(intent);
+    }
+
+    public void nearMeStart(View view){
+        Intent intent = new Intent(this, NearMeActivity.class);
         startActivity(intent);
     }
 

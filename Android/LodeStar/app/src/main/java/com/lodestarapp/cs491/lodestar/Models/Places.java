@@ -1,6 +1,7 @@
 package com.lodestarapp.cs491.lodestar.Models;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -31,16 +32,16 @@ public class Places {
         this.attribution = attribution;
         this.placeId = placeId;
 
-        //int rate;
-        //int pointPart = Integer.parseInt(rating.substring(rating.indexOf('.') + 1));
+        double r = Double.parseDouble(rating) / 2;
+        this.numberOfStars = (int) r ;
 
-        //if(pointPart >= 5)
-        //    rate = Integer.parseInt(rating.substring(0, rating.indexOf('.'))) + 1;
-        //else
-        //    rate = Integer.parseInt(rating.substring(0, rating.indexOf('.')));
-
-        //this.numberOfStars = rate;
+        if(r % 1 > 0.5)
+            halfStar = true;
+        else
+            halfStar=false;
         //halfStar = rate % 2 != 0;
+        Log.d("stars", rating+ "");
+
 
     }
 

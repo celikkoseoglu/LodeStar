@@ -13,6 +13,7 @@ import com.android.volley.toolbox.Volley;
 import com.lodestarapp.cs491.lodestar.Interfaces.LodeStarServerCallback;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 
 public class WeatherInformationController {
 
@@ -38,7 +39,11 @@ public class WeatherInformationController {
             public void onResponse(JSONArray response) {
                 Log.i(TAG, response.toString());
                 responseFromServer[0] = response;
-                lodeStarServerCallback.onSuccess(responseFromServer[0], null);
+                try {
+                    lodeStarServerCallback.onSuccess(responseFromServer[0], null);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         }, new Response.ErrorListener() {
             @Override

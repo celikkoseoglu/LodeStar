@@ -426,7 +426,8 @@
                         android:paddingTop="20dp"
                         android:stateListAnimator="@null"
                         android:text="Near Me"
-                        android:textAllCaps="false" />
+                        android:textAllCaps="false"
+                        android:onClick="nearMeStart"/>
 
                     <Button
                         android:id="@+id/accomodation"

@@ -10,7 +10,6 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -21,7 +20,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class PlacesToSeeController {
+public class NearMeController {
 
     private static final String TAG = "controller";
     private boolean locationPermissionGiven;
@@ -29,61 +28,53 @@ public class PlacesToSeeController {
     private String keyword;
     private Location location;
 
-    //Default Constructor
-    public PlacesToSeeController(){}
 
-    public PlacesToSeeController(String keyword, boolean locationPermissionGiven, Location location){
+    public NearMeController(String keyword, boolean locationPermissionGiven, Location location){
         this.keyword = keyword;
         this.locationPermissionGiven = locationPermissionGiven;
         this.location = location;
 
         if(this.locationPermissionGiven){
-            //Server part not implemented
+            this.requestFromUrl = "http://lodestarapp.com:3009/?location=39.9098703,32.86061219999999&limit=10&query=park";
 
-            this.requestFromUrl = "http://lodestarapp.com:3010/?city=ankara";
-
-            // this.requestFromUrl = "http://lodestarapp.com:3009/?location="+location.getLatitude()+
-            //","+location.getLongitude()+"&limit=5";
-
-            Log.i(TAG, this.requestFromUrl);
+            //Log.i(TAG, this.requestFromUrl);
         }
         else{
             this.requestFromUrl = "something";
         }
     }
 
-    public void getPlacesToSeeInformation(String requestFromUrl, Context context,
-                                          final LodeStarServerCallback lodeStarServerCallback){
+    public void getNearMeInformation( Context context,
+                                          final VolleyCallback5 lodeStarServerCallback){
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
 
         final JSONArray[] responseFromServer = new JSONArray[1];
 
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET,
-                requestFromUrl, null, new Response.Listener<JSONArray>() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, requestFromUrl, null, new Response.Listener<JSONObject>() {
             @Override
-            public void onResponse(JSONArray response) {
-                responseFromServer[0] = response;
-                try {
-                    lodeStarServerCallback.onSuccess(responseFromServer[0], null);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+            public void onResponse(JSONObject response) {
+                Log.i(TAG, response.toString());
+
+                lodeStarServerCallback.onSuccess(response);
+
+                //mAdapter = new WeatherInformationAdapter(responseFromServer[0]);
+                //mRecyclerView.setAdapter(mAdapter);
             }
+
         }, new Response.ErrorListener() {
-            @Override
             public void onErrorResponse(VolleyError error) {
-                //Log.i(TAG, "Failed to get weather information of the city " + getCity());
+                Log.i(TAG, "Failed to get flight information");
                 //Log.i(TAG, error.getMessage());
                 //Log.i(TAG, error.getLocalizedMessage());
                 //Log.i(TAG, error.toString());
-                responseFromServer[0] = null;
             }
         });
-        requestQueue.add(jsonArrayRequest);
+        requestQueue.add(jsonObjectRequest);
+
     }
 
-    public void getPlaceImage(String imageURL, Context context, final LodeStarServerCallback lodeStarServerCallback){
+    public void getPlaceImage(String imageURL, Context context, final VolleyCallback6 lodeStarServerCallback){
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         final Bitmap[] imageMap = new Bitmap[1];
@@ -93,7 +84,7 @@ public class PlacesToSeeController {
             public void onResponse(Bitmap response) {
                 if (response != null) {
                     imageMap[0] = response;
-                    lodeStarServerCallback.onPlaceImageSuccess(imageMap[0]);
+                    lodeStarServerCallback.onSuccess(imageMap[0]);
                 }
 
             }
@@ -107,7 +98,6 @@ public class PlacesToSeeController {
                 });
 
         requestQueue.add(imageRequest);
-
     }
 
     public String getKeyword() {
@@ -126,20 +116,20 @@ public class PlacesToSeeController {
         this.location = location;
     }
 
-    public String getRequestFromUrl() {
-        return requestFromUrl;
+    public String getRequestFromUrl() {return requestFromUrl;
     }
 
     public void setRequestFromUrl(String requestFromUrl) {
         this.requestFromUrl = requestFromUrl;
     }
 
-    /*private boolean checkForLocationPermission() {
+    public interface VolleyCallback5{
+        void onSuccess(JSONObject result);
+    }
 
+    public interface VolleyCallback6{
+        void onSuccess(Bitmap result);
+    }
 
-
-
-        return false;
-    }*/
 
 }

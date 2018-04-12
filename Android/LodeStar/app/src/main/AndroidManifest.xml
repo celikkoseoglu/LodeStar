@@ -18,10 +18,7 @@
     <uses-feature
         android:name="android.hardware.nfc"
         android:required="false" />
-
-    <uses-feature
-        android:name="android.hardware.location.gps"
-        />
+    <uses-feature android:name="android.hardware.location.gps" />
 
     <application
         android:allowBackup="true"
@@ -39,11 +36,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".BrickBreakerActivity" />
-        <activity android:name=".SignInActivity"
-            android:windowSoftInputMode="stateVisible|adjustResize"/>
-        <activity android:name=".SignUpActivity"
-            android:windowSoftInputMode="stateVisible|adjustResize"
-            />
+        <activity
+            android:name=".SignInActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity
+            android:name=".SignUpActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity android:name=".WeatherInformationActivity" />
         <activity android:name=".FlightInfoActivity" />
         <activity android:name=".CurrencyActivity" />
@@ -81,8 +79,9 @@
         <activity
             android:name=".ManualDestinationActivity"
             android:label="@string/title_activity_manual_destination"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity android:name=".PlacesToSeeExpandedActivity" />
+        <activity android:name=".VR.NearMeActivity"></activity>
     </application>
 
 </manifest>
