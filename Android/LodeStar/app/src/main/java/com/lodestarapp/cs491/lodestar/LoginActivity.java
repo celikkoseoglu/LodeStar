@@ -162,7 +162,7 @@ public class LoginActivity extends AppCompatActivity implements
 
         //Yeni eklendi, user signed in ise tab activiye yonlederiyor
        if( FirebaseAuth.getInstance().getCurrentUser() != null) {
-           Intent i = new Intent(LoginActivity.this,PreferencesActivity.class);
+           Intent i = new Intent(LoginActivity.this,TabActivity.class);
            startActivity(i);
        }
 

@@ -98,44 +98,48 @@ public class PreferencesActivity extends AppCompatActivity {
                             String str = data + "";
                             String tmpKey = "";
 
-                            //Parsing the value in the database
                             String myArr[] = str.split("e-mail=");
-                            String tmp = myArr[myArr.length - 1];
-                            tmp = removeLastCh(tmp); //Removes the last characther
-                            tmp = tmp.substring(0,tmp.length()-2);
-                            int foccurence = returnCurrentEmailofTheUserUnparsed().indexOf("-");
-                            int foccurence2 = tmp.substring(0,tmp.length()).indexOf("-");
+                            Log.i("agam","OMYGOD: " + myArr[1]);
+                            myArr[1] = myArr[1].substring(0, myArr[1].length() - 3);
 
-                            String subString = null,substring2 = null;
-                            //Used code in https://stackoverflow.com/questions/7683448/in-java-how-to-get-substring-from-a-string-till-a-character-c for parsing
-                            if (foccurence != -1)
-                            {
-                                subString= returnCurrentEmailofTheUserUnparsed().substring(0 , foccurence);
-                            }
-
-                            if(foccurence2 != -1) {
-                                substring2 = returnCurrentEmailofTheUserUnparsed().substring(0 , foccurence2);
-                            }
-
-
-
-                            Log.i("agam","-----------" + subString + " vs " + substring2);
-
-                            //Return the string value until "-" is encountered
-
-                            if(subString.equals(substring2)) {
-                                //Get the key
-                                tmpKey = str;
-                                tmpKey = tmpKey.substring(tmpKey.indexOf("key = ") + 1);
-                                tmpKey = tmpKey.substring(0, tmpKey.indexOf(", value ="));
-                                tmpKey = tmpKey.substring(5,tmpKey.length());
-                                Log.i("agam","oo yea" + tmpKey);
-
-                                //   databaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(tmpKey).child("username");
-                                Log.i("agam","key: " + tmpKey);
-                                //    databaseReference.setValue("bymyside");
-
-                            }
+                            //Parsing the value in the database
+//                            String myArr[] = str.split("e-mail=");
+//                            String tmp = myArr[myArr.length - 1];
+//                            tmp = removeLastCh(tmp); //Removes the last characther
+//                            tmp = tmp.substring(0,tmp.length()-2);
+//                            int foccurence = returnCurrentEmailofTheUserUnparsed().indexOf("-");
+//                            int foccurence2 = tmp.substring(0,tmp.length()).indexOf("-");
+//
+//                            String subString = null,substring2 = null;
+//                            //Used code in https://stackoverflow.com/questions/7683448/in-java-how-to-get-substring-from-a-string-till-a-character-c for parsing
+//                            if (foccurence != -1)
+//                            {
+//                                subString= returnCurrentEmailofTheUserUnparsed().substring(0 , foccurence);
+//                            }
+//
+//                            if(foccurence2 != -1) {
+//                                substring2 = returnCurrentEmailofTheUserUnparsed().substring(0 , foccurence2);
+//                            }
+//
+//
+//
+//                            Log.i("agam","-----------" + subString + " vs " + substring2);
+//
+//                            //Return the string value until "-" is encountered
+//
+//                            if(subString.equals(substring2)) {
+//                                //Get the key
+//                                tmpKey = str;
+//                                tmpKey = tmpKey.substring(tmpKey.indexOf("key = ") + 1);
+//                                tmpKey = tmpKey.substring(0, tmpKey.indexOf(", value ="));
+//                                tmpKey = tmpKey.substring(5,tmpKey.length());
+//                                Log.i("agam","oo yea" + tmpKey);
+//
+//                                //   databaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(tmpKey).child("username");
+//                                Log.i("agam","key: " + tmpKey);
+//                                //    databaseReference.setValue("bymyside");
+//
+//                            }
 
                             changeUNAME();
 

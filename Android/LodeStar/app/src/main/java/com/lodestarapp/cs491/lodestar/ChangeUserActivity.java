@@ -54,41 +54,44 @@ public class ChangeUserActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
                         for (com.google.firebase.database.DataSnapshot data : dataSnapshot.getChildren()) {
-                            Log.i("agam",data + "");
+//                            Log.i("agam",data + "");
+//                            String str = data + "";
+//                            String tmpKey = "";
+//
+//                            //Parsing the value in the database
+//                            String myArr[] = str.split("e-mail=");
+//                            String tmp = myArr[myArr.length - 1];
+//                            tmp = removeLastCh(tmp); //Removes the last characther
+//                            tmp = tmp.substring(0,tmp.length()-2);
+//                            int foccurence = returnCurrentEmailofTheUserUnparsed().indexOf("-");
+//                            int foccurence2 = tmp.substring(0,tmp.length()).indexOf("-");
+
                             String str = data + "";
                             String tmpKey = "";
 
-                            //Parsing the value in the database
                             String myArr[] = str.split("e-mail=");
-                            String tmp = myArr[myArr.length - 1];
-                            tmp = removeLastCh(tmp); //Removes the last characther
-                            tmp = tmp.substring(0,tmp.length()-2);
-                            int foccurence = returnCurrentEmailofTheUserUnparsed().indexOf("-");
-                            int foccurence2 = tmp.substring(0,tmp.length()).indexOf("-");
-
-                            String subString = null,substring2 = null;
-                            //Used code in https://stackoverflow.com/questions/7683448/in-java-how-to-get-substring-from-a-string-till-a-character-c for parsing
-                            if (foccurence != -1)
-                            {
-                                subString= returnCurrentEmailofTheUserUnparsed().substring(0 , foccurence);
-                            }
-
-                            if(foccurence2 != -1) {
-                                substring2 = returnCurrentEmailofTheUserUnparsed().substring(0 , foccurence2);
-                            }
-
-                            String myStr = returnCurrentEmailofTheUserUnparsed();
-                            String tmpSTRARRAY[] = myStr.split("----");
-                            myStr = tmpSTRARRAY[tmpSTRARRAY.length-1];
+                            Log.i("agam","OMYGOD: " + myArr[1]);
+                            myArr[1] = myArr[1].substring(0, myArr[1].length() - 3);
 
 
-
-
-                            Log.i("agam","-----------" + subString + " vs " + myStr);
+//                            String subString = null,substring2 = null;
+//                            //Used code in https://stackoverflow.com/questions/7683448/in-java-how-to-get-substring-from-a-string-till-a-character-c for parsing
+//                            if (foccurence != -1)
+//                            {
+//                                subString= returnCurrentEmailofTheUserUnparsed().substring(0 , foccurence);
+//                            }
+//
+//                            if(foccurence2 != -1) {
+//                                substring2 = returnCurrentEmailofTheUserUnparsed().substring(0 , foccurence2);
+//                            }
+//
+//                            String myStr = returnCurrentEmailofTheUserUnparsed();
+//                            String tmpSTRARRAY[] = myStr.split("----");
+//                            myStr = tmpSTRARRAY[tmpSTRARRAY.length-1];
 
                             //Return the string value until "-" is encountered
 
-                            if(subString.equals(substring2)) {
+                            if(myArr[1].equals(returnCurrentEmailofTheUserUnparsed())) {
                                 //Get the key
                                 tmpKey = str;
                                 tmpKey = tmpKey.substring(tmpKey.indexOf("key = ") + 1);
@@ -101,7 +104,7 @@ public class ChangeUserActivity extends AppCompatActivity {
                                 String newUname2 = String.valueOf(newUNAME.getText());
 
 
-                                databaseReference.setValue(myStr + "/" + newUname2);
+                                databaseReference.setValue(newUname2);
                                 Toast.makeText(ChangeUserActivity.this,"Congragulations, you have sucessfully changed the username ",Toast.LENGTH_LONG).show();
                                 redirectToLogin();
                             }
