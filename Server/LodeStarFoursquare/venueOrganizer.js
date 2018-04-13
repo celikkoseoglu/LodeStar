@@ -58,9 +58,9 @@ function foursqaureRequest(query, res) {
                 console.error(foursqaureErr);
             } else {
 
-                let data = JSON.parse(foursquareBody); //this step is required for making modifications on JSON data.
+                let data = JSON.parse(foursquareBody); //this step is required for making modifications on JSON data
 
-                let numberOfVenuesInResponse = data.response.groups[0].items.length;
+                let numberOfVenuesInResponse = data.response.groups[0].items.length; // this line will throw error if daily quota exceeded
 
                 let imageRequests = [];
                 let reviewRequests = [];
@@ -99,7 +99,10 @@ function foursqaureRequest(query, res) {
 
                         let imageLink = result[i].photos.items[0];
 
-                        data.response.groups[0].items[i].venueImage = imageLink.prefix + '300x300' + imageLink.suffix;
+                        if (result[i].photos.count !== 0)
+                            data.response.groups[0].items[i].venueImage = imageLink.prefix + '300x300' + imageLink.suffix;
+                        else //items with no picture will be owned by huseyin
+                            data.response.groups[0].items[i].venueImage = "http://lodestarapp.com/images/team/huseyin_beyan_bw_optimized_overlay.jpg";
                     }
 
                     async.map(reviewRequests, requestReview, reviewRequestDone);
@@ -135,6 +138,9 @@ function foursqaureRequest(query, res) {
 
 app.get('/', (req, res) => {
 
+    //console.log("request sent to /");
+    //console.log(req.body);
+
     //Cloning the template. Should not modify it because the venue_id replacement header is needed for future requests to be correct.
     let venueSearchQueryClone = clone(requestQuery);
 
@@ -149,6 +155,10 @@ app.get('/', (req, res) => {
 });
 
 app.get('/reviewsWithVenueID', (req, res) => {
+
+    //console.log("request sent to /");
+    //console.log(req.body);
+
     let venue_id = req.query.venue_id;
 
     //Cloning the template. Should not modify it because the venue_id replacement header is needed for future requests to be correct.
@@ -159,11 +169,19 @@ app.get('/reviewsWithVenueID', (req, res) => {
 });
 
 app.get('/imagesWithVenueID', (req, res) => {
+
+    //console.log("request sent to /");
+    //console.log(req.body);
+
     let venue_id = req.query.venue_id;
     res.send('not ready yet');
 });
 
 app.get('/test', (req, res) => {
+
+    //console.log("request sent to /");
+    //console.log(req.body);
+
     //Cloning the template. Should not modify it because the venue_id replacement header is needed for future requests to be correct.
     let venueSearchQueryClone = clone(requestQuery);
 

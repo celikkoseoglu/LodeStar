@@ -1,0 +1,16 @@
+{
+  "name": "LodeStarPanorama",
+  "version": "1.0.0",
+  "description": "Retrieves panorama images",
+  "main": "panorama.js",
+  "scripts": {
+    "start": "node panorama.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Husseyin Beyan and Celik Koseoglu <celikkoseoglu@me.com>",
+  "license": "MIT",
+  "dependencies": {
+    "node-rest-client": "^3.1.0",
+    "express": "^4.16.2"
+  }
+}

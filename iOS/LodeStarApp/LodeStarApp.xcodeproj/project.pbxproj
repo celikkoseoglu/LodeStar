@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		143FF65F2037088C00C462F6 /* loginBackground.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 143FF65E2037088B00C462F6 /* loginBackground.pdf */; };
 		146ED5BB207BB475001BCD5F /* VenueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146ED5BA207BB475001BCD5F /* VenueViewController.swift */; };
+		147523EB207CED97006C0AAB /* VenueVRCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147523EA207CED96006C0AAB /* VenueVRCell.swift */; };
+		147524082080EECC006C0AAB /* PhotoDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147524072080EECC006C0AAB /* PhotoDescriptionCell.swift */; };
 		14A1E2AB207AF60300BF1847 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A1E2AA207AF60300BF1847 /* MapKit.framework */; };
 		14BC327E207AF6A0003280C0 /* Artwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BC327D207AF6A0003280C0 /* Artwork.swift */; };
 		14D03F0F202B35FF00B3B80A /* istabul.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D03F0D202B35FF00B3B80A /* istabul.png */; };
@@ -40,7 +42,6 @@
 		8D2A6C331FDE781C00AA44E7 /* FlightDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2A6C321FDE781C00AA44E7 /* FlightDetailsCell.swift */; };
 		8D2A6C351FDE7E1600AA44E7 /* LodeStarLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2A6C341FDE7E1600AA44E7 /* LodeStarLayout.swift */; };
 		8D2EAC792007735A000819DA /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2EAC782007735A000819DA /* WeatherViewController.swift */; };
-		8D2F8FEE1FD57C7600334A86 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2F8FED1FD57C7600334A86 /* SwiftyJSON.swift */; };
 		8D302A8420387E6D00710A78 /* WeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D302A8320387E6D00710A78 /* WeatherCell.swift */; };
 		8D3D437B200A2FDC0091CCEB /* TransportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3D437A200A2FDC0091CCEB /* TransportViewController.swift */; };
 		8D3D437D200A3AD30091CCEB /* LogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3D437C200A3AD30091CCEB /* LogCell.swift */; };
@@ -83,6 +84,8 @@
 /* Begin PBXFileReference section */
 		143FF65E2037088B00C462F6 /* loginBackground.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = loginBackground.pdf; sourceTree = "<group>"; };
 		146ED5BA207BB475001BCD5F /* VenueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueViewController.swift; sourceTree = "<group>"; };
+		147523EA207CED96006C0AAB /* VenueVRCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueVRCell.swift; sourceTree = "<group>"; };
+		147524072080EECC006C0AAB /* PhotoDescriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDescriptionCell.swift; sourceTree = "<group>"; };
 		14A1E2AA207AF60300BF1847 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		14BC327D207AF6A0003280C0 /* Artwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artwork.swift; sourceTree = "<group>"; };
 		14D03F0D202B35FF00B3B80A /* istabul.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = istabul.png; sourceTree = "<group>"; };
@@ -116,7 +119,6 @@
 		8D2A6C321FDE781C00AA44E7 /* FlightDetailsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlightDetailsCell.swift; sourceTree = "<group>"; };
 		8D2A6C341FDE7E1600AA44E7 /* LodeStarLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LodeStarLayout.swift; sourceTree = "<group>"; };
 		8D2EAC782007735A000819DA /* WeatherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
-		8D2F8FED1FD57C7600334A86 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		8D302A8320387E6D00710A78 /* WeatherCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherCell.swift; sourceTree = "<group>"; };
 		8D3D437A200A2FDC0091CCEB /* TransportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransportViewController.swift; sourceTree = "<group>"; };
 		8D3D437C200A3AD30091CCEB /* LogCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogCell.swift; sourceTree = "<group>"; };
@@ -158,6 +160,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		147523EC207CEDC0006C0AAB /* Venue */ = {
+			isa = PBXGroup;
+			children = (
+				146ED5BA207BB475001BCD5F /* VenueViewController.swift */,
+				147523EA207CED96006C0AAB /* VenueVRCell.swift */,
+				147524072080EECC006C0AAB /* PhotoDescriptionCell.swift */,
+			);
+			path = Venue;
+			sourceTree = "<group>";
+		};
 		14D03F0C202B35DC00B3B80A /* images */ = {
 			isa = PBXGroup;
 			children = (
@@ -264,7 +276,7 @@
 				8D6F76C21F961993004824B0 /* Main.storyboard */,
 				8D26FA0F2043407E0011E5BE /* FoodCell.swift */,
 				8D26FA0D20433DE50011E5BE /* LivingExpensesViewController.swift */,
-				146ED5BA207BB475001BCD5F /* VenueViewController.swift */,
+				147523EC207CEDC0006C0AAB /* Venue */,
 				8D11715C200F74FE0032860E /* LoginViewController.swift */,
 				8D3D437E200A3CDA0091CCEB /* ProfileViewController.swift */,
 				8D3D437C200A3AD30091CCEB /* LogCell.swift */,
@@ -273,7 +285,6 @@
 				8D6F76C51F961993004824B0 /* Assets.xcassets */,
 				8D6F76C71F961993004824B0 /* LaunchScreen.storyboard */,
 				8D6F76CA1F961993004824B0 /* Info.plist */,
-				8D2F8FED1FD57C7600334A86 /* SwiftyJSON.swift */,
 				14BC327D207AF6A0003280C0 /* Artwork.swift */,
 				14DA46B1207BC751009871A8 /* GVRBridgingHeader.h */,
 			);
@@ -356,7 +367,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0820;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Berk Abbasoglu";
 				TargetAttributes = {
 					8D6F76BA1F961992004824B0 = {
@@ -516,15 +527,16 @@
 				14FF11A52077D34F00D611AF /* TripCell.swift in Sources */,
 				8D567EF6207A3C9800A1F051 /* LandmarksViewController.swift in Sources */,
 				8D26FA102043407E0011E5BE /* FoodCell.swift in Sources */,
-				8D2F8FEE1FD57C7600334A86 /* SwiftyJSON.swift in Sources */,
 				8D26FA0C2042FE400011E5BE /* SmallWeatherCell.swift in Sources */,
 				8D3D437F200A3CDA0091CCEB /* ProfileViewController.swift in Sources */,
 				8DC4DCB72021CBAC00DBF943 /* FlightInformationViewController.swift in Sources */,
 				8D567EF8207A3CE800A1F051 /* LandmarkCell.swift in Sources */,
+				147523EB207CED97006C0AAB /* VenueVRCell.swift in Sources */,
 				8D302A8420387E6D00710A78 /* WeatherCell.swift in Sources */,
 				14BC327E207AF6A0003280C0 /* Artwork.swift in Sources */,
 				8D3D437D200A3AD30091CCEB /* LogCell.swift in Sources */,
 				8D2A6C331FDE781C00AA44E7 /* FlightDetailsCell.swift in Sources */,
+				147524082080EECC006C0AAB /* PhotoDescriptionCell.swift in Sources */,
 				8D2A6C351FDE7E1600AA44E7 /* LodeStarLayout.swift in Sources */,
 				8D3D437B200A2FDC0091CCEB /* TransportViewController.swift in Sources */,
 				146ED5BB207BB475001BCD5F /* VenueViewController.swift in Sources */,
@@ -587,6 +599,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -594,6 +607,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -643,6 +657,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -650,6 +665,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -685,6 +701,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 84BN7PWNQH;
+				GCC_OPTIMIZATION_LEVEL = fast;
 				INFOPLIST_FILE = LodeStarApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -703,6 +720,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 84BN7PWNQH;
+				GCC_OPTIMIZATION_LEVEL = fast;
 				INFOPLIST_FILE = LodeStarApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

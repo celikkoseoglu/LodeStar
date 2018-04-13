@@ -186,7 +186,7 @@ class TravelViewController: UIViewController, TravelViewControllerDelegate, UICo
         
         cityImage.image = UIImage(named: "shanghai")
         
-        var fadeAnim:CABasicAnimation = CABasicAnimation(keyPath: "contents")
+        let fadeAnim:CABasicAnimation = CABasicAnimation(keyPath: "contents")
         fadeAnim.fromValue = UIImage(named: "shanghai")
         fadeAnim.toValue   = UIImage(named: "uganda")
         fadeAnim.duration  = 0.8;
@@ -208,7 +208,7 @@ class TravelViewController: UIViewController, TravelViewControllerDelegate, UICo
         
         cityImage.image = UIImage(named: "uganda")
         
-        var fadeAnim:CABasicAnimation = CABasicAnimation(keyPath: "contents")
+        let fadeAnim:CABasicAnimation = CABasicAnimation(keyPath: "contents")
         fadeAnim.fromValue = UIImage(named: "uganda")
         fadeAnim.toValue   = UIImage(named: "shanghai")
         fadeAnim.duration  = 0.8;
