@@ -308,8 +308,7 @@ public class PanoramaView extends GLSurfaceView{
                 }*/
 
 
-                Log.i(TAG,Float.toString(roll)+" "+Float.toString(pitch)
-                        +" "+Float.toString(yaw));
+                //Log.i(TAG,Float.toString(roll)+" "+Float.toString(pitch)+" "+Float.toString(yaw));
 
             }
         }

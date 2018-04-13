@@ -102,17 +102,16 @@ public class Renderer {
 
     Arrow arr;
     float arrowAngle = 0.0f;
-    boolean ifEGLPresent;
+    boolean ifEGLPresent = true;
 
     public Renderer(final Context context, final int depth, final float radius) {
 
-        ByteBuffer a = ByteBuffer.allocateDirect(Integer.SIZE);
-        IntBuffer a1 = a.asIntBuffer();
-        GLES20.glGetIntegerv(GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS, a1);
-        byte cc[] = a.array();
-        Log.i("max combined texture", a1.get() + "");
-        //if(a1.get()>0)
-         ifEGLPresent = true;
+        IntBuffer il = IntBuffer.allocate(1);
+        GLES20.glGetIntegerv(GLES20.GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS, il);
+        int limit = il.get();
+        Log.i("max combined texture",  limit+ "");
+        if(limit<192)
+         ifEGLPresent = false;
 
 
         final String vertexShader = getVertexShader(context);
@@ -315,14 +314,11 @@ public class Renderer {
         final int[] textureHandle = new int[3];
 
         GLES20.glGenTextures(3, textureHandle, 0);
-
-
         if (textureHandle[0] != 0) {
             final BitmapFactory.Options options = new BitmapFactory.Options();
             options.inScaled = false;
 
             final Bitmap bitmap = BitmapFactory.decodeResource(c.getResources(), rid, options);
-
             GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureHandle[0]);
 
             GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_NEAREST);
@@ -337,7 +333,6 @@ public class Renderer {
         if (textureHandle[1] != 0) {
             final BitmapFactory.Options options = new BitmapFactory.Options();
             options.inScaled = false;
-
             final Bitmap bitmap = BitmapFactory.decodeResource(c.getResources(), R.drawable.up_triangle, options);
             GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureHandle[1]);
 
@@ -411,7 +406,12 @@ public class Renderer {
 
         }
 
+
+
         drawArrow(tl, mvpMatrix, arrowAngle);
+
+
+
 
         //drawArrow(tl, mvpMatrix, -90);
 
@@ -441,7 +441,7 @@ public class Renderer {
 
 
         //GLES20.glUniform4fv(tl, 1, color, 0);
-        if(!ifEGLPresent)
+        if (ifEGLPresent)
             GLES20.glActiveTexture(GLES20.GL_TEXTURE2);
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, mTextureDataHandle0[2]);
         GLES20.glUniform1i(mTextureCoordinateHandle, 2);
@@ -460,9 +460,8 @@ public class Renderer {
         GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, 3);
         GLES20.glDisableVertexAttribArray(tl);
 
-
-        if(!ifEGLPresent)
-            GLES20.glActiveTexture(GLES20.GL_TEXTURE1 );   // 1?
+        if (ifEGLPresent)
+            GLES20.glActiveTexture(GLES20.GL_TEXTURE1);
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, mTextureDataHandle0[1]);
         GLES20.glUniform1i(mTextureCoordinateHandle, 1);
 
@@ -656,7 +655,6 @@ public class Renderer {
     {
         EGL10 egl = (EGL10) EGLContext.getEGL();
         EGLDisplay display = egl.eglGetDisplay(EGL10.EGL_DEFAULT_DISPLAY);
-
         int[] version = new int[2];
         egl.eglInitialize(display, version);
 

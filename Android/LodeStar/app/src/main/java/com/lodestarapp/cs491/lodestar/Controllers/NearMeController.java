@@ -35,9 +35,10 @@ public class NearMeController {
         this.location = location;
 
         if(this.locationPermissionGiven){
-            this.requestFromUrl = "http://lodestarapp.com:3009/?location=39.9098703,32.86061219999999&limit=10&query=park";
 
-            //Log.i(TAG, this.requestFromUrl);
+            Log.i(TAG, location.getLatitude() + " " + location.getLongitude());
+            this.requestFromUrl = "http://lodestarapp.com:3009/?location=" +location.getLatitude()+ ","+location.getLongitude()+"&limit=10&query=restaurant";
+
         }
         else{
             this.requestFromUrl = "something";
@@ -64,7 +65,6 @@ public class NearMeController {
 
         }, new Response.ErrorListener() {
             public void onErrorResponse(VolleyError error) {
-                Log.i(TAG, "Failed to get flight information");
                 //Log.i(TAG, error.getMessage());
                 //Log.i(TAG, error.getLocalizedMessage());
                 //Log.i(TAG, error.toString());
