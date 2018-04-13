@@ -63,9 +63,6 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
 
         view.findViewById(R.id.flipper).setVisibility(View.GONE);
 
-        Button bt5 = view.findViewById(R.id.flightinfo);
-        bt5.setClickable(false);
-
         //String requestFromTheUrl = "http://10.0.2.2:3006?dataType=flightInfo";
         if (isStoragePermissionGranted())
             sendRequest();
@@ -83,6 +80,7 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
                 flightInfoStart(v);
             }
         });
+        bt.setClickable(false);
 
         view_flipper = view.findViewById(R.id.flipper);
 
@@ -250,6 +248,9 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
 
                     String humidity = weather.getString("temp_relhum");
                     flightInfo.setHumidity(Integer.parseInt(humidity));
+
+                    boolean wifi = result.getBoolean("adhoc");
+                    flightInfo.setWifi(Boolean.toString(wifi));
 
                     Button bt5 = getView().findViewById(R.id.flightinfo);
                     bt5.setClickable(true);

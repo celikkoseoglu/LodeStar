@@ -33,6 +33,8 @@ public class FlightInfo implements Parcelable{
     private int feelsLike;
     private int humidity;
 
+    private String wifi;
+
 
     public FlightInfo() {
 
@@ -58,6 +60,7 @@ public class FlightInfo implements Parcelable{
         temperature=in.readInt();
         feelsLike=in.readInt();
         humidity=in.readInt();
+        wifi = in.readString();
     }
 
     public static final Creator<FlightInfo> CREATOR = new Creator<FlightInfo>() {
@@ -209,6 +212,7 @@ public class FlightInfo implements Parcelable{
         parcel.writeInt(temperature);
         parcel.writeInt(feelsLike);
         parcel.writeInt(humidity);
+        parcel.writeString(wifi);
 
     }
 
@@ -250,5 +254,13 @@ public class FlightInfo implements Parcelable{
 
     public void setHumidity(int humidity) {
         this.humidity = humidity;
+    }
+
+    public String getWifi() {
+        return wifi;
+    }
+
+    public void setWifi(String wifi) {
+        this.wifi = wifi;
     }
 }

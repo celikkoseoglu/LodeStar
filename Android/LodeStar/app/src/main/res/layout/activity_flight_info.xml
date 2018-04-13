@@ -307,13 +307,12 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/imageView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/weatView"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:layout_marginLeft="19dp"
                     android:layout_marginStart="19dp"
-                    android:layout_marginTop="20dp"
-                    app:srcCompat="@drawable/broken_cloud" />
+                    android:layout_marginTop="20dp"/>
 
                 <TextView
                     android:id="@+id/textView23"
@@ -332,7 +331,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@+id/textView25"
                     android:layout_alignStart="@+id/textView25"
-                    android:layout_alignTop="@+id/imageView3"
+                    android:layout_alignTop="@+id/weatView"
                     android:layout_marginTop="10dp"
                     android:text="Raining Moderately"
                     android:textSize="18sp"
@@ -345,8 +344,8 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="55dp"
-                    android:layout_toEndOf="@+id/imageView3"
-                    android:layout_toRightOf="@+id/imageView3"
+                    android:layout_toEndOf="@+id/weatView"
+                    android:layout_toRightOf="@+id/weatView"
                     android:text="when you arrive Istanbul"
                     android:textSize="15sp" />
 
@@ -499,7 +498,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="90dp"
                     android:textSize="15sp"
-                    android:text="Planned Altitude"
+                    android:text="Wi-fi Availability"
                     />
 
                 <TextView

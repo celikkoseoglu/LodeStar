@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -83,8 +84,25 @@ public class FlightInfoActivity extends AppCompatActivity {
 
 
             TextView view24 = findViewById(R.id.textView24);
-            if(flightInfo.getWeather() != null)
-                view24.setText(flightInfo.getWeather());
+            ImageView weat = findViewById(R.id.weatView);
+            if(flightInfo.getWeather() != null) {
+                String weather = flightInfo.getWeather();
+                view24.setText(weather);
+                if(weather.toLowerCase().contains("cloud") && !(weather.toLowerCase().contains("scatter") || weather.toLowerCase().contains("broken")) )
+                    weat.setImageResource(R.drawable.cloud);
+                else if(weather.toLowerCase().contains("sun") || weather.toLowerCase().contains("clear"))
+                    weat.setImageResource(R.drawable.sun);
+                else if(weather.toLowerCase().contains("rain"))
+                    weat.setImageResource(R.drawable.rain);
+                else if(weather.toLowerCase().contains("fog") || weather.toLowerCase().contains("wind") )
+                    weat.setImageResource(R.drawable.fog);
+                else if(weather.toLowerCase().contains("storm"))
+                    weat.setImageResource(R.drawable.storm);
+                else if(weather.toLowerCase().contains("snow"))
+                    weat.setImageResource(R.drawable.snow);
+                else
+                    weat.setImageResource(R.drawable.broken_cloud);
+            }
 
             TextView view26 = findViewById(R.id.textView26);
                 view26.setText(flightInfo.getTemperature() + "°C");
@@ -102,6 +120,11 @@ public class FlightInfoActivity extends AppCompatActivity {
             TextView view25 = findViewById(R.id.textView25);
             if(flightInfo.getDest() != null)
                 view25.setText("when you arrive " + flightInfo.getDest());
+
+
+            TextView view22 = findViewById(R.id.textView22);
+            if(flightInfo.getWifi() != null)
+                view22.setText(flightInfo.getWifi());
 
         }
 

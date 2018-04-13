@@ -1,4 +1,4 @@
-package com.lodestarapp.cs491.lodestar.VR;
+package com.lodestarapp.cs491.lodestar;
 
 import android.Manifest;
 import android.content.pm.PackageManager;

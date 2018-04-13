@@ -120,9 +120,7 @@ public class WeatherInformationActivity extends AppCompatActivity {
             JSONObject main;
             JSONArray weather;
 
-            SimpleDateFormat simpleInputDate = new SimpleDateFormat("yyyy-mm-dd", Locale.US);
-            Date dateToConvertToFullName;
-            SimpleDateFormat simpleOutputDate = new SimpleDateFormat("EEEE", Locale.US);
+            SimpleDateFormat sdf = new SimpleDateFormat("EEEE",Locale.UK);
 
             String date;
             double temp;
@@ -136,7 +134,7 @@ public class WeatherInformationActivity extends AppCompatActivity {
                 main = process.getJSONObject("main");
                 weather = process.getJSONArray("weather");
 
-                date = process.getString("dt_txt");
+                date = process.getString("dt");
                 temp = main.getDouble("temp");
                 humidity = main.getDouble("humidity");
                 feelsLike = main.getDouble("perceived_temp");
@@ -155,16 +153,14 @@ public class WeatherInformationActivity extends AppCompatActivity {
 
                 Log.d(TAG, "........ " + weatherID);
 
-                try {
-                    dateToConvertToFullName = simpleInputDate.parse(date);
-                    date = simpleOutputDate.format(dateToConvertToFullName);
-                }catch (ParseException parseException){
-                    parseException.printStackTrace();
-                }
+
+                Date dateFormat = new java.util.Date(Integer.parseInt(date) * 1000);
+                String weekday = sdf.format(dateFormat );
+
 
                 weatherInformationList.add(i,
                         new WeatherInformation(weatherInformationController.getCity(),
-                                date, wth, temp, feelsLike, humidity, weatherID));
+                                weekday, wth, temp, feelsLike, humidity, weatherID));
             }
         }catch (JSONException jsonException){
             Log.e(TAG, "JSON Parsing error");
