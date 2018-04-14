@@ -37,7 +37,7 @@ public class NearMeController {
         if(this.locationPermissionGiven){
 
             Log.i(TAG, location.getLatitude() + " " + location.getLongitude());
-            this.requestFromUrl = "http://lodestarapp.com:3009/?location=" +location.getLatitude()+ ","+location.getLongitude()+"&limit=10&query=restaurant";
+            this.requestFromUrl = "http://lodestarapp.com:3009/?location="+location.getLatitude() + ","+location.getLongitude()+"&limit=10&query=";
 
         }
         else{
@@ -45,14 +45,15 @@ public class NearMeController {
         }
     }
 
-    public void getNearMeInformation( Context context,
+    public void getNearMeInformation( Context context, String keywor,
                                           final VolleyCallback5 lodeStarServerCallback){
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
 
         final JSONArray[] responseFromServer = new JSONArray[1];
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, requestFromUrl, null, new Response.Listener<JSONObject>() {
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, requestFromUrl + keywor, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 Log.i(TAG, response.toString());

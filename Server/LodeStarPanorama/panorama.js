@@ -14,9 +14,9 @@ var id;
 var tiles = [];
 
 var radius = 50;
-var currentX = 0;
+//var currentX = 0;
 var totalX = 7;
-var currentY = 0;
+//var currentY = 0;
 var totalY = 3;
 var tileCount = 0;
 var result;
@@ -45,9 +45,12 @@ app.get('/', (req, res) => {
                 //console.log(replyMessage);
                 json = JSON.parse(replyMessage);
 
-                if (json.Locatio = n === undefined)
-                    json = "{}";
-
+                if (json.Location === undefined)
+		        {
+			        res.send("{}");
+			        return;
+		        }
+                    
                 //console.log("id: " + json.Location.panoId);
                 //console.log("angle: " + json.Location.best_view_direction_deg);
 
@@ -104,6 +107,7 @@ function getLowRes(res) {
 
                 json["lowRes"] = base64str;
                 res.send(json);
+		        json = "";
             });
 
         });
@@ -121,7 +125,7 @@ function base64_encode(file) {
 function getTileNo(tileX, tileY, res) {
 
     var url = 'http://cbk0.google.com/cbk?output=tile&panoid=' + id + '&x=' + tileX + '&y=' + tileY + "&zoom=3";
-    var name = 'im' + tileX + 'x' + tileY;
+    var name = id+'im' + tileX + 'x' + tileY;
 
     let request2 = http.request(url, function (response) {
         var data = new Stream();
@@ -156,6 +160,7 @@ function getTileNo(tileX, tileY, res) {
 
                             json["highRes"] = base64_encode(id + '.jpg');
                             res.send(json);
+			                json = "";
                             fs.unlinkSync(id + '.jpg');
 
                             for (var i = 0; i < totalX * totalY; i++)

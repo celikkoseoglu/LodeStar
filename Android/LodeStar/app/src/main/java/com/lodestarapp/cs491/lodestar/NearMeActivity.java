@@ -39,16 +39,27 @@ import java.util.List;
 public class NearMeActivity extends AppCompatActivity {
     private RecyclerView recyclerView1;
     private RecyclerView recyclerView2;
+    private RecyclerView recyclerView3;
+
     private final int REQUEST_LOCATION = 200;
     private FusedLocationProviderClient fusedLocationProviderClient;
 
     private RecyclerView.Adapter<RecyclerView.ViewHolder> adapter;
+    private RecyclerView.Adapter<RecyclerView.ViewHolder> adapter2;
+    private RecyclerView.Adapter<RecyclerView.ViewHolder> adapter3;
+
     private RecyclerView.LayoutManager layoutManager;
+    private RecyclerView.LayoutManager layoutManager2;
+    private RecyclerView.LayoutManager layoutManager3;
+
     private LinearLayout ll1;
     private LinearLayout ll2;
-
+    private LinearLayout ll3;
 
     private List<Places> restList = new ArrayList<>();
+    private List<Places> parkList = new ArrayList<>();
+    private List<Places> museumList = new ArrayList<>();
+
     NearMeController nmc;
     private String[] venueImageURL = new String[10];
     private ArrayList<String> iconURLs = new ArrayList<>();
@@ -63,22 +74,38 @@ public class NearMeActivity extends AppCompatActivity {
 
 
         recyclerView1 = findViewById(R.id.near_me_recycler1);
-        recyclerView1.setHasFixedSize(true);
+        recyclerView1.setHasFixedSize(false);
 
         recyclerView2 = findViewById(R.id.near_me_recycler2);
-        recyclerView2.setHasFixedSize(true);
+        recyclerView2.setHasFixedSize(false);
+
+        recyclerView3 = findViewById(R.id.near_me_recycler3);
+        recyclerView3.setHasFixedSize(false);
+
 
         ll1 = findViewById(R.id.ll1);
         ll2 = findViewById(R.id.ll2);
+        ll3 = findViewById(R.id.ll3);
 
         recyclerView1.setVisibility(View.GONE);
         recyclerView2.setVisibility(View.GONE);
+        recyclerView3.setVisibility(View.GONE);
+
 
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView1.setLayoutManager(layoutManager);
-
-        adapter = new NearMeAdapter(restList, "restaurants",this.getApplicationContext());
+        adapter = new NearMeAdapter(restList, "restaurant",this.getApplicationContext());
         recyclerView1.setAdapter(adapter);
+
+        layoutManager2 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerView2.setLayoutManager(layoutManager2);
+        adapter2 = new NearMeAdapter(parkList, "park",this.getApplicationContext());
+        recyclerView2.setAdapter(adapter2);
+
+        layoutManager3 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerView3.setLayoutManager(layoutManager3);
+        adapter3 = new NearMeAdapter(museumList, "museum",this.getApplicationContext());
+        recyclerView3.setAdapter(adapter3);
 
         boolean locationPermissionGiven = checkForLocationPermission();
 
@@ -95,8 +122,7 @@ public class NearMeActivity extends AppCompatActivity {
     }
 
     private boolean checkForLocationPermission() {
-        int locationPermissionCheck = ContextCompat.checkSelfPermission(getApplicationContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION);
+        int locationPermissionCheck = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION);
 
         return locationPermissionCheck == PackageManager.PERMISSION_GRANTED;
     }
@@ -131,16 +157,37 @@ public class NearMeActivity extends AppCompatActivity {
                         done[0] = true;
                         myLocation[0] = locationResult.getResult();
                         nmc = new NearMeController("",true,myLocation[0]);
-                        nmc.getNearMeInformation(getApplicationContext(), new NearMeController.VolleyCallback5() {
+                        nmc.getNearMeInformation(getApplicationContext(),"restaurant", new NearMeController.VolleyCallback5() {
                             @Override
                             public void onSuccess(JSONObject result) {
                                 try {
-                                    parseTheJSONObject(result);
+                                    parseTheJSONObject(result,1);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
                             }
                         });
+                        nmc.getNearMeInformation(getApplicationContext(),"park", new NearMeController.VolleyCallback5() {
+                            @Override
+                            public void onSuccess(JSONObject result) {
+                                try {
+                                    parseTheJSONObject(result,2);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                        nmc.getNearMeInformation(getApplicationContext(),"museum", new NearMeController.VolleyCallback5() {
+                            @Override
+                            public void onSuccess(JSONObject result) {
+                                try {
+                                    parseTheJSONObject(result,3);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+
 
                     }
                     //complete else
@@ -152,11 +199,31 @@ public class NearMeActivity extends AppCompatActivity {
             final Location[] myLocation = new Location[1];
             myLocation[0] = location;
             nmc = new NearMeController("",true,myLocation[0]);
-            nmc.getNearMeInformation(getApplicationContext(), new NearMeController.VolleyCallback5() {
+            nmc.getNearMeInformation(getApplicationContext(), "restaurant", new NearMeController.VolleyCallback5() {
                 @Override
                 public void onSuccess(JSONObject result) {
                     try {
-                        parseTheJSONObject(result);
+                        parseTheJSONObject(result,1);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            nmc.getNearMeInformation(getApplicationContext(), "park", new NearMeController.VolleyCallback5() {
+                @Override
+                public void onSuccess(JSONObject result) {
+                    try {
+                        parseTheJSONObject(result,2);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            nmc.getNearMeInformation(getApplicationContext(),"museum", new NearMeController.VolleyCallback5() {
+                @Override
+                public void onSuccess(JSONObject result) {
+                    try {
+                        parseTheJSONObject(result,3);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -183,11 +250,31 @@ public class NearMeActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task task) {
                             if(task.isSuccessful()){
                                 nmc = new NearMeController("",true,null);
-                                nmc.getNearMeInformation(getApplicationContext(), new NearMeController.VolleyCallback5() {
+                                nmc.getNearMeInformation(getApplicationContext(), "restaurant",new NearMeController.VolleyCallback5() {
                                     @Override
                                     public void onSuccess(JSONObject result) {
                                         try {
-                                            parseTheJSONObject(result);
+                                            parseTheJSONObject(result,1);
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                });
+                                nmc.getNearMeInformation(getApplicationContext(), "park",new NearMeController.VolleyCallback5() {
+                                    @Override
+                                    public void onSuccess(JSONObject result) {
+                                        try {
+                                            parseTheJSONObject(result,2);
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                });
+                                nmc.getNearMeInformation(getApplicationContext(),"museum", new NearMeController.VolleyCallback5() {
+                                    @Override
+                                    public void onSuccess(JSONObject result) {
+                                        try {
+                                            parseTheJSONObject(result,3);
                                         } catch (JSONException e) {
                                             e.printStackTrace();
                                         }
@@ -208,13 +295,13 @@ public class NearMeActivity extends AppCompatActivity {
         }
     }
 
-    private void parseTheJSONObject(JSONObject jo) throws JSONException {
+    private void parseTheJSONObject(JSONObject jo, int qtype) throws JSONException {
         //Log.d(TAG, "bbb");
         //Log.d("near me", jo.toString());
 
         JSONArray groups = jo.getJSONArray("groups");
         JSONArray items = groups.getJSONObject(0).getJSONArray("items");
-        //Log.d("near me", items.toString());
+        Log.d("near me", items.toString());
 
         JSONObject venue; //name
         JSONObject location; //location
@@ -243,7 +330,11 @@ public class NearMeActivity extends AppCompatActivity {
             placeId = venue.getString("id");
             //Log.d(TAG, location.toString());
 
-            placeRating = venue.getDouble("rating") + "";
+            if(venue.has("rating")){
+                placeRating = venue.getDouble("rating") + "";
+            }
+            else
+                placeRating = "0";
             //Log.d("rating", placeRating);
 
 
@@ -263,9 +354,9 @@ public class NearMeActivity extends AppCompatActivity {
 
             photoURL = items.getJSONObject(i).getString("venueImage");
             this.venueImageURL[i] = photoURL;
-            iconURL = categories.getJSONObject(0).getJSONObject("icon").getString("prefix") + "64" +
+            iconURL = categories.getJSONObject(0).getJSONObject("icon").getString("prefix") + "bg_64" +
                     categories.getJSONObject(0).getJSONObject("icon").getString("suffix");
-            iconURLs.add(i,iconURL);
+            iconURLs.add(iconURL);
 
             //getPlacesIcons(iconURL);
 
@@ -278,21 +369,64 @@ public class NearMeActivity extends AppCompatActivity {
             final String finalNumberOfReviews = numberOfReviews;
             final String finalPlaceRating = placeRating;
             final String fplaceId = placeId;
+            final int fqtype = qtype;
+            final String finalIconURL = iconURL;
             nmc.getPlaceImage(this.venueImageURL[i], getApplicationContext(), new NearMeController.VolleyCallback6() {
                 @Override
                 public void onSuccess(Bitmap result) {
                     imgBitmap[0] = result;
-                    restList.add(new Places(imgBitmap[0], finalPlaceName, finalPlaceLocation, finalPlaceType, finalPlaceRating, null, finalPlaceRating, fplaceId));
-                    adapter.notifyDataSetChanged();
-
-                    ll1.setVisibility(View.GONE);
-                    recyclerView1.setVisibility(View.VISIBLE);
-
+                    if( fqtype == 1){
+                        Places pl = new Places(imgBitmap[0], finalPlaceName, finalPlaceLocation, finalPlaceType, finalPlaceRating, null, finalPlaceRating, fplaceId);
+                        restList.add(pl);
+                        ll1.setVisibility(View.GONE);
+                        recyclerView1.setVisibility(View.VISIBLE);
+                        adapter.notifyDataSetChanged();
+                        getPlacesIcon(restList.indexOf(pl), finalIconURL,"restaurant");
+                    }
+                    if( fqtype == 2){
+                        Places pl = new Places(imgBitmap[0], finalPlaceName, finalPlaceLocation, finalPlaceType, finalPlaceRating, null, finalPlaceRating, fplaceId);
+                        parkList.add(pl);
+                        ll2.setVisibility(View.GONE);
+                        recyclerView2.setVisibility(View.VISIBLE);
+                        adapter2.notifyDataSetChanged();
+                        getPlacesIcon(parkList.indexOf(pl), finalIconURL,"park");
+                    }
+                    if( fqtype == 3){
+                        Places pl = new Places(imgBitmap[0], finalPlaceName, finalPlaceLocation, finalPlaceType, finalPlaceRating, null, finalPlaceRating, fplaceId);
+                        museumList.add(pl);
+                        ll3.setVisibility(View.GONE);
+                        recyclerView3.setVisibility(View.VISIBLE);
+                        adapter3.notifyDataSetChanged();
+                        getPlacesIcon(museumList.indexOf(pl), finalIconURL,"museum");
+                    }
 
                 }
                 });
         }
     }
+
+    private void getPlacesIcon(final int i,String iconURL, final String criter) {
+        nmc.getPlaceImage(iconURL, getApplicationContext(),
+                new NearMeController.VolleyCallback6() {
+                @Override
+                public void onSuccess(Bitmap result) {
+                    if(criter.equals("restaurant")){
+                        restList.get(i).setPlaceIconImage(result);
+                        adapter.notifyItemChanged(i);
+
+                    }
+                    if(criter.equals("park")){
+                        parkList.get(i).setPlaceIconImage(result);
+                        adapter2.notifyItemChanged(i);
+                    }
+                    if(criter.equals("museum")){
+                        museumList.get(i).setPlaceIconImage(result);
+                        adapter3.notifyItemChanged(i);
+                    }
+                }
+        });
+    }
+
 
 
 

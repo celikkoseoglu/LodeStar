@@ -120,9 +120,16 @@ public class NearMeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         ((NearMeAdapter.NearMeHolder) holder).placePicture.setImageBitmap(placesList.get(position).getPlaceImage());
 
-        ((NearMeAdapter.NearMeHolder) holder).placeName.setText(placesList.get(position).getPlaceName());
+        if(placesList.get(position).getPlaceName().length() > 16)
+            ((NearMeAdapter.NearMeHolder) holder).placeName.setText(placesList.get(position).getPlaceName().substring(0,15));
+        else
+            ((NearMeAdapter.NearMeHolder) holder).placeName.setText(placesList.get(position).getPlaceName());
 
-        ((NearMeAdapter.NearMeHolder) holder).placePhotoAttribution.setText(placesList.get(position).getPlaceType());
+        if(placesList.get(position).getPlaceType().length() > 17)
+            ((NearMeAdapter.NearMeHolder) holder).placePhotoAttribution.setText(placesList.get(position).getPlaceType().substring(0,16));
+        else
+            ((NearMeAdapter.NearMeHolder) holder).placePhotoAttribution.setText(placesList.get(position).getPlaceType());
+
 
         ((NearMeAdapter.NearMeHolder) holder).placeIcon.setImageBitmap(placesList.get(position).getPlaceIconImage());
 
