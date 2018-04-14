@@ -88,7 +88,7 @@ public class SearchUserActivity extends AppCompatActivity {
                 for (DataSnapshot noteSnapshot: dataSnapshot.getChildren()){
                     tmp = noteSnapshot.getValue() + "";
                     tmp = tmp.substring(10, tmp.length() - 1);
-                    tmp = tmp.replace("e-mail=","");
+                    tmp = tmp.replace("email=","");
 
                     int foccurence = tmp.substring(0,tmp.length()).indexOf(",");
 

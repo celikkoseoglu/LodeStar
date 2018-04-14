@@ -117,7 +117,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
                 for (com.google.firebase.database.DataSnapshot child : dataSnapshot.getChildren()) {
                     for (com.google.firebase.database.DataSnapshot child2 : child.getChildren()) {
-                        Log.i("aga",child2.child("e-mail").toString());
+                        Log.i("aga",child2.child("email").toString());
                     }
                 }
 
@@ -142,7 +142,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private void writeNewUser(String uid, String userName, String email) {
 
         mDatabase.child("users").child(uid).child("username").setValue(userName);
-        mDatabase.child("users").child(uid).child("e-mail").setValue(email);
+        mDatabase.child("users").child(uid).child("email").setValue(email);
     }
 
     @Override

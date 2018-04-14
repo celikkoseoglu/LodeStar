@@ -69,7 +69,7 @@ public class ChangeUserActivity extends AppCompatActivity {
                             String str = data + "";
                             String tmpKey = "";
 
-                            String myArr[] = str.split("e-mail=");
+                            String myArr[] = str.split("email=");
                             Log.i("agam","OMYGOD: " + myArr[1]);
                             myArr[1] = myArr[1].substring(0, myArr[1].length() - 3);
 
