@@ -130,12 +130,37 @@
 
                 </TableRow>
 
+                <TableRow
+                    android:id="@+id/expand_fifth_row"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/expand_fourth_row"
+                    android:layout_marginTop="3dp">
+
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:layout_height="20dp"
+                        app:srcCompat="@drawable/ic_location" />
+
+                    <TextView
+                        android:id="@+id/place_phone_number_expanded"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/place_number" />
+
+                </TableRow>
 
             </RelativeLayout>
 
         </android.support.v7.widget.CardView>
 
-        <android.support.v7.widget.CardView
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/place_review_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/place_general"/>
+
+        <!--<android.support.v7.widget.CardView
             android:id="@+id/place_panorama_cardview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -176,7 +201,7 @@
 
             </RelativeLayout>
 
-        </android.support.v7.widget.CardView>
+        </android.support.v7.widget.CardView>!-->
     </RelativeLayout>
 
     <!--<RelativeLayout
