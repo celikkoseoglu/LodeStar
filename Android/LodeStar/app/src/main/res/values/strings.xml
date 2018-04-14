@@ -54,4 +54,8 @@
     <string name="review">Review</string>
     <string name="name_surname_dd_mm_yyyy">Name Surname - DD/MM/YYYY</string>
 
+    <string name="write_post_message">Write a Post</string>
+    <string name="write_post_title">New Post</string>
+    <string name="write_post_cancel">Cancel</string>
+
 </resources>

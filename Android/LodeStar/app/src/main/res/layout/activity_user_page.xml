@@ -42,9 +42,22 @@
                 android:background="@null"
                 app:srcCompat="@drawable/ic_settings"
                 android:layout_alignParentEnd="true"
-                android:onClick="prefStart"/>
+                android:onClick="prefStart"
+                android:layout_marginEnd="10dp" />
+
+            <ImageButton
+                android:id="@+id/write_post"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="end"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="15dp"
+                app:srcCompat="?android:attr/colorMultiSelectHighlight" />
 
         </android.support.v7.widget.Toolbar>
+
 
 
 

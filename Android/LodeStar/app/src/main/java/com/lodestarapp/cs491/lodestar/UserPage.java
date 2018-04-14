@@ -1,6 +1,8 @@
 package com.lodestarapp.cs491.lodestar;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -16,7 +18,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -67,6 +72,15 @@ public class UserPage extends android.support.v4.app.Fragment {
         mAdapter = new UserPageAdapter(userInfoWithPosts);
         mRecyclerView.setAdapter(mAdapter);
 
+        ImageButton button = view.findViewById(R.id.write_post);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                writePost();
+            }
+        });
+
+
         takeTheUser();
 
         return view;
@@ -92,6 +106,30 @@ public class UserPage extends android.support.v4.app.Fragment {
     public void takeTheUser(){
         userInfoWithPosts.add("efe");
         mAdapter.notifyDataSetChanged();
+    }
+
+    public void writePost(){
+        //REFERENCE:https://developer.android.com/guide/topics/ui/dialogs.html
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        LayoutInflater layoutInflater = getActivity().getLayoutInflater();
+
+        builder.setView(layoutInflater.inflate(R.layout.dialog_post, null))
+                .setPositiveButton(R.string.write_post_message, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //SEND TO DATABASE
+                        //REFRESH
+                    }
+                })
+                .setNegativeButton(R.string.write_post_cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //CANCEL
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }
 
