@@ -3,8 +3,10 @@ package com.lodestarapp.cs491.lodestar;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -33,6 +35,7 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.app.Activity.RESULT_OK;
 import static android.widget.Toast.LENGTH_LONG;
 
 public class UserPage extends android.support.v4.app.Fragment {
@@ -45,6 +48,9 @@ public class UserPage extends android.support.v4.app.Fragment {
 
     private List<String> userInfoWithPosts = new ArrayList<>();
 
+    private final int IMAGE = 1;
+    private View view;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +61,7 @@ public class UserPage extends android.support.v4.app.Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.activity_user_page, container, false);
+        this.view = view;
 
         ImageView profileImageView = (ImageView) view.findViewById(R.id.me_profile_picture);
 
@@ -80,6 +87,13 @@ public class UserPage extends android.support.v4.app.Fragment {
             }
         });
 
+        ImageButton button2 = view.findViewById(R.id.profile_picture_add);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pickImageAndChangeTheProfilePicture();
+            }
+        });
 
         takeTheUser();
 
@@ -124,12 +138,31 @@ public class UserPage extends android.support.v4.app.Fragment {
                 .setNegativeButton(R.string.write_post_cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        //CANCEL
+                        dialogInterface.cancel();
                     }
                 });
 
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    //REFERENCE: https://developer.android.com/reference/android/content/Intent.html
+    public void pickImageAndChangeTheProfilePicture(){
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select a photo for your profile"), IMAGE);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == IMAGE){
+            if (resultCode == RESULT_OK){
+                Uri uri = data.getData();
+                ImageView view3 = this.view.findViewById(R.id.me_profile_picture);
+                view3.setImageURI(uri);
+            }
+        }
     }
 }
 

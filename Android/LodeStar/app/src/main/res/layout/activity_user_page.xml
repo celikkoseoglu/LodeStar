@@ -58,6 +58,144 @@
 
         </android.support.v7.widget.Toolbar>
 
+        <android.support.v7.widget.CardView
+            android:id="@+id/me_cardview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/me_profile_picture"
+                    android:layout_width="104dp"
+                    android:layout_height="89dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="12dp"
+                    android:src="@mipmap/ic_launcher_round"
+                    />
+
+                <TextView
+                    android:id="@+id/me_realName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/me_profile_picture"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/user_name"
+                    android:textColor="#353535"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:id="@+id/me_trip_logs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/me_realName"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:text="Trip Logs"
+                    android:textColor="#353535"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/me_trip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/me_realName"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Trips"
+                    android:textColor="#353535"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/me_last_trip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/me_trip_logs"
+                    android:layout_alignBottom="@+id/me_trip_logs"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginRight="30dp"
+                    android:text="Last Trip"
+                    android:textColor="#353535"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/me_trip_logs_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/me_trip_logs"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/user_trip_logs_count"
+                    android:textColor="#353535"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/me_trip_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/me_trip_logs_count"
+                    android:layout_alignBottom="@+id/me_trip_logs_count"
+                    android:layout_alignLeft="@+id/me_trip"
+                    android:layout_alignStart="@+id/me_trip"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginStart="12dp"
+                    android:text="@string/user_trip_count"
+                    android:textColor="#353535"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/me_last_trip_city"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/me_trip_logs_count"
+                    android:layout_alignBottom="@+id/me_trip_logs_count"
+                    android:layout_alignEnd="@+id/me_last_trip"
+                    android:layout_alignRight="@+id/me_last_trip"
+                    android:layout_marginEnd="18dp"
+                    android:layout_marginRight="18dp"
+                    android:text="@string/user_last_trip_to"
+                    android:textColor="#353535"
+                    android:textSize="18sp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton4"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignTop="@+id/imageButton5"
+                    android:layout_toLeftOf="@+id/imageButton5"
+                    android:layout_toStartOf="@+id/imageButton5"
+                    app:srcCompat="@drawable/com_facebook_button_icon_blue" />
+
+                <ImageButton
+                    android:id="@+id/imageButton5"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignEnd="@+id/me_last_trip"
+                    android:layout_alignRight="@+id/me_last_trip"
+                    android:layout_alignTop="@+id/me_profile_picture"
+                    app:srcCompat="@drawable/common_google_signin_btn_icon_light" />
+
+                <ImageButton
+                    android:id="@+id/profile_picture_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true" />
+
+
+            </RelativeLayout>
+
+
+        </android.support.v7.widget.CardView>
 
 
 
@@ -66,7 +204,7 @@
             android:scrollbars="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/toolbar7"
+            android:layout_below="@+id/me_cardview"
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="64dp" />
 
