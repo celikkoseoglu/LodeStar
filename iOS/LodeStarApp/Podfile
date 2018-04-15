@@ -8,5 +8,7 @@ target 'LodeStarApp' do
 
   # Pods for LodeStarApp
   pod 'Alamofire', '~> 4.5'
+  pod "ImageSlideshow/AFURL"
   pod 'GVRKit'
+  pod 'AlamofireImage'
 end

@@ -13,6 +13,8 @@ class PhotoDescriptionCell: UICollectionViewCell {
     @IBOutlet weak var venueAddress: UILabel!
     @IBOutlet weak var venuePhoneNumber: UILabel!
     
+    @IBOutlet weak var slideShow: ImageSlideshow!
+    
     func displayContent(venueImage: UIImage, venueName: String, venueReviewCount: String, venueType: String, venueAddress: String, venuePhoneNumber: String) {
         //venueImage.image
     }

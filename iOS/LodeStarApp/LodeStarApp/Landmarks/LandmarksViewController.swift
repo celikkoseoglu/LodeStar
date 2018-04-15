@@ -16,13 +16,14 @@ fileprivate let itemsPerRow: CGFloat = 1
 fileprivate let sectionInsets = UIEdgeInsets(top: 6.0, left: 6.0, bottom: 6.0, right: 6.0)
 fileprivate let cellCount = 10
 fileprivate let reuseIdentifier = "landmarkCell"
-fileprivate let key = "AIzaSyCnY6cljLR3vRDuCSdI0yOzDVyaLyfseRI"
+let key = "AIzaSyCnY6cljLR3vRDuCSdI0yOzDVyaLyfseRI"
 
 fileprivate var landmarkNames = Array(repeating: "", count: 10)
 fileprivate var landmarkAddresses = Array(repeating: "", count: 10)
 fileprivate var landmarkCoordinates = [NSDictionary]()
 fileprivate var landmarkRatings = Array(repeating: -1.0, count: 10)
 fileprivate var landmarkData = Array(repeating: Data.init(), count: 10)
+fileprivate var landmarkPlaceIDs = Array(repeating: "", count: 10)
 
 var landmarksArrElement:NSDictionary = ["": [""]]
 var landmarksArr = Array(repeating: landmarksArrElement, count: 10)
@@ -80,8 +81,18 @@ extension LandmarksViewController {
             print(artwork)
             mapView.addAnnotation(artwork)
             
+            // add action to image
+            // create object to hold the index value
+            cell.landmarkImage.tag = index.row
+            
+            // add action
+            let landmarkTap = UITapGestureRecognizer(target: self, action: #selector(LandmarksViewController.landmarkTapAction(_:)))
+            cell.landmarkImage.isUserInteractionEnabled = true
+            cell.landmarkImage.addGestureRecognizer(landmarkTap)
+            
             //why is there a +1 in rating??
-            cell.displayContent(landmarkPic: UIImage(data: landmarkData[index.row])!, name: landmarkNames[index.row].uppercased(), landmarkType: UIImage(named: "type.pdf")!, type: landmarkType, landmarkLocation: UIImage(named: "location.pdf")!, location: landmarkAddresses[index.row], star: Int(landmarkRatings[index.row]) + 1)
+            //go away and let me handle it
+            cell.displayContent(landmarkPic: UIImage(data: landmarkData[index.row])!, name: landmarkNames[index.row].uppercased(), landmarkType: UIImage(named: "type.pdf")!, type: landmarkType, landmarkLocation: UIImage(named: "location.pdf")!, location: landmarkAddresses[index.row], star: Int(landmarkRatings[index.row]) + 1, ID: landmarkPlaceIDs[index.row])
             
         }
         return cell
@@ -164,6 +175,10 @@ class LandmarksViewController: UIViewController, UICollectionViewDelegate, UICol
                     let landmarkRating = landmarkItem["rating"] as? Double
                     landmarkRatings[i] = landmarkRating!
                     
+                    let landmarkPlaceID = landmarkItem["place_id"]
+                    landmarkPlaceIDs[i] = landmarkPlaceID as! String
+                    
+                    
                     let landmarkPhoto = landmarkItem["photos"] as! NSArray
                     let landmarkPhotoDict = landmarkPhoto[0] as! NSDictionary
                     let landmarkPhotoRef = landmarkPhotoDict["photo_reference"] as? String
@@ -203,5 +218,15 @@ class LandmarksViewController: UIViewController, UICollectionViewDelegate, UICol
         dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func landmarkTapAction(_ sender: UITapGestureRecognizer) {
+        
+        let imageViewTag = sender.view?.tag
+        venuePlaceID = landmarkPlaceIDs[(imageViewTag)!]
+        
+        let storyboard = self.storyboard
+        let controller = storyboard?.instantiateViewController(withIdentifier: "venueNAV")
+        self.present(controller!, animated: true, completion: nil)
+        
+    }
     
 }

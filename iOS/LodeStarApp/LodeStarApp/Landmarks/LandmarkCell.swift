@@ -24,8 +24,9 @@ class LandmarkCell: UICollectionViewCell {
     @IBOutlet weak var landmarkStarImage4: UIImageView!
     @IBOutlet weak var landmarkStarImage5: UIImageView!
     
+    var landmarkPlaceID = ""
     
-    func displayContent(landmarkPic: UIImage, name: String, landmarkType: UIImage, type: String, landmarkLocation: UIImage, location: String, star: Int) {
+    func displayContent(landmarkPic: UIImage, name: String, landmarkType: UIImage, type: String, landmarkLocation: UIImage, location: String, star: Int, ID: String) {
         
         landmarkImage.image = landmarkPic
         landmarkNameLabel.text = name
@@ -33,6 +34,8 @@ class LandmarkCell: UICollectionViewCell {
         landmarkTypeTextLabel.text = type
         landmarkLocationImage.image = landmarkLocation
         landmarkLocationTextLabel.text = location
+        
+        landmarkPlaceID = ID
         
         if star >= 5 {
             landmarkStarImage1.image = UIImage(named: "starFull.pdf")

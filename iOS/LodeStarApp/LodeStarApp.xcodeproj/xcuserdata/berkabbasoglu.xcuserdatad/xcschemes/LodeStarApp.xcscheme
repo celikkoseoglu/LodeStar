@@ -38,6 +38,16 @@
                ReferencedContainer = "container:LodeStarApp.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8DCB8C892082AEA4004252DA"
+               BuildableName = "SlideshowTests.xctest"
+               BlueprintName = "SlideshowTests"
+               ReferencedContainer = "container:LodeStarApp.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

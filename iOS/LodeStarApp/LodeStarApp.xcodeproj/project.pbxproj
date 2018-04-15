@@ -48,6 +48,16 @@
 		8D3D437F200A3CDA0091CCEB /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3D437E200A3CDA0091CCEB /* ProfileViewController.swift */; };
 		8D567EF6207A3C9800A1F051 /* LandmarksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D567EF5207A3C9800A1F051 /* LandmarksViewController.swift */; };
 		8D567EF8207A3CE800A1F051 /* LandmarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D567EF7207A3CE800A1F051 /* LandmarkCell.swift */; };
+		8D614AD42082943B00D97725 /* FullScreenSlideshowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D614ACC2082943A00D97725 /* FullScreenSlideshowViewController.swift */; };
+		8D614AD52082943B00D97725 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D614ACD2082943A00D97725 /* ActivityIndicator.swift */; };
+		8D614AD62082943B00D97725 /* UIImage+AspectFit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D614ACE2082943B00D97725 /* UIImage+AspectFit.swift */; };
+		8D614AD72082943B00D97725 /* UIImageView+Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D614ACF2082943B00D97725 /* UIImageView+Tools.swift */; };
+		8D614AD82082943B00D97725 /* ImageSlideshowItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D614AD02082943B00D97725 /* ImageSlideshowItem.swift */; };
+		8D614AD92082943B00D97725 /* ImageSlideshow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D614AD12082943B00D97725 /* ImageSlideshow.swift */; };
+		8D614ADA2082943B00D97725 /* ZoomAnimatedTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D614AD22082943B00D97725 /* ZoomAnimatedTransitioning.swift */; };
+		8D614ADB2082943B00D97725 /* InputSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D614AD32082943B00D97725 /* InputSource.swift */; };
+		8D614ADD2082AC5C00D97725 /* AlamofireSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D614ADC2082AC5C00D97725 /* AlamofireSource.swift */; };
+		8D6A5BC72083E4F400E15956 /* VenueCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6A5BC62083E4F400E15956 /* VenueCommentCell.swift */; };
 		8D6F76BF1F961993004824B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6F76BE1F961993004824B0 /* AppDelegate.swift */; };
 		8D6F76C41F961993004824B0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D6F76C21F961993004824B0 /* Main.storyboard */; };
 		8D6F76C61F961993004824B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D6F76C51F961993004824B0 /* Assets.xcassets */; };
@@ -125,6 +135,16 @@
 		8D3D437E200A3CDA0091CCEB /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		8D567EF5207A3C9800A1F051 /* LandmarksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarksViewController.swift; sourceTree = "<group>"; };
 		8D567EF7207A3CE800A1F051 /* LandmarkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkCell.swift; sourceTree = "<group>"; };
+		8D614ACC2082943A00D97725 /* FullScreenSlideshowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullScreenSlideshowViewController.swift; sourceTree = "<group>"; };
+		8D614ACD2082943A00D97725 /* ActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		8D614ACE2082943B00D97725 /* UIImage+AspectFit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+AspectFit.swift"; sourceTree = "<group>"; };
+		8D614ACF2082943B00D97725 /* UIImageView+Tools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Tools.swift"; sourceTree = "<group>"; };
+		8D614AD02082943B00D97725 /* ImageSlideshowItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSlideshowItem.swift; sourceTree = "<group>"; };
+		8D614AD12082943B00D97725 /* ImageSlideshow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSlideshow.swift; sourceTree = "<group>"; };
+		8D614AD22082943B00D97725 /* ZoomAnimatedTransitioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomAnimatedTransitioning.swift; sourceTree = "<group>"; };
+		8D614AD32082943B00D97725 /* InputSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputSource.swift; sourceTree = "<group>"; };
+		8D614ADC2082AC5C00D97725 /* AlamofireSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlamofireSource.swift; sourceTree = "<group>"; };
+		8D6A5BC62083E4F400E15956 /* VenueCommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueCommentCell.swift; sourceTree = "<group>"; };
 		8D6F76BB1F961993004824B0 /* LodeStarApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LodeStarApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D6F76BE1F961993004824B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8D6F76C31F961993004824B0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -166,6 +186,7 @@
 				146ED5BA207BB475001BCD5F /* VenueViewController.swift */,
 				147523EA207CED96006C0AAB /* VenueVRCell.swift */,
 				147524072080EECC006C0AAB /* PhotoDescriptionCell.swift */,
+				8D6A5BC62083E4F400E15956 /* VenueCommentCell.swift */,
 			);
 			path = Venue;
 			sourceTree = "<group>";
@@ -242,6 +263,22 @@
 			path = Landmarks;
 			sourceTree = "<group>";
 		};
+		8D614ACB2082942500D97725 /* ImageSlideshow */ = {
+			isa = PBXGroup;
+			children = (
+				8D614ACD2082943A00D97725 /* ActivityIndicator.swift */,
+				8D614ADC2082AC5C00D97725 /* AlamofireSource.swift */,
+				8D614ACC2082943A00D97725 /* FullScreenSlideshowViewController.swift */,
+				8D614AD12082943B00D97725 /* ImageSlideshow.swift */,
+				8D614AD02082943B00D97725 /* ImageSlideshowItem.swift */,
+				8D614AD32082943B00D97725 /* InputSource.swift */,
+				8D614ACE2082943B00D97725 /* UIImage+AspectFit.swift */,
+				8D614ACF2082943B00D97725 /* UIImageView+Tools.swift */,
+				8D614AD22082943B00D97725 /* ZoomAnimatedTransitioning.swift */,
+			);
+			path = ImageSlideshow;
+			sourceTree = "<group>";
+		};
 		8D6F76B21F961992004824B0 = {
 			isa = PBXGroup;
 			children = (
@@ -266,6 +303,7 @@
 		8D6F76BD1F961993004824B0 /* LodeStarApp */ = {
 			isa = PBXGroup;
 			children = (
+				8D614ACB2082942500D97725 /* ImageSlideshow */,
 				14DA46B4207BC9D7009871A8 /* 360 Images */,
 				14FF11A72077E16200D611AF /* Weather */,
 				14FF11A62077DDF100D611AF /* Trip */,
@@ -273,10 +311,10 @@
 				8D6F76BE1F961993004824B0 /* AppDelegate.swift */,
 				8D6F76DE1F961B40004824B0 /* SelectNationViewController.swift */,
 				8D567EF9207A3D0300A1F051 /* Landmarks */,
+				147523EC207CEDC0006C0AAB /* Venue */,
 				8D6F76C21F961993004824B0 /* Main.storyboard */,
 				8D26FA0F2043407E0011E5BE /* FoodCell.swift */,
 				8D26FA0D20433DE50011E5BE /* LivingExpensesViewController.swift */,
-				147523EC207CEDC0006C0AAB /* Venue */,
 				8D11715C200F74FE0032860E /* LoginViewController.swift */,
 				8D3D437E200A3CDA0091CCEB /* ProfileViewController.swift */,
 				8D3D437C200A3AD30091CCEB /* LogCell.swift */,
@@ -366,7 +404,7 @@
 		8D6F76B31F961992004824B0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0820;
+				LastSwiftUpdateCheck = 0930;
 				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Berk Abbasoglu";
 				TargetAttributes = {
@@ -465,11 +503,7 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/CardboardSDK.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleKitCore.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleKitDialogs.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleKitHUD.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialRobotoFontLoader.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -483,15 +517,21 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-LodeStarApp/Pods-LodeStarApp-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/ImageSlideshow/ImageSlideshow.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ImageSlideshow.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -527,22 +567,32 @@
 				14FF11A52077D34F00D611AF /* TripCell.swift in Sources */,
 				8D567EF6207A3C9800A1F051 /* LandmarksViewController.swift in Sources */,
 				8D26FA102043407E0011E5BE /* FoodCell.swift in Sources */,
+				8D614AD52082943B00D97725 /* ActivityIndicator.swift in Sources */,
 				8D26FA0C2042FE400011E5BE /* SmallWeatherCell.swift in Sources */,
 				8D3D437F200A3CDA0091CCEB /* ProfileViewController.swift in Sources */,
+				8D6A5BC72083E4F400E15956 /* VenueCommentCell.swift in Sources */,
 				8DC4DCB72021CBAC00DBF943 /* FlightInformationViewController.swift in Sources */,
+				8D614AD42082943B00D97725 /* FullScreenSlideshowViewController.swift in Sources */,
 				8D567EF8207A3CE800A1F051 /* LandmarkCell.swift in Sources */,
+				8D614AD72082943B00D97725 /* UIImageView+Tools.swift in Sources */,
 				147523EB207CED97006C0AAB /* VenueVRCell.swift in Sources */,
 				8D302A8420387E6D00710A78 /* WeatherCell.swift in Sources */,
 				14BC327E207AF6A0003280C0 /* Artwork.swift in Sources */,
+				8D614ADA2082943B00D97725 /* ZoomAnimatedTransitioning.swift in Sources */,
+				8D614ADD2082AC5C00D97725 /* AlamofireSource.swift in Sources */,
 				8D3D437D200A3AD30091CCEB /* LogCell.swift in Sources */,
 				8D2A6C331FDE781C00AA44E7 /* FlightDetailsCell.swift in Sources */,
+				8D614AD92082943B00D97725 /* ImageSlideshow.swift in Sources */,
 				147524082080EECC006C0AAB /* PhotoDescriptionCell.swift in Sources */,
 				8D2A6C351FDE7E1600AA44E7 /* LodeStarLayout.swift in Sources */,
 				8D3D437B200A2FDC0091CCEB /* TransportViewController.swift in Sources */,
 				146ED5BB207BB475001BCD5F /* VenueViewController.swift in Sources */,
+				8D614AD82082943B00D97725 /* ImageSlideshowItem.swift in Sources */,
 				8D2EAC792007735A000819DA /* WeatherViewController.swift in Sources */,
 				8D6F76DF1F961B40004824B0 /* SelectNationViewController.swift in Sources */,
+				8D614ADB2082943B00D97725 /* InputSource.swift in Sources */,
 				8D26FA0E20433DE50011E5BE /* LivingExpensesViewController.swift in Sources */,
+				8D614AD62082943B00D97725 /* UIImage+AspectFit.swift in Sources */,
 				8D2A6C2F1FDE71F600AA44E7 /* TripViewController.swift in Sources */,
 				8D11715D200F74FE0032860E /* LoginViewController.swift in Sources */,
 			);
@@ -700,6 +750,7 @@
 			baseConfigurationReference = 2E1BD3D5549A92F56E0B6398 /* Pods-LodeStarApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = 84BN7PWNQH;
 				GCC_OPTIMIZATION_LEVEL = fast;
 				INFOPLIST_FILE = LodeStarApp/Info.plist;
@@ -719,6 +770,7 @@
 			baseConfigurationReference = E0296F5819E422DCEF19640A /* Pods-LodeStarApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = 84BN7PWNQH;
 				GCC_OPTIMIZATION_LEVEL = fast;
 				INFOPLIST_FILE = LodeStarApp/Info.plist;
