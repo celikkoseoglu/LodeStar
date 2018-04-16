@@ -199,7 +199,7 @@ public class QRCodeActivity extends AppCompatActivity{
 
                                                                                     //Parse the data
                                                                                     String tmpArr[] = str.split(",");
-                                                                                    String myTMPSTR = tmpArr[1].substring(8,tmpArr[1].length()-1);
+                                                                                    String myTMPSTR = tmpArr[1].substring(7,tmpArr[1].length()-1);
                                                                                     Log.i("ii",myTMPSTR + " vs " + userEmail);
                                                                                     if(userEmail.equals(myTMPSTR)) {
 

@@ -15,6 +15,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,6 +31,7 @@ public class HistoryFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    ADDITIONAL_USER au;
     DatabaseReference ref;
     private ListView tripListView;
     View myView;
@@ -71,7 +74,7 @@ public class HistoryFragment extends Fragment {
 
         // tripListView = myView.findViewById(R.id.olalala);
 
-        // tripListView = getActivity().findViewById(R.id.olalala);
+
 
 
         super.onCreate(savedInstanceState);
@@ -83,9 +86,18 @@ public class HistoryFragment extends Fragment {
         ref.child("users").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
-                    ADDITIONAL_USER au = childSnapshot.getValue(ADDITIONAL_USER.class);
-                    //Log.i("agam",au.getemail());
+
+                for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
+                    au = childSnapshot.getValue(ADDITIONAL_USER.class);
+
+                    if(au.gettrips() != null)
+                        Log.i("agam",au.gettrips());
+
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                    if(user.getEmail().equals(au.getemail())) {
+                      //  Toast.makeText(this,au.gettrips(),Toast.LENGTH_LONG).show();
+                    }
                 }
 
             }
@@ -95,6 +107,10 @@ public class HistoryFragment extends Fragment {
 
             }
         });
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        
 //
 //        ref.addListenerForSingleValueEvent(new ValueEventListener() {
 //            @Override

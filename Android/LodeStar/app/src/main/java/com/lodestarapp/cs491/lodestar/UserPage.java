@@ -28,6 +28,12 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.lodestarapp.cs491.lodestar.Adapters.ADDITIONAL_USER;
 import com.lodestarapp.cs491.lodestar.Adapters.UserPageAdapter;
 
 import org.w3c.dom.Text;
@@ -45,6 +51,10 @@ public class UserPage extends android.support.v4.app.Fragment {
     private RecyclerView.LayoutManager mLayoutManager;
     private FirebaseAuth mAuth;
     String currentUserName;
+    TextView tw;
+
+    ADDITIONAL_USER au;
+    DatabaseReference ref;
 
     private List<String> userInfoWithPosts = new ArrayList<>();
 
@@ -61,8 +71,10 @@ public class UserPage extends android.support.v4.app.Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.activity_user_page, container, false);
+
         this.view = view;
 
+        tw = view.findViewById(R.id.me_realName);
         ImageView profileImageView = (ImageView) view.findViewById(R.id.me_profile_picture);
 
         /*Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_003_user);
@@ -95,7 +107,41 @@ public class UserPage extends android.support.v4.app.Fragment {
             }
         });*/
 
-        takeTheUser();
+      //  takeTheUser();
+
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        //   ADDITIONAL_USER au = dataSnapshot.getValue(ADDITIONAL_USER.class);
+        // Log.i("agam",au.username);
+        ref = database.getReference();
+
+        ref.child("users").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
+                    au = childSnapshot.getValue(ADDITIONAL_USER.class);
+
+                    if(au.gettrips() != null)
+                        Log.i("agam",au.gettrips());
+
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                    if(user.getEmail().equals(au.getemail())) {
+                        //  Toast.makeText(this,au.gettrips(),Toast.LENGTH_LONG).show();
+                        takeTheUser(au.username);
+                        tw.setText(au.username);
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         return view;
 
@@ -117,8 +163,8 @@ public class UserPage extends android.support.v4.app.Fragment {
 
     //Reference to retrieving current user: https://stackoverflow.com/questions/35112204/get-current-user-firebase-android
 
-    public void takeTheUser(){
-        userInfoWithPosts.add("efe");
+    public void takeTheUser(String q){
+        userInfoWithPosts.add(q);
         mAdapter.notifyDataSetChanged();
     }
 

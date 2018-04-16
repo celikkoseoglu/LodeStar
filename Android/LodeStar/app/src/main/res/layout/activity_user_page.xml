@@ -30,6 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/user_activity"
+                android:id="@+id/tid"
                 android:textColor="@color/colorWhite"
                 android:textSize="20sp" />
 

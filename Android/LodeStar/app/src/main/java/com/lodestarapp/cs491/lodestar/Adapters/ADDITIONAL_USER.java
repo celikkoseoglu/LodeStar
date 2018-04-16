@@ -4,6 +4,7 @@ public class ADDITIONAL_USER {
 
     public String email;
     public String username;
+    public String trips;
 
     public ADDITIONAL_USER() {
 
@@ -11,6 +12,14 @@ public class ADDITIONAL_USER {
 
     public String getemail() {
         return email;
+    }
+
+    public String gettrips() {
+        return trips;
+    }
+
+    public void settrips(String trips) {
+        this.trips = trips;
     }
 
     public String getusername() {
