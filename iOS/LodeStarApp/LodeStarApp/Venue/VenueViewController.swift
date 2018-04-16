@@ -6,7 +6,7 @@ import Alamofire
 fileprivate var cellCount = 1
 fileprivate let itemsPerRow: CGFloat = 1
 fileprivate var reuseIdentifier = "venueVRCell"
-fileprivate var reuseIdentifiers = ["photoDescriptionCell", "venueCommentCell", "venueCommentCell", "venueCommentCell", "venueCommentCell", "venueCommentCell"]
+fileprivate var reuseIdentifiers = ["photoDescriptionCell", "venueVRCell", "venueCommentCell", "venueCommentCell", "venueCommentCell", "venueCommentCell", "venueCommentCell"]
 fileprivate let sectionInsets = UIEdgeInsets(top: 0.0, left: 6.0, bottom: 3.0, right: 6.0)
 
 fileprivate var venueData = Array(repeating: Data.init(), count: 5)
@@ -60,24 +60,36 @@ extension VenueViewController {
             }
             return cell
         }
-        else if (index.row > 0 && index.row < 6) {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifiers[index.row], for: indexPath) as! VenueCommentCell
+            else if (index.row == 1){
             
-            //background shadow for collectionView elements
-            cell.layer.shadowColor = UIColor.black.cgColor
-            cell.layer.shadowOffset = CGSize(width: 5, height: 5)
-            cell.layer.shadowRadius = 5;
-            cell.layer.shadowOpacity = 0.25;
-            cell.clipsToBounds = false
-            cell.layer.masksToBounds = false
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifiers[index.row], for: indexPath) as! VenueVRCell
             
-            cell.displayContent(nameAndDate: allcommentNamesAndDates[index.row - 1], comment: allcomments[index.row - 1])
+            let vrImage = UIImage(named: "sindhu_beach.jpg")
+            cell.displayContent(landmarkPic: vrImage!)
             
             return cell
+            
+        }
+            else if (index.row > 1 && index.row < 7) {
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifiers[index.row], for: indexPath) as! VenueCommentCell
+            
+                //background shadow for collectionView elements
+                cell.layer.shadowColor = UIColor.black.cgColor
+                cell.layer.shadowOffset = CGSize(width: 5, height: 5)
+                cell.layer.shadowRadius = 5;
+                cell.layer.shadowOpacity = 0.25;
+                cell.clipsToBounds = false
+                cell.layer.masksToBounds = false
+            
+                cell.displayContent(nameAndDate: allcommentNamesAndDates[index.row - 1], comment: allcomments[index.row - 1])
+            
+                return cell
         }
         else {
             return UICollectionViewCell.init() //return empty cell if no index is found
         }
+        
+        return UICollectionViewCell.init() //return empty cell if no index is found
     }
 }
 

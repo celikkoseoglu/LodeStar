@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LodeStarApp/Venue/VenueViewController.swift"
-            timestampString = "545595367.891117"
+            timestampString = "545598144.433359"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "155"
-            endingLineNumber = "155"
+            startingLineNumber = "167"
+            endingLineNumber = "167"
             landmarkName = "jsonparseVenue(placeID:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LodeStarApp/Venue/VenueViewController.swift"
-            timestampString = "545595367.891615"
+            timestampString = "545598144.433436"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "163"
-            endingLineNumber = "163"
+            startingLineNumber = "175"
+            endingLineNumber = "175"
             landmarkName = "jsonparseVenue(placeID:)"
             landmarkType = "7">
          </BreakpointContent>
