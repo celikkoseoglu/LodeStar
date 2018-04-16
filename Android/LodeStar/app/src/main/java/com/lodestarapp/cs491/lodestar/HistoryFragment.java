@@ -84,7 +84,7 @@ public class HistoryFragment extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
                     ADDITIONAL_USER au = childSnapshot.getValue(ADDITIONAL_USER.class);
-                    Log.i("agam",au.getemail());
+                    //Log.i("agam",au.getemail());
                 }
 
             }

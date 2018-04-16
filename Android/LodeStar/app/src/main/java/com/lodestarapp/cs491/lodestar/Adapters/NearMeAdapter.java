@@ -107,15 +107,14 @@ public class NearMeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         //Set Number of Stars Image
         int noOfStars = placesList.get(position).getNumberOfStars();
         boolean halfStar = placesList.get(position).isHalfStar();
-        int i;
 
-        for ( i = 0; i < noOfStars; i++) {
+        for ( int i = 0; i < noOfStars; i++) {
             //Log.d("stars", noOfStars+ "");
             ((NearMeHolder) holder).placeStarImages[i].setImageResource(this.context.getResources()
             .getIdentifier("ic_star_full", "drawable", this.context.getPackageName()));
         }
         if(halfStar)
-            ((NearMeHolder) holder).placeStarImages[i].setImageResource(this.context.getResources()
+            ((NearMeHolder) holder).placeStarImages[noOfStars].setImageResource(this.context.getResources()
                     .getIdentifier("ic_star_half_full", "drawable", this.context.getPackageName()));
 
         ((NearMeAdapter.NearMeHolder) holder).placePicture.setImageBitmap(placesList.get(position).getPlaceImage());

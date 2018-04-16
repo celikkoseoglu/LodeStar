@@ -64,6 +64,9 @@ public class PanoramaView extends GLSurfaceView{
 
 
     float[] rotationMatrix = new float[16];
+    float[] tempMatrix = new float[16];
+
+
     float[] rotMatrix  = new float[16];
     float[] orientations = new float[3];
 
@@ -203,8 +206,11 @@ public class PanoramaView extends GLSurfaceView{
 
             Matrix.setIdentityM(curRotation, 0);
 
+            if(sensorRead)
+                Matrix.setLookAtM(mCamera, 0, 0.0f, 0.0f,  CAMERA_Z, (float)Math.sin(mDeltaY),  0.2f, (float) -Math.cos(mDeltaY), 0.0f, 1.0f, 0.0f);
+            else
+                Matrix.setLookAtM(mCamera, 0, 0.0f, 0.0f,  CAMERA_Z, (float)Math.sin(mDeltaY),  ((float)Math.sin(mDeltaX)) + 0.2f, (float) -Math.cos(mDeltaY), 0.0f, 1.0f, 0.0f);
 
-            Matrix.setLookAtM(mCamera, 0, 0.0f, 0.0f,  CAMERA_Z, (float)Math.sin(mDeltaY), ((float)Math.sin(mDeltaX)) + 0.2f, (float) -Math.cos(mDeltaY), 0.0f, 1.0f, 0.0f);
 
 
             Matrix.multiplyMM(temp, 0, curRotation, 0, accRotation, 0);
@@ -222,7 +228,7 @@ public class PanoramaView extends GLSurfaceView{
                 Matrix.rotateM(rotationMatrix, 0, -90, 0.0f, 1.0f, 0.0f);
                 Matrix.multiplyMM(mIdentity,0,mIdentity,0,rotationMatrix,0);
 
-                sensorRead = false;
+                //sensorRead = false;
             }
 
 
@@ -275,7 +281,7 @@ public class PanoramaView extends GLSurfaceView{
                 String TAG="pano";
 
                 if (sensorEvent.sensor.getType() == Sensor.TYPE_GAME_ROTATION_VECTOR) {
-                    //sensorRead = true;
+                    sensorRead = true;
                     SensorManager.getRotationMatrixFromVector(rotationMatrix , sensorEvent.values);
                     SensorManager.getOrientation(rotationMatrix, orientations);
                     //Matrix.invertM(rotationMatrix,0,rotationMatrix,0);

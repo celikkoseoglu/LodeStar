@@ -49,7 +49,6 @@
                 android:minWidth="0dp"
                 android:onClick="tripStart"
                 android:padding="0dp"
-                android:text=" Trip"
                 android:textAllCaps="false"
                 android:textColor="@android:color/holo_blue_bright"
                 android:textSize="16sp" />
@@ -106,7 +105,6 @@
                         android:paddingRight="10dp"
                         android:paddingStart="10dp"
                         android:paddingTop="10dp"
-                        android:text=" Approximate Living Expenses in"
                         android:textSize="17sp"
                         android:textStyle="bold" />
 
@@ -129,9 +127,9 @@
                         android:paddingRight="10dp"
                         android:paddingStart="10dp"
                         android:paddingTop="10dp"
-                        android:text="   A single person monthly costs: \n   100"
                         android:textColor="@color/colorBlack"
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        android:drawableStart="@drawable/ic_cost" />
 
                 </android.support.v7.widget.CardView>
 
@@ -152,9 +150,9 @@
                         android:paddingRight="10dp"
                         android:paddingStart="10dp"
                         android:paddingTop="10dp"
-                        android:text="   Meal (inexpensive restaurant): \n   100"
                         android:textColor="@color/colorBlack"
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        android:drawableStart="@drawable/ic_meal" />
 
                 </android.support.v7.widget.CardView>
 
@@ -175,8 +173,8 @@
                         android:paddingRight="10dp"
                         android:paddingStart="10dp"
                         android:paddingTop="10dp"
-                        android:text="   Apartment rent (1 bedroom, city centre): \n   100"
-                        android:textColor="@color/colorBlack" />
+                        android:textColor="@color/colorBlack"
+                        android:drawableStart="@drawable/ic_rent" />
                 </android.support.v7.widget.CardView>
 
 
@@ -196,8 +194,8 @@
                         android:paddingRight="10dp"
                         android:paddingStart="10dp"
                         android:paddingTop="10dp"
-                        android:text="   Monthly Transport Pass: \n   100"
-                        android:textColor="@color/colorBlack" />
+                        android:textColor="@color/colorBlack"
+                        android:drawableStart="@drawable/ic_train" />
 
                 </android.support.v7.widget.CardView>
 
@@ -218,8 +216,8 @@
                         android:paddingRight="10dp"
                         android:paddingStart="10dp"
                         android:paddingTop="10dp"
-                        android:text="   Coke/Pepsi (0.33 liter bottle): \n   100"
-                        android:textColor="@color/colorBlack" />
+                        android:textColor="@color/colorBlack"
+                        android:drawableStart="@drawable/ic_coke" />
 
                 </android.support.v7.widget.CardView>
 
@@ -240,8 +238,8 @@
                         android:paddingRight="10dp"
                         android:paddingStart="10dp"
                         android:paddingTop="10dp"
-                        android:text="   McMeal at McDonalds: \n   100"
-                        android:textColor="@color/colorBlack" />
+                        android:textColor="@color/colorBlack"
+                        android:drawableStart="@drawable/ic_mcdonalds" />
 
                 </android.support.v7.widget.CardView>
 
@@ -256,14 +254,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:alpha="0.7"
-                        android:drawableLeft="@drawable/ic_taxi"
                         android:paddingBottom="10dp"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
                         android:paddingStart="10dp"
                         android:paddingTop="10dp"
-                        android:text="   Taxi Start: \n   100"
-                        android:textColor="@color/colorBlack" />
+                        android:textColor="@color/colorBlack"
+                        android:drawableLeft="@drawable/frontal_taxi_cab"/>
 
                 </android.support.v7.widget.CardView>
 
@@ -284,8 +281,8 @@
                         android:paddingRight="10dp"
                         android:paddingStart="10dp"
                         android:paddingTop="10dp"
-                        android:text="   Taxi 1 km: \n   100"
-                        android:textColor="@color/colorBlack" />
+                        android:textColor="@color/colorBlack"
+                        android:drawableStart="@drawable/ic_speedometer" />
 
                 </android.support.v7.widget.CardView>
 
@@ -295,7 +292,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginBottom="10dp"
-                    android:text="Information from www.numbeo.com"
+                    android:text="@string/information_from_www_numbeo_com"
                     android:textSize="12sp" />
 
 

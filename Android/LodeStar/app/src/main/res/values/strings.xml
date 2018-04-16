@@ -57,5 +57,6 @@
     <string name="write_post_message">Write a Post</string>
     <string name="write_post_title">New Post</string>
     <string name="write_post_cancel">Cancel</string>
+    <string name="information_from_www_numbeo_com">Information from www.numbeo.com</string>
 
 </resources>

@@ -35,7 +35,7 @@ public class Places {
         double r = Double.parseDouble(rating) / 2;
         this.numberOfStars = (int) r ;
 
-        if(r % 1 > 0.5)
+        if(r % 1 >= 0.5)
             halfStar = true;
         else
             halfStar=false;
