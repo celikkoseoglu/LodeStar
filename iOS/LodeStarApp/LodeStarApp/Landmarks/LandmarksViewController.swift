@@ -222,6 +222,12 @@ class LandmarksViewController: UIViewController, UICollectionViewDelegate, UICol
         
         let imageViewTag = sender.view?.tag
         venuePlaceID = landmarkPlaceIDs[(imageViewTag)!]
+        venueName = landmarkNames[(imageViewTag)!]
+        venueAddress = landmarkAddresses[(imageViewTag)!]
+        venueRating = landmarkRatings[(imageViewTag)!]
+        venueType = "Park"
+        venuePhone = "NO PHONE NUMBER AVAILABLE"
+        
         
         let storyboard = self.storyboard
         let controller = storyboard?.instantiateViewController(withIdentifier: "venueNAV")

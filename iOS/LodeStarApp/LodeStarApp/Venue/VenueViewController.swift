@@ -15,7 +15,13 @@ fileprivate var venueString = Array(repeating: AlamofireSource(urlString: "sindh
 fileprivate var allcommentNamesAndDates = Array(repeating: "", count: 5)
 fileprivate var allcomments = Array(repeating: "", count: 5)
 
+// var for filling information passed from landmarks VC
 var venuePlaceID = ""
+var venueName = ""
+var venueRating = -1.0
+var venueType = ""
+var venueAddress = ""
+var venuePhone = ""
 
 extension VenueViewController {
     
@@ -50,7 +56,7 @@ extension VenueViewController {
 
                 
                 let vrImage = UIImage(named: "sindhu_beach.jpg")
-                cell.displayContent(venueImage: vrImage!, venueName: "asd", venueReviewCount: "dsa", venueType: "asd", venueAddress: "asd", venuePhoneNumber: "asd")
+                cell.displayContent(venueImage: vrImage!, venueName: venueName, venueReviewCount: "", venueType: venueType, venueAddress: venueAddress, venuePhoneNumber: venuePhone, star: Int(venueRating) + 1)
             }
             return cell
         }
