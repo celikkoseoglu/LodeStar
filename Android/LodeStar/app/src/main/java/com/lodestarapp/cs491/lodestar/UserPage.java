@@ -79,21 +79,21 @@ public class UserPage extends android.support.v4.app.Fragment {
         mAdapter = new UserPageAdapter(userInfoWithPosts);
         mRecyclerView.setAdapter(mAdapter);
 
-        ImageButton button = view.findViewById(R.id.write_post);
+        /*ImageButton button = view.findViewById(R.id.write_post);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 writePost();
             }
-        });
+        });*/
 
-        ImageButton button2 = view.findViewById(R.id.profile_picture_add);
+/*        ImageButton button2 = view.findViewById(R.id.profile_picture_add);
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 pickImageAndChangeTheProfilePicture();
             }
-        });
+        });*/
 
         takeTheUser();
 
