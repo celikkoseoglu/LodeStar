@@ -115,7 +115,7 @@ public class UserPage extends android.support.v4.app.Fragment {
         // Log.i("agam",au.username);
         ref = database.getReference();
 
-        /*ref.child("users").addValueEventListener(new ValueEventListener() {
+        ref.child("users").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -140,9 +140,9 @@ public class UserPage extends android.support.v4.app.Fragment {
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });*/
+        });
 
-        //FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         return view;
 
