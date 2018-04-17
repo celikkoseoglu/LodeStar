@@ -81,7 +81,7 @@ public class HistoryFragment extends Fragment {
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         //   ADDITIONAL_USER au = dataSnapshot.getValue(ADDITIONAL_USER.class);
         // Log.i("agam",au.username);
-        ref = database.getReference();
+        /*ref = database.getReference();
 
         ref.child("users").addValueEventListener(new ValueEventListener() {
             @Override
@@ -106,9 +106,9 @@ public class HistoryFragment extends Fragment {
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });
+        });*/
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        //FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         
 //

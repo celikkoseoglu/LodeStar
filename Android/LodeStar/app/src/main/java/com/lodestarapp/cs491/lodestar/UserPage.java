@@ -13,6 +13,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -91,21 +92,21 @@ public class UserPage extends android.support.v4.app.Fragment {
         mAdapter = new UserPageAdapter(userInfoWithPosts);
         mRecyclerView.setAdapter(mAdapter);
 
-        /*ImageButton button = view.findViewById(R.id.write_post);
+        AppCompatButton button = view.findViewById(R.id.write_post);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 writePost();
             }
-        });*/
+        });
 
-/*        ImageButton button2 = view.findViewById(R.id.profile_picture_add);
+        AppCompatButton button2 = view.findViewById(R.id.profile_picture_add);
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 pickImageAndChangeTheProfilePicture();
             }
-        });*/
+        });
 
       //  takeTheUser();
 
@@ -114,7 +115,7 @@ public class UserPage extends android.support.v4.app.Fragment {
         // Log.i("agam",au.username);
         ref = database.getReference();
 
-        ref.child("users").addValueEventListener(new ValueEventListener() {
+        /*ref.child("users").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -139,9 +140,9 @@ public class UserPage extends android.support.v4.app.Fragment {
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });
+        });*/
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        //FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         return view;
 
