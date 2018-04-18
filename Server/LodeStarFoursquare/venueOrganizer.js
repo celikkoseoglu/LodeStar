@@ -10,7 +10,7 @@ const app = express();
  * esenboga airport coordinates: 40.12443989999999,32.991672600000015
  */
 
-let venueSearchURL = "https://api.foursquare.com/v2/venues/explore";
+let venueSearchURL = "https://api.foursquare.com/v2/venues/search";
 let venueReviewsURL = "https://api.foursquare.com/v2/venues/venue_id/tips"; //replace "venue_id" with the real venue_id of the place
 let venuePhotosURL = "https://api.foursquare.com/v2/venues/venue_id/photos"; //replace "venue_id" with the real venue_id of the place
 
@@ -21,7 +21,7 @@ let requestQuery = {
         client_id: 'YUYULQTBMYN3VEFRZLV4UDSWMEQDVNUBOSCTCE2ALE0VIZ12',
         client_secret: 'NMPD43K4MGD2JT4ZFQ5JX2OC1GPT5HR3PU4FZVW1IMRBDIGC',
         //near: 'Ankara,TR', //only required if ll (latitude longitude not provided)
-        v: '20180304',
+        v: '20180414',
         limit: 1
         //radius: 250 //in meters. Only valid when used with query enabled
     }
@@ -60,12 +60,16 @@ function foursqaureRequest(query, res) {
 
                 let data = JSON.parse(foursquareBody); //this step is required for making modifications on JSON data
 
+                res.send(data);
+
                 let numberOfVenuesInResponse = data.response.groups[0].items.length; // this line will throw error if daily quota exceeded
 
                 let imageRequests = [];
                 let reviewRequests = [];
 
                 for (let i = 0; i < numberOfVenuesInResponse; i++) {
+
+                    console.log(data.response.groups[0].items[i].venue.name);
 
                     let venue_id = data.response.groups[0].items[i].venue.id;
                     let venuePhotoRequestURL = venuePhotosURL.replace("venue_id", venue_id);

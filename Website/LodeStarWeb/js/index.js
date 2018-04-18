@@ -49,8 +49,8 @@ $( window ).resize(function() {
 // All the scenes for the experience
 var scenes = {
     thy_lounge: {
-        image: 'images/panoramas/kiz-kulesi-360_sh1te.jpg',
-        preview: 'images/panoramas/kiz-kulesi-360_sh1te.jpg'
+        image: 'images/panoramas/kiz-kulesi-360-optimized.jpg',
+        preview: 'images/panoramas/kiz-kulesi-360-preview.jpg'
     },
     christTheRedeemer: {
         image: 'christ-redeemer.jpg',
@@ -59,14 +59,6 @@ var scenes = {
     machuPicchu: {
         image: 'machu-picchu.jpg',
         preview: 'machu-picchu-preview.jpg'
-    },
-    chichenItza: {
-        image: 'chichen-itza.jpg',
-        preview: 'chichen-itza-preview.jpg'
-    },
-    tajMahal: {
-        image: 'taj-mahal.jpg',
-        preview: 'taj-mahal-preview.jpg'
     }
 };
 

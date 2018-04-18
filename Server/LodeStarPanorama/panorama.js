@@ -34,47 +34,40 @@ app.get('/', (req, res) => {
 
     let request = https.request("https://cbk0.google.com/cbk?output=json&ll=" + req.query.ll + "&radius=" + req.query.radius, function (response) {
 
-            let replyMessage = "";
-            tileCount = 0;
+        let replyMessage = "";
+        tileCount = 0;
 
-            response.on('data', function (data) {
-                replyMessage += data;
-            });
-
-            response.on('end', function (data) {
-                //console.log(replyMessage);
-                json = JSON.parse(replyMessage);
-
-                if (json.Location === undefined)
-		        {
-			        res.send("{}");
-			        return;
-		        }
-                    
-                //console.log("id: " + json.Location.panoId);
-                //console.log("angle: " + json.Location.best_view_direction_deg);
-
-                result = replyMessage;
-
-                id = json.Location.panoId;
-
-                for (i in json.Links) {
-                    //console.log("link to: " + json.Links[i].panoId);
-                    //console.log("by  degree: " + json.Links[i].yawDeg);
-                }
-
-                if (req.query.resol === "low")
-                    getLowRes(res);
-
-                if (req.query.resol === "high") {
-                    for (i = 0; i < totalX; i++)
-                        for (j = 0; j < totalY; j++)
-                            getTileNo(i, j, res);
-                }
-
-
-            })
+        response.on('data', function (data) {
+            replyMessage += data;
         });
+
+        response.on('end', function (data) {
+            //console.log(replyMessage);
+            json = JSON.parse(replyMessage);
+
+            if (json.Location === undefined) {
+                res.send("{}");
+                return;
+            }
+
+            //console.log("id: " + json.Location.panoId);
+            //console.log("angle: " + json.Location.best_view_direction_deg);
+
+            result = replyMessage;
+
+            id = json.Location.panoId;
+
+
+            if (req.query.resol === "low")
+                getLowRes(res);
+
+            if (req.query.resol === "high") {
+                for (i = 0; i < totalX; i++)
+                    for (j = 0; j < totalY; j++)
+                        getTileNo(i, j, res);
+            }
+        })
+    });
 
     request.end();
 
@@ -90,7 +83,8 @@ function getLowRes(res) {
             lowData.push(lowchunk);
         });
 
-        response.on('end', function () {
+        response.on('end', function ()
+        {
             fs.writeFileSync('output.jpg', lowData.read());
             im.crop({
                 srcPath: "output.jpg",
@@ -99,16 +93,17 @@ function getLowRes(res) {
                 height: 100,
                 quality: 1,
                 gravity: "North"
-            }, function (err) {
-                // foo
-                var base64str = base64_encode('cropped.jpg');
-                fs.unlinkSync("output.jpg");
-                fs.unlinkSync('cropped.jpg');
+            }, function (err)
+                {
+                    // foo
+                    var base64str = base64_encode('cropped.jpg');
+                    fs.unlinkSync("output.jpg");
+                    fs.unlinkSync('cropped.jpg');
 
-                json["lowRes"] = base64str;
-                res.send(json);
-		        json = "";
-            });
+                    json["lowRes"] = base64str;
+                    res.send(json);
+                    json = "";
+                });
 
         });
     }).end();
@@ -125,7 +120,7 @@ function base64_encode(file) {
 function getTileNo(tileX, tileY, res) {
 
     var url = 'http://cbk0.google.com/cbk?output=tile&panoid=' + id + '&x=' + tileX + '&y=' + tileY + "&zoom=3";
-    var name = id+'im' + tileX + 'x' + tileY;
+    var name = id + 'im' + tileX + 'x' + tileY;
 
     let request2 = http.request(url, function (response) {
         var data = new Stream();
@@ -155,12 +150,12 @@ function getTileNo(tileX, tileY, res) {
                     tiles[totalX * totalY + 4] = id + '.jpg';
                     sim.montage(tiles,
                         function (err, metadata) {
-                            if (err) throw err
+                            if (err) throw err;
 
 
                             json["highRes"] = base64_encode(id + '.jpg');
                             res.send(json);
-			                json = "";
+                            json = "";
                             fs.unlinkSync(id + '.jpg');
 
                             for (var i = 0; i < totalX * totalY; i++)
@@ -168,7 +163,6 @@ function getTileNo(tileX, tileY, res) {
                         });
                     return;
                 }
-                ;
             });
 
         });
