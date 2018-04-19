@@ -79,7 +79,6 @@ public class UserPage extends android.support.v4.app.Fragment {
 
         tw = view.findViewById(R.id.me_realName);
         tripCounr = view.findViewById(R.id.me_trip_count);
-        posts = view.findViewById(R.id.user_post_EditText);
         ImageView profileImageView = (ImageView) view.findViewById(R.id.me_profile_picture);
 
         /*Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_003_user);
@@ -194,13 +193,16 @@ public class UserPage extends android.support.v4.app.Fragment {
         //REFERENCE:https://developer.android.com/guide/topics/ui/dialogs.html
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater layoutInflater = getActivity().getLayoutInflater();
-
-        builder.setView(layoutInflater.inflate(R.layout.dialog_post, null))
+        //Reference: https://stackoverflow.com/questions/44212583/why-am-i-getting-edittext-gettext-on-a-null-object-reference
+        View dialogView = LayoutInflater.from(getActivity().getApplicationContext())
+                .inflate(R.layout.dialog_post, null);
+        posts = dialogView.findViewById(R.id.user_post_EditText);
+        builder.setView(dialogView)
                 .setPositiveButton(R.string.write_post_message, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         //SEND TO DATABASE
-                       // Log.i("agam",posts.getText().toString());
+                        Log.i("agam",posts.getText().toString());
 
                         //REFRESH
                     }
