@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -49,6 +50,8 @@ public class PlacesToSeeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         ImageView placeStarImage3;
         ImageView placeStarImage4;
         ImageView placeStarImage5;*/
+
+        Button placeToFavorites;
 
         //TextView placeNumberOfReviewsView;
 
@@ -102,6 +105,19 @@ public class PlacesToSeeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             this.placeStarImages[3] = itemView.findViewById(R.id.place_stars_image4);
             this.placeStarImages[4] = itemView.findViewById(R.id.place_stars_image5);
 
+
+            this.placeToFavorites = itemView.findViewById(R.id.landmarks_add_to_favorites);
+
+            this.placeToFavorites.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int card = getAdapterPosition();
+
+                    String placeId = PlacesToSeeAdapter.this.placesList.get(card).getPlaceId();
+
+                    //SEND TO DATABASE
+                }
+            });
         }
     }
 
