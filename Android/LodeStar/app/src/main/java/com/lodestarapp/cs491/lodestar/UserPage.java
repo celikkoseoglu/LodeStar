@@ -53,6 +53,7 @@ public class UserPage extends android.support.v4.app.Fragment {
     private FirebaseAuth mAuth;
     String currentUserName;
     TextView tw;
+    private TextView tripCounr;
 
     ADDITIONAL_USER au;
     DatabaseReference ref;
@@ -76,6 +77,7 @@ public class UserPage extends android.support.v4.app.Fragment {
         this.view = view;
 
         tw = view.findViewById(R.id.me_realName);
+        tripCounr = view.findViewById(R.id.me_trip_count);
         ImageView profileImageView = (ImageView) view.findViewById(R.id.me_profile_picture);
 
         /*Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_003_user);
@@ -131,6 +133,15 @@ public class UserPage extends android.support.v4.app.Fragment {
                         //  Toast.makeText(this,au.gettrips(),Toast.LENGTH_LONG).show();
                         takeTheUser(au.username);
                         tw.setText(au.username);
+
+                        if(au.gettrips() != null) {
+                            String [] arrtemp = au.gettrips().split("!");
+                            tripCounr.setText("" + arrtemp.length);
+                        }
+                        else {
+                            tripCounr.setText(0 + "");
+                        }
+
                     }
                 }
 

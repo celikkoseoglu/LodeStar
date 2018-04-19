@@ -31,6 +31,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.pdf417.encoder.PDF417;
+import com.lodestarapp.cs491.lodestar.Adapters.ADDITIONAL_USER;
 import com.lodestarapp.cs491.lodestar.Models.QRCodeInfo;
 
 import java.io.IOException;
@@ -54,6 +55,10 @@ public class QRCodeActivity extends AppCompatActivity{
     private AlertDialog.Builder diyalogOlusturucu;
 
     private FirebaseAuth mAuth;
+
+    private ADDITIONAL_USER au;
+
+    private String prev;
 
 
     private DatabaseReference mDatabase;
@@ -192,18 +197,21 @@ public class QRCodeActivity extends AppCompatActivity{
                                                                         @Override
                                                                         public void onDataChange(DataSnapshot dataSnapshot) {
                                                                             for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                                                                au = snapshot.getValue(ADDITIONAL_USER.class);
                                                                                 String str = snapshot.getValue() + "";
                                                                                 // Log.i("ii",str);
                                                                                 if (currentUser != null) {
                                                                                     String userEmail = currentUser.getEmail();
 
-                                                                                    //Parse the data
-                                                                                    String tmpArr[] = str.split(",");
-                                                                                    String myTMPSTR = tmpArr[1].substring(7,tmpArr[1].length()-1);
+
+                                                                                    String myTMPSTR = au.getemail();
                                                                                     Log.i("ii",myTMPSTR + " vs " + userEmail);
                                                                                     if(userEmail.equals(myTMPSTR)) {
 
-                                                                                        mDatabase.child("users").child(snapshot.getKey()).child("trips").setValue("Flight Code: " + qrCodeInfo.getFlightCode()+ " From: " + qrCodeInfo.getFrom() + " To: " + qrCodeInfo.getTo());
+                                                                                        if(au.trips != null)
+                                                                                            prev = au.gettrips();
+
+                                                                                        mDatabase.child("users").child(snapshot.getKey()).child("trips").setValue(prev + "!" + " Flight Code: " + qrCodeInfo.getFlightCode()+ " From: " + qrCodeInfo.getFrom() + " To: " + qrCodeInfo.getTo());
                                                                                     }
                                                                                 }
                                                                             }
