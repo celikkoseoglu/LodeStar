@@ -54,6 +54,7 @@ public class UserPage extends android.support.v4.app.Fragment {
     String currentUserName;
     TextView tw;
     private TextView tripCounr;
+    private EditText posts;
 
     ADDITIONAL_USER au;
     DatabaseReference ref;
@@ -78,6 +79,7 @@ public class UserPage extends android.support.v4.app.Fragment {
 
         tw = view.findViewById(R.id.me_realName);
         tripCounr = view.findViewById(R.id.me_trip_count);
+        posts = view.findViewById(R.id.user_post_EditText);
         ImageView profileImageView = (ImageView) view.findViewById(R.id.me_profile_picture);
 
         /*Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_003_user);
@@ -137,6 +139,14 @@ public class UserPage extends android.support.v4.app.Fragment {
                         if(au.gettrips() != null) {
                             String [] arrtemp = au.gettrips().split("!");
                             tripCounr.setText("" + arrtemp.length);
+                            int lastIndex = arrtemp.length -1;
+
+                            if(lastIndex >= 0) {
+                                String strToParse = au.gettrips();
+                                String tmparr[] = strToParse.split("To: ");
+                                String lastTrip = tmparr[tmparr.length -1];
+
+                            }
                         }
                         else {
                             tripCounr.setText(0 + "");
@@ -190,6 +200,8 @@ public class UserPage extends android.support.v4.app.Fragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         //SEND TO DATABASE
+                       // Log.i("agam",posts.getText().toString());
+
                         //REFRESH
                     }
                 })
