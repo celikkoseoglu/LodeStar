@@ -5,9 +5,18 @@ public class ADDITIONAL_USER {
     public String email;
     public String username;
     public String trips;
+    public String posts;
 
     public ADDITIONAL_USER() {
 
+    }
+
+    public String getposts() {
+        return posts;
+    }
+
+    public void setposts(String posts) {
+         this.posts = posts;
     }
 
     public String getemail() {

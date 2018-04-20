@@ -29,6 +29,7 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -55,8 +56,12 @@ public class UserPage extends android.support.v4.app.Fragment {
     TextView tw;
     private TextView tripCounr;
     private EditText posts;
+    FirebaseUser user,userMe;
+    public FirebaseUser mUser;
+    private DatabaseReference mDatabase;
 
     ADDITIONAL_USER au;
+    ADDITIONAL_USER au2;
     DatabaseReference ref;
 
     private List<String> userInfoWithPosts = new ArrayList<>();
@@ -68,6 +73,7 @@ public class UserPage extends android.support.v4.app.Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -85,6 +91,8 @@ public class UserPage extends android.support.v4.app.Fragment {
         RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
         roundedBitmapDrawable.setCircular(true);
         profileImageView.setImageDrawable(roundedBitmapDrawable);*/
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         mRecyclerView = view.findViewById(R.id.my_user_page_recycler_view);
         mRecyclerView.setHasFixedSize(true);
@@ -126,9 +134,9 @@ public class UserPage extends android.support.v4.app.Fragment {
                     au = childSnapshot.getValue(ADDITIONAL_USER.class);
 
                     if(au.gettrips() != null)
-                        Log.i("agam",au.gettrips());
+                        //Log.i("agam",au.gettrips());
 
-                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    user = FirebaseAuth.getInstance().getCurrentUser();
 
                     if(user.getEmail().equals(au.getemail())) {
                         //  Toast.makeText(this,au.gettrips(),Toast.LENGTH_LONG).show();
@@ -152,6 +160,9 @@ public class UserPage extends android.support.v4.app.Fragment {
                         }
 
                     }
+
+
+                //    ref.child("users").child(childSnapshot.getKey()).child("Posts").setValue();
                 }
 
             }
@@ -192,6 +203,9 @@ public class UserPage extends android.support.v4.app.Fragment {
     public void writePost(){
         //REFERENCE:https://developer.android.com/guide/topics/ui/dialogs.html
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        int t = 0;
+        mAuth = FirebaseAuth.getInstance();
+        mUser = mAuth.getCurrentUser();
         LayoutInflater layoutInflater = getActivity().getLayoutInflater();
         //Reference: https://stackoverflow.com/questions/44212583/why-am-i-getting-edittext-gettext-on-a-null-object-reference
         View dialogView = LayoutInflater.from(getActivity().getApplicationContext())
@@ -199,12 +213,39 @@ public class UserPage extends android.support.v4.app.Fragment {
         posts = dialogView.findViewById(R.id.user_post_EditText);
         builder.setView(dialogView)
                 .setPositiveButton(R.string.write_post_message, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        //SEND TO DATABASE
-                        Log.i("agam",posts.getText().toString());
 
-                        //REFRESH
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                        //   ADDITIONAL_USER au = dataSnapshot.getValue(ADDITIONAL_USER.class);
+                         Log.i("agam",posts.getText().toString());
+                        ref = database.getReference();
+                        userMe = FirebaseAuth.getInstance().getCurrentUser();
+                        ref.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
+
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
+                                    au = childSnapshot.getValue(ADDITIONAL_USER.class);
+
+                                    Log.i("agam",userMe.getEmail() + " vs " + au.getemail());
+                                    if(userMe.getEmail().equals(au.getemail())) {
+                                        String str = "";
+                                        if(au.getposts() != null)
+                                            str = au.getposts();
+
+                                        mDatabase.child("users").child(childSnapshot.getKey()).child("posts").setValue(posts.getText().toString() + "&" + str);
+
+                                    }
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
                     }
                 })
                 .setNegativeButton(R.string.write_post_cancel, new DialogInterface.OnClickListener() {

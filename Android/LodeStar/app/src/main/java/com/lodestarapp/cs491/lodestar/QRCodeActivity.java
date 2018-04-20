@@ -186,7 +186,7 @@ public class QRCodeActivity extends AppCompatActivity{
                                             qrCodeInfo.setTo(parts[2].substring(3, 6));
                                             qrCodeInfo.setFlightCode(parts[2].substring(6).concat(parts[3]));
 
-                                            Log.d(TAG, "99999999999");
+                                          //  Log.d(TAG, "99999999999");
 
                                             FirebaseDatabase.getInstance().getReference().child("users")
                                                     .addListenerForSingleValueEvent(new ValueEventListener() {
