@@ -98,7 +98,7 @@ public class UserPage extends android.support.v4.app.Fragment {
                             String tmpArray[] = toBeParsed.split("&&&");
                             for(int i = 0; i < tmpArray.length;i++) {
                                 noteArrayList.add(tmpArray[i]);
-                                Log.i("agam","bu" + tmpArray[i]);
+                                Log.i("agam","bu" + noteArrayList.get(i));
                             }
                         }
 
