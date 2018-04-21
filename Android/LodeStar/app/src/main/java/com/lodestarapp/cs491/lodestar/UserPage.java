@@ -59,6 +59,7 @@ public class UserPage extends android.support.v4.app.Fragment {
     FirebaseUser user,userMe;
     public FirebaseUser mUser;
     private DatabaseReference mDatabase;
+    private ArrayList<String> noteArrayList;
 
     ADDITIONAL_USER au;
     ADDITIONAL_USER au2;
@@ -74,6 +75,53 @@ public class UserPage extends android.support.v4.app.Fragment {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        noteArrayList = new ArrayList<String>();
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+        au2 = new ADDITIONAL_USER();
+        //   ADDITIONAL_USER au = dataSnapshot.getValue(ADDITIONAL_USER.class);
+        // Log.i("agam",au.username);
+        ref = database.getReference();
+
+        ref.child("users").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
+                    au2 = childSnapshot.getValue(ADDITIONAL_USER.class);
+                    user = FirebaseAuth.getInstance().getCurrentUser();
+
+                    if(user.getEmail().equals(au2.getemail())) {
+                        String toBeParsed = au2.getposts();
+
+                        if(au2.getposts() != null) {
+                            String tmpArray[] = toBeParsed.split("&&&");
+                            for(int i = 0; i < tmpArray.length;i++) {
+                                noteArrayList.add(tmpArray[i]);
+                                Log.i("agam","bu" + tmpArray[i]);
+                            }
+                        }
+
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        Log.i("agam","Could be the one: " + noteArrayList.size());
+        for(int t = 0; t < noteArrayList.size(); t++) {
+            Log.i("agam","abey: " + noteArrayList.get(t));
+        }
+    }
+
+    public void retrieveAllNotes() {
+
+
+
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -126,38 +174,20 @@ public class UserPage extends android.support.v4.app.Fragment {
         // Log.i("agam",au.username);
         ref = database.getReference();
 
-        ref.child("users").addValueEventListener(new ValueEventListener() {
+        ref.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
                     au = childSnapshot.getValue(ADDITIONAL_USER.class);
 
-                    if(au.gettrips() != null)
-                        //Log.i("agam",au.gettrips());
+
 
                     user = FirebaseAuth.getInstance().getCurrentUser();
 
                     if(user.getEmail().equals(au.getemail())) {
                         //  Toast.makeText(this,au.gettrips(),Toast.LENGTH_LONG).show();
-                        takeTheUser(au.username);
-                        tw.setText(au.username);
 
-                        if(au.gettrips() != null) {
-                            String [] arrtemp = au.gettrips().split("!");
-                            tripCounr.setText("" + arrtemp.length);
-                            int lastIndex = arrtemp.length -1;
-
-                            if(lastIndex >= 0) {
-                                String strToParse = au.gettrips();
-                                String tmparr[] = strToParse.split("To: ");
-                                String lastTrip = tmparr[tmparr.length -1];
-
-                            }
-                        }
-                        else {
-                            tripCounr.setText(0 + "");
-                        }
 
                     }
 
@@ -234,8 +264,8 @@ public class UserPage extends android.support.v4.app.Fragment {
                                         if(au.getposts() != null)
                                             str = au.getposts();
 
-                                        mDatabase.child("users").child(childSnapshot.getKey()).child("posts").setValue(posts.getText().toString() + "&" + str);
-
+                                        mDatabase.child("users").child(childSnapshot.getKey()).child("posts").setValue(posts.getText().toString() + "&&&" + str);
+                            
                                     }
                                 }
 
