@@ -53,7 +53,7 @@ public class UserPage extends android.support.v4.app.Fragment {
     private RecyclerView.LayoutManager mLayoutManager;
     private FirebaseAuth mAuth;
     String currentUserName;
-    TextView tw;
+    TextView tw,tripLogs,lastTrip;
     private TextView tripCounr;
     private EditText posts;
     FirebaseUser user,userMe;
@@ -87,7 +87,9 @@ public class UserPage extends android.support.v4.app.Fragment {
         this.view = view;
 
         tw = view.findViewById(R.id.me_realName);
+        tripLogs = view.findViewById(R.id.me_trip_logs_count);
         tripCounr = view.findViewById(R.id.me_trip_count);
+        lastTrip = view.findViewById(R.id.me_last_trip_city);
         ImageView profileImageView = (ImageView) view.findViewById(R.id.me_profile_picture);
 
         /*Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_003_user);
@@ -143,6 +145,13 @@ public class UserPage extends android.support.v4.app.Fragment {
                     if(user.getEmail().equals(au.getemail())) {
                         //  Toast.makeText(this,au.gettrips(),Toast.LENGTH_LONG).show();
                         tw.setText(au.getusername());
+                        tripCounr.setText(au.gettrips().split("!").length + "");
+
+                        if(au.gettrips() != null) {
+                            String str = au.gettrips();
+                            String myTMPARR[] = str.split("To: ");
+                            lastTrip.setText(myTMPARR[1]);
+                        }
 
                     }
 
@@ -178,6 +187,7 @@ public class UserPage extends android.support.v4.app.Fragment {
 
                         if(au2.getposts() != null) {
                             String tmpArray[] = toBeParsed.split("&&&");
+                            tripLogs.setText(tmpArray.length + "");
                             for(int i = 0; i < tmpArray.length;i++) {
                                 userInfoWithPosts.add(tmpArray[i]);
                                 //Log.i("agam","bariscim: " + noteArrayList.get(i));

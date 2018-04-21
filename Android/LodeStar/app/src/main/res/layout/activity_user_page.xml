@@ -9,8 +9,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="16dp">
+        tools:layout_editor_absoluteX="32dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar7"
@@ -26,11 +26,11 @@
             tools:layout_editor_absoluteY="0dp">
 
             <TextView
+                android:id="@+id/tid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/user_activity"
-                android:id="@+id/tid"
                 android:textColor="@color/colorWhite"
                 android:textSize="20sp" />
 
@@ -163,7 +163,7 @@
                     android:layout_alignRight="@+id/me_last_trip"
                     android:layout_marginEnd="18dp"
                     android:layout_marginRight="18dp"
-                    android:text="@string/user_last_trip_to"
+                    android:text="N/A"
                     android:textColor="#353535"
                     android:textSize="18sp" />
 
