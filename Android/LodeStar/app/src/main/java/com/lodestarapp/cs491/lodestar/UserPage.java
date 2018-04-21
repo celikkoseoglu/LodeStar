@@ -75,10 +75,9 @@ public class UserPage extends android.support.v4.app.Fragment {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
-
-
+        noteArrayList = new ArrayList<String>();
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
     }
-
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -123,10 +122,42 @@ public class UserPage extends android.support.v4.app.Fragment {
             }
         });
 
-        //----------------------------------------------
+      //  takeTheUser();
 
-        noteArrayList = new ArrayList<String>();
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        //   ADDITIONAL_USER au = dataSnapshot.getValue(ADDITIONAL_USER.class);
+        // Log.i("agam",au.username);
+        ref = database.getReference();
+
+        ref.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
+                    au = childSnapshot.getValue(ADDITIONAL_USER.class);
+
+
+
+                    user = FirebaseAuth.getInstance().getCurrentUser();
+
+                    if(user.getEmail().equals(au.getemail())) {
+                        //  Toast.makeText(this,au.gettrips(),Toast.LENGTH_LONG).show();
+                        tw.setText(au.getusername());
+
+                    }
+
+
+                //    ref.child("users").child(childSnapshot.getKey()).child("Posts").setValue();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
 
         au2 = new ADDITIONAL_USER();
         //   ADDITIONAL_USER au = dataSnapshot.getValue(ADDITIONAL_USER.class);
@@ -148,7 +179,7 @@ public class UserPage extends android.support.v4.app.Fragment {
                             String tmpArray[] = toBeParsed.split("&&&");
                             for(int i = 0; i < tmpArray.length;i++) {
                                 noteArrayList.add(tmpArray[i]);
-                                Log.i("agam","burda: " + noteArrayList.get(i));
+                                Log.i("agam","bariscim: " + noteArrayList.get(i));
                             }
                         }
 
@@ -163,11 +194,7 @@ public class UserPage extends android.support.v4.app.Fragment {
             }
         });
 
-
-        //----------------------------------------------
-
-
-
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         return view;
 
