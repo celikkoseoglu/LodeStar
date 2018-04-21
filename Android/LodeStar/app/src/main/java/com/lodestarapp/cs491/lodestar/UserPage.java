@@ -164,6 +164,7 @@ public class UserPage extends android.support.v4.app.Fragment {
         // Log.i("agam",au.username);
         ref = database.getReference();
 
+        //userInfoWithPosts = new ArrayList<>();
         ref.child("users").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -178,14 +179,16 @@ public class UserPage extends android.support.v4.app.Fragment {
                         if(au2.getposts() != null) {
                             String tmpArray[] = toBeParsed.split("&&&");
                             for(int i = 0; i < tmpArray.length;i++) {
-                                noteArrayList.add(tmpArray[i]);
-                                Log.i("agam","bariscim: " + noteArrayList.get(i));
+                                userInfoWithPosts.add(tmpArray[i]);
+                                //Log.i("agam","bariscim: " + noteArrayList.get(i));
                             }
                         }
 
                     }
                 }
-
+                mAdapter.notifyDataSetChanged();
+                userInfoWithPosts = new ArrayList<>();
+                //UserPage.this.onCreate(null);
             }
 
             @Override
@@ -259,7 +262,7 @@ public class UserPage extends android.support.v4.app.Fragment {
                             
                                     }
                                 }
-
+                            posts.setText("");
                             }
 
                             @Override

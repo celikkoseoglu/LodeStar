@@ -22,7 +22,7 @@ public class UserPageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private static final int PROFILE = 0;
     private static final int POSTS = 1;
 
-    List<String> userInfoWithPosts;
+    private List<String> userInfoWithPosts;
 
     public UserPageAdapter(List<String> userInfoWithPosts){
         this.userInfoWithPosts = userInfoWithPosts;
@@ -62,12 +62,13 @@ public class UserPageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        ((UserPagePosts) holder).userPostView.setText(userInfoWithPosts.get(position));
 
     }
 
     @Override
     public int getItemCount() {
-        return 5;
+        return userInfoWithPosts.size();
     }
 
 }
