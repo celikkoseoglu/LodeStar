@@ -15,6 +15,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.google.vrtoolkit.cardboard.CardboardView;
@@ -71,6 +72,7 @@ public class PanoramaView extends GLSurfaceView{
     float[] orientations = new float[3];
 
     float angle = 80.0f;
+    ScrollView sc;
 
     public PanoramaView(Context context) {
         super(context);
@@ -226,7 +228,7 @@ public class PanoramaView extends GLSurfaceView{
             if(sensorRead){
                 Matrix.rotateM(rotationMatrix, 0, 90, 1.0f, 0.0f, 0.0f);
                 Matrix.rotateM(rotationMatrix, 0, -90, 0.0f, 1.0f, 0.0f);
-                Matrix.multiplyMM(mIdentity,0,mIdentity,0,rotationMatrix,0);
+                Matrix.multiplyMM(mIdentity,0,rotationMatrix, 0, mIdentity,0);
 
                 //sensorRead = false;
             }
@@ -292,7 +294,7 @@ public class PanoramaView extends GLSurfaceView{
                     roll = sensorEvent.values[2]/sinv;     //x
                     pitch = sensorEvent.values[1]/sinv;   //y
                     yaw = sensorEvent.values[0]/sinv;     //z
-
+                    requestRender();
                 }
 
 

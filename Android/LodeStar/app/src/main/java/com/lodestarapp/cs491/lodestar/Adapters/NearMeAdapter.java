@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.lodestarapp.cs491.lodestar.Models.Places;
 import com.lodestarapp.cs491.lodestar.PlacesToSeeExpandedActivity;
 import com.lodestarapp.cs491.lodestar.R;
+import com.lodestarapp.cs491.lodestar.VenueActivity;
 
 import java.util.List;
 
@@ -61,16 +62,19 @@ public class NearMeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     String placeName = NearMeAdapter.this.placesList.get(card).getPlaceName();
                     String placeLocation = NearMeAdapter.this.placesList.get(card).getPlaceLocation();
                     String placeType = NearMeAdapter.this.placesList.get(card).getPlaceType();
+                    String placeId = NearMeAdapter.this.placesList.get(card).getPlaceId();
 
-                    Intent intent = new Intent(view.getContext(), PlacesToSeeExpandedActivity.class);
+                    Intent intent = new Intent(view.getContext(), VenueActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putString("placeName", placeName);
                     bundle.putString("placeLocation", placeLocation);
                     bundle.putString("placeType", placeType);
+                    bundle.putString("placeId", placeId);
+
 
 
                     intent.putExtras(bundle);
-                    //view.getContext().startActivity(intent);
+                    view.getContext().startActivity(intent);
                 }
             });
 

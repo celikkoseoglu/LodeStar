@@ -27,6 +27,7 @@ public class PlacesToSeeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     private List<Places> placesList;
     private Context context;
+    private String rating;
 
     public PlacesToSeeAdapter(List<Places> placesList, Context context){
         this.placesList = placesList;
@@ -35,13 +36,13 @@ public class PlacesToSeeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     class PlacesViewHolder extends RecyclerView.ViewHolder {
 
+        TextView placeTypeView;
         ImageView placePictureView;
         TextView placeNameView;
         //TextView placeTypeView;
         TextView placeLocationView;
 
         ImageView placeTypeIcon;
-        TextView placePhotoAttributionView;
 
         //ImageView ??? Number of stars???
         ImageView[] placeStarImages = new ImageView[5];
@@ -77,6 +78,7 @@ public class PlacesToSeeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     String placeLocation = PlacesToSeeAdapter.this.placesList.get(card).getPlaceLocation();
                     String placeType = PlacesToSeeAdapter.this.placesList.get(card).getPlaceType();
                     String placeId = PlacesToSeeAdapter.this.placesList.get(card).getPlaceId();
+                    rating  = PlacesToSeeAdapter.this.placesList.get(card).getRating();
 
                     Intent intent = new Intent(view.getContext(), PlacesToSeeExpandedActivity.class);
                     Bundle bundle = new Bundle();
@@ -84,6 +86,7 @@ public class PlacesToSeeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     bundle.putString("placeLocation", placeLocation);
                     bundle.putString("placeType", placeType);
                     bundle.putString("placeId", placeId);
+                    bundle.putString("placeRating", rating);
 
 
                     intent.putExtras(bundle);
@@ -93,11 +96,10 @@ public class PlacesToSeeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
             this.placePictureView = itemView.findViewById(R.id.imageButtonView);
             this.placeNameView = itemView.findViewById(R.id.place_name);
-            //this.placeTypeView = itemView.findViewById(R.id.place_type);
+            this.placeTypeView = itemView.findViewById(R.id.place_type);
             this.placeLocationView = itemView.findViewById(R.id.place_location);
             //this.placeNumberOfReviewsView = itemView.findViewById(R.id.place_number_of_reviews);
             this.placeTypeIcon = itemView.findViewById(R.id.place_icon_from_api);
-            this.placePhotoAttributionView = itemView.findViewById(R.id.photo_attribution);
 
             this.placeStarImages[0] = itemView.findViewById(R.id.place_stars_image1);
             this.placeStarImages[1] = itemView.findViewById(R.id.place_stars_image2);
@@ -161,8 +163,10 @@ public class PlacesToSeeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 .getPlaceName());
 
         //Set Place Type
-        //((PlacesViewHolder) holder).placeTypeView.setText(placesList.get(position)
-        //        .getPlaceType());
+        if(placesList.get(position).getPlaceType().length() > 20 )
+            ((PlacesViewHolder) holder).placeTypeView.setText(placesList.get(position).getPlaceType().substring(0,19));
+        else
+            ((PlacesViewHolder) holder).placeTypeView.setText(placesList.get(position).getPlaceType());
 
         //Set Place Location
         ((PlacesViewHolder) holder).placeLocationView.setText(placesList.get(position)
@@ -173,11 +177,21 @@ public class PlacesToSeeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         //        .getPlaceNumberOfReviews());
 
         //Set Photo Attribution
-        ((PlacesViewHolder) holder).placePhotoAttributionView.setText(placesList.get(position)
-                .getAttribution());
 
         ((PlacesViewHolder) holder).placeTypeIcon.
                 setImageBitmap(placesList.get(position).getPlaceIconImage());
+
+        int noOfStars = placesList.get(position).getNumberOfStars();
+        boolean halfStar = placesList.get(position).isHalfStar();
+
+        for ( int i = 0; i < noOfStars; i++) {
+            //Log.d("stars", noOfStars+ "");
+            ((PlacesViewHolder) holder).placeStarImages[i].setImageResource(this.context.getResources()
+                    .getIdentifier("ic_star_full", "drawable", this.context.getPackageName()));
+        }
+        if(halfStar)
+            ((PlacesViewHolder) holder).placeStarImages[noOfStars].setImageResource(this.context.getResources()
+                    .getIdentifier("ic_star_half_full", "drawable", this.context.getPackageName()));
 
     }
 

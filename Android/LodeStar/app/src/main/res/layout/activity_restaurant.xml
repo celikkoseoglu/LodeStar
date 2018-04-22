@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".RestaurantActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -29,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Landmarks"
+                android:text="Restaurants"
                 android:textColor="@android:color/background_light"
                 android:textSize="20sp"
                 tools:layout_editor_absoluteX="319dp"
@@ -45,7 +45,7 @@
                 android:drawableLeft="@drawable/arrow_left"
                 android:gravity="left|center_vertical"
                 android:minWidth="0dp"
-                android:onClick="tripStart"
+                android:onClick="nearStart"
                 android:padding="0dp"
                 android:text=" Trip"
                 android:textAllCaps="false"
@@ -53,6 +53,7 @@
                 android:textSize="16sp"
                 tools:ignore="OnClick" />
         </android.support.v7.widget.Toolbar>
+
         <fragment
             android:id="@+id/fragment_map"
             android:name="com.google.android.gms.maps.MapFragment"
@@ -82,7 +83,7 @@
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/places_to_see_recycler_view"
+            android:id="@+id/near_me_recycler1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -91,5 +92,6 @@
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="233dp" />
     </RelativeLayout>
+
 
 </android.support.constraint.ConstraintLayout>

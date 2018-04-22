@@ -27,6 +27,7 @@ public class NearMeController {
     private String requestFromUrl;
     private String keyword;
     private Location location;
+    private int limit=10;
 
 
     public NearMeController(String keyword, boolean locationPermissionGiven, Location location){
@@ -37,7 +38,7 @@ public class NearMeController {
         if(this.locationPermissionGiven){
 
             Log.i(TAG, location.getLatitude() + " " + location.getLongitude());
-            this.requestFromUrl = "http://lodestarapp.com:3009/?location="+location.getLatitude() + ","+location.getLongitude()+"&limit=10&query=";
+            this.requestFromUrl = "http://lodestarapp.com:3009/?location="+location.getLatitude() + ","+location.getLongitude()+"&limit="+limit+"&query=";
 
         }
         else{
@@ -51,7 +52,7 @@ public class NearMeController {
         RequestQueue requestQueue = Volley.newRequestQueue(context);
 
         final JSONArray[] responseFromServer = new JSONArray[1];
-
+        this.requestFromUrl = "http://lodestarapp.com:3009/?location="+location.getLatitude() + ","+location.getLongitude()+"&limit="+limit+"&query=";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, requestFromUrl + keywor, null, new Response.Listener<JSONObject>() {
             @Override
@@ -130,6 +131,10 @@ public class NearMeController {
 
     public interface VolleyCallback6{
         void onSuccess(Bitmap result);
+    }
+
+    public void setLimit(int limit){
+        this.limit = limit;
     }
 
 

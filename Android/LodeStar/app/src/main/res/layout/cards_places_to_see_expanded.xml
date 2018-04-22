@@ -190,7 +190,10 @@
         <android.support.v7.widget.CardView
             android:id="@+id/place_reviews_cardview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            app:cardCornerRadius="0dp">
             <!--android:layout_below="@id/place_panorama_cardview"!-->
 
         </android.support.v7.widget.CardView>

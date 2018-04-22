@@ -81,7 +81,9 @@
             android:label="@string/title_activity_manual_destination"
             android:theme="@style/AppTheme" />
         <activity android:name=".PlacesToSeeExpandedActivity" />
-        <activity android:name=".NearMeActivity"></activity>
+        <activity android:name=".NearMeActivity" />
+        <activity android:name=".VenueActivity" />
+        <activity android:name=".RestaurantActivity"></activity>
     </application>
 
 </manifest>

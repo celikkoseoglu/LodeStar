@@ -289,6 +289,11 @@ public class TabActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void restStart(View view){
+        Intent intent = new Intent(this, RestaurantActivity.class);
+        startActivity(intent);
+    }
+
 
 
 

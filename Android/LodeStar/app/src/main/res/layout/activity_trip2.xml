@@ -376,6 +376,7 @@
                         android:layout_marginRight="3dp"
                         android:elevation="5dp"
                         android:stateListAnimator="@null"
+                        android:onClick="restStart"
                         android:paddingTop="20dp"
                         android:paddingBottom="5dp"/>
 

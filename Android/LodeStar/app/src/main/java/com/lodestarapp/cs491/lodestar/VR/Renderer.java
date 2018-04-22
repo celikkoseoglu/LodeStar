@@ -110,7 +110,7 @@ public class Renderer {
         GLES20.glGetIntegerv(GLES20.GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS, il);
         int limit = il.get();
         Log.i("max combined texture",  limit+ "");
-        if(limit<192)
+        if(limit<192 || limit>32)
          ifEGLPresent = false;
 
 

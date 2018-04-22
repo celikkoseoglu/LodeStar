@@ -16,6 +16,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -54,6 +56,7 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
 
     private LocationManager locationManager;
     private LocationListener locationListener;
+    private LinearLayout ll1;
 
     private List<Places> placesList = new ArrayList<>();
 
@@ -117,6 +120,10 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
 
         adapter = new PlacesToSeeAdapter(placesList, this.getApplicationContext());
         recyclerView.setAdapter(adapter);
+
+        ll1 = findViewById(R.id.ll1);
+        recyclerView.setVisibility(View.GONE);
+
 
         Log.d(TAG, "lol");
 
@@ -295,9 +302,8 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
     }
 
     private void parseTheJSONObject(JSONArray jsonArray) throws JSONException {
-        //Log.d(TAG, "bbb");
+        Log.d(TAG, "bbb");
         Log.d(TAG, jsonArray.toString());
-
 
         String placeName;
         String placeAddress;
@@ -333,7 +339,7 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
 
             placeName = place.getString("name");
             placeAddress = place.getString("formatted_address");
-            placeRating = place.getString("rating");
+            placeRating = Double.parseDouble(place.getString("rating")) * 2 + "";
             placeType = types.getString(0);
             placeId = place.getString("place_id");
 
@@ -492,11 +498,17 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
                         public void onPlaceImageSuccess(Bitmap bitmap) {
                             placesList.get(finalI).setPlaceImage(bitmap);
                             adapter.notifyDataSetChanged();
+                            ll1.setVisibility(View.GONE);
+                            recyclerView.setVisibility(View.VISIBLE);
                         }
                     });
 
             requestFromURL.setLength(0);
         }
+    }
+
+    public void tripStart(View view) {
+        finish();
     }
 
     /*private void getPlaceImage() {

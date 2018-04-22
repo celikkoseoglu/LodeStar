@@ -1,56 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
+    tools:context=".VenueActivity">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/my_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="42dp"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <TextView
+            android:id="@+id/tv_daily"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Venue Details"
+            android:textColor="@android:color/background_light"
+            android:textSize="20sp"
+            tools:layout_editor_absoluteX="319dp"
+            tools:layout_editor_absoluteY="19dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:background="?attr/colorPrimary"
-            android:elevation="4dp"
-            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="0dp">
-
-            <TextView
-                android:id="@+id/tv_daily"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Venue Details"
-                android:textColor="@android:color/background_light"
-                android:textSize="20sp"
-                tools:layout_editor_absoluteX="319dp"
-                tools:layout_editor_absoluteY="19dp" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_gravity="left"
-                android:background="@android:color/transparent"
-                android:drawableLeft="@drawable/arrow_left"
-                android:gravity="left|center_vertical"
-                android:minWidth="0dp"
-                android:onClick="nearStart"
-                android:padding="0dp"
-                android:text=" Landmarks"
-                android:textAllCaps="false"
-                android:textColor="@android:color/holo_blue_bright"
-                android:textSize="16sp" />
-        </android.support.v7.widget.Toolbar>
+            android:layout_gravity="left"
+            android:background="@android:color/transparent"
+            android:drawableLeft="@drawable/arrow_left"
+            android:gravity="left|center_vertical"
+            android:minWidth="0dp"
+            android:onClick="nearStart"
+            android:padding="0dp"
+            android:text=" Near Me"
+            android:textAllCaps="false"
+            android:textColor="@android:color/holo_blue_bright"
+            android:textSize="16sp" />
+    </android.support.v7.widget.Toolbar>
         <ScrollView
             android:id="@+id/scroll_general"
             android:layout_width="match_parent"
@@ -265,82 +265,82 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                    <TextView
-                        android:id="@+id/place_name_expanded2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/place_name"
-                        android:textSize="20sp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_alignParentTop="true"/>
-
-                    <com.lodestarapp.cs491.lodestar.VR.PanoramaView
-                        android:id="@+id/layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:layout_below="@id/place_name_expanded2"
-                        >
-
-                    </com.lodestarapp.cs491.lodestar.VR.PanoramaView>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_below="@id/place_name_expanded2">
-
-                        <RelativeLayout
-                            android:id="@+id/relativelayout"
-                            android:layout_width="match_parent"
-                            android:layout_height="200dp">
-
-                            <ImageView
-                                android:id="@+id/close"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                app:srcCompat="@drawable/ic_close"
-                                android:layout_alignParentTop="true"
-                                android:layout_alignParentLeft="true"
-                                android:onClick="goSmall"
-                                android:layout_alignParentStart="true" />
-
-                            <ImageView
-                                android:id="@+id/vrSmall"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                app:srcCompat="@drawable/ic_cardboard3"
-                                android:layout_toLeftOf="@+id/full"
-                                android:layout_marginRight="5dp"
-                                android:layout_alignParentBottom="true"
-                                android:onClick="goVr"
-                                android:layout_toStartOf="@+id/full"
-                                android:layout_marginEnd="5dp" />
-
-                            <ImageView
-                                android:id="@+id/full"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                app:srcCompat="@drawable/ic_fullscreen"
-                                android:layout_alignParentRight="true"
-                                android:layout_alignParentBottom="true"
-                                android:layout_alignParentEnd="true"
-                                android:onClick="goFullscreen"/>
-
-                        </RelativeLayout>
-
-                        <ImageView
-                            android:id="@+id/vrBig"
+                        <TextView
+                            android:id="@+id/place_name_expanded2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentBottom="true"
-                            android:layout_alignParentEnd="true"
-                            android:layout_alignParentRight="true"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginRight="10dp"
-                            android:onClick="goVr"
-                            app:srcCompat="@drawable/ic_cardboard3" />
+                            android:text="@string/place_name"
+                            android:textSize="20sp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_alignParentTop="true"/>
 
-                    </RelativeLayout>
+                        <com.lodestarapp.cs491.lodestar.VR.PanoramaView
+                            android:id="@+id/layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:layout_below="@id/place_name_expanded2"
+                            >
+
+                        </com.lodestarapp.cs491.lodestar.VR.PanoramaView>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_below="@id/place_name_expanded2">
+
+                            <RelativeLayout
+                                android:id="@+id/relativelayout"
+                                android:layout_width="match_parent"
+                                android:layout_height="200dp">
+
+                                <ImageView
+                                    android:id="@+id/close"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    app:srcCompat="@drawable/ic_close"
+                                    android:layout_alignParentTop="true"
+                                    android:layout_alignParentLeft="true"
+                                    android:onClick="goSmall"
+                                    android:layout_alignParentStart="true" />
+
+                                <ImageView
+                                    android:id="@+id/vrSmall"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    app:srcCompat="@drawable/ic_cardboard3"
+                                    android:layout_toLeftOf="@+id/full"
+                                    android:layout_marginRight="5dp"
+                                    android:layout_alignParentBottom="true"
+                                    android:onClick="goVr"
+                                    android:layout_toStartOf="@+id/full"
+                                    android:layout_marginEnd="5dp" />
+
+                                <ImageView
+                                    android:id="@+id/full"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    app:srcCompat="@drawable/ic_fullscreen"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_alignParentEnd="true"
+                                    android:onClick="goFullscreen"/>
+
+                            </RelativeLayout>
+
+                            <ImageView
+                                android:id="@+id/vrBig"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginEnd="10dp"
+                                android:layout_marginRight="10dp"
+                                android:onClick="goVr"
+                                app:srcCompat="@drawable/ic_cardboard3" />
+
+                        </RelativeLayout>
                     </RelativeLayout>
 
                 </android.support.v7.widget.CardView>
@@ -357,13 +357,13 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Reviews by Google"
-                        android:textSize="20sp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginStart="10dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Reviews by Google"
+                            android:textSize="20sp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginStart="10dp"/>
 
                         <View
                             android:layout_width="match_parent"
@@ -372,13 +372,13 @@
                             android:layout_marginLeft="10dp"
                             android:layout_marginRight="10dp"/>
 
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/place_review_recyclerview"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginStart="10dp"
-                        />
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/place_review_recyclerview"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginStart="10dp"
+                            />
                     </LinearLayout>
 
                 </android.support.v7.widget.CardView>
@@ -390,6 +390,5 @@
 
 
     </RelativeLayout>
-
 
 </android.support.constraint.ConstraintLayout>
