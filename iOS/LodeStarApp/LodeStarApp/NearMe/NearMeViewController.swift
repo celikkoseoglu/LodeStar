@@ -238,4 +238,8 @@ class NearMeViewController: UIViewController, UICollectionViewDelegate, UICollec
             }
         }
     }
+    
+    @IBAction func backButton(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
 }

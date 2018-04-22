@@ -149,7 +149,7 @@ class TravelViewController: UIViewController, UICollectionViewDelegate, UICollec
         
         slideShow.backgroundColor = UIColor.white
         //slideShow.slideshowInterval = 5.0
-        slideShow.pageControlPosition = PageControlPosition.underScrollView
+        slideShow.pageControlPosition = PageControlPosition.insideScrollView
         slideShow.pageControl.currentPageIndicatorTintColor = UIColor.lightGray
         slideShow.pageControl.pageIndicatorTintColor = UIColor.black
         slideShow.contentScaleMode = UIViewContentMode.scaleAspectFill
