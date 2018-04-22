@@ -46,6 +46,9 @@ extension VenueViewController {
             cell.slideShow.pageControl.pageIndicatorTintColor = UIColor.black
             cell.slideShow.contentScaleMode = UIViewContentMode.scaleAspectFill
             
+            // related to trip view controller
+            cell.slideShow.travelViewSet = false
+            
             if venueString[index.row] != nil {
             
                 // can be used with other sample sources as `afNetworkingSource`, `alamofireSource` or `sdWebImageSource` or `kingfisherSource`

@@ -11,12 +11,8 @@ import UIKit
 fileprivate let itemsPerRow: CGFloat = 3
 fileprivate let sectionInsets = UIEdgeInsets(top: 0.0, left: 6.0, bottom: 3.0, right: 6.0)
 fileprivate let reuseIdentifier = "tripCell"
-fileprivate var availableServices = ["Transport Options", "Weather", "Flight Information", "Shopping", "Lounge", "Restaurants", "Living Expenses", "Places to See", "Accomodation", "Landmarks", "Get a SIM Card", "N/A"]
+fileprivate var availableServices = ["Transport Options", "Weather", "Flight Information", "Shopping", "Lounge", "Restaurants", "Living Expenses", "Near Me", "Accomodation", "Landmarks", "Get a SIM Card", "N/A"]
 fileprivate var availableServiceImages = ["transport", "weather", "flight", "shopping", "lounge", "restaurants", "livingExpenses", "placesToSee", "accomodation", "landmarks", "getASIMCard", "na"]
-
-protocol TravelViewControllerDelegate {
-    func setDestinationInfo(_ name:String)
-}
 
 // MARK: - UICollectionViewDataSource
 extension TravelViewController {
@@ -81,6 +77,14 @@ extension TravelViewController {
             
         }
         
+        else if text == "Near Me" {
+            
+            let nearMeTap = UITapGestureRecognizer(target: self, action: #selector(TravelViewController.nearMeTapAction(_:)))
+            cell.cellImage.isUserInteractionEnabled = true
+            cell.cellImage.addGestureRecognizer(nearMeTap)
+            
+        }
+        
         cell.displayContent(title: text, cellImage: image!)
         
         return cell
@@ -107,7 +111,7 @@ extension TravelViewController : UICollectionViewDelegateFlowLayout {
     }
 }
 
-class TravelViewController: UIViewController, TravelViewControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
+class TravelViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     // variables
     @IBOutlet weak var tripLabel: UILabel!
@@ -121,13 +125,11 @@ class TravelViewController: UIViewController, TravelViewControllerDelegate, UICo
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    @IBOutlet weak var cityImage: UIImageView!
+    @IBOutlet weak var slideShow: ImageSlideshow!
+    var imageString = [AlamofireSource(urlString: "http://wearesilentarrow.com/wp-content/uploads/Silent-Arrow-Hot-AF-Bra-Side.jpg")!, AlamofireSource(urlString: "http://st1.bollywoodlife.com/wp-content/uploads/photos/aishwarya-rai-bachchan-looks-steaming-hot-in-this-picture-201701-873948.jpg")!]
     
-    var destination = "Tap to Set"
-    var departure = "Tap to Set"
-    
-    var swipeRight = UISwipeGestureRecognizer()
-    var swipeLeft = UISwipeGestureRecognizer()
+    var destination = "Izmir"
+    var departure = "Ibiza"
     
     var direction = true
     
@@ -137,20 +139,27 @@ class TravelViewController: UIViewController, TravelViewControllerDelegate, UICo
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        // add gesture recognizer to image
-        let imageTap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
-        destinationCityImage.addGestureRecognizer(imageTap)
-        destinationCityImage.isUserInteractionEnabled = true
-        
-        // swipe gestures
-        swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleRightSwipe(_:)))
-        swipeRight.direction = .right
-        destinationCityImage.addGestureRecognizer(swipeRight)
-        
-        swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleLeftSwipe(_:)))
-        swipeLeft.direction = .left
-        
         self.collectionView.isScrollEnabled = true
+        
+        // init
+        boardingInfoLabel.text = "You will be boarding PJ15396 to"
+        destinationCityNameLabel.text = destination
+        destinationCityLabel.text = "Showing information about " + departure
+        departureCityLabel.text = "Swipe left to see information about " + destination
+        
+        slideShow.backgroundColor = UIColor.white
+        //slideShow.slideshowInterval = 5.0
+        slideShow.pageControlPosition = PageControlPosition.underScrollView
+        slideShow.pageControl.currentPageIndicatorTintColor = UIColor.lightGray
+        slideShow.pageControl.pageIndicatorTintColor = UIColor.black
+        slideShow.contentScaleMode = UIViewContentMode.scaleAspectFill
+        slideShow.setImageInputs(imageString)
+        slideShow.pauseTimer()
+        
+        // additions
+        slideShow.travelView = self
+        slideShow.travelViewSet = true
+        
         
     }
     
@@ -159,87 +168,28 @@ class TravelViewController: UIViewController, TravelViewControllerDelegate, UICo
         // Dispose of any resources that can be recreated.
     }
     
-    // function which is triggered when handleTap is called
-    @objc func handleTap(_ sender: UITapGestureRecognizer) {
+    open func handleSwipe() {
         
-        let popupSelectNation = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "selectNation") as! SelectNationViewController
-        popupSelectNation.travelViewControllerDelegate = self
-        self.addChildViewController(popupSelectNation)
-        popupSelectNation.view.frame = self.view.frame
-        self.view.addSubview(popupSelectNation.view)
-        popupSelectNation.didMove(toParentViewController: self)
+        if (direction == true) {
         
-    }
-    
-    @objc func handleRightSwipe(_ sender: UISwipeGestureRecognizer) {
-        
-        destinationCityNameLabel.text = departure
-        destinationCityLabel.text = "Showing information about " + departure
-        departureCityLabel.text = "Swipe left to see information about " + destination
-        
-        destinationCityImage.removeGestureRecognizer(swipeRight)
-        destinationCityImage.addGestureRecognizer(swipeLeft)
-        
-        //destinationCityImage.image = UIImage(named: "istanbul.png")
-        
-        boardingInfoLabel.text = "You will be boarding PJ15396 from"
-        
-        cityImage.image = UIImage(named: "shanghai")
-        
-        let fadeAnim:CABasicAnimation = CABasicAnimation(keyPath: "contents")
-        fadeAnim.fromValue = UIImage(named: "shanghai")
-        fadeAnim.toValue   = UIImage(named: "uganda")
-        fadeAnim.duration  = 0.8;
-        
-        direction = false
-        
-    }
-    
-    @objc func handleLeftSwipe(_ sender: UISwipeGestureRecognizer) {
-        
-        destinationCityNameLabel.text = destination
-        destinationCityLabel.text = "Showing information about " + destination
-        departureCityLabel.text = "Swipe right to see information about " + departure
-        
-        destinationCityImage.removeGestureRecognizer(swipeLeft)
-        destinationCityImage.addGestureRecognizer(swipeRight)
-        
-        boardingInfoLabel.text = "You will be boarding PJ15396 to"
-        
-        cityImage.image = UIImage(named: "uganda")
-        
-        let fadeAnim:CABasicAnimation = CABasicAnimation(keyPath: "contents")
-        fadeAnim.fromValue = UIImage(named: "uganda")
-        fadeAnim.toValue   = UIImage(named: "shanghai")
-        fadeAnim.duration  = 0.8;
-        
-        cityImage.layer.add(fadeAnim, forKey: "contents")
-        
-        direction = true
-        
-    }
-    
-    func setDestinationInfo(_ name: String) {
-        
-        // don't allow further changes
-        //destinationCityImage.isUserInteractionEnabled = false
-        
-        if direction == true {
-            // update content of the labels etc for destination
-            destination = name
-            destinationCityNameLabel.text = destination
-            destinationCityLabel.text = "Showing information about " + destination
-            boardingInfoLabel.text = "You will be boarding PJ15396 to"
-        }
-            
-        else {
-            // update content of the labels etc for departure
-            departure = name
             destinationCityNameLabel.text = departure
             destinationCityLabel.text = "Showing information about " + departure
+            departureCityLabel.text = "Swipe to see information about " + destination
             boardingInfoLabel.text = "You will be boarding PJ15396 from"
+            
+            direction = false
         }
         
+        else {
+            
+            destinationCityNameLabel.text = destination
+            destinationCityLabel.text = "Showing information about " + destination
+            departureCityLabel.text = "Swipe to see information about " + departure
+            boardingInfoLabel.text = "You will be boarding PJ15396 to"
+            
+            direction = true
+            
+        }
         
     }
     
@@ -277,6 +227,14 @@ class TravelViewController: UIViewController, TravelViewControllerDelegate, UICo
         
         let storyboard = self.storyboard
         let controller = storyboard?.instantiateViewController(withIdentifier: "landmarksNAV")
+        self.present(controller!, animated: true, completion: nil)
+        
+    }
+    
+    @IBAction func nearMeTapAction(_ sender: UITapGestureRecognizer) {
+        
+        let storyboard = self.storyboard
+        let controller = storyboard?.instantiateViewController(withIdentifier: "nearMeNAV")
         self.present(controller!, animated: true, completion: nil)
         
     }

@@ -65,6 +65,9 @@
 		8D6F76D41F961993004824B0 /* LodeStarAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6F76D31F961993004824B0 /* LodeStarAppTests.swift */; };
 		8D6F76DF1F961B40004824B0 /* SelectNationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6F76DE1F961B40004824B0 /* SelectNationViewController.swift */; };
 		8DC4DCB72021CBAC00DBF943 /* FlightInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC4DCB62021CBAC00DBF943 /* FlightInformationViewController.swift */; };
+		8DCEC19D208D06420030EECF /* NearMeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCEC19C208D06420030EECF /* NearMeViewController.swift */; };
+		8DCEC1A1208D06780030EECF /* NearMeSmallCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCEC19F208D06770030EECF /* NearMeSmallCell.swift */; };
+		8DCEC1A2208D06780030EECF /* NearMeMainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCEC1A0208D06780030EECF /* NearMeMainCell.swift */; };
 		F706920C93114283E2A46A09 /* Pods_LodeStarApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC355C9C62AF5D3EFF746B52 /* Pods_LodeStarApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -156,6 +159,9 @@
 		8D6F76D51F961993004824B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D6F76DE1F961B40004824B0 /* SelectNationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectNationViewController.swift; sourceTree = "<group>"; };
 		8DC4DCB62021CBAC00DBF943 /* FlightInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlightInformationViewController.swift; sourceTree = "<group>"; };
+		8DCEC19C208D06420030EECF /* NearMeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearMeViewController.swift; sourceTree = "<group>"; };
+		8DCEC19F208D06770030EECF /* NearMeSmallCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NearMeSmallCell.swift; path = /Users/berkabbasoglu/Documents/LodeStar/LodeStar/iOS/LodeStarApp/LodeStarApp/NearMe/NearMeSmallCell.swift; sourceTree = "<absolute>"; };
+		8DCEC1A0208D06780030EECF /* NearMeMainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NearMeMainCell.swift; path = /Users/berkabbasoglu/Documents/LodeStar/LodeStar/iOS/LodeStarApp/LodeStarApp/NearMe/NearMeMainCell.swift; sourceTree = "<absolute>"; };
 		DC355C9C62AF5D3EFF746B52 /* Pods_LodeStarApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LodeStarApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0296F5819E422DCEF19640A /* Pods-LodeStarApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LodeStarApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-LodeStarApp/Pods-LodeStarApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -311,6 +317,7 @@
 				8D6F76BE1F961993004824B0 /* AppDelegate.swift */,
 				8D6F76DE1F961B40004824B0 /* SelectNationViewController.swift */,
 				8D567EF9207A3D0300A1F051 /* Landmarks */,
+				8DCEC19E208D064D0030EECF /* NearMe */,
 				147523EC207CEDC0006C0AAB /* Venue */,
 				8D6F76C21F961993004824B0 /* Main.storyboard */,
 				8D26FA0F2043407E0011E5BE /* FoodCell.swift */,
@@ -336,6 +343,16 @@
 				8D6F76D51F961993004824B0 /* Info.plist */,
 			);
 			path = LodeStarAppTests;
+			sourceTree = "<group>";
+		};
+		8DCEC19E208D064D0030EECF /* NearMe */ = {
+			isa = PBXGroup;
+			children = (
+				8DCEC1A0208D06780030EECF /* NearMeMainCell.swift */,
+				8DCEC19F208D06770030EECF /* NearMeSmallCell.swift */,
+				8DCEC19C208D06420030EECF /* NearMeViewController.swift */,
+			);
+			path = NearMe;
 			sourceTree = "<group>";
 		};
 		B1FE187B4F90C8A59E3E3863 /* Frameworks */ = {
@@ -571,6 +588,7 @@
 				14FF11A52077D34F00D611AF /* TripCell.swift in Sources */,
 				8D567EF6207A3C9800A1F051 /* LandmarksViewController.swift in Sources */,
 				8D26FA102043407E0011E5BE /* FoodCell.swift in Sources */,
+				8DCEC19D208D06420030EECF /* NearMeViewController.swift in Sources */,
 				8D614AD52082943B00D97725 /* ActivityIndicator.swift in Sources */,
 				8D26FA0C2042FE400011E5BE /* SmallWeatherCell.swift in Sources */,
 				8D3D437F200A3CDA0091CCEB /* ProfileViewController.swift in Sources */,
@@ -587,10 +605,12 @@
 				8D3D437D200A3AD30091CCEB /* LogCell.swift in Sources */,
 				8D2A6C331FDE781C00AA44E7 /* FlightDetailsCell.swift in Sources */,
 				8D614AD92082943B00D97725 /* ImageSlideshow.swift in Sources */,
+				8DCEC1A1208D06780030EECF /* NearMeSmallCell.swift in Sources */,
 				147524082080EECC006C0AAB /* PhotoDescriptionCell.swift in Sources */,
 				8D2A6C351FDE7E1600AA44E7 /* LodeStarLayout.swift in Sources */,
 				8D3D437B200A2FDC0091CCEB /* TransportViewController.swift in Sources */,
 				146ED5BB207BB475001BCD5F /* VenueViewController.swift in Sources */,
+				8DCEC1A2208D06780030EECF /* NearMeMainCell.swift in Sources */,
 				8D614AD82082943B00D97725 /* ImageSlideshowItem.swift in Sources */,
 				8D2EAC792007735A000819DA /* WeatherViewController.swift in Sources */,
 				8D6F76DF1F961B40004824B0 /* SelectNationViewController.swift in Sources */,

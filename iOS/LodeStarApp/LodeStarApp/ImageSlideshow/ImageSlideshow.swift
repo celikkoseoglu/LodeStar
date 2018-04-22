@@ -45,6 +45,10 @@ public enum ImagePreload {
 @objcMembers
 open class ImageSlideshow: UIView {
     
+    // additions
+    var travelView = TravelViewController()
+    var travelViewSet = false
+    
     /// Scroll View to wrap the slideshow
     open let scrollView = UIScrollView()
     
@@ -72,6 +76,12 @@ open class ImageSlideshow: UIView {
         didSet {
             if oldValue != currentPage {
                 currentPageChanged?(currentPage)
+                
+                
+                // additions
+                if travelViewSet {
+                    tripChange(view: travelView)
+                }
             }
         }
     }
@@ -484,5 +494,12 @@ extension ImageSlideshow: UIScrollViewDelegate {
         }
         
         pageControl.currentPage = currentPageForScrollViewPage(primaryVisiblePage)
+    }
+    
+    // added by berk
+    func tripChange(view: TravelViewController) {
+        
+        view.handleSwipe()
+
     }
 }

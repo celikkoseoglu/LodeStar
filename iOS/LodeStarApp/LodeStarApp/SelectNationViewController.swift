@@ -14,8 +14,6 @@ class SelectNationViewController: UIViewController {
     var globe = "Turkey"
     var city = "Istanbul"
     
-    var travelViewControllerDelegate:TravelViewControllerDelegate?
-    
     @IBOutlet weak var nationPicker: UIPickerView!
     @IBOutlet weak var cityPicker: UIPickerView!
     
@@ -45,9 +43,9 @@ class SelectNationViewController: UIViewController {
     
     @IBAction func selectNationDoneAction(_ sender: UIButton) {
         
-        if let vcDelegate = travelViewControllerDelegate {
-            vcDelegate.setDestinationInfo(city)
-        }
+        //if let vcDelegate = travelViewControllerDelegate {
+          //  vcDelegate.setDestinationInfo(city)
+        //}
         
         self.removeAnimate()
         
