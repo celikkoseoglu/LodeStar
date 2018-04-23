@@ -58,10 +58,11 @@
             android:id="@+id/fragment_map"
             android:name="com.google.android.gms.maps.MapFragment"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="230dp"
             android:layout_below="@id/my_toolbar"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="56dp" />
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -82,15 +83,35 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/fragment_map"
+            android:id="@+id/ll2"
+            android:orientation="vertical">
+
+        <Button
+            android:id="@+id/optionMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ced91d1d"
+            android:text="General - Tap Here to Change Restaurant Type "
+            android:textAllCaps="false"
+            android:paddingTop="10dp"
+            android:minHeight="0dp"
+            android:paddingBottom="10dp"
+            android:textColor="@color/colorWhite"
+            />
+
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/near_me_recycler1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/fragment_map"
             tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="233dp" />
+            tools:layout_editor_absoluteY="233dp" >
+        </android.support.v7.widget.RecyclerView>
+        </LinearLayout>
     </RelativeLayout>
 
 

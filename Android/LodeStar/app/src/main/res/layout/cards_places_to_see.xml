@@ -92,13 +92,14 @@
                     android:layout_marginLeft="5dp"/>
 
                 <ImageView
-                    android:id="@+id/place_icon"
+                    android:id="@+id/place_iconn"
                     android:layout_width="15dp"
                     android:layout_height="20dp"
                     app:srcCompat="@drawable/ic_location"
                     android:layout_below="@id/place_icon_from_api"
-                    android:layout_alignLeft="@id/place_icon_from_api"
-                    android:layout_marginTop="10dp"/>
+                    android:layout_alignLeft="@id/place_name"
+                    android:layout_marginTop="10dp"
+                    android:layout_alignStart="@id/place_name" />
 
 
                 <TextView
@@ -107,8 +108,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/place_location"
                     android:textSize="14sp"
-                    android:layout_toRightOf="@+id/place_icon"
-                    android:layout_alignTop="@id/place_icon"
+                    android:layout_toRightOf="@+id/place_iconn"
+                    android:layout_alignTop="@id/place_iconn"
                     android:layout_marginLeft="5dp"
                     />
 
@@ -117,10 +118,10 @@
                     android:id="@+id/place_stars_image1"
                     android:layout_width="15dp"
                     android:layout_height="15dp"
-                    android:layout_alignLeft="@id/place_icon"
-                    android:layout_alignStart="@id/place_icon"
+                    android:layout_alignLeft="@id/place_iconn"
+                    android:layout_alignStart="@id/place_iconn"
                     android:layout_below="@id/place_location"
-                    android:layout_marginTop="15dp" />
+                    android:layout_marginTop="10dp" />
 
                 <ImageView
                     android:id="@+id/place_stars_image2"

@@ -139,28 +139,11 @@ public class PlacesToSeeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        //TODO: Place Image
-
-        //Set Number of Stars Image
-        //int noOfStars = placesList.get(position).getNumberOfStars();
-        //boolean halfStar = placesList.get(position).isHalfStar();
-        //int i;
-
-        /*for ( i = 0; i < noOfStars; i++) {
-            ((PlacesViewHolder) holder).placeStarImages[i].setImageResource(this.context.getResources()
-            .getIdentifier("ic_star_full", "drawable", this.context.getPackageName()));
-        }
-        if(halfStar)
-            ((PlacesViewHolder) holder).placeStarImages[i].setImageResource(this.context.getResources()
-                    .getIdentifier("ic_star_half_full", "drawable", this.context.getPackageName()));*/
-
         //Set Place Image
-        ((PlacesViewHolder) holder).placePictureView.
-                setImageBitmap(placesList.get(position).getPlaceImage());
+        ((PlacesViewHolder) holder).placePictureView.setImageBitmap(placesList.get(position).getPlaceImage());
 
         //Set Place Name
-        ((PlacesViewHolder) holder).placeNameView.setText(placesList.get(position)
-                .getPlaceName());
+        ((PlacesViewHolder) holder).placeNameView.setText(placesList.get(position).getPlaceName());
 
         //Set Place Type
         if(placesList.get(position).getPlaceType().length() > 20 )
@@ -169,17 +152,13 @@ public class PlacesToSeeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             ((PlacesViewHolder) holder).placeTypeView.setText(placesList.get(position).getPlaceType());
 
         //Set Place Location
-        ((PlacesViewHolder) holder).placeLocationView.setText(placesList.get(position)
-                .getPlaceLocation());
+        ((PlacesViewHolder) holder).placeLocationView.setText(placesList.get(position).getPlaceLocation());
 
         //Set Place Number of Reviews
         //((PlacesViewHolder) holder).placeNumberOfReviewsView.setText(placesList.get(position)
         //        .getPlaceNumberOfReviews());
 
-        //Set Photo Attribution
-
-        ((PlacesViewHolder) holder).placeTypeIcon.
-                setImageBitmap(placesList.get(position).getPlaceIconImage());
+        ((PlacesViewHolder) holder).placeTypeIcon.setImageBitmap(placesList.get(position).getPlaceIconImage());
 
         int noOfStars = placesList.get(position).getNumberOfStars();
         boolean halfStar = placesList.get(position).isHalfStar();

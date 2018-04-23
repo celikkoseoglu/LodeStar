@@ -4,6 +4,7 @@ import android.*;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.location.Location;
 import android.location.LocationListener;
@@ -15,17 +16,21 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -65,6 +70,7 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
     private ArrayList<String> iconURL = new ArrayList<>();
 
     private static final String TAG = "placesToSeeMessage";
+    LatLngBounds.Builder builder;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -123,6 +129,7 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
 
         ll1 = findViewById(R.id.ll1);
         recyclerView.setVisibility(View.GONE);
+        builder= new LatLngBounds.Builder();
 
 
         Log.d(TAG, "lol");
@@ -177,6 +184,7 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
                         googleMap.addMarker((new MarkerOptions().
                                 position(new LatLng(myLocation[0].getLatitude(), myLocation[0].getLongitude()))
                                 .title("You are Here")));
+                        builder.include(new LatLng(myLocation[0].getLatitude(), myLocation[0].getLongitude()));
 
                         placesToSeeController = new PlacesToSeeController("", true, myLocation[0]);
                         placesToSeeController.getPlacesToSeeInformation(placesToSeeController.getRequestFromUrl(),
@@ -211,6 +219,7 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
             googleMap.addMarker((new MarkerOptions().
                     position(new LatLng(myLocation[0].getLatitude(), myLocation[0].getLongitude()))
                     .title("You are Here")));
+            builder.include(new LatLng(myLocation[0].getLatitude(), myLocation[0].getLongitude()));
 
             placesToSeeController = new PlacesToSeeController("", true, myLocation[0]);
             placesToSeeController.getPlacesToSeeInformation(placesToSeeController.getRequestFromUrl(),
@@ -269,6 +278,7 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
                                 googleMap.addMarker((new MarkerOptions().
                                         position(new LatLng(myLocation[0].getLatitude(), myLocation[0].getLongitude()))
                                         .title("You are Here")));
+                                builder.include(new LatLng(myLocation[0].getLatitude(), myLocation[0].getLongitude()));
 
                                 placesToSeeController = new PlacesToSeeController("", true, myLocation[0]);
                                 placesToSeeController.getPlacesToSeeInformation(placesToSeeController.getRequestFromUrl(),
@@ -356,11 +366,17 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
             googleMap.addMarker(new MarkerOptions()
                     .position(placeLatLng)
                     .title(placeName));
+            builder.include(placeLatLng);
 
             placesList.add(new Places(null, placeName, placeAddress, placeType,
-                    placeRating, null, photoAttribution, placeId));
+                    placeRating, null, placeRating, placeId));
 
         }
+        LatLngBounds bounds= builder.build();
+
+        int padding = 100;
+        CameraUpdate c = CameraUpdateFactory.newLatLngBounds(bounds,padding);
+        googleMap.animateCamera(c);
 
         adapter.notifyDataSetChanged();
 
@@ -482,9 +498,11 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
             final int finalI = i;
             //Log.d(TAG, "Photo");
             //Log.d(TAG, this.photoReferences.get(i));
+            DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
+            int px = (int) (130 * (metrics.densityDpi / 160f));
 
             requestFromURL.append("https://maps.googleapis.com/maps/api/place/photo" +
-                    "?maxheight=125&photoreference=");
+                    "?maxwidth="+px+"&photoreference=");
 
             requestFromURL.append(photoReferences.get(i));
             requestFromURL.append("&key=" + "AIzaSyAKnThPPshmgffk3DNPNkXd2glEQaH1Rlw");
