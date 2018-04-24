@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		143EB945208D476E0086BDAA /* NearMeSmallCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143EB943208D476E0086BDAA /* NearMeSmallCell.swift */; };
+		143EB946208D476E0086BDAA /* NearMeMainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143EB944208D476E0086BDAA /* NearMeMainCell.swift */; };
 		143FF65F2037088C00C462F6 /* loginBackground.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 143FF65E2037088B00C462F6 /* loginBackground.pdf */; };
 		146ED5BB207BB475001BCD5F /* VenueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146ED5BA207BB475001BCD5F /* VenueViewController.swift */; };
 		147523EB207CED97006C0AAB /* VenueVRCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147523EA207CED96006C0AAB /* VenueVRCell.swift */; };
@@ -66,8 +68,6 @@
 		8D6F76DF1F961B40004824B0 /* SelectNationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6F76DE1F961B40004824B0 /* SelectNationViewController.swift */; };
 		8DC4DCB72021CBAC00DBF943 /* FlightInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC4DCB62021CBAC00DBF943 /* FlightInformationViewController.swift */; };
 		8DCEC19D208D06420030EECF /* NearMeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCEC19C208D06420030EECF /* NearMeViewController.swift */; };
-		8DCEC1A1208D06780030EECF /* NearMeSmallCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCEC19F208D06770030EECF /* NearMeSmallCell.swift */; };
-		8DCEC1A2208D06780030EECF /* NearMeMainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCEC1A0208D06780030EECF /* NearMeMainCell.swift */; };
 		F706920C93114283E2A46A09 /* Pods_LodeStarApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC355C9C62AF5D3EFF746B52 /* Pods_LodeStarApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -95,6 +95,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		143EB943208D476E0086BDAA /* NearMeSmallCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearMeSmallCell.swift; sourceTree = "<group>"; };
+		143EB944208D476E0086BDAA /* NearMeMainCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearMeMainCell.swift; sourceTree = "<group>"; };
 		143FF65E2037088B00C462F6 /* loginBackground.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = loginBackground.pdf; sourceTree = "<group>"; };
 		146ED5BA207BB475001BCD5F /* VenueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueViewController.swift; sourceTree = "<group>"; };
 		147523EA207CED96006C0AAB /* VenueVRCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueVRCell.swift; sourceTree = "<group>"; };
@@ -160,8 +162,6 @@
 		8D6F76DE1F961B40004824B0 /* SelectNationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectNationViewController.swift; sourceTree = "<group>"; };
 		8DC4DCB62021CBAC00DBF943 /* FlightInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlightInformationViewController.swift; sourceTree = "<group>"; };
 		8DCEC19C208D06420030EECF /* NearMeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearMeViewController.swift; sourceTree = "<group>"; };
-		8DCEC19F208D06770030EECF /* NearMeSmallCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NearMeSmallCell.swift; path = /Users/berkabbasoglu/Documents/LodeStar/LodeStar/iOS/LodeStarApp/LodeStarApp/NearMe/NearMeSmallCell.swift; sourceTree = "<absolute>"; };
-		8DCEC1A0208D06780030EECF /* NearMeMainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NearMeMainCell.swift; path = /Users/berkabbasoglu/Documents/LodeStar/LodeStar/iOS/LodeStarApp/LodeStarApp/NearMe/NearMeMainCell.swift; sourceTree = "<absolute>"; };
 		DC355C9C62AF5D3EFF746B52 /* Pods_LodeStarApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LodeStarApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0296F5819E422DCEF19640A /* Pods-LodeStarApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LodeStarApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-LodeStarApp/Pods-LodeStarApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -323,8 +323,8 @@
 				8D26FA0F2043407E0011E5BE /* FoodCell.swift */,
 				8D26FA0D20433DE50011E5BE /* LivingExpensesViewController.swift */,
 				8D11715C200F74FE0032860E /* LoginViewController.swift */,
-				8D3D437E200A3CDA0091CCEB /* ProfileViewController.swift */,
 				8D3D437C200A3AD30091CCEB /* LogCell.swift */,
+				8D3D437E200A3CDA0091CCEB /* ProfileViewController.swift */,
 				8D3D437A200A2FDC0091CCEB /* TransportViewController.swift */,
 				8D2A6C341FDE7E1600AA44E7 /* LodeStarLayout.swift */,
 				8D6F76C51F961993004824B0 /* Assets.xcassets */,
@@ -348,8 +348,8 @@
 		8DCEC19E208D064D0030EECF /* NearMe */ = {
 			isa = PBXGroup;
 			children = (
-				8DCEC1A0208D06780030EECF /* NearMeMainCell.swift */,
-				8DCEC19F208D06770030EECF /* NearMeSmallCell.swift */,
+				143EB944208D476E0086BDAA /* NearMeMainCell.swift */,
+				143EB943208D476E0086BDAA /* NearMeSmallCell.swift */,
 				8DCEC19C208D06420030EECF /* NearMeViewController.swift */,
 			);
 			path = NearMe;
@@ -605,12 +605,12 @@
 				8D3D437D200A3AD30091CCEB /* LogCell.swift in Sources */,
 				8D2A6C331FDE781C00AA44E7 /* FlightDetailsCell.swift in Sources */,
 				8D614AD92082943B00D97725 /* ImageSlideshow.swift in Sources */,
-				8DCEC1A1208D06780030EECF /* NearMeSmallCell.swift in Sources */,
+				143EB945208D476E0086BDAA /* NearMeSmallCell.swift in Sources */,
 				147524082080EECC006C0AAB /* PhotoDescriptionCell.swift in Sources */,
 				8D2A6C351FDE7E1600AA44E7 /* LodeStarLayout.swift in Sources */,
 				8D3D437B200A2FDC0091CCEB /* TransportViewController.swift in Sources */,
 				146ED5BB207BB475001BCD5F /* VenueViewController.swift in Sources */,
-				8DCEC1A2208D06780030EECF /* NearMeMainCell.swift in Sources */,
+				143EB946208D476E0086BDAA /* NearMeMainCell.swift in Sources */,
 				8D614AD82082943B00D97725 /* ImageSlideshowItem.swift in Sources */,
 				8D2EAC792007735A000819DA /* WeatherViewController.swift in Sources */,
 				8D6F76DF1F961B40004824B0 /* SelectNationViewController.swift in Sources */,

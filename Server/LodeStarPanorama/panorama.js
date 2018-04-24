@@ -1,3 +1,5 @@
+//install using sudo npm install --unsafe-perm --verbose
+
 const https = require('https');
 const http = require('http');
 const express = require('express');
@@ -6,9 +8,6 @@ let fs = require('fs');
 let Stream = require('stream').Transform;
 let im = require('imagemagick');
 let sim = require('simple-imagemagick');
-const sharp = require('sharp');
-
-const API = "AIzaSyDgv0aGgnEV7DTm7rcg_8LvIM_9zR0yJBg";
 
 var id;
 var tiles = [];
@@ -19,18 +18,17 @@ var totalX = 7;
 //var currentY = 0;
 var totalY = 3;
 var tileCount = 0;
-var result;
 var json;
+
+function base64_encode(file) {
+
+    let bitmap = fs.readFileSync(file);
+    return new Buffer(bitmap).toString('base64');
+}
 
 
 // parameters: ll:latitude,longitude ,radius, resol:low,high
 app.get('/', (req, res) => {
-
-    //console.log("Longitude is: " + longitude);
-    //console.log("Latitude is: " + latitude);
-
-    //var lat = 47.85783227207914;
-    //var lng = 2.295226175151347;
 
     let request = https.request("https://cbk0.google.com/cbk?output=json&ll=" + req.query.ll + "&radius=" + req.query.radius, function (response) {
 
@@ -45,15 +43,10 @@ app.get('/', (req, res) => {
             //console.log(replyMessage);
             json = JSON.parse(replyMessage);
 
-            if (json.Location === undefined) {
+            if (json.Location === undefined) { // I guess this is the response when no panorama is found.
                 res.send("{}");
                 return;
             }
-
-            //console.log("id: " + json.Location.panoId);
-            //console.log("angle: " + json.Location.best_view_direction_deg);
-
-            result = replyMessage;
 
             id = json.Location.panoId;
 
@@ -73,7 +66,17 @@ app.get('/', (req, res) => {
 
 });
 
-app.listen(3000, () => console.log('LodeStar panorama is on port 3000!'));
+app.get('/test', (req, res) => {
+
+    im.identify('a.jpg', function(err, features){
+        if (err) throw err;
+        res.send(features);
+        // { format: 'JPEG', width: 3904, height: 2622, depth: 8 }
+    });
+});
+
+
+app.listen(3011, () => console.log('LodeStar panorama is on port 3011!'));
 
 function getLowRes(res) {
     var url = 'http://cbk0.google.com/cbk?output=tile&panoid=' + id + "&x=0&y=0&zoom=0";
@@ -83,8 +86,7 @@ function getLowRes(res) {
             lowData.push(lowchunk);
         });
 
-        response.on('end', function ()
-        {
+        response.on('end', function () {
             fs.writeFileSync('output.jpg', lowData.read());
             im.crop({
                 srcPath: "output.jpg",
@@ -93,49 +95,48 @@ function getLowRes(res) {
                 height: 100,
                 quality: 1,
                 gravity: "North"
-            }, function (err)
-                {
-                    // foo
-                    var base64str = base64_encode('cropped.jpg');
-                    fs.unlinkSync("output.jpg");
-                    fs.unlinkSync('cropped.jpg');
+            }, function (err) {
+                var base64str = base64_encode('cropped.jpg');
+                fs.unlinkSync("output.jpg");
+                fs.unlinkSync('cropped.jpg');
 
-                    json["lowRes"] = base64str;
-                    res.send(json);
-                    json = "";
-                });
+                json["lowRes"] = base64str;
+                res.send(json);
+                json = "";
+            });
 
         });
     }).end();
 
 }
 
-function base64_encode(file) {
-
-    var bitmap = fs.readFileSync(file);
-    return new Buffer(bitmap).toString('base64');
-}
-
-
 function getTileNo(tileX, tileY, res) {
 
     var url = 'http://cbk0.google.com/cbk?output=tile&panoid=' + id + '&x=' + tileX + '&y=' + tileY + "&zoom=3";
     var name = id + 'im' + tileX + 'x' + tileY;
 
-    let request2 = http.request(url, function (response) {
+    let request = http.request(url, function (response) {
         var data = new Stream();
         response.on('data', function (chunk) {
             data.push(chunk);
         });
 
         response.on('end', function () {
+
+            console.log("Starting iamge write");
+
             fs.writeFileSync(name + '.jpg', data.read());
+
+            console.log("Starting iamge resize");
 
             im.resize({
                 srcPath: name + '.jpg',
                 dstPath: name + '-small.jpg',
                 width: 350
-            }, function (err, stdout, stderr) {
+            }, function (err, stdout, stderr) { // callback function for when the image resize event is finished. Image resizing seems to be an sync op
+
+                console.log("Finished image resize");
+
                 if (err) throw err;
                 fs.unlinkSync(name + '.jpg');
                 tiles[totalX * tileY + tileX] = name + '-small.jpg';
@@ -170,58 +171,3 @@ function getTileNo(tileX, tileY, res) {
 }
 
 
-/*
-function getNextTile(){
-	if(currentX >= totalX) {
-		currentY++;
-		currentX = 0;
-	}
-
-	if(currentY >= totalY) {
-		tiles[totalX*totalY] = '-tile' ;
-		tiles[totalX*totalY+1] =  ''+totalX + 'x' + totalY;
-		tiles[totalX*totalY+2] =  '-geometry';
-		tiles[totalX*totalY+3] = '+0+0';
-		tiles[totalX*totalY+4] =  id + '.jpg';
-		sim.montage(tiles,
-		function(err, metadata){
-		  if (err) throw err
-		  for(var i=0;i<totalX*totalY;i++)
-			fs.unlinkSync(tiles[i]);
-		})
-		return;
-	};
-
-	var j = currentY;
-	var i = currentX++;
-	var url = 'http://cbk0.google.com/cbk?output=tile&panoid='+ id +'&zoom=3&x='+i+'&y='+j;
-	var name = 'im' + i + 'x' + j;
-
-	
-    	
-	let request2 = http.request(url, function(response) {                                        
-		var data = new Stream();
-		response.on('data', function(chunk) {                                       
-		data.push(chunk);                                                         
-		});                                                                         
-
-		response.on('end', function() {                                             
-		fs.writeFileSync(name+ '.jpg', data.read());       
-		
-		im.resize({
-		srcPath: name + '.jpg',
-		dstPath: name + '-small.jpg',
-		width:   350
-		}, function(err, stdout, stderr){
-		if (err) throw err
-			fs.unlinkSync(name + '.jpg');
-			tiles[totalX*j+i] = name + '-small.jpg';
-			//console.log(totalX*j+i);
-				
-			getNextTile();		
-		});
-				        
-	});                                                                         
-	}).end();
-}
-*/
