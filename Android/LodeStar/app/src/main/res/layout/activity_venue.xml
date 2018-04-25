@@ -96,6 +96,12 @@
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginStart="10dp"/>
 
+                            <Button
+                                android:id="@+id/near_me_add_to_favorites"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Add" />
+
 
                         </TableRow>
 

@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
@@ -39,7 +40,20 @@ public class VenueActivity extends AppCompatActivity {
         ImageView im2 = findViewById(R.id.vrBig);
         im2.setVisibility(View.GONE);
 
+        Button b1 = findViewById(R.id.near_me_add_to_favorites);
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String placeIdNearMe = placeId;
+                sendPlaceIdToDatabase(placeIdNearMe);
+            }
+        });
 
+
+    }
+
+    private void sendPlaceIdToDatabase(String placeIdNearMe) {
+        //Database e kaydolcak
     }
 
     public void nearStart(View view) {

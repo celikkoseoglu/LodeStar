@@ -177,8 +177,7 @@ public class PlacesToSeeExpandedActivity extends AppCompatActivity implements Vi
             public void onClick(View view) {
                 String placeIdToDatabase = placeId;
 
-                //placeIdToDatabase i database burada atarsın efe hocam
-                //sonra bana bu bilgiyi favorites activity de verirsin efe reyiz
+                sendLandmarkPlaceIdsToDatabase(placeIdToDatabase);
             }
         });
 
@@ -192,6 +191,10 @@ public class PlacesToSeeExpandedActivity extends AppCompatActivity implements Vi
         recyclerView.setAdapter(adapter);
 
         retrieveMoreInformationsAndPhotos();
+    }
+
+    private void sendLandmarkPlaceIdsToDatabase(String placeIdToDatabase) {
+        //Database e burada atabilirsin
     }
 
     protected void onResume() {
