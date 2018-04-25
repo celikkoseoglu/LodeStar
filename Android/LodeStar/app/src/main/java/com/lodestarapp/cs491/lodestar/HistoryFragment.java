@@ -42,6 +42,7 @@ public class HistoryFragment extends Fragment {
 
     ArrayList<String> arrayListOfHistory;
 
+    ArrayList<String> flightCodeList;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -85,6 +86,7 @@ public class HistoryFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         arrayListOfHistory = new ArrayList<String>();
+        flightCodeList = new ArrayList<String>();
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         //   ADDITIONAL_USER au = dataSnapshot.getValue(ADDITIONAL_USER.class);
@@ -113,12 +115,19 @@ public class HistoryFragment extends Fragment {
                             for(int i = 0; i < tmpArrayOfmine.length; i++) {
                                 arrayListOfHistory.add(tmpArrayOfmine[i]);
                                 Log.i("agam",i + ":" + tmpArrayOfmine[i]);
+                                for(int t = 0; t < arrayListOfHistory.size();t++) {
+                                    String s = arrayListOfHistory.get(t);
+                                    s = s.substring(s.indexOf(":") + 1);
+                                    s = s.substring(0, s.indexOf(" From"));
+                                    Log.i("agam", "ooyea :" + s);
+                                    flightCodeList.add(s);
+
+                                }
+
+
                             }
-
                         }
-
                     }
-
                 }
             }
 
