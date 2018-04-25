@@ -52,7 +52,7 @@ public class PlacesToSeeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         ImageView placeStarImage4;
         ImageView placeStarImage5;*/
 
-        Button placeToFavorites;
+
 
         //TextView placeNumberOfReviewsView;
 
@@ -108,18 +108,7 @@ public class PlacesToSeeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             this.placeStarImages[4] = itemView.findViewById(R.id.place_stars_image5);
 
 
-            this.placeToFavorites = itemView.findViewById(R.id.landmarks_add_to_favorites);
 
-            this.placeToFavorites.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    int card = getAdapterPosition();
-
-                    String placeId = PlacesToSeeAdapter.this.placesList.get(card).getPlaceId();
-
-                    //SEND TO DATABASE
-                }
-            });
         }
     }
 
