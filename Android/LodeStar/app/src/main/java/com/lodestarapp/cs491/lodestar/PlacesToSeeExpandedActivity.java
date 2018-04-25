@@ -17,6 +17,7 @@ import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -74,6 +75,8 @@ public class PlacesToSeeExpandedActivity extends AppCompatActivity implements Vi
     private double rating;
     ImageView[] placeStarImages = new ImageView[5];
     TextView t11;
+
+    private Button b1;
 
     Sensor gameRotatiton;
     SensorManager sManager;
@@ -167,6 +170,17 @@ public class PlacesToSeeExpandedActivity extends AppCompatActivity implements Vi
 
         TextView t3 = findViewById(R.id.place_location_expanded);
         t3.setText(placeLocation);
+
+        b1 = findViewById(R.id.landmarks_add_to_favorites);
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String placeIdToDatabase = placeId;
+
+                //placeIdToDatabase i database burada atarsın efe hocam
+                //sonra bana bu bilgiyi favorites activity de verirsin efe reyiz
+            }
+        });
 
         recyclerView = findViewById(R.id.place_review_recyclerview);
         recyclerView.setHasFixedSize(true);

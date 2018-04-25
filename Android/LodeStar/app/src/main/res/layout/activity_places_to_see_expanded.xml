@@ -69,8 +69,7 @@
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        >
+                        android:layout_height="match_parent">
 
                         <com.daimajia.slider.library.SliderLayout
                             android:id="@+id/slider"
@@ -78,8 +77,8 @@
                             android:layout_height="250dp">
 
 
-
                         </com.daimajia.slider.library.SliderLayout>
+
 
                         <TableRow
                             android:id="@+id/expand_first_row"
@@ -91,11 +90,16 @@
                                 android:id="@+id/place_name_expanded"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/place_name"
-                                android:textSize="27sp"
                                 android:layout_marginLeft="10dp"
-                                android:layout_marginStart="10dp"/>
+                                android:layout_marginStart="10dp"
+                                android:text="@string/place_name"
+                                android:textSize="27sp" />
 
+                            <Button
+                                android:id="@+id/landmarks_add_to_favorites"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Add" />
 
                         </TableRow>
 
@@ -111,36 +115,36 @@
                                 android:id="@+id/place_stars_image1"
                                 android:layout_width="15dp"
                                 android:layout_height="15dp"
-                                android:layout_marginTop="1dp"
-                                android:layout_marginBottom="2dp" />
+                                android:layout_marginBottom="2dp"
+                                android:layout_marginTop="1dp" />
 
                             <ImageView
                                 android:id="@+id/place_stars_image2"
                                 android:layout_width="15dp"
                                 android:layout_height="15dp"
-                                android:layout_marginTop="1dp"
-                                android:layout_marginBottom="2dp"/>
+                                android:layout_marginBottom="2dp"
+                                android:layout_marginTop="1dp" />
 
                             <ImageView
                                 android:id="@+id/place_stars_image3"
                                 android:layout_width="15dp"
                                 android:layout_height="15dp"
-                                android:layout_marginTop="1dp"
-                                android:layout_marginBottom="2dp"/>
+                                android:layout_marginBottom="2dp"
+                                android:layout_marginTop="1dp" />
 
                             <ImageView
                                 android:id="@+id/place_stars_image4"
                                 android:layout_width="15dp"
                                 android:layout_height="15dp"
-                                android:layout_marginTop="1dp"
-                                android:layout_marginBottom="2dp" />
+                                android:layout_marginBottom="2dp"
+                                android:layout_marginTop="1dp" />
 
                             <ImageView
                                 android:id="@+id/place_stars_image5"
                                 android:layout_width="15dp"
                                 android:layout_height="15dp"
-                                android:layout_marginTop="1dp"
-                                android:layout_marginBottom="2dp" />
+                                android:layout_marginBottom="2dp"
+                                android:layout_marginTop="1dp" />
 
                             <!--<TextView
                                 android:id="@+id/place_number_of_reviews_expanded"
@@ -158,18 +162,17 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/expand_second_row"
-                            android:layout_marginTop="2dp"
                             android:layout_marginBottom="2dp"
                             android:layout_marginLeft="10dp"
                             android:layout_marginStart="10dp"
-                            >
+                            android:layout_marginTop="2dp">
 
 
                             <ImageView
                                 android:id="@+id/place_type_icon_expanded"
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
-                                app:srcCompat="@drawable/ic_type"/>
+                                app:srcCompat="@drawable/ic_type" />
 
                             <TextView
                                 android:id="@+id/place_type_expanded"
@@ -178,16 +181,17 @@
                                 android:layout_marginLeft="5dp"
                                 android:layout_marginStart="5dp"
                                 android:text="@string/place_type"
-                                android:textSize="15sp"/>
+                                android:textSize="15sp" />
 
                         </TableRow>
+
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
-                            android:background="#b9b9b9"
                             android:layout_below="@id/expand_third_row"
                             android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp"/>
+                            android:layout_marginRight="10dp"
+                            android:background="#b9b9b9" />
 
 
                         <TableRow
@@ -195,10 +199,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/expand_third_row"
-                            android:layout_marginTop="3dp"
                             android:layout_marginBottom="3dp"
                             android:layout_marginLeft="10dp"
-                            android:layout_marginStart="10dp">
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="3dp">
 
                             <ImageView
                                 android:id="@+id/place_icon_expanded"
@@ -210,18 +214,19 @@
                                 android:id="@+id/place_location_expanded"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/place_location"
                                 android:layout_marginLeft="5dp"
-                                android:layout_marginStart="5dp" />
+                                android:layout_marginStart="5dp"
+                                android:text="@string/place_location" />
 
                         </TableRow>
+
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:background="#b9b9b9"
                             android:layout_below="@id/expand_fourth_row"
                             android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp"/>
+                            android:layout_marginRight="10dp"
+                            android:background="#b9b9b9" />
 
 
                         <TableRow
@@ -229,10 +234,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/expand_fourth_row"
-                            android:layout_marginTop="3dp"
                             android:layout_marginBottom="3dp"
                             android:layout_marginLeft="10dp"
-                            android:layout_marginStart="10dp">
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="3dp">
 
                             <ImageView
                                 android:layout_width="15dp"
@@ -243,9 +248,9 @@
                                 android:id="@+id/place_phone_number_expanded"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/place_number"
                                 android:layout_marginLeft="5dp"
-                                android:layout_marginStart="5dp" />
+                                android:layout_marginStart="5dp"
+                                android:text="@string/place_number" />
 
                         </TableRow>
 
