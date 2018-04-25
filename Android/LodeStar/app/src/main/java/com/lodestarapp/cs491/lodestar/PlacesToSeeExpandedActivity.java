@@ -34,6 +34,15 @@ import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
+import com.firebase.client.Firebase;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.lodestarapp.cs491.lodestar.Adapters.ADDITIONAL_USER;
 import com.lodestarapp.cs491.lodestar.Adapters.NearMeAdapter;
 import com.lodestarapp.cs491.lodestar.Adapters.PlacesToSeeAdapter;
 import com.lodestarapp.cs491.lodestar.Adapters.PlacesToSeeExpandedAdapter;
@@ -57,6 +66,8 @@ public class PlacesToSeeExpandedActivity extends AppCompatActivity implements Vi
     private ArrayList<String> reviewers;
     private ArrayList<Double> ratings;
     private ArrayList<Bitmap> landmarkBitmaps;
+    ADDITIONAL_USER au;
+    DatabaseReference mDatabase;
     PanoramaView pv;
 
     private String API = "AIzaSyAKnThPPshmgffk3DNPNkXd2glEQaH1Rlw";
@@ -64,6 +75,8 @@ public class PlacesToSeeExpandedActivity extends AppCompatActivity implements Vi
     private CardView cv1;
     private CardView cv2;
     private CardView cv3;
+
+    DatabaseReference ref;
 
     private Toolbar toolbar;
     private RecyclerView recyclerView;
@@ -86,6 +99,7 @@ public class PlacesToSeeExpandedActivity extends AppCompatActivity implements Vi
         setContentView(R.layout.activity_places_to_see_expanded);
         pv = findViewById(R.id.layout);
         ScrollView sc = findViewById(R.id.scroll_general);
+        mDatabase = FirebaseDatabase.getInstance().getReference();
         /*sc.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -171,15 +185,15 @@ public class PlacesToSeeExpandedActivity extends AppCompatActivity implements Vi
         TextView t3 = findViewById(R.id.place_location_expanded);
         t3.setText(placeLocation);
 
-        b1 = findViewById(R.id.landmarks_add_to_favorites);
-        b1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String placeIdToDatabase = placeId;
-
-                sendLandmarkPlaceIdsToDatabase(placeIdToDatabase);
-            }
-        });
+        //b1 = findViewById(R.id.landmarks_add_to_favorites);
+//        b1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                String placeIdToDatabase = placeId;
+//
+//                sendLandmarkPlaceIdsToDatabase(placeIdToDatabase);
+//            }
+//        });
 
         recyclerView = findViewById(R.id.place_review_recyclerview);
         recyclerView.setHasFixedSize(true);
@@ -193,8 +207,44 @@ public class PlacesToSeeExpandedActivity extends AppCompatActivity implements Vi
         retrieveMoreInformationsAndPhotos();
     }
 
-    private void sendLandmarkPlaceIdsToDatabase(String placeIdToDatabase) {
+    private void sendLandmarkPlaceIdsToDatabase(final String placeIdToDatabase) {
         //Database e burada atabilirsin
+
+        //Olur abi :)
+//        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        ref = database.getReference();
+//        ref.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//
+//                for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
+//                    au = childSnapshot.getValue(ADDITIONAL_USER.class);
+//                    FirebaseUser userMe;
+//                    userMe = FirebaseAuth.getInstance().getCurrentUser();
+//                    Log.i("agam",userMe.getEmail() + " vs " + au.getemail());
+//                    if(userMe.getEmail().equals(au.getemail())) {
+//                        String str = "";
+//                        if(au.getposts() != null)
+//                            str = au.getposts();
+//
+//
+//                        Log.i("agam","placeID: " + placeIdToDatabase);
+//                        mDatabase.child("users").child(childSnapshot.getKey()).child("posts").setValue(placeIdToDatabase);
+//
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
+//
+
+
+
     }
 
     protected void onResume() {

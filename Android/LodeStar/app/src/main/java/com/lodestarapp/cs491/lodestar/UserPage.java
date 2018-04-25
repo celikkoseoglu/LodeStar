@@ -156,7 +156,7 @@ public class UserPage extends android.support.v4.app.Fragment {
 
                             if(str.contains("To: ")) {
                                 myTMPARR = str.split("To: ");
-                                lastTrip.setText(myTMPARR[1]);
+                                lastTrip.setText(myTMPARR[2].substring(0,3));
                             }
                             else {
                                 lastTrip.setText("N/A");
