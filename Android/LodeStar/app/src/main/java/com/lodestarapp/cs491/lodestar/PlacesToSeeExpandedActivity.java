@@ -213,36 +213,41 @@ public class PlacesToSeeExpandedActivity extends AppCompatActivity implements Vi
         //Database e burada atabilirsin
 
         //Olur abi :)
-//        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-//        ref = database.getReference();
-//        ref.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//
-//
-//                for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
-//                    au = childSnapshot.getValue(ADDITIONAL_USER.class);
-//                    FirebaseUser userMe;
-//                    userMe = FirebaseAuth.getInstance().getCurrentUser();
-//                    Log.i("agam",userMe.getEmail() + " vs " + au.getemail());
-//                    if(userMe.getEmail().equals(au.getemail())) {
-//                        String str = "";
-//                        if(au.getposts() != null)
-//                            str = au.getposts();
-//
-//
-//                        Log.i("agam","placeID: " + placeIdToDatabase);
-//                        mDatabase.child("users").child(childSnapshot.getKey()).child("posts").setValue(placeIdToDatabase);
-//
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        ref = database.getReference();
+        ref.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+
+                for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
+                    au = childSnapshot.getValue(ADDITIONAL_USER.class);
+                    FirebaseUser userMe;
+                    userMe = FirebaseAuth.getInstance().getCurrentUser();
+                    Log.i("agam",userMe.getEmail() + " vs " + au.getemail());
+                    if(userMe.getEmail().equals(au.getemail())) {
+                        String str = "";
+                        if(au.getfavorites() != null) {
+                            str = au.getfavorites();
+                            mDatabase.child("users").child(childSnapshot.getKey()).child("favorites").setValue(placeIdToDatabase + "!" + au.getfavorites() );
+                        } else {
+                            mDatabase.child("users").child(childSnapshot.getKey()).child("favorites").setValue(placeIdToDatabase);
+                        }
+
+
+
+                        Log.i("agam","placeID: " + placeIdToDatabase);
+
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 //
 
 

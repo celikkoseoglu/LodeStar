@@ -6,10 +6,21 @@ public class ADDITIONAL_USER {
     public String username;
     public String trips;
     public String posts;
+    public String favorites;
 
     public ADDITIONAL_USER() {
 
     }
+
+
+    public String getfavorites() {
+        return favorites;
+    }
+
+    public void setfavorites(String favorites) {
+        this.favorites = favorites;
+    }
+
 
     public String getposts() {
         return posts;
