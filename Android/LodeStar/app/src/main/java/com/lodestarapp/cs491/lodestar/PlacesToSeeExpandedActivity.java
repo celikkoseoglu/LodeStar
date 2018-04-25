@@ -78,6 +78,8 @@ public class PlacesToSeeExpandedActivity extends AppCompatActivity implements Vi
 
     private Button b1;
 
+
+
     Sensor gameRotatiton;
     SensorManager sManager;
 
