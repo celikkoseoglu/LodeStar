@@ -28,14 +28,6 @@ extension NearMeMainCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifierSmall, for: indexPath) as! NearMeSmallCell
         
-        //background shadow for collectionView elements
-        cell.layer.shadowColor = UIColor.black.cgColor
-        cell.layer.shadowOffset = CGSize(width: 5, height: 5)
-        cell.layer.shadowRadius = 5;
-        cell.layer.shadowOpacity = 0.25;
-        cell.clipsToBounds = false
-        cell.layer.masksToBounds = false
-        
         let index = indexPath as NSIndexPath
         
         if nearMeNamesRestaurants[0] != "" && nearMeNamesParks[0] != "" {
@@ -61,12 +53,9 @@ extension NearMeMainCell {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
-        let availableWidth = 130 - paddingSpace
-        let widthPerItem = availableWidth / itemsPerRow
         let heightperItem = 192 as CGFloat
         
-        return CGSize(width: 130, height: heightperItem )
+        return CGSize(width: 120, height: heightperItem )
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -74,7 +63,7 @@ extension NearMeMainCell {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return sectionInsets.top
+        return sectionInsets.left
     }
 }
 

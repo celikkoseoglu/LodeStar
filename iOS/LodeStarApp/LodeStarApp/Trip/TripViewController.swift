@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 fileprivate let itemsPerRow: CGFloat = 3
 fileprivate let sectionInsets = UIEdgeInsets(top: 0.0, left: 6.0, bottom: 3.0, right: 6.0)
@@ -120,16 +121,13 @@ class TravelViewController: UIViewController, UICollectionViewDelegate, UICollec
     @IBOutlet weak var destinationCityLabel: UILabel!
     @IBOutlet weak var departureCityLabel: UILabel!
     
-    @IBOutlet weak var destinationCityImage: UIImageView!
-    @IBOutlet var tapImage: UITapGestureRecognizer!
-    
     @IBOutlet weak var collectionView: UICollectionView!
     
     @IBOutlet weak var slideShow: ImageSlideshow!
-    var imageString = [AlamofireSource(urlString: "http://wearesilentarrow.com/wp-content/uploads/Silent-Arrow-Hot-AF-Bra-Side.jpg")!, AlamofireSource(urlString: "http://st1.bollywoodlife.com/wp-content/uploads/photos/aishwarya-rai-bachchan-looks-steaming-hot-in-this-picture-201701-873948.jpg")!]
+    //var imageString = [AlamofireSource(urlString: "https://lonelyplanetwp.imgix.net/2017/03/Shanghai_for_free-abe6e2eb510b.jpg?crop=entropy&fit=crop&h=421&sharp=10&vib=20&w=748")!, AlamofireSource(urlString: "https://lonelyplanetwp.imgix.net/2017/09/GettyRF_508077687-0bda14a9c9a7-2.jpg?crop=entropy&fit=crop&h=421&sharp=10&vib=20&w=748")!]
     
-    var destination = "Izmir"
-    var departure = "Ibiza"
+    var destination = "Shanghai"
+    var departure = "Istanbul"
     
     var direction = true
     
@@ -153,14 +151,74 @@ class TravelViewController: UIViewController, UICollectionViewDelegate, UICollec
         slideShow.pageControl.currentPageIndicatorTintColor = UIColor.lightGray
         slideShow.pageControl.pageIndicatorTintColor = UIColor.black
         slideShow.contentScaleMode = UIViewContentMode.scaleAspectFill
-        slideShow.setImageInputs(imageString)
+        //slideShow.setImageInputs(imageString)
+        
         slideShow.pauseTimer()
         
         // additions
         slideShow.travelView = self
         slideShow.travelViewSet = true
+        slideShow.circular = false
         
+        var cityImages = [ImageSource]()
         
+        let image1URL = "https://lonelyplanetwp.imgix.net/2017/03/Shanghai_for_free-abe6e2eb510b.jpg?crop=entropy&fit=crop&h=421&sharp=10&vib=20&w=748"
+        let image2URL = "https://lonelyplanetwp.imgix.net/2017/09/GettyRF_508077687-0bda14a9c9a7-2.jpg?crop=entropy&fit=crop&h=421&sharp=10&vib=20&w=748"
+        
+        //huge bug: image order might get mixed yp
+        
+        Alamofire.request(image1URL).responseImage { response in
+            if let image = response.result.value {
+                var modifiedImage = self.applyDarkenFilter(image: image)
+                modifiedImage = self.applyBlurFilter(image: modifiedImage)
+                cityImages.append(ImageSource(image: modifiedImage)) //image is of type UIImage
+                self.slideShow.setImageInputs(cityImages)
+            }
+        }
+        
+        Alamofire.request(image2URL).responseImage { response in
+            if let image = response.result.value {
+                var modifiedImage = self.applyDarkenFilter(image: image)
+                modifiedImage = self.applyBlurFilter(image: modifiedImage)
+                cityImages.append(ImageSource(image: modifiedImage)) //image is of type UIImage
+                self.slideShow.setImageInputs(cityImages)
+            }
+        }
+    }
+    
+    func applyDarkenFilter(image: UIImage) -> UIImage {
+        let context = CIContext(options: nil)
+        
+        if let currentFilter = CIFilter(name: "CIExposureAdjust") {
+            let beginImage = CIImage(image: image)
+            currentFilter.setValue(beginImage, forKey: kCIInputImageKey)
+            currentFilter.setValue(-3.0, forKey: kCIInputEVKey)
+            //currentFilter.setValue(10.0, forKey: kCIInputRadiusKey)
+            
+            if let output = currentFilter.outputImage {
+                if let cgimg = context.createCGImage(output, from: output.extent) {
+                    return UIImage(cgImage: cgimg)
+                }
+            }
+        }
+        return image //return the image untouched
+    }
+    
+    func applyBlurFilter(image: UIImage) -> UIImage {
+        let context = CIContext(options: nil)
+        
+        if let currentFilter = CIFilter(name: "CIBoxBlur") {
+            let beginImage = CIImage(image: image)
+            currentFilter.setValue(beginImage, forKey: kCIInputImageKey)
+            currentFilter.setValue(2.0, forKey: kCIInputRadiusKey)
+            
+            if let output = currentFilter.outputImage {
+                if let cgimg = context.createCGImage(output, from: output.extent) {
+                    return UIImage(cgImage: cgimg)
+                }
+            }
+        }
+        return image //return the image untouched
     }
     
     override func didReceiveMemoryWarning() {
