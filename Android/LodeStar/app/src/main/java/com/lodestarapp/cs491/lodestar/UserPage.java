@@ -137,26 +137,36 @@ public class UserPage extends android.support.v4.app.Fragment {
 
                 for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
                     au = childSnapshot.getValue(ADDITIONAL_USER.class);
-
-
-
                     user = FirebaseAuth.getInstance().getCurrentUser();
 
                     if(user.getEmail().equals(au.getemail())) {
                         //  Toast.makeText(this,au.gettrips(),Toast.LENGTH_LONG).show();
                         tw.setText(au.getusername());
-                        tripCounr.setText(au.gettrips().split("!").length + "");
+
+                        if(au.gettrips() != null && au.gettrips().contains("!")) {
+                            tripCounr.setText(au.gettrips().split("!").length + "");
+                        } else {
+                            tripCounr.setText("0");
+                        }
+
 
                         if(au.gettrips() != null) {
                             String str = au.gettrips();
-                            String myTMPARR[] = str.split("To: ");
-                            lastTrip.setText(myTMPARR[1]);
+                            String myTMPARR[];
+
+                            if(str.contains("To: ")) {
+                                myTMPARR = str.split("To: ");
+                                lastTrip.setText(myTMPARR[1]);
+                            }
+                            else {
+                                lastTrip.setText("N/A");
+                            }
+
+
                         }
 
                     }
 
-
-                //    ref.child("users").child(childSnapshot.getKey()).child("Posts").setValue();
                 }
 
             }
