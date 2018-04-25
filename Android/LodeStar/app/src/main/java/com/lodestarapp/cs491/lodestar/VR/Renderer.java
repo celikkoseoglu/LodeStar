@@ -306,6 +306,65 @@ public class Renderer {
         mTextureDataHandle0 = getTexture(c, rid);
     }
 
+    public void loadTexture(Context c, Bitmap b) {
+        final int[] textureHandle = new int[3];
+        GLES20.glGenTextures(3, textureHandle, 0);
+        if (textureHandle[0] != 0) {
+            final BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inScaled = false;
+
+            //final Bitmap bitmap = b.copy(c.getResources(),true)      ;
+            GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureHandle[0]);
+
+            GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_NEAREST);
+            GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_NEAREST);
+
+            GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, b, 0);
+            //bitmap.recycle();
+
+            checkGLError("texture0");
+        }
+
+        if (textureHandle[1] != 0) {
+            final BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inScaled = false;
+            final Bitmap bitmap = BitmapFactory.decodeResource(c.getResources(), R.drawable.up_triangle, options);
+            GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureHandle[1]);
+
+            GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_NEAREST);
+            GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_NEAREST);
+
+
+            GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, b, 0);
+            bitmap.recycle();
+            checkGLError("texture1");
+
+        }
+
+        if (textureHandle[2] != 0) {
+            final BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inScaled = false;
+
+            final Bitmap bitmap = BitmapFactory.decodeResource(c.getResources(), R.drawable.gray, options);
+            GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureHandle[2]);
+
+            GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_NEAREST);
+            GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_NEAREST);
+
+
+            GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, b, 0);
+            bitmap.recycle();
+            checkGLError("texture2");
+
+        }
+
+        if (textureHandle[0] == 0) {
+            throw new RuntimeException("error loading texture");
+        }
+
+        mTextureDataHandle0 = textureHandle;
+    }
+
     public void deleteCurrentTexture() {
         GLES20.glDeleteTextures(mTextureDataHandle0.length, mTextureDataHandle0, 0);
     }

@@ -1,6 +1,7 @@
 package com.lodestarapp.cs491.lodestar.VR;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -35,6 +36,7 @@ import javax.microedition.khronos.opengles.GL10;
 import static android.content.Context.SENSOR_SERVICE;
 import static android.opengl.GLES20.GL_TEXTURE0;
 import static android.opengl.GLES20.GL_TEXTURE_2D;
+import static android.opengl.GLES20.glBindAttribLocation;
 import static android.opengl.GLES20.glBlendEquationSeparate;
 import static android.opengl.GLES20.glEnable;
 import static android.opengl.GLES20.glViewport;
@@ -73,6 +75,8 @@ public class PanoramaView extends GLSurfaceView{
 
     float angle = 80.0f;
     ScrollView sc;
+
+    Bitmap texture;
 
     public PanoramaView(Context context) {
         super(context);
@@ -122,6 +126,7 @@ public class PanoramaView extends GLSurfaceView{
         if(event != null){
             if(event.getPointerCount()==1)
             {
+                renderer.loadTexture(c,texture);
                 float x = event.getX();
                 float y = event.getY();
 
@@ -184,6 +189,7 @@ public class PanoramaView extends GLSurfaceView{
             GLES20.glClearColor(1f, 1f, 1f, 1f);
             renderer = new com.lodestarapp.cs491.lodestar.VR.Renderer(c, 50, 5f);
             renderer.loadTexture(c, R.drawable.alan1);
+            //renderer.loadTexture(c,texture);
 
             Matrix.setLookAtM(mCamera, 0, 0.0f, 0.0f, CAMERA_Z, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
             Matrix.setIdentityM(accRotation, 0);
@@ -233,13 +239,7 @@ public class PanoramaView extends GLSurfaceView{
                 //sensorRead = false;
             }
 
-
-
-
-
             multiplyMM(mView, 0, mIdentity, 0, mCamera, 0);
-
-
 
             multiplyMM(mViewProjectionMatrix, 0, mProjectionMatrix, 0, mView, 0);
 
@@ -267,8 +267,6 @@ public class PanoramaView extends GLSurfaceView{
                     }
                 }
             }
-
-
             //checkGLError("onDrawEye");
         }
 
@@ -333,5 +331,9 @@ public class PanoramaView extends GLSurfaceView{
             s += arr[i] + " ";
 
         return s;
+    }
+
+    public void setBitmap(Bitmap b){
+        texture = b;
     }
 }
