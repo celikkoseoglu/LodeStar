@@ -25,6 +25,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.lodestarapp.cs491.lodestar.Adapters.ADDITIONAL_USER;
 
+import java.util.ArrayList;
+
 
 public class HistoryFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -37,6 +39,8 @@ public class HistoryFragment extends Fragment {
     View myView;
     ArrayAdapter<String> arrayAdapter;
     FirebaseUser user;
+
+    ArrayList<String> arrayListOfHistory;
 
 
     // TODO: Rename and change types of parameters
@@ -80,6 +84,8 @@ public class HistoryFragment extends Fragment {
 
         super.onCreate(savedInstanceState);
 
+        arrayListOfHistory = new ArrayList<String>();
+
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         //   ADDITIONAL_USER au = dataSnapshot.getValue(ADDITIONAL_USER.class);
         // Log.i("agam",au.username);
@@ -96,8 +102,20 @@ public class HistoryFragment extends Fragment {
                     user = FirebaseAuth.getInstance().getCurrentUser();
 
                     if(user.getEmail().equals(au.getemail())) {
-                        
+
                         Log.i("agam", "whatever it takes" + au.gettrips());
+
+                        if(au.gettrips() == null) {
+
+                        }else {
+
+                            String tmpArrayOfmine[] = au.gettrips().split("!");
+                            for(int i = 0; i < tmpArrayOfmine.length; i++) {
+                                arrayListOfHistory.add(tmpArrayOfmine[i]);
+                                Log.i("agam",i + ":" + tmpArrayOfmine[i]);
+                            }
+
+                        }
 
                     }
 
