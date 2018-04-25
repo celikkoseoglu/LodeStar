@@ -6,11 +6,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +27,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.lodestarapp.cs491.lodestar.Adapters.ADDITIONAL_USER;
+import com.lodestarapp.cs491.lodestar.Adapters.HistoryAdapter;
+import com.lodestarapp.cs491.lodestar.Adapters.UserPageAdapter;
+import com.lodestarapp.cs491.lodestar.Controllers.FlightInfoController;
+import com.lodestarapp.cs491.lodestar.Models.HistoryInfo;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -41,6 +51,14 @@ public class HistoryFragment extends Fragment {
     FirebaseUser user;
 
     ArrayList<String> arrayListOfHistory;
+
+    private FlightInfoController flc = new FlightInfoController();
+
+    private ArrayList<HistoryInfo> historyInfos;
+
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
 
 
     // TODO: Rename and change types of parameters
@@ -73,18 +91,10 @@ public class HistoryFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
-
-        //Write History Activity Here
-
-        // tripListView = myView.findViewById(R.id.olalala);
-
-
-
-
         super.onCreate(savedInstanceState);
 
         arrayListOfHistory = new ArrayList<String>();
+        historyInfos = new ArrayList<>();
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         //   ADDITIONAL_USER au = dataSnapshot.getValue(ADDITIONAL_USER.class);
@@ -92,7 +102,8 @@ public class HistoryFragment extends Fragment {
         ref = database.getReference();
         Toast.makeText(this.getActivity(),"ww",Toast.LENGTH_LONG).show();
         Log.i("agam", "fffff");
-        ref.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
+
+        /*ref.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -118,37 +129,6 @@ public class HistoryFragment extends Fragment {
                         }
 
                     }
-
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-
-        //final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        //   ADDITIONAL_USER au = dataSnapshot.getValue(ADDITIONAL_USER.class);
-        // Log.i("agam",au.username);
-        /*ref = database.getReference();
-
-        ref.child("users").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
-                    au = childSnapshot.getValue(ADDITIONAL_USER.class);
-
-                    if(au.gettrips() != null)
-                        Log.i("agam",au.gettrips());
-
-                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-                    if(user.getEmail().equals(au.getemail())) {
-                      //  Toast.makeText(this,au.gettrips(),Toast.LENGTH_LONG).show();
-                    }
                 }
 
             }
@@ -157,30 +137,8 @@ public class HistoryFragment extends Fragment {
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });
+        });*/
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();*/
-
-        
-//
-//        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                ADDITIONAL_USER au = dataSnapshot.getValue(ADDITIONAL_USER.class);
-//                Log.i("agam",au.email);
-//            }
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
-//
-//        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-//        }
-//    }
-//
     }
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -193,19 +151,79 @@ public class HistoryFragment extends Fragment {
         //  View view = inflater.inflate(R.layout.activity_history_initial, container, false);
 
         // Inflate the layout for this fragment
-        myView = inflater.inflate(R.layout.activity_history_initial, container, false);
+        //initial'ı tekrardan bağla
+        //myView = inflater.inflate(R.layout.activity_history_initial, container, false);
 
-        TextView t1 = myView.findViewById(R.id.textview33);
+        myView = inflater.inflate(R.layout.fragment_history, container, false);
+
+        /*TextView t1 = myView.findViewById(R.id.textview33);
         t1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), QRCodeActivity.class);
                 startActivity(intent);
             }
-        });
+        });*/
+
+        mRecyclerView = myView.findViewById(R.id.history_recyclerview);
+        mRecyclerView.setHasFixedSize(true);
+
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        mAdapter = new HistoryAdapter(historyInfos);
+        mRecyclerView.setAdapter(mAdapter);
+
+        sendRequest();
+
         return myView;
     }
 
+    public void sendRequest() {
+        String flight = "THY26"; //bunun binis kartından alınması gerekmiyo mu??????
+        historyInfos = new ArrayList<>();
 
+        flc.getFlightInfo(flight, getActivity(), new FlightInfoController.VolleyCallback2() {
+            @Override
+            public void onSuccess(JSONObject result) {
+                try {
+
+                    JSONObject origin = result.getJSONObject("origin");
+                    JSONObject destination = result.getJSONObject("destination");
+
+                    JSONObject filedDepartureTime = result.getJSONObject("filed_departure_time");
+                    JSONObject filedArrivalTime = result.getJSONObject("filed_arrival_time");
+
+                    String flightCode = result.getString("ident");
+
+                    String cityFrom = origin.getString("city");
+                    String fromAirport = origin.getString("airport_name");
+                    String fromAirportIdent = origin.getString("alternate_ident");
+
+                    String cityTo = destination.getString("city");
+                    String toAirport = destination.getString("airport_name");
+                    String toAirportIdent = destination.getString("alternate_ident");
+
+                    long departureTime = filedDepartureTime.getLong("localtime");
+                    String departureDate = filedDepartureTime.getString("date");
+
+                    long arrivalTime = filedArrivalTime.getLong("localtime");
+                    String arrivalDate = filedArrivalTime.getString("date");
+
+                    HistoryInfo historyInfo = new HistoryInfo(flightCode, cityFrom, cityTo,
+                            fromAirport, fromAirportIdent, toAirport, toAirportIdent, departureTime,
+                            arrivalTime, departureDate, arrivalDate);
+
+                    historyInfos.add(historyInfo);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                mAdapter.notifyDataSetChanged();
+            }
+        });
+
+
+    }
 
 }
