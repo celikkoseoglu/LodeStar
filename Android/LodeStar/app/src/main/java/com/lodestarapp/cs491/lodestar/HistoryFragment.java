@@ -36,6 +36,7 @@ public class HistoryFragment extends Fragment {
     private ListView tripListView;
     View myView;
     ArrayAdapter<String> arrayAdapter;
+    FirebaseUser user;
 
 
     // TODO: Rename and change types of parameters
@@ -78,7 +79,39 @@ public class HistoryFragment extends Fragment {
 
 
         super.onCreate(savedInstanceState);
+
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        //   ADDITIONAL_USER au = dataSnapshot.getValue(ADDITIONAL_USER.class);
+        // Log.i("agam",au.username);
+        ref = database.getReference();
+        Toast.makeText(this.getActivity(),"ww",Toast.LENGTH_LONG).show();
+        Log.i("agam", "fffff");
+        ref.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+
+                for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
+                    au = childSnapshot.getValue(ADDITIONAL_USER.class);
+                    user = FirebaseAuth.getInstance().getCurrentUser();
+
+                    if(user.getEmail().equals(au.getemail())) {
+                        
+                        Log.i("agam", "whatever it takes" + au.gettrips());
+
+                    }
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+        //final FirebaseDatabase database = FirebaseDatabase.getInstance();
         //   ADDITIONAL_USER au = dataSnapshot.getValue(ADDITIONAL_USER.class);
         // Log.i("agam",au.username);
         /*ref = database.getReference();

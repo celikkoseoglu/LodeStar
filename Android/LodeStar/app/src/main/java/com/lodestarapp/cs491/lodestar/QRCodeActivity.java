@@ -208,10 +208,14 @@ public class QRCodeActivity extends AppCompatActivity{
                                                                                     Log.i("ii",myTMPSTR + " vs " + userEmail);
                                                                                     if(userEmail.equals(myTMPSTR)) {
 
-                                                                                        if(au.trips != null)
+                                                                                        if(au.gettrips() != null)
                                                                                             prev = au.gettrips();
 
-                                                                                        mDatabase.child("users").child(snapshot.getKey()).child("trips").setValue(prev + "!" + " Flight Code: " + qrCodeInfo.getFlightCode()+ " From: " + qrCodeInfo.getFrom() + " To: " + qrCodeInfo.getTo());
+                                                                                        if(prev != null)
+                                                                                            mDatabase.child("users").child(snapshot.getKey()).child("trips").setValue(prev + "!" + " Flight Code: " + qrCodeInfo.getFlightCode()+ " From: " + qrCodeInfo.getFrom() + " To: " + qrCodeInfo.getTo());
+                                                                                        else {
+                                                                                            mDatabase.child("users").child(snapshot.getKey()).child("trips").setValue("Flight Code: " + qrCodeInfo.getFlightCode()+ " From: " + qrCodeInfo.getFrom() + " To: " + qrCodeInfo.getTo());
+                                                                                        }
                                                                                     }
                                                                                 }
                                                                             }
