@@ -238,9 +238,6 @@ public class QRCodeActivity extends AppCompatActivity{
 
 
                                                     });
-
-
-
                                             Intent intent = new Intent(QRCodeActivity.this, LoginActivity.class);
                                             startActivity(intent);
                                         }
