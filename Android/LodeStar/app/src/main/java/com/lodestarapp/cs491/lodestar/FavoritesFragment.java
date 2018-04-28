@@ -3,9 +3,21 @@ package com.lodestarapp.cs491.lodestar;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.lodestarapp.cs491.lodestar.Adapters.ADDITIONAL_USER;
+
+import java.util.ArrayList;
 
 
 /**
@@ -22,6 +34,9 @@ public class FavoritesFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    private ArrayList<String> favPlaces;
+    private DatabaseReference ref;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -58,6 +73,47 @@ public class FavoritesFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        favPlaces = new ArrayList<String>();
+
+    }
+
+    public void databaseToArrayList() {
+
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        ref = database.getReference();
+
+        ref.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+
+                for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
+                    ADDITIONAL_USER au = childSnapshot.getValue(ADDITIONAL_USER.class);
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                    if(user.getEmail().equals(au.getemail())) {
+
+                        Log.i("agam", "whatever it takes" + au.gettrips());
+
+                        if(au.getfavorites() == null) {
+
+                        }else {
+
+                            String tmpArrayOfmine[] = au.getfavorites().split("!");
+                            for(int i = 0; i < tmpArrayOfmine.length; i++) {
+                                favPlaces.add(tmpArrayOfmine[i]);
+                            }
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
 

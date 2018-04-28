@@ -208,6 +208,7 @@ public class PlacesToSeeExpandedActivity extends AppCompatActivity implements Vi
         recyclerView.setAdapter(adapter);
 
         retrieveMoreInformationsAndPhotos();
+        sendLandmarkPlaceIdsToDatabase("1");
     }
 
     private void sendLandmarkPlaceIdsToDatabase(final String placeIdToDatabase) {

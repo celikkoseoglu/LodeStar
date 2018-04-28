@@ -147,7 +147,6 @@ public class HistoryFragment extends Fragment {
                                     s = s.substring(0, s.indexOf(" From"));
                                     Log.i("agam", "ooyea :" + s);
                                     flightCodeList.add(s);
-
                                 }
 
                             }
