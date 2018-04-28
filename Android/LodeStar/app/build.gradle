@@ -61,7 +61,6 @@ dependencies {
     compile 'com.daimajia.slider:library:1.1.5@aar'
 
 
-
 }
 apply plugin: 'com.google.gms.google-services'
 

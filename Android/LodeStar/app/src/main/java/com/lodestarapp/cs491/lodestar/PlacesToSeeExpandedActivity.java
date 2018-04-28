@@ -98,6 +98,7 @@ public class PlacesToSeeExpandedActivity extends AppCompatActivity implements Vi
 
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        sendLandmarkPlaceIdsToDatabase("lol");
         setContentView(R.layout.activity_places_to_see_expanded);
         pv = findViewById(R.id.layout);
         ScrollView sc = findViewById(R.id.scroll_general);

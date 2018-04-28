@@ -337,8 +337,8 @@ public class HistoryFragment extends Fragment {
                                 public void onSuccess(Bitmap result) {
                                     ImageStorage.saveToSdCard(result, cityFroms.get(finalI));
 
-                                    getView().findViewById(R.id.ll1).setVisibility(View.GONE);
-                                    getView().findViewById(R.id.flipper).setVisibility(View.VISIBLE);
+            //                        getView().findViewById(R.id.ll1).setVisibility(View.GONE);
+            //                        getView().findViewById(R.id.flipper).setVisibility(View.VISIBLE);
 
                                     historyInfos.get(finalI).setCityFromBitmap(result);
                                     mAdapter.notifyDataSetChanged();
