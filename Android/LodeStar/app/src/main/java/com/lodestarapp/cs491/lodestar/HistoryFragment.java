@@ -112,6 +112,10 @@ public class HistoryFragment extends Fragment {
 
         historyInfos = new ArrayList<>();
 
+        cityFroms = new ArrayList<>();
+
+        cityTos = new ArrayList<>();
+
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         //   ADDITIONAL_USER au = dataSnapshot.getValue(ADDITIONAL_USER.class);
@@ -138,9 +142,10 @@ public class HistoryFragment extends Fragment {
                         }else {
 
                             String tmpArrayOfmine[] = au.gettrips().split("!");
+                            String fromArray[] = tmpArrayOfmine;
                             for(int i = 0; i < tmpArrayOfmine.length; i++) {
                                 arrayListOfHistory.add(tmpArrayOfmine[i]);
-                                Log.i("agam",i + ":" + tmpArrayOfmine[i]);
+                            }
                                 for(int t = 0; t < arrayListOfHistory.size();t++) {
                                     String s = arrayListOfHistory.get(t);
                                     s = s.substring(s.indexOf(":") + 1);
@@ -149,7 +154,28 @@ public class HistoryFragment extends Fragment {
                                     flightCodeList.add(s);
                                 }
 
+
+
+
+                                for(int e = 0; e < arrayListOfHistory.size();e++) {
+                                    String s = arrayListOfHistory.get(e);
+                                    s = s.substring(s.indexOf("From: ") + 6);
+                                    s = s.substring(0, s.indexOf(" To:"));
+                                    Log.i("agam", "cityfroms:" + s + ">");
+                                    cityFroms.add(s);
+                                }
+
+                            for(int e = 0; e < arrayListOfHistory.size();e++) {
+                                String s = arrayListOfHistory.get(e);
+                                s = s.substring(s.indexOf("To: ") + 4);
+                                s = s.substring(0, s.length());
+                                Log.i("agam", "cityto:" + s + ">");
+                                cityTos.add(s);
                             }
+
+
+
+
                         }
                     }
                 }
