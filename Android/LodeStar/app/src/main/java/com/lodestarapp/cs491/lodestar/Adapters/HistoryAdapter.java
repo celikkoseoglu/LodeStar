@@ -30,10 +30,10 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         TextView cityTo;
         TextView fromAirport;
         TextView toAirport;
-        TextView departureTime;
-        TextView arrivalTime;
-        TextView departureDate;
-        TextView arrivalDate;
+        //TextView departureTime;
+        //TextView arrivalTime;
+        //TextView departureDate;
+        //TextView arrivalDate;
 
         HistoryViewHolder(View itemView){
             super(itemView);
@@ -45,10 +45,10 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             cityTo = itemView.findViewById(R.id.history_to_city_country_textview);
             fromAirport = itemView.findViewById(R.id.history_from_airport_name_textview);
             toAirport = itemView.findViewById(R.id.history_to_airport_name_textview);
-            departureTime = itemView.findViewById(R.id.history_from_time_in_CST);
-            arrivalTime = itemView.findViewById(R.id.history_to_time_in_CST);
-            departureDate = itemView.findViewById(R.id.history_from_time_in_GMT3);
-            arrivalDate = itemView.findViewById(R.id.history_to_time_in_GMT3);
+            //departureTime = itemView.findViewById(R.id.history_from_time_in_CST);
+            //arrivalTime = itemView.findViewById(R.id.history_to_time_in_CST);
+            //departureDate = itemView.findViewById(R.id.history_from_time_in_GMT3);
+            //arrivalDate = itemView.findViewById(R.id.history_to_time_in_GMT3);
 
         }
 
@@ -77,8 +77,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         //----
 
-        ((HistoryViewHolder) holder).departureDate.setText(historyInfos.get(position).getDepartureDate());
-        ((HistoryViewHolder) holder).arrivalDate.setText(historyInfos.get(position).getArrivalDate());
+        //((HistoryViewHolder) holder).departureDate.setText(historyInfos.get(position).getDepartureDate());
+        //((HistoryViewHolder) holder).arrivalDate.setText(historyInfos.get(position).getArrivalDate());
 
         ((HistoryViewHolder) holder).cityFromImage.setImageBitmap(historyInfos.get(position).getCityFromBitmap());
         ((HistoryViewHolder) holder).cityToImage.setImageBitmap(historyInfos.get(position).getCityToBitmap());

@@ -56,7 +56,7 @@ public class HistoryFragment extends Fragment {
     private FlightInfoController flc = new FlightInfoController();
     private TripController trc = new TripController();
 
-    private ArrayList<HistoryInfo> historyInfos;
+    private ArrayList<HistoryInfo> historyInfos = new ArrayList<>();
 
     private ArrayList<String> cityFroms;
     private ArrayList<String> cityTos;
@@ -113,7 +113,6 @@ public class HistoryFragment extends Fragment {
         super.onCreate(savedInstanceState);
         arrayListOfHistory = new ArrayList<>();
         flightCodeList = new ArrayList<>();
-        historyInfos = new ArrayList<>();
         cityFroms = new ArrayList<>();
         cityTos = new ArrayList<>();
     }
@@ -216,8 +215,8 @@ public class HistoryFragment extends Fragment {
             JSONObject origin = result.getJSONObject("origin");
             JSONObject destination = result.getJSONObject("destination");
 
-            JSONObject filedDepartureTime = result.getJSONObject("filed_departure_time");
-            JSONObject filedArrivalTime = result.getJSONObject("filed_arrival_time");
+            //JSONObject filedDepartureTime = result.getJSONObject("filed_departure_time");
+            //JSONObject filedArrivalTime = result.getJSONObject("filed_arrival_time");
 
             String flightCode = result.getString("ident");
 
@@ -229,13 +228,16 @@ public class HistoryFragment extends Fragment {
             String toAirport = destination.getString("airport_name");
             String toAirportIdent = destination.getString("alternate_ident");
 
-            long departureTime = filedDepartureTime.getLong("localtime");
-            departureTime = 0;
-            String departureDate = filedDepartureTime.getString("date");
+            //long departureTime = filedDepartureTime.getLong("localtime");
+            long departureTime = 0;
+            //String departureDate = filedDepartureTime.getString("date");
+            String departureDate = "";
 
-            long arrivalTime = filedArrivalTime.getLong("localtime");
+            //long arrivalTime = filedArrivalTime.getLong("localtime");
+            long arrivalTime = 0;
             arrivalTime = 0;
-            String arrivalDate = filedArrivalTime.getString("date");
+            //String arrivalDate = filedArrivalTime.getString("date");
+            String arrivalDate = "";
 
             HistoryInfo historyInfo = new HistoryInfo(null, null, flightCode,
                     cityFrom, cityTo, fromAirport, fromAirportIdent, toAirport,
@@ -245,12 +247,11 @@ public class HistoryFragment extends Fragment {
             cityFromsComplete.add(cityFrom);
             cityTosComplete.add(cityTo);
 
-
+            mAdapter.notifyDataSetChanged();
         }catch (JSONException e){
             e.printStackTrace();
         }
 
-        mAdapter.notifyDataSetChanged();
         getFromAndToCityPhotos(cityFromsComplete, cityTosComplete);
     }
 
