@@ -35,7 +35,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         TextView departureDate;
         TextView arrivalDate;
 
-        HistoryViewHolder(final View itemView){
+        HistoryViewHolder(View itemView){
             super(itemView);
 
             cityFromImage = itemView.findViewById(R.id.history_from_imageview);

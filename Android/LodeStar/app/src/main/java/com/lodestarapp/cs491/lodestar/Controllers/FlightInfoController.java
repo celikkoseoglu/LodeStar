@@ -24,11 +24,12 @@ public class FlightInfoController {
 
     private static final String TAG = "Flight";
 
-    public void getFlightInfo(String city, Context c, final VolleyCallback2 callback) {
+    public void getFlightInfo(String cityFromAirportCode, String cityToAirportCode, String flightCode, Context c, final VolleyCallback2 callback) {
 
         final JSONObject[] result = new JSONObject[1];
 
-        String requestFromTheUrl = "http://lodestarapp.com:3006/?originAirportCode=IST&destinationAirportCode=PVG&flightNumber=THY26";
+        String requestFromTheUrl = "http://lodestarapp.com:3006/?originAirportCode="+cityFromAirportCode
+                +"&destinationAirportCode="+cityToAirportCode+"&flightNumber="+flightCode;
 
         RequestQueue requestQueue = Volley.newRequestQueue( c.getApplicationContext() );
 

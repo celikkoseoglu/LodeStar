@@ -1,10 +1,7 @@
 package com.lodestarapp.cs491.lodestar;
 
-import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -15,15 +12,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,7 +23,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.lodestarapp.cs491.lodestar.Adapters.ADDITIONAL_USER;
 import com.lodestarapp.cs491.lodestar.Adapters.HistoryAdapter;
-import com.lodestarapp.cs491.lodestar.Adapters.UserPageAdapter;
 import com.lodestarapp.cs491.lodestar.Controllers.FlightInfoController;
 import com.lodestarapp.cs491.lodestar.Controllers.TripController;
 import com.lodestarapp.cs491.lodestar.Models.HistoryInfo;
@@ -70,6 +61,9 @@ public class HistoryFragment extends Fragment {
     private ArrayList<String> cityFroms;
     private ArrayList<String> cityTos;
 
+    private ArrayList<String> cityFromsComplete;
+    private ArrayList<String> cityTosComplete;
+
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -77,6 +71,18 @@ public class HistoryFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    public ArrayList<HistoryInfo> getHistoryInfos() {
+        return this.historyInfos;
+    }
+
+    public ArrayList<String> getCityFromsComplete() {
+        return this.cityFromsComplete;
+    }
+
+    public ArrayList<String> getCityTosComplete() {
+        return this.cityTosComplete;
+    }
 
 
     public HistoryFragment() {
@@ -105,80 +111,78 @@ public class HistoryFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         arrayListOfHistory = new ArrayList<>();
-
         flightCodeList = new ArrayList<>();
-
         historyInfos = new ArrayList<>();
-
         cityFroms = new ArrayList<>();
-
         cityTos = new ArrayList<>();
+    }
 
+    @Override
+    public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container,
+                             Bundle savedInstanceState) {
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        //   ADDITIONAL_USER au = dataSnapshot.getValue(ADDITIONAL_USER.class);
-        // Log.i("agam",au.username);
+
         ref = database.getReference();
-        Toast.makeText(this.getActivity(),"ww",Toast.LENGTH_LONG).show();
-        Log.i("agam", "fffff");
 
         ref.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
+
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
-
-                for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
+                for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
                     au = childSnapshot.getValue(ADDITIONAL_USER.class);
                     user = FirebaseAuth.getInstance().getCurrentUser();
 
-                    if(user.getEmail().equals(au.getemail())) {
+                    if (user.getEmail().equals(au.getemail())) {
+                        if (au.gettrips() == null) {
 
-                        Log.i("agam", "whatever it takes" + au.gettrips());
-
-                        if(au.gettrips() == null) {
-
-                        }else {
-
+                        } else {
                             String tmpArrayOfmine[] = au.gettrips().split("!");
                             String fromArray[] = tmpArrayOfmine;
-                            for(int i = 0; i < tmpArrayOfmine.length; i++) {
+
+                            for (int i = 0; i < tmpArrayOfmine.length; i++) {
                                 arrayListOfHistory.add(tmpArrayOfmine[i]);
                             }
-                                for(int t = 0; t < arrayListOfHistory.size();t++) {
-                                    String s = arrayListOfHistory.get(t);
-                                    s = s.substring(s.indexOf(":") + 1);
-                                    s = s.substring(0, s.indexOf(" From"));
-                                    Log.i("agam", "ooyea :" + s);
-                                    flightCodeList.add(s);
-                                }
 
-
-
-
-                                for(int e = 0; e < arrayListOfHistory.size();e++) {
-                                    String s = arrayListOfHistory.get(e);
-                                    s = s.substring(s.indexOf("From: ") + 6);
-                                    s = s.substring(0, s.indexOf(" To:"));
-                                    Log.i("agam", "cityfroms:" + s + ">");
-                                    cityFroms.add(s);
-                                }
-
-                            for(int e = 0; e < arrayListOfHistory.size();e++) {
+                            for (int t = 0; t < arrayListOfHistory.size(); t++) {
+                                String s = arrayListOfHistory.get(t);
+                                s = s.substring(s.indexOf(":") + 1);
+                                s = s.substring(0, s.indexOf(" From"));
+                                flightCodeList.add(s.substring(1));
+                            }
+                            for (int e = 0; e < arrayListOfHistory.size(); e++) {
+                                String s = arrayListOfHistory.get(e);
+                                s = s.substring(s.indexOf("From: ") + 6);
+                                s = s.substring(0, s.indexOf(" To:"));
+                                cityFroms.add(s);
+                            }
+                            for (int e = 0; e < arrayListOfHistory.size(); e++) {
                                 String s = arrayListOfHistory.get(e);
                                 s = s.substring(s.indexOf("To: ") + 4);
                                 s = s.substring(0, s.length());
-                                Log.i("agam", "cityto:" + s + ">");
                                 cityTos.add(s);
                             }
-
-
-
-
                         }
                     }
                 }
+                if (flightCodeList.size() > 0) {
+                    myView = inflater.inflate(R.layout.fragment_history, container, false);
+
+                    mRecyclerView = myView.findViewById(R.id.history_recyclerview);
+                    mRecyclerView.setHasFixedSize(true);
+
+                    mLayoutManager = new LinearLayoutManager(getActivity());
+                    mRecyclerView.setLayoutManager(mLayoutManager);
+
+                    mAdapter = new HistoryAdapter(historyInfos);
+                    mRecyclerView.setAdapter(mAdapter);
+
+                    sendRequest(flightCodeList);
+                } else {
+                    myView = inflater.inflate(R.layout.activity_history_initial, container, false);
+                }
+
             }
 
             @Override
@@ -187,234 +191,129 @@ public class HistoryFragment extends Fragment {
             }
         });
 
-
-        //final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        //   ADDITIONAL_USER au = dataSnapshot.getValue(ADDITIONAL_USER.class);
-        // Log.i("agam",au.username);
-        /*ref = database.getReference();
-
-        ref.child("users").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
-                    au = childSnapshot.getValue(ADDITIONAL_USER.class);
-
-                    if(au.gettrips() != null)
-                        Log.i("agam",au.gettrips());
-
-                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-                    if(user.getEmail().equals(au.getemail())) {
-                      //  Toast.makeText(this,au.gettrips(),Toast.LENGTH_LONG).show();
-=======
->>>>>>> a1fe68cfb90da8378d830f56f014b57b89f1b80c
-                    }
-                }
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });*/
-
-    }
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-        if(this.flightCodeList.size() > 0){
-            myView = inflater.inflate(R.layout.fragment_history, container, false);
-
-            mRecyclerView = myView.findViewById(R.id.history_recyclerview);
-            mRecyclerView.setHasFixedSize(true);
-
-            mLayoutManager = new LinearLayoutManager(getActivity());
-            mRecyclerView.setLayoutManager(mLayoutManager);
-
-            mAdapter = new HistoryAdapter(historyInfos);
-            mRecyclerView.setAdapter(mAdapter);
-
-            sendRequest(this.flightCodeList);
-        }
-        else {
-            myView = inflater.inflate(R.layout.activity_history_initial, container, false);
-        }
-
-        //TODO:Check the state - whether there is item in history or not from database
-        //if ....
-        //  View view = inflater.inflate(R.layout.fragment_history, container, false)
-        //else
-        //  View view = inflater.inflate(R.layout.activity_history_initial, container, false);
-
-        // Inflate the layout for this fragment
-        //initial'ı tekrardan bağla
-        //myView = inflater.inflate(R.layout.activity_history_initial, container, false);
-
-
-
-        /*TextView t1 = myView.findViewById(R.id.textview33);
-        t1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), QRCodeActivity.class);
-                startActivity(intent);
-            }
-        });*/
-
-
-
         return myView;
     }
 
     public void sendRequest(ArrayList<String> flightCodeList) {
-        historyInfos = new ArrayList<>();
-        cityFroms = new ArrayList<>();
-        cityTos = new ArrayList<>();
+        cityFromsComplete = new ArrayList<>();
+        cityTosComplete = new ArrayList<>();
 
         int size = flightCodeList.size();
 
-        final String[] city1 = new String[1];
-        final String[] city2 = new String[1];
-
         for (int i = 0; i < size; i++) {
-            flc.getFlightInfo(flightCodeList.get(i), getActivity(), new FlightInfoController.VolleyCallback2() {
+            final int finalI = i;
+            flc.getFlightInfo(cityFroms.get(i), cityTos.get(i), flightCodeList.get(i), getActivity(), new FlightInfoController.VolleyCallback2() {
                 @Override
                 public void onSuccess(JSONObject result) {
-                    try {
-
-                        JSONObject origin = result.getJSONObject("origin");
-                        JSONObject destination = result.getJSONObject("destination");
-
-                        JSONObject filedDepartureTime = result.getJSONObject("filed_departure_time");
-                        JSONObject filedArrivalTime = result.getJSONObject("filed_arrival_time");
-
-                        String flightCode = result.getString("ident");
-
-                        String cityFrom = origin.getString("city");
-                        city1[0] = cityFrom;
-                        String fromAirport = origin.getString("airport_name");
-                        String fromAirportIdent = origin.getString("alternate_ident");
-
-                        String cityTo = destination.getString("city");
-                        city2[0] = cityTo;
-                        String toAirport = destination.getString("airport_name");
-                        String toAirportIdent = destination.getString("alternate_ident");
-
-                        long departureTime = filedDepartureTime.getLong("localtime");
-                        String departureDate = filedDepartureTime.getString("date");
-
-                        long arrivalTime = filedArrivalTime.getLong("localtime");
-                        String arrivalDate = filedArrivalTime.getString("date");
-
-                        HistoryInfo historyInfo = new HistoryInfo(null, null, flightCode,
-                                cityFrom, cityTo, fromAirport, fromAirportIdent, toAirport,
-                                toAirportIdent, departureTime, arrivalTime, departureDate, arrivalDate);
-
-                        historyInfos.add(historyInfo);
-                        cityFroms.add(city1[0]);
-                        cityTos.add(city2[0]);
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                    parseTheJSONObject(result);
                 }
             });
         }
-        mAdapter.notifyDataSetChanged();
-
-        getFromAndToCityPhotos(cityFroms, cityTos);
     }
 
-    private void getFromAndToCityPhotos(final ArrayList<String> cityFroms, final ArrayList<String> cityTos) {
-        final String[] cityFromReference = new String[1];
-        final String[] cityToReference = new String[1];
+    private void parseTheJSONObject(JSONObject result) {
+        try {
+            JSONObject origin = result.getJSONObject("origin");
+            JSONObject destination = result.getJSONObject("destination");
 
-        int size = cityFroms.size();
+            JSONObject filedDepartureTime = result.getJSONObject("filed_departure_time");
+            JSONObject filedArrivalTime = result.getJSONObject("filed_arrival_time");
+
+            String flightCode = result.getString("ident");
+
+            String cityFrom = origin.getString("city");
+            String fromAirport = origin.getString("airport_name");
+            String fromAirportIdent = origin.getString("alternate_ident");
+
+            String cityTo = destination.getString("city");
+            String toAirport = destination.getString("airport_name");
+            String toAirportIdent = destination.getString("alternate_ident");
+
+            long departureTime = filedDepartureTime.getLong("localtime");
+            departureTime = 0;
+            String departureDate = filedDepartureTime.getString("date");
+
+            long arrivalTime = filedArrivalTime.getLong("localtime");
+            arrivalTime = 0;
+            String arrivalDate = filedArrivalTime.getString("date");
+
+            HistoryInfo historyInfo = new HistoryInfo(null, null, flightCode,
+                    cityFrom, cityTo, fromAirport, fromAirportIdent, toAirport,
+                    toAirportIdent, departureTime, arrivalTime, departureDate, arrivalDate);
+
+            this.historyInfos.add(historyInfo);
+            cityFromsComplete.add(cityFrom);
+            cityTosComplete.add(cityTo);
+
+
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+
+        mAdapter.notifyDataSetChanged();
+        getFromAndToCityPhotos(cityFromsComplete, cityTosComplete);
+    }
+
+    private void getFromAndToCityPhotos(final ArrayList<String> from, final ArrayList<String> to) {
+
+        int size = from.size();
 
         for (int i = 0; i < size; i++) {
             final int finalI = i;
-            trc.getTripCity(cityFroms.get(i), getContext(), new TripController.VolleyCallback4() {
+            trc.getTripCity(from.get(i), getContext(), new TripController.VolleyCallback4() {
                 @Override
                 public void onSuccess(JSONObject result) {
-                    try{
-                        JSONArray x = result.getJSONArray("results");
-                        JSONObject jo = x.getJSONObject(0);
-
-                        JSONArray photos = jo.getJSONArray("photos");
-                        JSONObject photo = photos.getJSONObject(0);
-                        cityFromReference[0] = photo.getString("photo_reference");
-
-                        if (ImageStorage.checkIfImageExists(cityFroms.get(finalI))) {
-                            File file = ImageStorage.getImage("/" + cityFroms.get(finalI) + ".png");
-                            assert file != null;
-                            String p = file.getAbsolutePath();
-                            Bitmap b = BitmapFactory.decodeFile(p);
-
-                            historyInfos.get(finalI).setCityFromBitmap(b);
-                            mAdapter.notifyDataSetChanged();
-
-                        } else {
-                            trc.getBackgroundImage(cityFromReference[0], 1080, getContext(), new TripController.VolleyCallback5() {
-                                @Override
-                                public void onSuccess(Bitmap result) {
-                                    ImageStorage.saveToSdCard(result, cityFroms.get(finalI));
-
-            //                        getView().findViewById(R.id.ll1).setVisibility(View.GONE);
-            //                        getView().findViewById(R.id.flipper).setVisibility(View.VISIBLE);
-
-                                    historyInfos.get(finalI).setCityFromBitmap(result);
-                                    mAdapter.notifyDataSetChanged();
-                                }
-                            });
-                        }
-
-                    }catch (JSONException e){
-                        e.printStackTrace();
-                    }
+                    parseTheTripInformation(result, from.get(finalI), finalI, 0);
+                    mAdapter.notifyDataSetChanged();
                 }
             });
 
-            trc.getTripCity(cityTos.get(i), getContext(), new TripController.VolleyCallback4() {
+            trc.getTripCity(to.get(i), getContext(), new TripController.VolleyCallback4() {
                 @Override
                 public void onSuccess(JSONObject result) {
-                    try{
-                        JSONArray x = result.getJSONArray("results");
-                        JSONObject jo = x.getJSONObject(0);
-
-                        JSONArray photos = jo.getJSONArray("photos");
-                        JSONObject photo = photos.getJSONObject(0);
-                        cityToReference[0] = photo.getString("photo_reference");
-
-                        if (ImageStorage.checkIfImageExists(cityTos.get(finalI))) {
-                            File file = ImageStorage.getImage("/" + cityTos.get(finalI) + ".png");
-                            assert file != null;
-                            String p = file.getAbsolutePath();
-                            Bitmap b = BitmapFactory.decodeFile(p);
-
-                            historyInfos.get(finalI).setCityToBitmap(b);
-                            mAdapter.notifyDataSetChanged();
-
-                        } else {
-                            trc.getBackgroundImage(cityToReference[0], 1080, getContext(), new TripController.VolleyCallback5() {
-                                @Override
-                                public void onSuccess(Bitmap result) {
-                                    ImageStorage.saveToSdCard(result, cityTos.get(finalI));
-
-                                    historyInfos.get(finalI).setCityToBitmap(result);
-                                    mAdapter.notifyDataSetChanged();
-                                }
-                            });
-                        }
-
-                    }catch (JSONException e){
-                        e.printStackTrace();
-                    }
+                    parseTheTripInformation(result, to.get(finalI), finalI, 1);
+                    mAdapter.notifyDataSetChanged();
                 }
             });
         }
     }
 
+    private void parseTheTripInformation(JSONObject result, final String city, final int index, final int which) {
+        try {
+            JSONArray x = result.getJSONArray("results");
+            JSONObject jo = x.getJSONObject(0);
+
+            JSONArray photos = jo.getJSONArray("photos");
+            JSONObject photo = photos.getJSONObject(0);
+            String cityReference = photo.getString("photo_reference");
+
+            if (ImageStorage.checkIfImageExists(city)) {
+                File file = ImageStorage.getImage("/" + city + ".png");
+                assert file != null;
+                String p = file.getAbsolutePath();
+                Bitmap b = BitmapFactory.decodeFile(p);
+
+                if(which == 0)
+                    getHistoryInfos().get(index).setCityFromBitmap(b);
+                else
+                    getHistoryInfos().get(index).setCityToBitmap(b);
+
+            } else {
+                trc.getBackgroundImage(cityReference, 1080, getContext(), new TripController.VolleyCallback5() {
+                    @Override
+                    public void onSuccess(Bitmap result) {
+                        ImageStorage.saveToSdCard(result, city);
+
+                        if(which == 0)
+                            getHistoryInfos().get(index).setCityFromBitmap(result);
+                        else
+                            getHistoryInfos().get(index).setCityToBitmap(result);
+                    }
+                });
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 }

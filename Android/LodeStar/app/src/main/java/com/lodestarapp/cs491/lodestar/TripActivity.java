@@ -173,7 +173,7 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
     public void sendRequest() {
         String flight = "THY26"; //bunun binis kartından alınması gerekmiyo mu??????
 
-        flc.getFlightInfo(flight, getActivity(), new FlightInfoController.VolleyCallback2() {
+        flc.getFlightInfo("IST", "PVG", flight, getActivity(), new FlightInfoController.VolleyCallback2() {
             @Override
             public void onSuccess(JSONObject result) {
                 try {
