@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lodestarapp.cs491.lodestar.Models.HistoryInfo;
@@ -22,6 +23,9 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     static class HistoryViewHolder extends RecyclerView.ViewHolder{
 
+        ImageView cityFromImage;
+        ImageView cityToImage;
+
         TextView cityFrom;
         TextView cityTo;
         TextView fromAirport;
@@ -33,6 +37,9 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         HistoryViewHolder(final View itemView){
             super(itemView);
+
+            cityFromImage = itemView.findViewById(R.id.history_from_imageview);
+            cityToImage = itemView.findViewById(R.id.history_to_imageview);
 
             cityFrom = itemView.findViewById(R.id.history_from_city_country_textview);
             cityTo = itemView.findViewById(R.id.history_to_city_country_textview);
@@ -73,6 +80,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         ((HistoryViewHolder) holder).departureDate.setText(historyInfos.get(position).getDepartureDate());
         ((HistoryViewHolder) holder).arrivalDate.setText(historyInfos.get(position).getArrivalDate());
 
+        ((HistoryViewHolder) holder).cityFromImage.setImageBitmap(historyInfos.get(position).getCityFromBitmap());
+        ((HistoryViewHolder) holder).cityToImage.setImageBitmap(historyInfos.get(position).getCityToBitmap());
     }
 
     @Override

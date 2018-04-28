@@ -2,6 +2,8 @@ package com.lodestarapp.cs491.lodestar;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,11 +33,15 @@ import com.lodestarapp.cs491.lodestar.Adapters.ADDITIONAL_USER;
 import com.lodestarapp.cs491.lodestar.Adapters.HistoryAdapter;
 import com.lodestarapp.cs491.lodestar.Adapters.UserPageAdapter;
 import com.lodestarapp.cs491.lodestar.Controllers.FlightInfoController;
+import com.lodestarapp.cs491.lodestar.Controllers.TripController;
 import com.lodestarapp.cs491.lodestar.Models.HistoryInfo;
+import com.lodestarapp.cs491.lodestar.Models.ImageStorage;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.ArrayList;
 
 
@@ -56,8 +63,12 @@ public class HistoryFragment extends Fragment {
     ArrayList<String> flightCodeList;
 
     private FlightInfoController flc = new FlightInfoController();
+    private TripController trc = new TripController();
 
     private ArrayList<HistoryInfo> historyInfos;
+
+    private ArrayList<String> cityFroms;
+    private ArrayList<String> cityTos;
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -95,9 +106,9 @@ public class HistoryFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        arrayListOfHistory = new ArrayList<String>();
+        arrayListOfHistory = new ArrayList<>();
 
-        flightCodeList = new ArrayList<String>();
+        flightCodeList = new ArrayList<>();
 
         historyInfos = new ArrayList<>();
 
@@ -189,6 +200,24 @@ public class HistoryFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        if(this.flightCodeList.size() > 0){
+            myView = inflater.inflate(R.layout.fragment_history, container, false);
+
+            mRecyclerView = myView.findViewById(R.id.history_recyclerview);
+            mRecyclerView.setHasFixedSize(true);
+
+            mLayoutManager = new LinearLayoutManager(getActivity());
+            mRecyclerView.setLayoutManager(mLayoutManager);
+
+            mAdapter = new HistoryAdapter(historyInfos);
+            mRecyclerView.setAdapter(mAdapter);
+
+            sendRequest(this.flightCodeList);
+        }
+        else {
+            myView = inflater.inflate(R.layout.activity_history_initial, container, false);
+        }
+
         //TODO:Check the state - whether there is item in history or not from database
         //if ....
         //  View view = inflater.inflate(R.layout.fragment_history, container, false)
@@ -199,7 +228,7 @@ public class HistoryFragment extends Fragment {
         //initial'ı tekrardan bağla
         //myView = inflater.inflate(R.layout.activity_history_initial, container, false);
 
-        myView = inflater.inflate(R.layout.fragment_history, container, false);
+
 
         /*TextView t1 = myView.findViewById(R.id.textview33);
         t1.setOnClickListener(new View.OnClickListener() {
@@ -210,65 +239,157 @@ public class HistoryFragment extends Fragment {
             }
         });*/
 
-        mRecyclerView = myView.findViewById(R.id.history_recyclerview);
-        mRecyclerView.setHasFixedSize(true);
 
-        mLayoutManager = new LinearLayoutManager(getActivity());
-        mRecyclerView.setLayoutManager(mLayoutManager);
-
-        mAdapter = new HistoryAdapter(historyInfos);
-        mRecyclerView.setAdapter(mAdapter);
-
-        sendRequest();
 
         return myView;
     }
 
-    public void sendRequest() {
-        String flight = "THY26"; //bunun binis kartından alınması gerekmiyo mu??????
+    public void sendRequest(ArrayList<String> flightCodeList) {
         historyInfos = new ArrayList<>();
+        cityFroms = new ArrayList<>();
+        cityTos = new ArrayList<>();
 
-        flc.getFlightInfo(flight, getActivity(), new FlightInfoController.VolleyCallback2() {
-            @Override
-            public void onSuccess(JSONObject result) {
-                try {
+        int size = flightCodeList.size();
 
-                    JSONObject origin = result.getJSONObject("origin");
-                    JSONObject destination = result.getJSONObject("destination");
+        final String[] city1 = new String[1];
+        final String[] city2 = new String[1];
 
-                    JSONObject filedDepartureTime = result.getJSONObject("filed_departure_time");
-                    JSONObject filedArrivalTime = result.getJSONObject("filed_arrival_time");
+        for (int i = 0; i < size; i++) {
+            flc.getFlightInfo(flightCodeList.get(i), getActivity(), new FlightInfoController.VolleyCallback2() {
+                @Override
+                public void onSuccess(JSONObject result) {
+                    try {
 
-                    String flightCode = result.getString("ident");
+                        JSONObject origin = result.getJSONObject("origin");
+                        JSONObject destination = result.getJSONObject("destination");
 
-                    String cityFrom = origin.getString("city");
-                    String fromAirport = origin.getString("airport_name");
-                    String fromAirportIdent = origin.getString("alternate_ident");
+                        JSONObject filedDepartureTime = result.getJSONObject("filed_departure_time");
+                        JSONObject filedArrivalTime = result.getJSONObject("filed_arrival_time");
 
-                    String cityTo = destination.getString("city");
-                    String toAirport = destination.getString("airport_name");
-                    String toAirportIdent = destination.getString("alternate_ident");
+                        String flightCode = result.getString("ident");
 
-                    long departureTime = filedDepartureTime.getLong("localtime");
-                    String departureDate = filedDepartureTime.getString("date");
+                        String cityFrom = origin.getString("city");
+                        city1[0] = cityFrom;
+                        String fromAirport = origin.getString("airport_name");
+                        String fromAirportIdent = origin.getString("alternate_ident");
 
-                    long arrivalTime = filedArrivalTime.getLong("localtime");
-                    String arrivalDate = filedArrivalTime.getString("date");
+                        String cityTo = destination.getString("city");
+                        city2[0] = cityTo;
+                        String toAirport = destination.getString("airport_name");
+                        String toAirportIdent = destination.getString("alternate_ident");
 
-                    HistoryInfo historyInfo = new HistoryInfo(flightCode, cityFrom, cityTo,
-                            fromAirport, fromAirportIdent, toAirport, toAirportIdent, departureTime,
-                            arrivalTime, departureDate, arrivalDate);
+                        long departureTime = filedDepartureTime.getLong("localtime");
+                        String departureDate = filedDepartureTime.getString("date");
 
-                    historyInfos.add(historyInfo);
+                        long arrivalTime = filedArrivalTime.getLong("localtime");
+                        String arrivalDate = filedArrivalTime.getString("date");
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                        HistoryInfo historyInfo = new HistoryInfo(null, null, flightCode,
+                                cityFrom, cityTo, fromAirport, fromAirportIdent, toAirport,
+                                toAirportIdent, departureTime, arrivalTime, departureDate, arrivalDate);
+
+                        historyInfos.add(historyInfo);
+                        cityFroms.add(city1[0]);
+                        cityTos.add(city2[0]);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
-                mAdapter.notifyDataSetChanged();
-            }
-        });
+            });
+        }
+        mAdapter.notifyDataSetChanged();
 
+        getFromAndToCityPhotos(cityFroms, cityTos);
+    }
 
+    private void getFromAndToCityPhotos(final ArrayList<String> cityFroms, final ArrayList<String> cityTos) {
+        final String[] cityFromReference = new String[1];
+        final String[] cityToReference = new String[1];
+
+        int size = cityFroms.size();
+
+        for (int i = 0; i < size; i++) {
+            final int finalI = i;
+            trc.getTripCity(cityFroms.get(i), getContext(), new TripController.VolleyCallback4() {
+                @Override
+                public void onSuccess(JSONObject result) {
+                    try{
+                        JSONArray x = result.getJSONArray("results");
+                        JSONObject jo = x.getJSONObject(0);
+
+                        JSONArray photos = jo.getJSONArray("photos");
+                        JSONObject photo = photos.getJSONObject(0);
+                        cityFromReference[0] = photo.getString("photo_reference");
+
+                        if (ImageStorage.checkIfImageExists(cityFroms.get(finalI))) {
+                            File file = ImageStorage.getImage("/" + cityFroms.get(finalI) + ".png");
+                            assert file != null;
+                            String p = file.getAbsolutePath();
+                            Bitmap b = BitmapFactory.decodeFile(p);
+
+                            historyInfos.get(finalI).setCityFromBitmap(b);
+                            mAdapter.notifyDataSetChanged();
+
+                        } else {
+                            trc.getBackgroundImage(cityFromReference[0], 1080, getContext(), new TripController.VolleyCallback5() {
+                                @Override
+                                public void onSuccess(Bitmap result) {
+                                    ImageStorage.saveToSdCard(result, cityFroms.get(finalI));
+
+                                    getView().findViewById(R.id.ll1).setVisibility(View.GONE);
+                                    getView().findViewById(R.id.flipper).setVisibility(View.VISIBLE);
+
+                                    historyInfos.get(finalI).setCityFromBitmap(result);
+                                    mAdapter.notifyDataSetChanged();
+                                }
+                            });
+                        }
+
+                    }catch (JSONException e){
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+            trc.getTripCity(cityTos.get(i), getContext(), new TripController.VolleyCallback4() {
+                @Override
+                public void onSuccess(JSONObject result) {
+                    try{
+                        JSONArray x = result.getJSONArray("results");
+                        JSONObject jo = x.getJSONObject(0);
+
+                        JSONArray photos = jo.getJSONArray("photos");
+                        JSONObject photo = photos.getJSONObject(0);
+                        cityToReference[0] = photo.getString("photo_reference");
+
+                        if (ImageStorage.checkIfImageExists(cityTos.get(finalI))) {
+                            File file = ImageStorage.getImage("/" + cityTos.get(finalI) + ".png");
+                            assert file != null;
+                            String p = file.getAbsolutePath();
+                            Bitmap b = BitmapFactory.decodeFile(p);
+
+                            historyInfos.get(finalI).setCityToBitmap(b);
+                            mAdapter.notifyDataSetChanged();
+
+                        } else {
+                            trc.getBackgroundImage(cityToReference[0], 1080, getContext(), new TripController.VolleyCallback5() {
+                                @Override
+                                public void onSuccess(Bitmap result) {
+                                    ImageStorage.saveToSdCard(result, cityTos.get(finalI));
+
+                                    historyInfos.get(finalI).setCityToBitmap(result);
+                                    mAdapter.notifyDataSetChanged();
+                                }
+                            });
+                        }
+
+                    }catch (JSONException e){
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
     }
 
 }

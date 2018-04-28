@@ -1,6 +1,11 @@
 package com.lodestarapp.cs491.lodestar.Models;
 
+import android.graphics.Bitmap;
+
 public class HistoryInfo {
+
+    private Bitmap cityFromBitmap;
+    private Bitmap cityToBitmap;
 
     private String flightCode;
     private String cityFrom;
@@ -14,11 +19,14 @@ public class HistoryInfo {
     private String departureDate;
     private String arrivalDate;
 
-    public HistoryInfo(String flightCode, String cityFrom, String cityTo,
-                       String fromAirport, String fromAirportIdent,
-                       String toAirport, String toAirportIdent,
+    public HistoryInfo(Bitmap cityFromBitmap, Bitmap cityToBitmap,String flightCode,
+                       String cityFrom, String cityTo, String fromAirport,
+                       String fromAirportIdent, String toAirport, String toAirportIdent,
                        long departureTime, long arrivalTime,
                        String departureDate, String arrivalDate){
+
+        this.cityFromBitmap = cityFromBitmap;
+        this.cityToBitmap = cityToBitmap;
 
         this.flightCode = flightCode;
         this.cityFrom = cityFrom;
@@ -119,5 +127,21 @@ public class HistoryInfo {
 
     public void setArrivalDate(String arrivalDate) {
         this.arrivalDate = arrivalDate;
+    }
+
+    public Bitmap getCityToBitmap() {
+        return cityToBitmap;
+    }
+
+    public void setCityToBitmap(Bitmap cityToBitmap) {
+        this.cityToBitmap = cityToBitmap;
+    }
+
+    public Bitmap getCityFromBitmap() {
+        return cityFromBitmap;
+    }
+
+    public void setCityFromBitmap(Bitmap cityFromBitmap) {
+        this.cityFromBitmap = cityFromBitmap;
     }
 }
