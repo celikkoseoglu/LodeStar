@@ -10,30 +10,22 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.lodestarapp.cs491.lodestar.Interfaces.LodeStarServerCallback;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 public class PlacesToSeeController {
 
     private static final String TAG = "controller";
     private boolean locationPermissionGiven;
     private String requestFromUrl;
-    private String keyword;
     private Location location;
 
-    //Default Constructor
-    public PlacesToSeeController(){}
-
-    public PlacesToSeeController(String keyword, boolean locationPermissionGiven, Location location){
-        this.keyword = keyword;
+    public PlacesToSeeController(boolean locationPermissionGiven, Location location){
         this.locationPermissionGiven = locationPermissionGiven;
         this.location = location;
 
@@ -110,14 +102,6 @@ public class PlacesToSeeController {
 
     }
 
-    public String getKeyword() {
-        return keyword;
-    }
-
-    public void setKeyword(String keyword) {
-        this.keyword = keyword;
-    }
-
     public Location getLocation() {
         return location;
     }
@@ -129,17 +113,5 @@ public class PlacesToSeeController {
     public String getRequestFromUrl() {
         return requestFromUrl;
     }
-
-    public void setRequestFromUrl(String requestFromUrl) {
-        this.requestFromUrl = requestFromUrl;
-    }
-
-    /*private boolean checkForLocationPermission() {
-
-
-
-
-        return false;
-    }*/
 
 }
