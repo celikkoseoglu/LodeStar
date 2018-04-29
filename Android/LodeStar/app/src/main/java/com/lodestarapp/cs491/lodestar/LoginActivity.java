@@ -272,7 +272,7 @@ public class LoginActivity extends AppCompatActivity implements
       //  intent.putExtra("key",userList);
         startActivity(intent);
     }
-    
+
     /**
      * Weather
      */

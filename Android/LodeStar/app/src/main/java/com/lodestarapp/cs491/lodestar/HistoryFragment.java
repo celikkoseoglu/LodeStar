@@ -34,13 +34,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class HistoryFragment extends Fragment {
-    ADDITIONAL_USER au;
+    private ADDITIONAL_USER au;
     DatabaseReference ref;
-    View myView;
-    FirebaseUser user;
+    private View myView;
+    private FirebaseUser user;
 
-    ArrayList<String> arrayListOfHistory;
-    ArrayList<String> flightCodeList;
+    private ArrayList<String> arrayListOfHistory;
+    private ArrayList<String> flightCodeList;
 
     private FlightInfoController flc = new FlightInfoController();
     private TripController trc = new TripController();

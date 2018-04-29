@@ -15,7 +15,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class ChangePasswordActivity extends AppCompatActivity implements View.OnClickListener{
     private FirebaseAuth managerDB;
-    private Button butt4;
+    private Button b4;
     private EditText etext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,17 +24,17 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        butt4 = (Button) findViewById(R.id.RegButton98);
+        b4 = (Button) findViewById(R.id.RegButton98);
         etext = (EditText) findViewById(R.id.emailEdit75);
 
-        butt4.setOnClickListener(this);
+        b4.setOnClickListener(this);
 
         managerDB = FirebaseAuth.getInstance();
     }
 
     @Override
     public void onClick(View v) {
-        if(v == butt4) {
+        if(v == b4) {
             //    Toast.makeText(this,"Please make sure you enter the credentials correctly",Toast.LENGTH_LONG).show();
             forgotPassword();
         }
