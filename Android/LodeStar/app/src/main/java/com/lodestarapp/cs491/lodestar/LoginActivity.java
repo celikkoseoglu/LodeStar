@@ -272,16 +272,7 @@ public class LoginActivity extends AppCompatActivity implements
       //  intent.putExtra("key",userList);
         startActivity(intent);
     }
-
-    /**
-     * Unity Try
-     */
-    public void unityGameStart(View view){
-        Intent intent = new Intent(this, BrickBreakerActivity.class);
-        startActivity(intent);
-    }
-
-
+    
     /**
      * Weather
      */
