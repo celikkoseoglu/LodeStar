@@ -7,12 +7,9 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -34,23 +31,15 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
-
+import java.util.Arrays;
 
 public class HistoryFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
     ADDITIONAL_USER au;
     DatabaseReference ref;
-    private ListView tripListView;
     View myView;
-    ArrayAdapter<String> arrayAdapter;
     FirebaseUser user;
 
     ArrayList<String> arrayListOfHistory;
-
-
     ArrayList<String> flightCodeList;
 
     private FlightInfoController flc = new FlightInfoController();
@@ -68,44 +57,13 @@ public class HistoryFragment extends Fragment {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
     public ArrayList<HistoryInfo> getHistoryInfos() {
         return this.historyInfos;
     }
 
-    public ArrayList<String> getCityFromsComplete() {
-        return this.cityFromsComplete;
-    }
-
-    public ArrayList<String> getCityTosComplete() {
-        return this.cityTosComplete;
-    }
-
-
     public HistoryFragment() {
         // Required empty public constructor
 
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment HistoryFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static HistoryFragment newInstance(String param1, String param2) {
-        HistoryFragment fragment = new HistoryFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
@@ -138,11 +96,8 @@ public class HistoryFragment extends Fragment {
 
                         } else {
                             String tmpArrayOfmine[] = au.gettrips().split("!");
-                            String fromArray[] = tmpArrayOfmine;
 
-                            for (int i = 0; i < tmpArrayOfmine.length; i++) {
-                                arrayListOfHistory.add(tmpArrayOfmine[i]);
-                            }
+                            arrayListOfHistory.addAll(Arrays.asList(tmpArrayOfmine));
 
                             for (int t = 0; t < arrayListOfHistory.size(); t++) {
                                 String s = arrayListOfHistory.get(t);
@@ -200,7 +155,6 @@ public class HistoryFragment extends Fragment {
         int size = flightCodeList.size();
 
         for (int i = 0; i < size; i++) {
-            final int finalI = i;
             flc.getFlightInfo(cityFroms.get(i), cityTos.get(i), flightCodeList.get(i), getActivity(), new FlightInfoController.VolleyCallback2() {
                 @Override
                 public void onSuccess(JSONObject result) {
@@ -234,7 +188,7 @@ public class HistoryFragment extends Fragment {
             String departureDate = "";
 
             //long arrivalTime = filedArrivalTime.getLong("localtime");
-            long arrivalTime = 0;
+            long arrivalTime;
             arrivalTime = 0;
             //String arrivalDate = filedArrivalTime.getString("date");
             String arrivalDate = "";

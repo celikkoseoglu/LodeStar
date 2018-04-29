@@ -42,7 +42,7 @@ public class User {
         surname = str;
     }
 
-    public void email(String str) {
+    public void setEmail(String str) {
         email = str;
     }
 

@@ -85,8 +85,6 @@ public class FavoritesFragment extends Fragment {
         ref.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
-
                 for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
                     ADDITIONAL_USER au = childSnapshot.getValue(ADDITIONAL_USER.class);
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -98,7 +96,6 @@ public class FavoritesFragment extends Fragment {
                         if(au.getfavorites() == null) {
 
                         }else {
-
                             String tmpArrayOfmine[] = au.getfavorites().split("!");
                             for(int i = 0; i < tmpArrayOfmine.length; i++) {
                                 favPlaces.add(tmpArrayOfmine[i]);
@@ -121,6 +118,11 @@ public class FavoritesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        databaseToArrayList();
+
+
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_favorites_initial, container, false);
     }

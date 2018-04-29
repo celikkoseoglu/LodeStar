@@ -19,9 +19,6 @@ import static com.facebook.share.model.ShareMessengerMediaTemplateContent.MediaT
 
 public class UserPageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private static final int PROFILE = 0;
-    private static final int POSTS = 1;
-
     private List<String> userInfoWithPosts;
 
     public UserPageAdapter(List<String> userInfoWithPosts){
