@@ -69,7 +69,7 @@ app.get('/', (req, res) => {
         	});
         });
 
-        res.send(mockResponse);
+        //res.send(mockResponse);
 });
 
 app.listen(3006, () => console.log('LodeStar FlightStatus listening on port 3006!'));

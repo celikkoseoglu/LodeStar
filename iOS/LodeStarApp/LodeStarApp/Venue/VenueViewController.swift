@@ -58,7 +58,7 @@ extension VenueViewController {
                 cell.slideShow.addGestureRecognizer(recognizer)
 
                 
-                let vrImage = UIImage(named: "sindhu_beach.jpg")
+                let vrImage = UIImage(named: "vodafone_ataturk_airport.jpg")
                 cell.displayContent(venueImage: vrImage!, venueName: venueName, venueReviewCount: "", venueType: venueType, venueAddress: venueAddress, venuePhoneNumber: venuePhone, star: Int(venueRating) + 1)
             }
             return cell
@@ -67,7 +67,7 @@ extension VenueViewController {
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifiers[index.row], for: indexPath) as! VenueVRCell
             
-            let vrImage = UIImage(named: "sindhu_beach.jpg")
+            let vrImage = UIImage(named: "vodafone_ataturk_airport.jpg")
             cell.displayContent(landmarkPic: vrImage!)
             
             return cell
