@@ -136,17 +136,20 @@ public class DirectedUserPage extends AppCompatActivity {
 
                 for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
                     au2 = childSnapshot.getValue(ADDITIONAL_USER.class);
+
+
                    // user = FirebaseAuth.getInstance().getCurrentUser();
 
                     if(myEmail.equals(au2.getemail())) {
                         String toBeParsed = au2.getposts();
 
                         if(au2.getposts() != null) {
+                            Log.i("agam","en kucuklere");
                             String tmpArray[] = toBeParsed.split("&&&");
                             tripLogs.setText(tmpArray.length + "");
-                            for(int i = 0; i < noteArrayList.size();i++) {
+                            for(int i = 0; i < tmpArray.length;i++) {
                                 userInfoWithPosts.add(tmpArray[i]);
-                                Log.i("agam","bariscim: " + noteArrayList.get(i));
+                                Log.i("agam","bariscim: " + userInfoWithPosts.get(i));
                             }
                         }
 
@@ -154,8 +157,11 @@ public class DirectedUserPage extends AppCompatActivity {
                 }
 
 
+                //Barıs burada userInfoWithPosts Arraylistini databaseden doldurdum, frontenede bu arraylisti kullanarak başlayabilirsin. Thnx efe kankan :)
+                
+
                 //mAdapter.notifyDataSetChanged();
-                userInfoWithPosts = new ArrayList<>();
+
                 //UserPage.this.onCreate(null);
             }
 
