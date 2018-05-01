@@ -33,6 +33,7 @@
                     android:layout_height="130dp"
                     android:background="@null"
                     app:srcCompat="@color/colorForestGreen"
+                    android:adjustViewBounds="true"
                     android:layout_marginLeft="7dp"
                     android:layout_marginTop="7dp"
                     android:layout_marginBottom="7dp"
@@ -121,7 +122,8 @@
                     android:layout_alignLeft="@id/place_iconn"
                     android:layout_alignStart="@id/place_iconn"
                     android:layout_below="@id/place_location"
-                    android:layout_marginTop="10dp" />
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="5dp"/>
 
                 <ImageView
                     android:id="@+id/place_stars_image2"

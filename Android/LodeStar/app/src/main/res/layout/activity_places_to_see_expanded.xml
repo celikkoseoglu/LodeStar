@@ -289,10 +289,30 @@
 
                     </com.lodestarapp.cs491.lodestar.VR.PanoramaView>
 
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:id="@+id/ll1"
+                            android:orientation="vertical"
+                            android:layout_below="@id/place_name_expanded2">
+
+                            <ProgressBar
+                                android:id="@+id/pb2"
+                                android:layout_marginTop="20dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:indeterminate="true"
+                                android:indeterminateTint="@color/colorRoyalBlue"
+                                />
+
+                        </LinearLayout>
+
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_below="@id/place_name_expanded2">
+                        android:layout_below="@id/place_name_expanded2"
+                        android:id="@+id/relative">
 
                         <RelativeLayout
                             android:id="@+id/relativelayout"

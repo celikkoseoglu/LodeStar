@@ -359,6 +359,8 @@ public class NearMeActivity extends AppCompatActivity {
             iconURLs.add(iconURL);
 
             //getPlacesIcons(iconURL);
+            final String coords = location.getDouble("lat")+ "," +location.getDouble("lng");
+
 
 
             final int finalI = i;
@@ -376,7 +378,7 @@ public class NearMeActivity extends AppCompatActivity {
                 public void onSuccess(Bitmap result) {
                     imgBitmap[0] = result;
                     if( fqtype == 1){
-                        Places pl = new Places(imgBitmap[0], finalPlaceName, finalPlaceLocation, finalPlaceType, finalPlaceRating, null, finalPlaceRating, fplaceId);
+                        Places pl = new Places(imgBitmap[0], finalPlaceName, finalPlaceLocation, finalPlaceType, finalPlaceRating, null, finalPlaceRating, fplaceId, coords);
                         restList.add(pl);
                         ll1.setVisibility(View.GONE);
                         recyclerView1.setVisibility(View.VISIBLE);
@@ -384,7 +386,7 @@ public class NearMeActivity extends AppCompatActivity {
                         getPlacesIcon(restList.indexOf(pl), finalIconURL,"restaurant");
                     }
                     if( fqtype == 2){
-                        Places pl = new Places(imgBitmap[0], finalPlaceName, finalPlaceLocation, finalPlaceType, finalPlaceRating, null, finalPlaceRating, fplaceId);
+                        Places pl = new Places(imgBitmap[0], finalPlaceName, finalPlaceLocation, finalPlaceType, finalPlaceRating, null, finalPlaceRating, fplaceId,coords);
                         parkList.add(pl);
                         ll2.setVisibility(View.GONE);
                         recyclerView2.setVisibility(View.VISIBLE);
@@ -392,7 +394,7 @@ public class NearMeActivity extends AppCompatActivity {
                         getPlacesIcon(parkList.indexOf(pl), finalIconURL,"park");
                     }
                     if( fqtype == 3){
-                        Places pl = new Places(imgBitmap[0], finalPlaceName, finalPlaceLocation, finalPlaceType, finalPlaceRating, null, finalPlaceRating, fplaceId);
+                        Places pl = new Places(imgBitmap[0], finalPlaceName, finalPlaceLocation, finalPlaceType, finalPlaceRating, null, finalPlaceRating, fplaceId, coords);
                         museumList.add(pl);
                         ll3.setVisibility(View.GONE);
                         recyclerView3.setVisibility(View.VISIBLE);

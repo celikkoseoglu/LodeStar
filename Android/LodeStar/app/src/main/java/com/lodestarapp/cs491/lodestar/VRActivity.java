@@ -45,6 +45,8 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
     float mDeltaY = 0.0f;
     float arrowAngle = 0.0f;
 
+    byte[] panorama;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,7 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
         Bundle data = getIntent().getExtras();
         if (data != null) {
             mDeltaY = data.getFloat("VrAngle");
+            panorama  = data.getByteArray("Bitmap");
             arrowAngle = mDeltaY;
         }
 
@@ -88,8 +91,8 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
 
 
         renderer = new Renderer(this, 50, 5f);
-        renderer.loadTexture(this, getPhotoIndex());
-        renderer.setAngle(arrowAngle);
+        renderer.loadTexture(this, panorama);
+        //renderer.setAngle(arrowAngle);
         checkGLError("onSurfaceCreated");
 
     }
@@ -115,7 +118,7 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
             if(arrowAngle == 80){
                 if(Math.abs(headRotatiton) < 0 + 30){
                     arrowAngle = -100;
-                    renderer.setAngle(arrowAngle);
+                    //renderer.setAngle(arrowAngle);
                     resetTexture();
 
                 }
@@ -124,7 +127,7 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
                 if ( Math.abs(headRotatiton) > 180 -30)
                 {
                     arrowAngle = 80;
-                    renderer.setAngle(arrowAngle);
+                    //renderer.setAngle(arrowAngle);
                     resetTexture();
 
                 }

@@ -329,6 +329,8 @@ public class RestaurantActivity extends AppCompatActivity implements OnMapReadyC
                     .position(placeLatLng)
                     .title(placeName));
             builder.include(placeLatLng);
+            final String coords = location.getDouble("lat")+ "," +location.getDouble("lng");
+
 
             final int finalI = i;
             //Log.d("iconn", iconURL);
@@ -343,7 +345,7 @@ public class RestaurantActivity extends AppCompatActivity implements OnMapReadyC
                 @Override
                 public void onSuccess(Bitmap result) {
                     imgBitmap[0] = result;
-                    Places pl = new Places(imgBitmap[0], finalPlaceName, finalPlaceLocation, finalPlaceType, finalPlaceRating, null, finalPlaceRating, fplaceId);
+                    Places pl = new Places(imgBitmap[0], finalPlaceName, finalPlaceLocation, finalPlaceType, finalPlaceRating, null, finalPlaceRating, fplaceId, coords);
                     restList.add(pl);
                     ll1.setVisibility(View.GONE);
                     ll2.setVisibility(View.VISIBLE);

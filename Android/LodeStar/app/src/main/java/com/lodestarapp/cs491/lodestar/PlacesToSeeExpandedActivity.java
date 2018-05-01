@@ -2,6 +2,7 @@ package com.lodestarapp.cs491.lodestar;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.hardware.Sensor;
@@ -12,6 +13,7 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
@@ -19,6 +21,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -46,6 +50,7 @@ import com.lodestarapp.cs491.lodestar.Adapters.ADDITIONAL_USER;
 import com.lodestarapp.cs491.lodestar.Adapters.NearMeAdapter;
 import com.lodestarapp.cs491.lodestar.Adapters.PlacesToSeeAdapter;
 import com.lodestarapp.cs491.lodestar.Adapters.PlacesToSeeExpandedAdapter;
+import com.lodestarapp.cs491.lodestar.Controllers.VenueController;
 import com.lodestarapp.cs491.lodestar.VR.PanoramaView;
 
 import org.json.JSONArray;
@@ -61,6 +66,7 @@ public class PlacesToSeeExpandedActivity extends AppCompatActivity implements Vi
 
     private static final String TAG = "expandedMessage";
     private String placeId;
+    private String coords;
     private ArrayList<String> photoReferences;
     private ArrayList<String> landmarkReviews;
     private ArrayList<String> reviewers;
@@ -95,11 +101,23 @@ public class PlacesToSeeExpandedActivity extends AppCompatActivity implements Vi
 
     Sensor gameRotatiton;
     SensorManager sManager;
+    VenueController vc;
+    RelativeLayout relative;
+    LinearLayout ll1;
+
+    byte[] VRBitmap;
 
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_places_to_see_expanded);
-        pv = findViewById(R.id.layout);
+        pv=findViewById(R.id.layout);
+        relative = findViewById(R.id.relative);
+        ll1 =findViewById(R.id.ll1);
+
+        pv.setVisibility(View.GONE);
+        relative.setVisibility(View.GONE);
+        ll1.setVisibility(View.VISIBLE);
+
         ScrollView sc = findViewById(R.id.scroll_general);
         mDatabase = FirebaseDatabase.getInstance().getReference();
         /*sc.setOnTouchListener(new View.OnTouchListener() {
@@ -132,6 +150,7 @@ public class PlacesToSeeExpandedActivity extends AppCompatActivity implements Vi
         this.placeName = getIntent().getExtras().getString("placeName");
         String placeLocation = getIntent().getExtras().getString("placeLocation");
         String placeType = getIntent().getExtras().getString("placeType");
+        coords = getIntent().getExtras().getString("placeCoords");
 
         this.placeId = getIntent().getExtras().getString("placeId");
         this.rating = Double.parseDouble(getIntent().getExtras().getString("placeRating"));
@@ -207,6 +226,58 @@ public class PlacesToSeeExpandedActivity extends AppCompatActivity implements Vi
         recyclerView.setAdapter(adapter);
 
         retrieveMoreInformationsAndPhotos();
+        vc = new VenueController();
+        vc.getPanorama(coords,"50","low", getApplicationContext(),new VenueController.VolleyCallback(){
+
+            @Override
+            public void onSuccess(JSONObject result) {
+                try {
+                    String encoded = result.getString("lowRes");
+                    double pano_deg = result.getJSONObject("Projection").getDouble("pano_yaw_deg") +200.0;
+
+                    double angle  = (result.getJSONObject("Location").getDouble("best_view_direction_deg") + pano_deg)%360.0;
+                    pv.setAngle((float) angle);
+                    byte[] decodedString = Base64.decode(encoded, Base64.DEFAULT);
+                    pv.setBitmap(decodedString);
+                    pv.setVisibility(View.VISIBLE);
+                    ll1.setVisibility(View.GONE);
+
+                    JSONArray links=result.getJSONArray("Links");
+                    JSONObject jo;
+                    ArrayList<Float> arrows = new ArrayList<>();
+                    for(int i = 0;i<links.length();i++){
+                        jo = links.getJSONObject(i);
+                        arrows.add((float) ((float) (jo.getDouble("yawDeg") + pano_deg)%360.0));
+                    }
+                    pv.setArrows(arrows);
+
+                    vc.getPanorama(coords,"50","high", getApplicationContext(),new VenueController.VolleyCallback(){
+
+                        @Override
+                        public void onSuccess(JSONObject result) {
+                            try {
+                                String encoded = result.getString("highRes");
+                                byte[] decodedString = Base64.decode(encoded, Base64.DEFAULT);
+                                pv.setBitmap(decodedString);
+                                VRBitmap = decodedString;
+                                relative.setVisibility(View.VISIBLE);
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+
+                        }
+                    });
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        });
+
     }
 
     private void sendLandmarkPlaceIdsToDatabase(final String placeIdToDatabase) {
@@ -505,6 +576,8 @@ public class PlacesToSeeExpandedActivity extends AppCompatActivity implements Vi
 
     public void goVr(View view) {
         Intent intent = new Intent(this, VRActivity.class);
+        if(VRBitmap != null)
+            intent.putExtra("Bitmap", VRBitmap);
         intent.putExtra("VrAngle", 0);
 
         startActivity(intent);

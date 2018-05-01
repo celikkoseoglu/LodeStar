@@ -367,9 +367,9 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
                     .position(placeLatLng)
                     .title(placeName));
             builder.include(placeLatLng);
-
+            String coords = location.getDouble("lat")+ "," +location.getDouble("lng");
             placesList.add(new Places(null, placeName, placeAddress, placeType,
-                    placeRating, null, placeRating, placeId));
+                    placeRating, null, placeRating, placeId, coords));
 
         }
         LatLngBounds bounds= builder.build();
@@ -502,7 +502,7 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
             int px = (int) (130 * (metrics.densityDpi / 160f));
 
             requestFromURL.append("https://maps.googleapis.com/maps/api/place/photo" +
-                    "?maxwidth="+px+"&photoreference=");
+                    "?maxheight="+px+"&photoreference=");
 
             requestFromURL.append(photoReferences.get(i));
             requestFromURL.append("&key=" + "AIzaSyAKnThPPshmgffk3DNPNkXd2glEQaH1Rlw");

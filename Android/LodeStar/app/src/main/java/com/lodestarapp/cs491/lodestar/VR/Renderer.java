@@ -104,6 +104,8 @@ public class Renderer {
     float arrowAngle = 0.0f;
     boolean ifEGLPresent = true;
 
+    ArrayList<Float> arrows;
+
     public Renderer(final Context context, final int depth, final float radius) {
 
         IntBuffer il = IntBuffer.allocate(1);
@@ -113,6 +115,7 @@ public class Renderer {
         if(limit<192 || limit>32)
          ifEGLPresent = false;
 
+        arrows = new ArrayList<>();
 
         final String vertexShader = getVertexShader(context);
         final String fragmentShader = getFragmentShader(context);
@@ -298,29 +301,32 @@ public class Renderer {
         return readShader(context, R.raw._fragment_shader);
     }
 
-    public void setAngle(float ang){
-        arrowAngle = ang;
+    public void setArrows(ArrayList<Float> ang){
+        arrows = new ArrayList<>(ang);
     }
 
     public void loadTexture(Context c, int rid) {
         mTextureDataHandle0 = getTexture(c, rid);
     }
 
-    public void loadTexture(Context c, Bitmap b) {
+    public void loadTexture(Context c, byte[] b) {
         final int[] textureHandle = new int[3];
         GLES20.glGenTextures(3, textureHandle, 0);
         if (textureHandle[0] != 0) {
             final BitmapFactory.Options options = new BitmapFactory.Options();
             options.inScaled = false;
 
-            //final Bitmap bitmap = b.copy(c.getResources(),true)      ;
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(b, 0, b.length, options);
+            Bitmap resizedbitmap=Bitmap.createBitmap(decodedByte, 0,0, (int) (decodedByte.getWidth()*0.925), decodedByte.getHeight());
+
             GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureHandle[0]);
 
             GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_NEAREST);
             GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_NEAREST);
 
-            GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, b, 0);
-            //bitmap.recycle();
+            GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, resizedbitmap, 0);
+            decodedByte.recycle();
+            resizedbitmap.recycle();
 
             checkGLError("texture0");
         }
@@ -335,7 +341,7 @@ public class Renderer {
             GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_NEAREST);
 
 
-            GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, b, 0);
+            GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bitmap, 0);
             bitmap.recycle();
             checkGLError("texture1");
 
@@ -352,7 +358,7 @@ public class Renderer {
             GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_NEAREST);
 
 
-            GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, b, 0);
+            GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bitmap, 0);
             bitmap.recycle();
             checkGLError("texture2");
 
@@ -466,22 +472,8 @@ public class Renderer {
         }
 
 
-
-        drawArrow(tl, mvpMatrix, arrowAngle);
-
-
-
-
-        //drawArrow(tl, mvpMatrix, -90);
-
-
-
-
-
-
-
-
-
+        for(int i=0;i<arrows.size();i++)
+            drawArrow(tl, mvpMatrix, arrows.get(i));
 
 
         GLES20.glDisableVertexAttribArray(mPositionHandle);

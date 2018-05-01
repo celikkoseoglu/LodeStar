@@ -87,6 +87,7 @@ public class PlacesToSeeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     bundle.putString("placeType", placeType);
                     bundle.putString("placeId", placeId);
                     bundle.putString("placeRating", rating);
+                    bundle.putString("placeCoords", PlacesToSeeAdapter.this.placesList.get(card).getCoords());
 
 
                     intent.putExtras(bundle);

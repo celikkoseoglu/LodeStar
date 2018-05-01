@@ -16,6 +16,8 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
@@ -29,6 +31,7 @@ import com.lodestarapp.cs491.lodestar.VR.Renderer;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.util.ArrayList;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
@@ -76,7 +79,12 @@ public class PanoramaView extends GLSurfaceView{
     float angle = 80.0f;
     ScrollView sc;
 
-    Bitmap texture;
+    byte[] texture;
+    boolean incoming = false;
+    PanoramaView pv;
+    RelativeLayout relative;
+    LinearLayout ll1;
+    ArrayList<Float> arrows;
 
     public PanoramaView(Context context) {
         super(context);
@@ -84,7 +92,7 @@ public class PanoramaView extends GLSurfaceView{
         setEGLContextClientVersion(2);
 
         setRenderer(pr = new PanoRenderer());
-        setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
+        setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
         ht = HeadTracker.createFromContext(c);
     }
 
@@ -95,8 +103,10 @@ public class PanoramaView extends GLSurfaceView{
         //setEGLConfigChooser(8 , 8, 8, 8, 16, 0);
 
         setRenderer(pr = new PanoRenderer());
-        setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
+        setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
         ht = HeadTracker.createFromContext(c);
+
+
     }
 
     float readX=0;
@@ -116,6 +126,11 @@ public class PanoramaView extends GLSurfaceView{
         angle = ang;
     }
 
+    public void setArrows(ArrayList<Float> ang){
+        arrows = new ArrayList<>(ang);
+    }
+
+
     @Override
     public void onResume(){
         ht.startTracking();
@@ -126,7 +141,6 @@ public class PanoramaView extends GLSurfaceView{
         if(event != null){
             if(event.getPointerCount()==1)
             {
-                renderer.loadTexture(c,texture);
                 float x = event.getX();
                 float y = event.getY();
 
@@ -188,14 +202,14 @@ public class PanoramaView extends GLSurfaceView{
         public void onSurfaceCreated(GL10 gl10, EGLConfig eglConfig) {
             GLES20.glClearColor(1f, 1f, 1f, 1f);
             renderer = new com.lodestarapp.cs491.lodestar.VR.Renderer(c, 50, 5f);
+            renderer.setArrows(arrows);
             renderer.loadTexture(c, R.drawable.alan1);
-            //renderer.loadTexture(c,texture);
 
             Matrix.setLookAtM(mCamera, 0, 0.0f, 0.0f, CAMERA_Z, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
             Matrix.setIdentityM(accRotation, 0);
 
             this.dr = new DistortionRenderer();
-            renderer.setAngle(angle);
+            setAngle(angle);
         }
 
         @Override
@@ -213,6 +227,11 @@ public class PanoramaView extends GLSurfaceView{
             Matrix.setIdentityM(mIdentity, 0);
 
             Matrix.setIdentityM(curRotation, 0);
+
+            if(incoming){
+                renderer.loadTexture(c,texture);
+                incoming = false;
+            }
 
             if(sensorRead)
                 Matrix.setLookAtM(mCamera, 0, 0.0f, 0.0f,  CAMERA_Z, (float)Math.sin(mDeltaY),  0.2f, (float) -Math.cos(mDeltaY), 0.0f, 1.0f, 0.0f);
@@ -247,25 +266,18 @@ public class PanoramaView extends GLSurfaceView{
 
             if(clicked){
                 clicked = false;
-                int x = renderer.testTouch(renderWidth,renderHeight,readX,readY,mView,mProjectionMatrix,angle);
-                Log.i("Check:",x + "");
-                if(x>0){
-                    if(angle  == 80){
-                        angle = -100;
-                        renderer.setAngle(angle);
 
-                        renderer.deleteCurrentTexture();
-                        renderer.loadTexture(c, R.drawable.alan2);
-                    }
-                    else if(angle == -100){
-                        angle = 80;
-                        renderer.setAngle(angle);
-
+                for(int i=0;i<arrows.size();i++){
+                    int x = renderer.testTouch(renderWidth,renderHeight,readX,readY,mView,mProjectionMatrix,(arrows.get(i)+angle)%360.0f);
+                    Log.i("Check:",x + "");
+                    if(x>0){
                         renderer.deleteCurrentTexture();
                         renderer.loadTexture(c, R.drawable.alan1);
-
                     }
                 }
+
+
+
             }
             //checkGLError("onDrawEye");
         }
@@ -333,7 +345,10 @@ public class PanoramaView extends GLSurfaceView{
         return s;
     }
 
-    public void setBitmap(Bitmap b){
+    public void setBitmap(byte[] b){
         texture = b;
+        if(texture != null)
+            incoming = true;
+        requestRender();
     }
 }
