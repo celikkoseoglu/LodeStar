@@ -14,11 +14,11 @@ public class SplashActivity extends AppCompatActivity{
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        /*try {
-            Thread.sleep(3000);
+        try {
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }*/
+        }
 
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
