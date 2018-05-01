@@ -89,39 +89,9 @@ public class SearchUserActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot noteSnapshot: dataSnapshot.getChildren()){
                     au = noteSnapshot.getValue(ADDITIONAL_USER.class);
-                    /*
-                    tmp = noteSnapshot.getValue() + "";
-                    tmp = tmp.substring(10, tmp.length() - 1);
-                    tmp = tmp.replace("email=","");
-
-                    int foccurence = tmp.substring(0,tmp.length()).indexOf(",");
-
-                    String subString = null,substring2 = "check";
-                    //Used code in https://stackoverflow.com/questions/7683448/in-java-how-to-get-substring-from-a-string-till-a-character-c for parsing
-                    if (foccurence != -1)
-                    {
-                        subString= tmp.substring(0 , foccurence);
-                    }
-
-
-                    //Goes here if password is changed
-                    if(subString.contains("/")) {
-                        int focc = subString.indexOf("/");
-
-                        if(focc != -1) {
-                            substring2 = subString.substring(0,focc);
-                        }
-                    }
-*/
-                    //Check if the password is changed
-/*
-                    if(substring2.equals("check"))
-                        userList.add(subString);
-                    else
-                        userList.add(subString);
-*/
                     userList.add(au.getusername());
                 }
+
                 arrayAdapter = new ArrayAdapter<String>
                         (SearchUserActivity.this, android.R.layout.simple_list_item_1, userList){
 
@@ -154,11 +124,11 @@ public class SearchUserActivity extends AppCompatActivity {
 
                 userListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        AlertDialog.Builder diyalogOlusturucu =
-                                new AlertDialog.Builder(SearchUserActivity.this);
+                    public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
 
 
+
+                        AlertDialog.Builder diyalogOlusturucu = new AlertDialog.Builder(SearchUserActivity.this);
 
                         diyalogOlusturucu.setMessage("Would you like to navigate to the user's page?")
                                 .setCancelable(false)
@@ -173,9 +143,40 @@ public class SearchUserActivity extends AppCompatActivity {
                                 .setPositiveButton("YES!", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        Intent intent = new Intent(SearchUserActivity.this, DirectedUserPage.class);
-                                        intent.putExtra("emailpass", au.getemail());
-                                        startActivity(intent);
+                                        final Intent intent = new Intent(SearchUserActivity.this, DirectedUserPage.class);
+                                        Log.i("agam","abi: " + userListView.getItemAtPosition(position));
+
+                                        //O bulunan usernamein emailini bul
+                                        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                        DatabaseReference ref = database.getReference();
+                                        String emailTobePassed = "";
+                                        ref.child("users").addValueEventListener(new ValueEventListener() {
+
+                                                                                     @Override
+                                                                                     public void onDataChange(DataSnapshot dataSnapshot) {
+                                                                                         for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
+                                                                                             au = childSnapshot.getValue(ADDITIONAL_USER.class);
+                                                                                             if(au.getusername().equals(userListView.getItemAtPosition(position))) {
+                                                                                                 Log.i("agam","looool");
+                                                                                                 intent.putExtra("emailpass", au.getemail());
+                                                                                                 startActivity(intent);
+                                                                                             }
+                                                                                         }
+
+
+                                                                                     }
+
+                                                                                     @Override
+                                                                                     public void onCancelled(DatabaseError databaseError) {
+
+                                                                                     }
+                                                                                 });
+
+
+
+                                        //--------------------------------
+
+
                                     }
                                 });
 

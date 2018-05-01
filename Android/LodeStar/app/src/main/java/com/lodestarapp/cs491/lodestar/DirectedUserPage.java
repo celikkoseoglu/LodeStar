@@ -129,6 +129,44 @@ public class DirectedUserPage extends AppCompatActivity {
 
 
 
+        //userInfoWithPosts = new ArrayList<>();
+        ref.child("users").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
+                    au2 = childSnapshot.getValue(ADDITIONAL_USER.class);
+                   // user = FirebaseAuth.getInstance().getCurrentUser();
+
+                    if(myEmail.equals(au2.getemail())) {
+                        String toBeParsed = au2.getposts();
+
+                        if(au2.getposts() != null) {
+                            String tmpArray[] = toBeParsed.split("&&&");
+                            tripLogs.setText(tmpArray.length + "");
+                            for(int i = 0; i < noteArrayList.size();i++) {
+                                userInfoWithPosts.add(tmpArray[i]);
+                                Log.i("agam","bariscim: " + noteArrayList.get(i));
+                            }
+                        }
+
+                    }
+                }
+
+
+                //mAdapter.notifyDataSetChanged();
+                userInfoWithPosts = new ArrayList<>();
+                //UserPage.this.onCreate(null);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+
     }
 
 
