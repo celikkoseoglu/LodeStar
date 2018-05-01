@@ -17,6 +17,7 @@ import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +28,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -35,11 +37,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.lodestarapp.cs491.lodestar.Adapters.ADDITIONAL_USER;
 import com.lodestarapp.cs491.lodestar.Adapters.UserPageAdapter;
 
 import org.w3c.dom.Text;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -301,6 +306,18 @@ public class UserPage extends android.support.v4.app.Fragment {
                 Uri uri = data.getData();
                 ImageView view3 = this.view.findViewById(R.id.me_profile_picture);
                 view3.setImageURI(uri);
+
+                StorageReference storageReference =  FirebaseStorage.getInstance().getReference().child("myimage");
+
+
+                ImageView image = view3;
+
+// Load the image using Glide
+               /* Glide.with(this /* context *///)
+                 /*       .using(new FirebaseImageLoader())
+                        .load(storageReference)
+                        .into(image );*/
+
             }
         }
     }
