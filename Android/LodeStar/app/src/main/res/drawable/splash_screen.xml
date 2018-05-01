@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Reference: https://www.bignerdranch.com/blog/splash-screens-the-right-way/ !-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:drawable="@drawable/ic_splash_screen"
+    />
+    <item>
+        <bitmap
+            android:gravity="center"
+            android:src="@mipmap/icon512" />
+    </item>
+
+</layer-list>
