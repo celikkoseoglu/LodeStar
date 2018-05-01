@@ -255,10 +255,7 @@ public class TabActivity extends AppCompatActivity {
             ((MyOnFocusListenable) trip).onWindowFocusChanged(hasFocus,width);
         }
     }
-    public void weatherStart(View view){
-        Intent intent = new Intent(this, WeatherInformationActivity.class);
-        startActivity(intent);
-    }
+
 
 
     public void currencyStart(View view){

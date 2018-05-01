@@ -227,7 +227,6 @@ public class PlacesToSeeExpandedActivity extends AppCompatActivity implements Vi
         recyclerView.setAdapter(adapter);
 
         retrieveMoreInformationsAndPhotos();
-<<<<<<< HEAD
         vc = new VenueController();
         vc.getPanorama(coords,"50","low", getApplicationContext(),new VenueController.VolleyCallback(){
 
@@ -279,10 +278,7 @@ public class PlacesToSeeExpandedActivity extends AppCompatActivity implements Vi
 
             }
         });
-
-=======
         sendLandmarkPlaceIdsToDatabase("1");
->>>>>>> 487a733b725e9d412872994ca955a1018088e9c9
     }
 
     private void sendLandmarkPlaceIdsToDatabase(final String placeIdToDatabase) {

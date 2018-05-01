@@ -58,6 +58,11 @@ public class WeatherInformationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
 
+        Bundle data = getIntent().getExtras();
+        if (data != null) {
+            city = data.getString("City");
+        }
+
         findViewById(R.id.weather_progress_bar).setVisibility(View.GONE);
 
         progressDialog = new ProgressDialog(WeatherInformationActivity.this);

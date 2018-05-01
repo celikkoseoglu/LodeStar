@@ -82,6 +82,17 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
         });
         bt.setClickable(false);
 
+        Button weather = view.findViewById(R.id.weather);
+        weather.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                weatherStart(v);
+            }
+        });
+        weather.setClickable(false);
+
+
         view_flipper = view.findViewById(R.id.flipper);
 
         CardView card = view.findViewById(R.id.my_card);
@@ -165,6 +176,16 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
     public void flightInfoStart(View view) {
         Intent intent = new Intent(getActivity(), FlightInfoActivity.class);
         intent.putExtra("FLIGHT_INFO", flightInfo);
+        startActivity(intent);
+    }
+
+    public void weatherStart(View view){
+        Intent intent = new Intent(getActivity(), WeatherInformationActivity.class);
+        if (view_flipper.getCurrentView() == firstView)
+            intent.putExtra("City", origCity);
+        else
+            intent.putExtra("City", destCity);
+
         startActivity(intent);
     }
 
@@ -254,6 +275,10 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
 
                     Button bt5 = getView().findViewById(R.id.flightinfo);
                     bt5.setClickable(true);
+
+                    Button bt2 = getView().findViewById(R.id.weather);
+                    bt2.setClickable(true);
+
 
                     sendImageRequestOrig();
                     sendImageRequestDest();
