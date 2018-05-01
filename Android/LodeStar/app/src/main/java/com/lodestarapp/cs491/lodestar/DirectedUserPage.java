@@ -52,6 +52,7 @@ public class DirectedUserPage extends AppCompatActivity {
     DatabaseReference ref;
 
     private List<String> userInfoWithPosts = new ArrayList<>();
+    private List<String> realName = new ArrayList<>();
 
     private final int IMAGE = 1;
     private View view;
@@ -83,9 +84,7 @@ public class DirectedUserPage extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        final String realName = "";
-
-        mAdapter = new DirectedUserPageAdapter(userInfoWithPosts);
+        mAdapter = new DirectedUserPageAdapter(realName, userInfoWithPosts);
         mRecyclerView.setAdapter(mAdapter);
 
 
@@ -101,7 +100,7 @@ public class DirectedUserPage extends AppCompatActivity {
                     if(au.getemail() != null && au.getemail().equals(myEmail)) {
                         //  Toast.makeText(this,au.gettrips(),Toast.LENGTH_LONG).show();
                         tw.setText(au.getusername());
-                        userInfoWithPosts.add(au.getusername());
+                        realName.add(au.getusername());
 
                         if(au.gettrips() != null && au.gettrips().contains("!")) {
                             tripCounr.setText(au.gettrips().split("!").length + "");

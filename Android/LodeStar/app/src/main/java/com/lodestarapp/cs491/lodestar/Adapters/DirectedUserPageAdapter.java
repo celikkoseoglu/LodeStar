@@ -17,9 +17,11 @@ import java.util.List;
 
 public class DirectedUserPageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    private List<String> realName;
     private List<String> userInfoWithPosts;
 
-    public DirectedUserPageAdapter(List<String> userInfoWithPosts){
+    public DirectedUserPageAdapter(List<String> realName, List<String> userInfoWithPosts){
+        this.realName = realName;
         this.userInfoWithPosts = userInfoWithPosts;
     }
 
@@ -57,8 +59,8 @@ public class DirectedUserPageAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ((DirectedUserPagePosts) holder).directedRealName.setText(userInfoWithPosts.get(0));
-        ((DirectedUserPagePosts) holder).directedUserPost.setText(userInfoWithPosts.get(position + 1));
+        ((DirectedUserPagePosts) holder).directedRealName.setText(realName.get(0));
+        ((DirectedUserPagePosts) holder).directedUserPost.setText(userInfoWithPosts.get(position));
     }
 
     @Override
