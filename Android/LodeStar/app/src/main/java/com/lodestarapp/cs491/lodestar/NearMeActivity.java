@@ -17,17 +17,12 @@ import android.widget.LinearLayout;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.lodestarapp.cs491.lodestar.Adapters.NearMeAdapter;
 import com.lodestarapp.cs491.lodestar.Controllers.NearMeController;
-import com.lodestarapp.cs491.lodestar.Controllers.PlacesToSeeController;
-import com.lodestarapp.cs491.lodestar.Interfaces.LodeStarServerCallback;
 import com.lodestarapp.cs491.lodestar.Models.Places;
-import com.lodestarapp.cs491.lodestar.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -94,17 +89,17 @@ public class NearMeActivity extends AppCompatActivity {
 
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView1.setLayoutManager(layoutManager);
-        adapter = new NearMeAdapter(restList, "restaurant",this.getApplicationContext());
+        adapter = new NearMeAdapter(restList, this.getApplicationContext());
         recyclerView1.setAdapter(adapter);
 
         layoutManager2 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView2.setLayoutManager(layoutManager2);
-        adapter2 = new NearMeAdapter(parkList, "park",this.getApplicationContext());
+        adapter2 = new NearMeAdapter(parkList, this.getApplicationContext());
         recyclerView2.setAdapter(adapter2);
 
         layoutManager3 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView3.setLayoutManager(layoutManager3);
-        adapter3 = new NearMeAdapter(museumList, "museum",this.getApplicationContext());
+        adapter3 = new NearMeAdapter(museumList, this.getApplicationContext());
         recyclerView3.setAdapter(adapter3);
 
         boolean locationPermissionGiven = checkForLocationPermission();

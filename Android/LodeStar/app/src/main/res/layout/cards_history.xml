@@ -38,18 +38,18 @@
                     android:layout_below="@+id/history_from_imageview"
                     android:text="SHANGAI, CHINA" />
 
-                <TextView
+                <!--<TextView
                     android:id="@+id/history_left_gate_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/history_from_city_country_textview"
-                    android:text="LEFT FROM GATE 208" />
+                    android:text="LEFT FROM GATE 208" />!-->
 
                 <TextView
                     android:id="@+id/history_from_airport_name_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/history_left_gate_textview"
+                    android:layout_below="@id/history_from_city_country_textview"
                     android:text="Shangai Pudong Int'l - PVG"/>
 
                 <TextView
@@ -61,14 +61,14 @@
                     android:text="ISTANBUL, TURKEY"
                     android:layout_alignParentEnd="true" />
 
-                <TextView
+                <!--<TextView
                     android:id="@+id/history_to_terminal_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
                     android:layout_below="@id/history_to_city_country_textview"
-                    android:text="ARRIVED TO TERMINAL 1"/>
+                    android:text="ARRIVED TO TERMINAL 1"/>!-->
 
                 <TextView
                     android:id="@+id/history_to_airport_name_textview"
@@ -76,11 +76,11 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_below="@id/history_to_terminal_textview"
+                    android:layout_below="@id/history_to_city_country_textview"
                     android:text="Istanbul Ataturk Int'l - IST"/>
 
 
-                <TextView
+                <!--<TextView
                     android:id="@+id/history_from_time_in_CST"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -88,9 +88,9 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginLeft="5dp"
                     android:text="11.50PM CST"
-                    android:layout_marginStart="5dp" />
+                    android:layout_marginStart="5dp" />!-->
 
-                <ImageView
+                <!--<ImageView
                     android:id="@+id/imageview_init_pos"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -98,9 +98,9 @@
                     android:layout_marginTop="25dp"
                     android:layout_marginLeft="25dp"
                     android:layout_below="@id/history_from_airport_name_textview"
-                    android:layout_marginStart="25dp" />
+                    android:layout_marginStart="25dp" />!-->
 
-                <TextView
+                <!--<TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@id/imageview_init_pos"
@@ -109,19 +109,20 @@
                     android:layout_marginLeft="25dp"
                     android:layout_marginStart="25dp"
                     android:layout_marginTop="30dp"
-                    android:text="---------------------------------------------------------------" />
+                    android:text=""/>
+                !-->
 
-                <TextView
+                <!--<TextView
                     android:id="@+id/history_from_time_in_GMT3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="7.50AM GMT+3"
                     android:layout_below="@id/imageview_init_pos"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginStart="5dp" />
+                    android:layout_marginStart="5dp" />!-->
 
 
-                <TextView
+                <!--<TextView
                     android:id="@+id/history_to_time_in_CST"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -131,9 +132,9 @@
                     android:layout_marginRight="5dp"
                     android:text="10.30AM CST"
                     android:layout_marginEnd="5dp"
-                    android:layout_alignParentEnd="true" />
+                    android:layout_alignParentEnd="true" />!-->
 
-                <ImageView
+                <!--<ImageView
                     android:id="@+id/imageview_final_pos"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -143,9 +144,9 @@
                     android:layout_marginRight="25dp"
                     android:layout_marginEnd="25dp"
                     android:layout_alignParentEnd="true"
-                    android:layout_below="@id/history_to_airport_name_textview"/>
+                    android:layout_below="@id/history_to_airport_name_textview"/>!-->
 
-                <TextView
+                <!--<TextView
                     android:id="@+id/history_to_time_in_GMT3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -154,15 +155,15 @@
                     android:layout_below="@id/imageview_final_pos"
                     android:layout_marginRight="5dp"
                     android:layout_marginEnd="5dp"
-                    android:layout_alignParentEnd="true" />
+                    android:layout_alignParentEnd="true" />!-->
 
                 <ImageView
                     android:id="@+id/history_to_imageview"
                     android:layout_width="match_parent"
                     android:layout_height="125dp"
-                    android:layout_below="@id/history_from_time_in_GMT3"
+                    android:layout_below="@id/history_from_airport_name_textview"
                     android:layout_marginTop="5dp"
-                    card_view:srcCompat="@android:color/holo_green_dark" />!
+                    card_view:srcCompat="@android:color/holo_green_dark" />
 
             </RelativeLayout>
 

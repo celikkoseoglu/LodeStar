@@ -35,7 +35,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".BrickBreakerActivity" />
         <activity
             android:name=".SignInActivity"
             android:windowSoftInputMode="stateVisible|adjustResize" />
@@ -83,7 +82,11 @@
         <activity android:name=".PlacesToSeeExpandedActivity" />
         <activity android:name=".NearMeActivity" />
         <activity android:name=".VenueActivity" />
-        <activity android:name=".RestaurantActivity"></activity>
+        <activity android:name=".RestaurantActivity" />
+        <activity
+            android:name=".DirectedUserPage"
+            android:label="@string/title_activity_directed_user_page"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

@@ -2,14 +2,25 @@ package com.lodestarapp.cs491.lodestar.Adapters;
 
 public class ADDITIONAL_USER {
 
-    public String email;
-    public String username;
-    public String trips;
-    public String posts;
+    private String email;
+    private String username;
+    private String trips;
+    private String posts;
+    private String favorites;
 
     public ADDITIONAL_USER() {
 
     }
+
+
+    public String getfavorites() {
+        return favorites;
+    }
+
+    public void setfavorites(String favorites) {
+        this.favorites = favorites;
+    }
+
 
     public String getposts() {
         return posts;

@@ -40,12 +40,4 @@ public class HomeActivity extends Fragment {
         });
         return myView;
     }
-
-    public void readQRCode(View view){
-        Intent intent = new Intent(getActivity(), QRCodeActivity.class);
-        startActivity(intent);
-    }
-
-
-
 }

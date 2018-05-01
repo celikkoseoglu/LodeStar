@@ -32,6 +32,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.lodestarapp.cs491.lodestar.Adapters.ADDITIONAL_USER;
 import com.lodestarapp.cs491.lodestar.Adapters.User;
 
 import java.util.ArrayList;
@@ -45,6 +46,7 @@ public class SearchUserActivity extends AppCompatActivity {
     private DatabaseReference databaseReacher;
     EditText inputSearch;
     String tmp;
+    ADDITIONAL_USER au;
 
 
     @Override
@@ -86,6 +88,8 @@ public class SearchUserActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot noteSnapshot: dataSnapshot.getChildren()){
+                    au = noteSnapshot.getValue(ADDITIONAL_USER.class);
+                    /*
                     tmp = noteSnapshot.getValue() + "";
                     tmp = tmp.substring(10, tmp.length() - 1);
                     tmp = tmp.replace("email=","");
@@ -108,14 +112,15 @@ public class SearchUserActivity extends AppCompatActivity {
                             substring2 = subString.substring(0,focc);
                         }
                     }
-
+*/
                     //Check if the password is changed
-
+/*
                     if(substring2.equals("check"))
                         userList.add(subString);
                     else
                         userList.add(subString);
-
+*/
+                    userList.add(au.getusername());
                 }
                 arrayAdapter = new ArrayAdapter<String>
                         (SearchUserActivity.this, android.R.layout.simple_list_item_1, userList){
@@ -168,7 +173,8 @@ public class SearchUserActivity extends AppCompatActivity {
                                 .setPositiveButton("YES!", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        Intent intent = new Intent(SearchUserActivity.this, SearchUserActivity.class);
+                                        Intent intent = new Intent(SearchUserActivity.this, DirectedUserPage.class);
+                                        intent.putExtra("emailpass", au.getemail());
                                         startActivity(intent);
                                     }
                                 });

@@ -1,8 +1,6 @@
 package com.lodestarapp.cs491.lodestar;
 
-import android.*;
 import android.Manifest;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -18,7 +16,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -35,7 +32,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.lodestarapp.cs491.lodestar.Adapters.PlacesToSeeAdapter;
-import com.lodestarapp.cs491.lodestar.Adapters.WeatherInformationAdapter;
 import com.lodestarapp.cs491.lodestar.Controllers.PlacesToSeeController;
 import com.lodestarapp.cs491.lodestar.Interfaces.LodeStarServerCallback;
 import com.lodestarapp.cs491.lodestar.Models.Places;
@@ -186,7 +182,7 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
                                 .title("You are Here")));
                         builder.include(new LatLng(myLocation[0].getLatitude(), myLocation[0].getLongitude()));
 
-                        placesToSeeController = new PlacesToSeeController("", true, myLocation[0]);
+                        placesToSeeController = new PlacesToSeeController(true, myLocation[0]);
                         placesToSeeController.getPlacesToSeeInformation(placesToSeeController.getRequestFromUrl(),
                                 getApplicationContext(), new LodeStarServerCallback() {
                                     @Override
@@ -221,7 +217,7 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
                     .title("You are Here")));
             builder.include(new LatLng(myLocation[0].getLatitude(), myLocation[0].getLongitude()));
 
-            placesToSeeController = new PlacesToSeeController("", true, myLocation[0]);
+            placesToSeeController = new PlacesToSeeController(true, myLocation[0]);
             placesToSeeController.getPlacesToSeeInformation(placesToSeeController.getRequestFromUrl(),
                     getApplicationContext(), new LodeStarServerCallback() {
                         @Override
@@ -280,7 +276,7 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
                                         .title("You are Here")));
                                 builder.include(new LatLng(myLocation[0].getLatitude(), myLocation[0].getLongitude()));
 
-                                placesToSeeController = new PlacesToSeeController("", true, myLocation[0]);
+                                placesToSeeController = new PlacesToSeeController(true, myLocation[0]);
                                 placesToSeeController.getPlacesToSeeInformation(placesToSeeController.getRequestFromUrl(),
                                         getApplicationContext(), new LodeStarServerCallback() {
                                             @Override
@@ -302,7 +298,7 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
                     });
                 }
                 else{
-                    placesToSeeController = new PlacesToSeeController("", false, null);
+                    placesToSeeController = new PlacesToSeeController(false, null);
                 }
                 break;
             default:

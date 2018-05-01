@@ -22,9 +22,8 @@ import java.util.List;
 public class NearMeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<Places> placesList;
     private Context context;
-    private String param;
 
-    public NearMeAdapter(List<Places> placesList,String param, Context context){
+    public NearMeAdapter(List<Places> placesList, Context context){
         this.placesList = placesList;
         this.context = context;
     }

@@ -274,15 +274,6 @@ public class LoginActivity extends AppCompatActivity implements
     }
 
     /**
-     * Unity Try
-     */
-    public void unityGameStart(View view){
-        Intent intent = new Intent(this, BrickBreakerActivity.class);
-        startActivity(intent);
-    }
-
-
-    /**
      * Weather
      */
     public void panoStart(View view){

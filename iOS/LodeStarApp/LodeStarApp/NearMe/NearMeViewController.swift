@@ -48,14 +48,6 @@ extension NearMeViewController {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifierMain, for: indexPath) as! NearMeMainCell
         
-        //background shadow for collectionView elements
-        cell.layer.shadowColor = UIColor.black.cgColor
-        cell.layer.shadowOffset = CGSize(width: 5, height: 5)
-        cell.layer.shadowRadius = 5;
-        cell.layer.shadowOpacity = 0.25;
-        cell.clipsToBounds = false
-        cell.layer.masksToBounds = false
-        
         let index = indexPath as NSIndexPath
         
         if types[index.row] != "" {
@@ -99,8 +91,6 @@ extension NearMeViewController {
 }
 
 class NearMeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    
-    
     
     @IBOutlet weak var collectionViewMain: UICollectionView!
     //@IBOutlet weak var collectionViewSmall: UICollectionView!

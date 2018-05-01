@@ -8,7 +8,7 @@ class VenueVRCell: UICollectionViewCell {
     
     @IBOutlet weak var imageVRView: GVRPanoramaView!
     enum Media {
-        static var photoArray = ["sindhu_beach.jpg", "grand_canyon.jpg", "underwater.jpg"]
+        static var photoArray = ["vodafone_ataturk_airport.jpg", "sindhu_beach.jpg", "grand_canyon.jpg", "underwater.jpg"]
     }
     
     func displayContent(landmarkPic: UIImage) {

@@ -152,7 +152,7 @@ public class QRCodeActivity extends AppCompatActivity{
 
                             Toast.makeText(QRCodeActivity.this, barcodeData.valueAt(0).displayValue , Toast.LENGTH_SHORT).show();
 
-                            diyalogOlusturucu.setMessage("Would you like to add this flight to your History page?")
+                            diyalogOlusturucu.setMessage("You just scanned a new QRCode, would you like to move to History Page?")
                                     .setCancelable(true)
                                     .setNegativeButton("NO :(", new DialogInterface.OnClickListener() {
                                         @Override
@@ -238,9 +238,6 @@ public class QRCodeActivity extends AppCompatActivity{
 
 
                                                     });
-
-
-
                                             Intent intent = new Intent(QRCodeActivity.this, LoginActivity.class);
                                             startActivity(intent);
                                         }
