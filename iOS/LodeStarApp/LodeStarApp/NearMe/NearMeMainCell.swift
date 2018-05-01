@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 fileprivate let itemsPerRow: CGFloat = 5
-fileprivate let sectionInsets = UIEdgeInsets(top: 0.0, left: 6.0, bottom: 0.0, right: 6.0)
+fileprivate let sectionInsets = UIEdgeInsets(top: 0.0, left: 3.0, bottom: 0.0, right: 3.0)
 fileprivate let cellCount = 5
 fileprivate let reuseIdentifierSmall = "nearMeSmallCell"
 
@@ -27,6 +27,14 @@ extension NearMeMainCell {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifierSmall, for: indexPath) as! NearMeSmallCell
+        
+        //background shadow for collectionView elements
+        cell.layer.shadowColor = UIColor.black.cgColor
+        cell.layer.shadowOffset = CGSize(width: 5, height: 5)
+        cell.layer.shadowRadius = 5;
+        cell.layer.shadowOpacity = 0.25;
+        cell.clipsToBounds = false
+        cell.layer.masksToBounds = false
         
         let index = indexPath as NSIndexPath
         
@@ -53,9 +61,12 @@ extension NearMeMainCell {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let heightperItem = 192 as CGFloat
+        let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
+        let availableWidth = 130 - paddingSpace
+        let widthPerItem = availableWidth / itemsPerRow
+        let heightperItem = 180 as CGFloat
         
-        return CGSize(width: 120, height: heightperItem )
+        return CGSize(width: 111, height: heightperItem )
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -63,7 +74,7 @@ extension NearMeMainCell {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return sectionInsets.left
+        return sectionInsets.top
     }
 }
 
@@ -84,14 +95,6 @@ class NearMeMainCell: UICollectionViewCell, UICollectionViewDelegate, UICollecti
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        
-        //background shadow for collectionView elements
-        self.layer.shadowColor = UIColor.black.cgColor
-        self.layer.shadowOffset = CGSize(width: 5, height: 5)
-        self.layer.shadowRadius = 5;
-        self.layer.shadowOpacity = 0.25;
-        self.clipsToBounds = false
-        self.layer.masksToBounds = false
         
         self.collectionView.delegate = self as UICollectionViewDelegate
         self.collectionView.dataSource = self as UICollectionViewDataSource

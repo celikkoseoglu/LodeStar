@@ -103,7 +103,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2xx-bi-RIw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-610.14492753623188" y="-1379.3478260869567"/>
+            <point key="canvasLocation" x="297.10144927536237" y="-1379.3478260869567"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="BLL-7I-L3S">
@@ -217,7 +217,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7xt-Xf-ITD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="128.98550724637681" y="-1379.3478260869567"/>
+            <point key="canvasLocation" x="1036.231884057971" y="-1379.3478260869567"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="YHK-bl-hot">
@@ -362,12 +362,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A2I-et-CH3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="863.768115942029" y="-1379.3478260869567"/>
+            <point key="canvasLocation" x="1771.0144927536232" y="-1379.3478260869567"/>
         </scene>
         <!--Home-->
         <scene sceneID="bg7-bi-8FT">
             <objects>
-                <viewController id="TjR-K3-Hmv" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="home" id="TjR-K3-Hmv" customClass="HomeViewController" customModule="LodeStarApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4XY-z5-bzg"/>
                         <viewControllerLayoutGuide type="bottom" id="KzQ-iJ-w73"/>
@@ -375,13 +375,153 @@
                     <view key="view" contentMode="scaleToFill" id="Mty-X3-eIR">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DjT-He-wYh">
+                                <rect key="frame" x="7" y="72" width="400" height="271"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.98431372549019602" green="0.98431372549019602" blue="0.98431372549019602" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tap here to scan a boarding pass" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LUc-b1-vC1">
+                                <rect key="frame" x="74" y="103" width="267" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="barcode" translatesAutoresizingMaskIntoConstraints="NO" id="jFS-BW-3dY">
+                                <rect key="frame" x="87" y="146" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gdS-V3-oj7">
+                                <rect key="frame" x="0.0" y="358" width="56" height="134"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wru-hd-Zqf">
+                                <rect key="frame" x="0.0" y="358" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="tintColor" red="0.72564453610000001" green="0.72564453610000001" blue="0.72564453610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="             Enter Flight Number">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bluesquare" translatesAutoresizingMaskIntoConstraints="NO" id="ia4-rz-oFO">
+                                <rect key="frame" x="7" y="362" width="36" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W8I-kL-1hc">
+                                <rect key="frame" x="0.0" y="403" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="tintColor" red="0.72564453610000001" green="0.72564453610000001" blue="0.72564453610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="             Manually Search For Destination">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="redsquare" translatesAutoresizingMaskIntoConstraints="NO" id="WRb-Ab-Lgm">
+                                <rect key="frame" x="7" y="407" width="36" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ube-55-tiS">
+                                <rect key="frame" x="0.0" y="448" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="tintColor" red="0.72564453610000001" green="0.72564453610000001" blue="0.72564453610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="             View Your Trip History">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="greensquare" translatesAutoresizingMaskIntoConstraints="NO" id="KCq-5q-a6k">
+                                <rect key="frame" x="7" y="452" width="36" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lcM-Hc-qPN">
+                                <rect key="frame" x="385" y="358" width="11" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" red="0.52549019610000003" green="0.52549019610000003" blue="0.52549019610000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zyQ-u6-LpI">
+                                <rect key="frame" x="385" y="403" width="11" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" red="0.52549019610000003" green="0.52549019610000003" blue="0.52549019610000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nns-hE-xTU">
+                                <rect key="frame" x="385" y="448" width="11" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" red="0.52549019610000003" green="0.52549019610000003" blue="0.52549019610000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FGD-Vx-d3h">
+                                <rect key="frame" x="7" y="500" width="400" height="271"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="virtual-reality" translatesAutoresizingMaskIntoConstraints="NO" id="aUh-Er-ydr">
+                                        <rect key="frame" x="20" y="45" width="91" height="91"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Do you have VR glasses?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6w2-yB-JeT">
+                                        <rect key="frame" x="150" y="40" width="202" height="22"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="Tap here to learn how to get them for an enhanced LodeStar experience" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EzA-rb-DdQ">
+                                        <rect key="frame" x="137" y="70" width="229" height="81"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.98431372549999996" green="0.98431372549999996" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Home" image="home" selectedImage="home" id="s35-6e-srF"/>
+                    <navigationItem key="navigationItem" title="Home" id="uOd-vg-FZd">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="tce-GM-8GN">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Y7D-hJ-INy">
+                                <rect key="frame" x="339" y="7" width="55" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Log Out"/>
+                                <connections>
+                                    <action selector="logoutButtonAction:" destination="TjR-K3-Hmv" eventType="touchUpInside" id="tgg-dT-Lgl"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="boardingPassBackView" destination="DjT-He-wYh" id="fxe-dS-Avz"/>
+                        <outlet property="virtualRealityBackView" destination="FGD-Vx-d3h" id="cik-wT-2qq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t2k-Ej-l2X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-610" y="-730"/>
+            <point key="canvasLocation" x="297.10144927536237" y="-730.43478260869574"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="t7y-s2-cg9">
@@ -393,7 +533,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="TjR-K3-Hmv" kind="relationship" relationship="viewControllers" id="aV8-Y6-mOs"/>
+                        <segue destination="wOe-2p-Guv" kind="relationship" relationship="viewControllers" id="aV8-Y6-mOs"/>
                         <segue destination="49u-4a-btD" kind="relationship" relationship="viewControllers" id="FuR-qZ-wBN"/>
                         <segue destination="cXT-rK-3GB" kind="relationship" relationship="viewControllers" id="0gi-XC-9uX"/>
                         <segue destination="wQl-7v-52i" kind="relationship" relationship="viewControllers" id="g9l-fX-XZZ"/>
@@ -402,7 +542,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EMx-d9-2ZT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="132" y="-730"/>
+            <point key="canvasLocation" x="1039.1304347826087" y="-730.43478260869574"/>
         </scene>
         <!--Favorites-->
         <scene sceneID="Lhx-mp-eY2">
@@ -558,7 +698,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7NF-hx-a6d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2510.144927536232" y="-539.67391304347825"/>
+            <point key="canvasLocation" x="3417.3913043478265" y="-539.67391304347825"/>
         </scene>
         <!--Flight Information-->
         <scene sceneID="83K-eP-O6F">
@@ -878,7 +1018,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TVq-0A-0eY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4089.8550724637685" y="-1200"/>
+            <point key="canvasLocation" x="4997.1014492753629" y="-1200"/>
         </scene>
         <!--Transport Options-->
         <scene sceneID="uel-M9-gn7">
@@ -923,7 +1063,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dj9-Sa-pYH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4091.3043478260875" y="-538.85869565217399"/>
+            <point key="canvasLocation" x="4998.5507246376819" y="-538.85869565217399"/>
         </scene>
         <!--Living Expenses-->
         <scene sceneID="ufw-Qj-bUt">
@@ -1017,7 +1157,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g2P-mQ-RFz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6610.144927536232" y="-1257.0652173913045"/>
+            <point key="canvasLocation" x="7517.3913043478269" y="-1257.0652173913045"/>
         </scene>
         <!--Weather Information-->
         <scene sceneID="j46-24-Evr">
@@ -1056,7 +1196,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="maraudingFiendPanda" translatesAutoresizingMaskIntoConstraints="NO" id="1jx-NG-ylx">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="rain" translatesAutoresizingMaskIntoConstraints="NO" id="1jx-NG-ylx">
                                                     <rect key="frame" x="8" y="35" width="55" height="55"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
@@ -1364,7 +1504,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XNs-Vl-1q9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5708.6956521739139" y="-538.85869565217399"/>
+            <point key="canvasLocation" x="6615.9420289855079" y="-538.85869565217399"/>
         </scene>
         <!--Select Nation View Controller-->
         <scene sceneID="DgI-px-Mdv">
@@ -1627,7 +1767,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nAf-9d-0Ay" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2511.594202898551" y="-1199.1847826086957"/>
+            <point key="canvasLocation" x="3418.840579710145" y="-1199.1847826086957"/>
         </scene>
         <!--Me-->
         <scene sceneID="vp8-rP-uMF">
@@ -1647,7 +1787,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ir6-ne-Wye" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1573.5999999999999" y="-1198.6506746626687"/>
+            <point key="canvasLocation" x="2479.7101449275365" y="-1199.1847826086957"/>
         </scene>
         <!--Trip-->
         <scene sceneID="9fE-cb-rDx">
@@ -1667,7 +1807,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B89-Of-wrg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1573.5999999999999" y="-538.38080959520244"/>
+            <point key="canvasLocation" x="2479.7101449275365" y="-538.85869565217399"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="a3y-Pj-vRd">
@@ -1686,7 +1826,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P0s-F4-wBq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4770.3999999999996" y="-538.38080959520244"/>
+            <point key="canvasLocation" x="5676.811594202899" y="-538.85869565217399"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="r3B-LN-2b5">
@@ -1705,7 +1845,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="29C-Fb-hw9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3152.8000000000002" y="-538.38080959520244"/>
+            <point key="canvasLocation" x="4059.420289855073" y="-538.85869565217399"/>
         </scene>
         <!--Landmarks-->
         <scene sceneID="b7t-CB-6M4">
@@ -2079,7 +2219,7 @@ SCULPTURE PARK</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Op9-pc-FGl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3153" y="-1199"/>
+            <point key="canvasLocation" x="4059.420289855073" y="-1199.1847826086957"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="h7k-ZU-G4h">
@@ -2098,7 +2238,7 @@ SCULPTURE PARK</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pxk-Aa-Prx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5702.898550724638" y="-1257.0652173913045"/>
+            <point key="canvasLocation" x="6610.144927536232" y="-1257.0652173913045"/>
         </scene>
         <!--Near Me-->
         <scene sceneID="ufr-PV-VRB">
@@ -2284,11 +2424,34 @@ SCULPTURE PARK</string>
             </objects>
             <point key="canvasLocation" x="2511.594202898551" y="289.4021739130435"/>
         </scene>
+        <!--Home-->
+        <scene sceneID="Epd-RE-MIt">
+            <objects>
+                <navigationController storyboardIdentifier="homeNAV" automaticallyAdjustsScrollViewInsets="NO" id="wOe-2p-Guv" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Home" image="home" selectedImage="home" id="s35-6e-srF"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fjN-R6-dvN">
+                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.54901960780000003" green="0.71372549019999998" blue="0.77647058820000003" alpha="1" colorSpace="calibratedRGB"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="TjR-K3-Hmv" kind="relationship" relationship="rootViewController" id="2Wb-QC-rNQ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IOI-nu-uyz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-610.14492753623188" y="-730.43478260869574"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="barcode" width="314" height="188"/>
+        <image name="bluesquare" width="225" height="225"/>
         <image name="chocolateIcecream" width="640" height="480"/>
         <image name="facebook" width="2000" height="2000"/>
         <image name="google" width="2000" height="2000"/>
+        <image name="greensquare" width="225" height="225"/>
         <image name="history" width="25" height="25"/>
         <image name="home" width="23" height="23"/>
         <image name="key" width="56" height="56"/>
@@ -2296,11 +2459,14 @@ SCULPTURE PARK</string>
         <image name="loginBackground" width="750" height="1336"/>
         <image name="mail" width="31" height="31"/>
         <image name="maraudingFiendPanda" width="640" height="844"/>
+        <image name="rain" width="33" height="33"/>
+        <image name="redsquare" width="225" height="225"/>
         <image name="star" width="25" height="25"/>
         <image name="starFull" width="56" height="54"/>
         <image name="trip" width="31" height="31"/>
         <image name="type" width="464" height="464"/>
         <image name="user" width="25" height="25"/>
+        <image name="virtual-reality" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="hV6-Se-uLe"/>

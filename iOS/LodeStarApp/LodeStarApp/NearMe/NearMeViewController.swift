@@ -92,6 +92,8 @@ extension NearMeViewController {
 
 class NearMeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
+    
+    
     @IBOutlet weak var collectionViewMain: UICollectionView!
     //@IBOutlet weak var collectionViewSmall: UICollectionView!
     
