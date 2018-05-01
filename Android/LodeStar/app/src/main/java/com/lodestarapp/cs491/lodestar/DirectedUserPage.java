@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -21,6 +22,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.lodestarapp.cs491.lodestar.Adapters.ADDITIONAL_USER;
+import com.lodestarapp.cs491.lodestar.Adapters.DirectedUserPageAdapter;
+import com.lodestarapp.cs491.lodestar.Adapters.UserPageAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,6 +77,17 @@ public class DirectedUserPage extends AppCompatActivity {
         tripCounr = findViewById(R.id.me_trip_count1);
         lastTrip = findViewById(R.id.me_last_trip_city1);
 
+        mRecyclerView = findViewById(R.id.my_user_page_recycler_view1);
+        mRecyclerView.setHasFixedSize(true);
+
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        final String realName = "";
+
+        mAdapter = new DirectedUserPageAdapter(userInfoWithPosts);
+        mRecyclerView.setAdapter(mAdapter);
+
 
         final FirebaseDatabase databaseg = FirebaseDatabase.getInstance();
         ref = databaseg.getReference();
@@ -84,21 +98,16 @@ public class DirectedUserPage extends AppCompatActivity {
 
                 for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
                     au = childSnapshot.getValue(ADDITIONAL_USER.class);
-
-
-
-
                     if(au.getemail() != null && au.getemail().equals(myEmail)) {
                         //  Toast.makeText(this,au.gettrips(),Toast.LENGTH_LONG).show();
                         tw.setText(au.getusername());
+                        userInfoWithPosts.add(au.getusername());
 
                         if(au.gettrips() != null && au.gettrips().contains("!")) {
                             tripCounr.setText(au.gettrips().split("!").length + "");
                         } else {
                             tripCounr.setText("0");
                         }
-
-
                         if(au.gettrips() != null) {
                             String str = au.gettrips();
                             String myTMPARR[];
@@ -111,14 +120,9 @@ public class DirectedUserPage extends AppCompatActivity {
                             else {
                                 lastTrip.setText("N/A");
                             }
-
-
                         }
-
                     }
-
                 }
-
             }
 
             @Override
@@ -126,8 +130,6 @@ public class DirectedUserPage extends AppCompatActivity {
 
             }
         });
-
-
 
         //userInfoWithPosts = new ArrayList<>();
         ref.child("users").addValueEventListener(new ValueEventListener() {
@@ -158,9 +160,7 @@ public class DirectedUserPage extends AppCompatActivity {
 
 
                 //Barıs burada userInfoWithPosts Arraylistini databaseden doldurdum, frontenede bu arraylisti kullanarak başlayabilirsin. Thnx efe kankan :)
-                
-
-                //mAdapter.notifyDataSetChanged();
+                mAdapter.notifyDataSetChanged();
 
                 //UserPage.this.onCreate(null);
             }

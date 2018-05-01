@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/me_posts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <ImageView
+                    android:id="@+id/directed_profile_picture"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginStart="15dp"
+                    app:srcCompat="@mipmap/ic_launcher_round" />
+
+                <TextView
+                    android:id="@+id/directed_realName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="14dp"
+                    android:layout_toRightOf="@+id/directed_profile_picture"
+                    android:text="Jack Cracker"
+                    android:textColor="#353535"
+                    android:textSize="14sp"
+                    android:layout_toEndOf="@+id/directed_profile_picture" />
+
+                <!--<TextView
+                    android:id="@+id/directed_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/directed_realName"
+                    android:layout_alignBottom="@+id/directed_realName"
+                    android:layout_marginEnd="89dp"
+                    android:layout_marginRight="89dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toLeftOf="@+id/directed_post_date"
+                    android:layout_toStartOf="@+id/directed_post_date"
+                    android:text="crackerjack"
+                    android:textSize="12sp"
+                    android:layout_marginStart="10dp" />!-->
+
+                <TextView
+                    android:id="@+id/directed_post_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/directed_realName"
+                    android:layout_alignBottom="@+id/directed_realName"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:text="DD/MM/YY"
+                    android:textColor="#353535"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/directed_user_post"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/directed_profile_picture"
+
+                    android:layout_toRightOf="@id/directed_profile_picture"
+                    android:maxWidth="300dp"
+                    android:text="I've definitely seen one of the most beautiful cities on Earth. With LodeStar, it was just like a walk in the park. That easy."
+                    android:textColor="#353535"
+                    android:textSize="12sp"
+                    android:layout_toEndOf="@id/directed_profile_picture" />
+
+                <!--<ImageButton
+                    android:id="@+id/user_post_city_more_info_button"
+                    android:layout_width="300dp"
+                    android:layout_height="100dp"
+                    android:layout_alignLeft="@+id/me_user_post"
+                    android:layout_alignStart="@+id/me_user_post"
+                    android:layout_below="@+id/me_user_post"
+                    android:layout_marginTop="14dp"
+                    app:srcCompat="@drawable/thy_lounge_background"
+                    tools:layout_editor_absoluteX="164dp"
+                    tools:layout_editor_absoluteY="96dp" />!-->
+
+                <!--<TextView
+                    android:id="@+id/user_post_city_more_info_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/user_post_city_more_info_button"
+                    android:layout_alignStart="@+id/user_post_city_more_info_button"
+                    android:layout_below="@+id/user_post_city_more_info_button"
+                    android:layout_marginTop="8dp"
+                    android:maxWidth="300dp"
+                    android:text="Tap to View Istanbul in LodeStar"
+                    android:textColor="#353535"
+                    android:textSize="12sp"
+                    tools:layout_editor_absoluteX="181dp"
+                    tools:layout_editor_absoluteY="221dp"
+                    />!-->
+
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

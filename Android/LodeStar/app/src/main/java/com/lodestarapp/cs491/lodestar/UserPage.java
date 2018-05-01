@@ -52,14 +52,12 @@ public class UserPage extends android.support.v4.app.Fragment {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private FirebaseAuth mAuth;
-    String currentUserName;
     TextView tw,tripLogs,lastTrip;
-    private TextView tripCounr;
+    private TextView tripCount;
     private EditText posts;
     FirebaseUser user,userMe;
     public FirebaseUser mUser;
     private DatabaseReference mDatabase;
-    private ArrayList<String> noteArrayList;
 
     ADDITIONAL_USER au;
     ADDITIONAL_USER au2;
@@ -75,7 +73,6 @@ public class UserPage extends android.support.v4.app.Fragment {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        noteArrayList = new ArrayList<String>();
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
     }
 
@@ -88,7 +85,7 @@ public class UserPage extends android.support.v4.app.Fragment {
 
         tw = view.findViewById(R.id.me_realName);
         tripLogs = view.findViewById(R.id.me_trip_logs_count);
-        tripCounr = view.findViewById(R.id.me_trip_count);
+        tripCount = view.findViewById(R.id.me_trip_count);
         lastTrip = view.findViewById(R.id.me_last_trip_city);
         ImageView profileImageView = (ImageView) view.findViewById(R.id.me_profile_picture);
 
@@ -124,8 +121,6 @@ public class UserPage extends android.support.v4.app.Fragment {
             }
         });
 
-      //  takeTheUser();
-
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         //   ADDITIONAL_USER au = dataSnapshot.getValue(ADDITIONAL_USER.class);
         // Log.i("agam",au.username);
@@ -144,9 +139,9 @@ public class UserPage extends android.support.v4.app.Fragment {
                         tw.setText(au.getusername());
 
                         if(au.gettrips() != null && au.gettrips().contains("!")) {
-                            tripCounr.setText(au.gettrips().split("!").length + "");
+                            tripCount.setText(au.gettrips().split("!").length + "");
                         } else {
-                            tripCounr.setText("0");
+                            tripCount.setText("0");
                         }
 
 
@@ -228,22 +223,9 @@ public class UserPage extends android.support.v4.app.Fragment {
     @Override
     public void onStart() {
         super.onStart();
-//        FirebaseUser currentUser = mAuth.getCurrentUser();
-//        if (currentUser != null) {
-//            String str;
-//            str = currentUser.getEmail();
-//            String[] tmp = str.split("----");
-//            currentUserName = tmp[tmp.length -1];
-//            Log.d("user", currentUser.getDisplayName());   //?
-//        }
     }
 
     //Reference to retrieving current user: https://stackoverflow.com/questions/35112204/get-current-user-firebase-android
-
-    public void takeTheUser(String q){
-        userInfoWithPosts.add(q);
-        mAdapter.notifyDataSetChanged();
-    }
 
     public void writePost(){
         //REFERENCE:https://developer.android.com/guide/topics/ui/dialogs.html
