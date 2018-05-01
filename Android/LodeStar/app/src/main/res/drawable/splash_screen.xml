@@ -9,7 +9,7 @@
     <item>
         <bitmap
             android:gravity="center"
-            android:src="@drawable/icon512" />
+            android:src="@drawable/icon128" />
     </item>
 
 </layer-list>
