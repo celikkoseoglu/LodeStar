@@ -167,8 +167,15 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
             Button bt10 = getView().findViewById(R.id.sim);
             bt10.setLayoutParams(params);
 
-            Button bt11 = getView().findViewById(R.id.na);
+            Button bt11 = getView().findViewById(R.id.search_for_user);
             bt11.setLayoutParams(params);
+
+            bt11.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    searchForUser(view);
+                }
+            });
         }
     }
 
@@ -459,6 +466,11 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
             Log.v(TAG, "Permission is granted");
             return true;
         }
+    }
+
+    public void searchForUser(View v) {
+        Intent intent = new Intent(getActivity(), SearchUserActivity.class);
+        startActivity(intent);
     }
 
 

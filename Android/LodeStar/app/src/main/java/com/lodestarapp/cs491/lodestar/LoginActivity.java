@@ -265,7 +265,7 @@ public class LoginActivity extends AppCompatActivity implements
     public void userSearchStart(View v) {
         //Toast.makeText(LoginActivity.this, "LOLOL", LENGTH_LONG).show();
         Intent intent = new Intent(LoginActivity.this, SearchUserActivity.class);
-        userList = new ArrayList<String>();
+        //userList = new ArrayList<String>();
        // retrieveDBValues();
         //justAnotherMethod();
         Log.i("aga",dbitemcouner + "counter");

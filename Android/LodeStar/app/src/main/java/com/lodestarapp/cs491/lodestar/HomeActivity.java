@@ -34,7 +34,7 @@ public class HomeActivity extends Fragment {
         manualSearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ManualDestinationActivity.class);
+                Intent intent = new Intent(getActivity(), SearchFlightActivity.class);
                 getActivity().startActivity(intent);
             }
         });

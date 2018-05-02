@@ -99,6 +99,7 @@ public class FavoritesFragment extends Fragment {
                             String tmpArrayOfmine[] = au.getfavorites().split("!");
                             for(int i = 0; i < tmpArrayOfmine.length; i++) {
                                 favPlaces.add(tmpArrayOfmine[i]);
+                                Log.d("favorites","i: " + i + ", " + tmpArrayOfmine[i]);
                             }
                         }
                     }
