@@ -92,6 +92,7 @@ public class PlacesToSeeExpandedActivity extends AppCompatActivity implements Vi
     private SliderLayout slider;
     private String placeName;
     private double rating;
+    private Button add;
     ImageView[] placeStarImages = new ImageView[5];
     TextView t11;
 
@@ -107,11 +108,21 @@ public class PlacesToSeeExpandedActivity extends AppCompatActivity implements Vi
 
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        sendLandmarkPlaceIdsToDatabase("lol");
         setContentView(R.layout.activity_places_to_see_expanded);
         pv=findViewById(R.id.layout);
         relative = findViewById(R.id.relative);
         ll1 =findViewById(R.id.ll1);
+
+        add = findViewById(R.id.landmarks_add_to_favorites);
+
+        add.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Log.i("agam","add dedik");
+                sendLandmarkPlaceIdsToDatabase(placeId);
+            }
+        });
 
         pv.setVisibility(View.GONE);
         relative.setVisibility(View.GONE);
@@ -152,6 +163,7 @@ public class PlacesToSeeExpandedActivity extends AppCompatActivity implements Vi
         coords = getIntent().getExtras().getString("placeCoords");
 
         this.placeId = getIntent().getExtras().getString("placeId");
+        
         this.rating = Double.parseDouble(getIntent().getExtras().getString("placeRating"));
 
         this.placeStarImages[0] = findViewById(R.id.place_stars_image1);
@@ -204,6 +216,7 @@ public class PlacesToSeeExpandedActivity extends AppCompatActivity implements Vi
 
         TextView t3 = findViewById(R.id.place_location_expanded);
         t3.setText(placeLocation);
+
 
         //b1 = findViewById(R.id.landmarks_add_to_favorites);
 //        b1.setOnClickListener(new View.OnClickListener() {
@@ -286,7 +299,7 @@ public class PlacesToSeeExpandedActivity extends AppCompatActivity implements Vi
 
             }
         });
-        sendLandmarkPlaceIdsToDatabase("1");
+
     }
 
     private void sendLandmarkPlaceIdsToDatabase(final String placeIdToDatabase) {

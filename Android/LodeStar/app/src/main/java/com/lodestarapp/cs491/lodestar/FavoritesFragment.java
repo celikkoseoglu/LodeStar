@@ -35,7 +35,7 @@ public class FavoritesFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    private ArrayList<String> favPlaces;
+    private ArrayList<String> favPlaces,favPlaceIds;
     private DatabaseReference ref;
 
     // TODO: Rename and change types of parameters
@@ -74,8 +74,43 @@ public class FavoritesFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
         favPlaces = new ArrayList<String>();
+        favPlaceIds = new ArrayList<String>();
+        fillArrayList();
 
     }
+
+
+    public void fillArrayList() {
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        ref = database.getReference();
+        ref.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
+                    ADDITIONAL_USER au = childSnapshot.getValue(ADDITIONAL_USER.class);
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                    if(user.getEmail().equals(au.getemail())) {
+                        if(au.getfavorites() != null) {
+                            String tmpArrayOfmine[] = au.getfavorites().split("!");
+                            for(int i = 0; i < tmpArrayOfmine.length; i++) {
+                                favPlaceIds.add(tmpArrayOfmine[i]);
+                                Log.d("favorites","i: " + i + ", " + tmpArrayOfmine[i]);
+                            }
+                        }
+                    }
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
 
     public void databaseToArrayList() {
 
@@ -120,7 +155,6 @@ public class FavoritesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        databaseToArrayList();
 
 
 
