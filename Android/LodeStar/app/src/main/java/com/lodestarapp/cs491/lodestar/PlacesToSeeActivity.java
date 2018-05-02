@@ -364,7 +364,7 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
                     .title(placeName));
             builder.include(placeLatLng);
             String coords = location.getDouble("lat")+ "," +location.getDouble("lng");
-            placesList.add(new Places(null, placeName, placeAddress, placeType,
+            placesList.add(new Places("landmark",null, placeName, placeAddress, placeType,
                     placeRating, null, placeRating, placeId, coords));
 
         }

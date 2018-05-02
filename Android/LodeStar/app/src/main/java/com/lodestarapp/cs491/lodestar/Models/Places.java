@@ -19,9 +19,10 @@ public class Places {
 
     private int numberOfStars;
     private boolean halfStar;
+    private String originPage;
 
     //TODO: places star and picture
-    public Places(Bitmap placeImage, String placeName, String placeLocation,
+    public Places(String originPage, Bitmap placeImage, String placeName, String placeLocation,
                   String placeType,
                   String rating, Bitmap placeIconImage, String attribution, String placeId, String coords){
         this.placeImage = placeImage;
@@ -33,6 +34,7 @@ public class Places {
         this.attribution = attribution;
         this.placeId = placeId;
         this.coords = coords;
+        this.originPage = originPage;
 
         double r = Double.parseDouble(rating) / 2;
         this.numberOfStars = (int) r ;
@@ -110,5 +112,13 @@ public class Places {
 
     public void setCoords(String coords) {
         this.coords = coords;
+    }
+
+    public String getOriginPage() {
+        return originPage;
+    }
+
+    public void setOriginPage(String originPage) {
+        this.originPage = originPage;
     }
 }

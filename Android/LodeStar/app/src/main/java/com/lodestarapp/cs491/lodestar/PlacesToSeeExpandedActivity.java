@@ -97,15 +97,13 @@ public class PlacesToSeeExpandedActivity extends AppCompatActivity implements Vi
 
     private Button b1;
 
-
-
     Sensor gameRotatiton;
     SensorManager sManager;
     VenueController vc;
     RelativeLayout relative;
     LinearLayout ll1;
 
-    byte[] VRBitmap;
+    String VRBitmap;
 
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -234,10 +232,10 @@ public class PlacesToSeeExpandedActivity extends AppCompatActivity implements Vi
             public void onSuccess(JSONObject result) {
                 try {
                     String encoded = result.getString("lowRes");
-                    double pano_deg = result.getJSONObject("Projection").getDouble("pano_yaw_deg") +200.0;
+                    double pano_deg = result.getJSONObject("Projection").getDouble("pano_yaw_deg") ;
 
-                    double angle  = (result.getJSONObject("Location").getDouble("best_view_direction_deg") + pano_deg)%360.0;
-                    pv.setAngle((float) angle);
+                    double angle  = (result.getJSONObject("Location").getDouble("best_view_direction_deg")+ 450 - pano_deg )%360.0;
+                    //pv.setAngle((float) angle);
                     byte[] decodedString = Base64.decode(encoded, Base64.DEFAULT);
                     pv.setBitmap(decodedString);
                     pv.setVisibility(View.VISIBLE);
@@ -246,11 +244,19 @@ public class PlacesToSeeExpandedActivity extends AppCompatActivity implements Vi
                     JSONArray links=result.getJSONArray("Links");
                     JSONObject jo;
                     ArrayList<Float> arrows = new ArrayList<>();
+                    ArrayList<String> panoids = new ArrayList<>();
                     for(int i = 0;i<links.length();i++){
                         jo = links.getJSONObject(i);
-                        arrows.add((float) ((float) (jo.getDouble("yawDeg") + pano_deg)%360.0));
+                        float ang = 180f - (float) ((float) (jo.getDouble("yawDeg") + 450- pano_deg) % 360.0);
+                        if(ang < 0)
+                            arrows.add(360+ang);
+                        else
+                            arrows.add(ang);
+                        panoids.add(jo.getString("panoId"));
+
                     }
                     pv.setArrows(arrows);
+                    pv.setPanos(panoids);
 
                     vc.getPanorama(coords,"50","high", getApplicationContext(),new VenueController.VolleyCallback(){
 
@@ -260,7 +266,7 @@ public class PlacesToSeeExpandedActivity extends AppCompatActivity implements Vi
                                 String encoded = result.getString("highRes");
                                 byte[] decodedString = Base64.decode(encoded, Base64.DEFAULT);
                                 pv.setBitmap(decodedString);
-                                VRBitmap = decodedString;
+                                VRBitmap = coords;
                                 relative.setVisibility(View.VISIBLE);
 
                             } catch (JSONException e) {
@@ -580,14 +586,13 @@ public class PlacesToSeeExpandedActivity extends AppCompatActivity implements Vi
 
     }
 
-    public void goVr(View view) {
+
+    public void goVrMode(View view) {
         Intent intent = new Intent(this, VRActivity.class);
         if(VRBitmap != null)
-            intent.putExtra("Bitmap", VRBitmap);
+            intent.putExtra("BitmapName", VRBitmap);
         intent.putExtra("VrAngle", 0);
 
         startActivity(intent);
-
     }
-
 }

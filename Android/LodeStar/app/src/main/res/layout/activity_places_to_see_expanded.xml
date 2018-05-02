@@ -337,7 +337,7 @@
                                 android:layout_toLeftOf="@+id/full"
                                 android:layout_marginRight="5dp"
                                 android:layout_alignParentBottom="true"
-                                android:onClick="goVr"
+                                android:onClick="goVrMode"
                                 android:layout_toStartOf="@+id/full"
                                 android:layout_marginEnd="5dp" />
 
@@ -362,7 +362,7 @@
                             android:layout_alignParentRight="true"
                             android:layout_marginEnd="10dp"
                             android:layout_marginRight="10dp"
-                            android:onClick="goVr"
+                            android:onClick="goVrMode"
                             app:srcCompat="@drawable/ic_cardboard3" />
 
                     </RelativeLayout>

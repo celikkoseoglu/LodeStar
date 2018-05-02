@@ -88,7 +88,7 @@
                         android:layout_marginBottom="2dp"
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="3dp"
-                        android:text="@string/number_of_reviews" />
+                         />
                 </LinearLayout>
 
                 <TextView

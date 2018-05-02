@@ -74,13 +74,13 @@ public class Renderer {
     static float triangleCoords[] = {
             -0.0f,  -0.622008459f/2-2, -0.9f-2, // top
             -0.5f, -0.311004243f/2-2, 0.0f-2, // bottom left
-            0.5f, -0.311004243f/2-2, 0.0f-2  // bottom right
+            0.5f, -0.311004243f/2-2f, 0.0f-2  // bottom right
     };
 
     static float triangleCoords2[] = {
-            -0.0f,  -0.622008459f/2-2, -2.85f, // top
-            -0.5f, -0.311004243f/2-2, -1.955f, // bottom left
-            0.5f, -0.311004243f/2-2, -1.95f  // bottom right
+            -0.0f,  -0.622008459f/2-2f, -2.85f, // top
+            -0.5f, -0.311004243f/2-2f, -1.955f, // bottom left
+            0.5f, -0.311004243f/2-2f, -1.95f  // bottom right
     };
 
     float textureCoords[] = {
@@ -116,6 +116,7 @@ public class Renderer {
          ifEGLPresent = false;
 
         arrows = new ArrayList<>();
+
 
         final String vertexShader = getVertexShader(context);
         final String fragmentShader = getFragmentShader(context);
@@ -470,6 +471,42 @@ public class Renderer {
             GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, this.mVertices.get(i).length / AMOUNT_OF_NUMBERS_PER_VERTEX_POINT);
 
         }
+        /*
+
+        Matrix.setIdentityM(mRotationMatrix, 0);
+        Matrix.translateM(mRotationMatrix, 0, 0, -0, 0.5f);
+        Matrix.rotateM(mRotationMatrix, 0, 0, 0, 1.0f, 0);
+        Matrix.translateM(mRotationMatrix, 0, 0, 0, -0.5f);
+
+        Matrix.multiplyMM(mvpMatrix, 0, mvpMatrix, 0, mRotationMatrix, 0);
+        GLES20.glUniformMatrix4fv(mMVPMatrixHandle, 1, false, mvpMatrix, 0);
+
+
+        //GLES20.glUniform4fv(tl, 1, color, 0);
+
+        if (ifEGLPresent)
+            GLES20.glActiveTexture(GLES20.GL_TEXTURE1);
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, mTextureDataHandle0[1]);
+        GLES20.glUniform1i(mTextureCoordinateHandle, 1);
+
+        //GLES20.glColorMask(true,true,true,false);
+        GLES20.glVertexAttribPointer(mPositionHandle, CORDS_PER_VERTEX, GLES20.GL_FLOAT, false, vertexStride, vertexBuffer);
+        GLES20.glEnableVertexAttribArray(mPositionHandle);
+
+        GLES20.glVertexAttribPointer(mTextureCoordinateHandle,AMOUNT_OF_NUMBERS_PER_TEXTURE_POINT, GLES20.GL_FLOAT, false, 0,arrowBuffer);
+
+        GLES20.glEnableVertexAttribArray(mTextureCoordinateHandle);
+
+
+        GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, 3);
+
+        Matrix.setIdentityM(mRotationMatrix, 0);
+        Matrix.translateM(mRotationMatrix, 0, 0, -0, 0.5f);
+        Matrix.rotateM(mRotationMatrix, 0, -0, 0, 1.0f, 0);
+        Matrix.translateM(mRotationMatrix, 0, 0, 0, -0.5f);
+        Matrix.multiplyMM(mvpMatrix, 0, mvpMatrix, 0, mRotationMatrix, 0);
+        GLES20.glUniformMatrix4fv(mMVPMatrixHandle, 1, false, mvpMatrix, 0);
+        */
 
 
         for(int i=0;i<arrows.size();i++)
@@ -601,6 +638,15 @@ public class Renderer {
         float v1[] = {convertedSquare[3],convertedSquare[4],convertedSquare[5]};
         float v2[] = {convertedSquare[6],convertedSquare[7],convertedSquare[8]};
         float I[] = new float[3];
+
+        Matrix.setIdentityM(mRotationMatrix, 0);
+        Matrix.translateM(mRotationMatrix, 0, 0, -0, 0.5f);
+        Matrix.rotateM(mRotationMatrix, 0, -angle, 0, 1.0f, 0);
+        Matrix.translateM(mRotationMatrix, 0, 0, 0, -0.5f);
+
+        Matrix.multiplyMM(mModelView, 0, mModelView, 0, mRotationMatrix, 0);
+        GLES20.glUniformMatrix4fv(mMVPMatrixHandle, 1, false, mModelView, 0);
+
 
         return intersectRayAndTriangle(r,v0,v1,v2,I);
 

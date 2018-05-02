@@ -62,6 +62,7 @@ public class NearMeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     String placeLocation = NearMeAdapter.this.placesList.get(card).getPlaceLocation();
                     String placeType = NearMeAdapter.this.placesList.get(card).getPlaceType();
                     String placeId = NearMeAdapter.this.placesList.get(card).getPlaceId();
+                    String rating  = NearMeAdapter.this.placesList.get(card).getRating();
 
                     Intent intent = new Intent(view.getContext(), VenueActivity.class);
                     Bundle bundle = new Bundle();
@@ -69,7 +70,8 @@ public class NearMeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     bundle.putString("placeLocation", placeLocation);
                     bundle.putString("placeType", placeType);
                     bundle.putString("placeId", placeId);
-
+                    bundle.putString("placeRating", rating);
+                    bundle.putString("placeCoords", NearMeAdapter.this.placesList.get(card).getCoords());
 
 
                     intent.putExtras(bundle);

@@ -306,7 +306,6 @@ public class RestaurantActivity extends AppCompatActivity implements OnMapReadyC
 
 
             placeLatLng = new LatLng(location.getDouble("lat"), location.getDouble("lng"));
-
             //Add marker to google maps
             //googleMap.addMarker(new MarkerOptions().position(placeLatLng).title(placeName));
 
@@ -345,7 +344,7 @@ public class RestaurantActivity extends AppCompatActivity implements OnMapReadyC
                 @Override
                 public void onSuccess(Bitmap result) {
                     imgBitmap[0] = result;
-                    Places pl = new Places(imgBitmap[0], finalPlaceName, finalPlaceLocation, finalPlaceType, finalPlaceRating, null, finalPlaceRating, fplaceId, coords);
+                    Places pl = new Places("restaurant",imgBitmap[0], finalPlaceName, finalPlaceLocation, finalPlaceType, finalPlaceRating, null, finalPlaceRating, fplaceId, coords);
                     restList.add(pl);
                     ll1.setVisibility(View.GONE);
                     ll2.setVisibility(View.VISIBLE);

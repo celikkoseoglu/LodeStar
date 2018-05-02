@@ -88,7 +88,6 @@
             android:layout_alignParentRight="true"
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
-            android:onClick="goVr"
             app:srcCompat="@drawable/ic_cardboard3" />
 
     </RelativeLayout>

@@ -19,6 +19,7 @@ import com.lodestarapp.cs491.lodestar.Models.Places;
 import com.lodestarapp.cs491.lodestar.PlacesToSeeActivity;
 import com.lodestarapp.cs491.lodestar.PlacesToSeeExpandedActivity;
 import com.lodestarapp.cs491.lodestar.R;
+import com.lodestarapp.cs491.lodestar.VenueActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,8 +80,14 @@ public class PlacesToSeeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     String placeType = PlacesToSeeAdapter.this.placesList.get(card).getPlaceType();
                     String placeId = PlacesToSeeAdapter.this.placesList.get(card).getPlaceId();
                     rating  = PlacesToSeeAdapter.this.placesList.get(card).getRating();
+                    Intent intent;
+                    if(PlacesToSeeAdapter.this.placesList.get(card).getOriginPage().equals("landmark"))
+                        intent = new Intent(view.getContext(), PlacesToSeeExpandedActivity.class);
+                    else
+                        intent = new Intent(view.getContext(), VenueActivity.class);
 
-                    Intent intent = new Intent(view.getContext(), PlacesToSeeExpandedActivity.class);
+
+
                     Bundle bundle = new Bundle();
                     bundle.putString("placeName", placeName);
                     bundle.putString("placeLocation", placeLocation);

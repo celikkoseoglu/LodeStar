@@ -70,26 +70,27 @@ public class PlacesToSeeExpandedAdapter extends RecyclerView.Adapter<RecyclerVie
 
         ((PlacesToSeeExpandedViewHolder) holder).reviewReviewViewHolder.setText(landmarkReviews.get(position));
 
-        double r = ratings.get(position);
-        int numberOfStars = (int) r ;
-        boolean halfStar;
-        if(r % 1 >= 0.5)
-            halfStar = true;
-        else
-            halfStar=false;
+        if(ratings.size() > 0) {
+            double r = ratings.get(position);
+            int numberOfStars = (int) r;
+            boolean halfStar;
+            if (r % 1 >= 0.5)
+                halfStar = true;
+            else
+                halfStar = false;
 
-        for ( int i = 0; i < numberOfStars; i++)
-            ((PlacesToSeeExpandedViewHolder) holder).placeStarImages[i].setImageResource(R.drawable.ic_star_full);
+            for (int i = 0; i < numberOfStars; i++)
+                ((PlacesToSeeExpandedViewHolder) holder).placeStarImages[i].setImageResource(R.drawable.ic_star_full);
 
-        if(halfStar)
-            ((PlacesToSeeExpandedViewHolder) holder).placeStarImages[numberOfStars].setImageResource(R.drawable.ic_star_half_full);
+            if (halfStar)
+                ((PlacesToSeeExpandedViewHolder) holder).placeStarImages[numberOfStars].setImageResource(R.drawable.ic_star_half_full);
 
-        for(int i = numberOfStars; i < 5; i++)
-            ((PlacesToSeeExpandedViewHolder) holder).placeStarImages[i].setVisibility(View.GONE);
+            for (int i = numberOfStars; i < 5; i++)
+                ((PlacesToSeeExpandedViewHolder) holder).placeStarImages[i].setVisibility(View.GONE);
 
-        ((PlacesToSeeExpandedViewHolder) holder).rating.setText(numberOfStars + "/5");
+            ((PlacesToSeeExpandedViewHolder) holder).rating.setText(numberOfStars + "/5");
 
-
+        }
     }
 
     @Override

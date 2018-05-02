@@ -4,6 +4,7 @@ import android.content.pm.ActivityInfo;
 import android.opengl.GLES20;
 import android.opengl.Matrix;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.Toast;
@@ -56,12 +57,12 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
         Bundle data = getIntent().getExtras();
         if (data != null) {
             mDeltaY = data.getFloat("VrAngle");
-            panorama  = data.getByteArray("Bitmap");
+            String pano  = data.getString("BitmapName");
             arrowAngle = mDeltaY;
         }
 
 
-            cv = (CardboardView) findViewById(R.id.cardboard_view);
+        cv = (CardboardView) findViewById(R.id.cardboard_view);
         cv.setRenderer(this);
         setCardboardView(cv);
 
@@ -91,7 +92,7 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
 
 
         renderer = new Renderer(this, 50, 5f);
-        renderer.loadTexture(this, panorama);
+        renderer.loadTexture(this, R.drawable.alan2);
         //renderer.setAngle(arrowAngle);
         checkGLError("onSurfaceCreated");
 

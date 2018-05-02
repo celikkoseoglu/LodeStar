@@ -13,21 +13,35 @@ import android.opengl.Matrix;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.AttributeSet;
+import android.util.Base64;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.vrtoolkit.cardboard.CardboardView;
 import com.google.vrtoolkit.cardboard.DistortionRenderer;
 import com.google.vrtoolkit.cardboard.sensors.HeadTracker;
 import com.google.vrtoolkit.cardboard.sensors.SensorEventProvider;
+import com.lodestarapp.cs491.lodestar.Controllers.VenueController;
 import com.lodestarapp.cs491.lodestar.R;
 import com.lodestarapp.cs491.lodestar.VR.MatrixCalculator;
 import com.lodestarapp.cs491.lodestar.VR.Renderer;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -76,7 +90,7 @@ public class PanoramaView extends GLSurfaceView{
     float[] rotMatrix  = new float[16];
     float[] orientations = new float[3];
 
-    float angle = 80.0f;
+    float angle = 0.0f;
     ScrollView sc;
 
     byte[] texture;
@@ -85,6 +99,8 @@ public class PanoramaView extends GLSurfaceView{
     RelativeLayout relative;
     LinearLayout ll1;
     ArrayList<Float> arrows;
+    private ArrayList<String> panoids;
+    VenueController vc = new VenueController();
 
     public PanoramaView(Context context) {
         super(context);
@@ -189,6 +205,10 @@ public class PanoramaView extends GLSurfaceView{
         return true;
     }
 
+    public void setPanos(ArrayList<String> panoid) {
+        panoids = new ArrayList<>(panoid);
+    }
+
     private class PanoRenderer implements Renderer, SensorEventListener{
         volatile public float mDeltaX, mDeltaY, mDeltaZ;
         volatile public float roll,pitch,yaw;
@@ -209,7 +229,6 @@ public class PanoramaView extends GLSurfaceView{
             Matrix.setIdentityM(accRotation, 0);
 
             this.dr = new DistortionRenderer();
-            setAngle(angle);
         }
 
         @Override
@@ -264,20 +283,71 @@ public class PanoramaView extends GLSurfaceView{
 
             renderer.draw(mViewProjectionMatrix);
 
+
             if(clicked){
                 clicked = false;
 
                 for(int i=0;i<arrows.size();i++){
-                    int x = renderer.testTouch(renderWidth,renderHeight,readX,readY,mView,mProjectionMatrix,(arrows.get(i)+angle)%360.0f);
-                    Log.i("Check:",x + "");
+                    int x = renderer.testTouch(renderWidth,renderHeight,readX,readY,mView,mProjectionMatrix, (arrows.get(i)) );
                     if(x>0){
+                        Log.i("Check:",i + " touched: " + arrows.get(i));
                         renderer.deleteCurrentTexture();
-                        renderer.loadTexture(c, R.drawable.alan1);
+                        String url = "http://cbk0.google.com/cbk?output=json&panoid=" + panoids.get(i);
+                        Log.i("Check:",url);
+                        RequestQueue requestQueue = Volley.newRequestQueue(c);
+
+                        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
+                                url, null, new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                try {
+                                    Log.i("Check:",response.toString());
+                                    String location = response.getJSONObject("Location").getString("lat")+ "," +
+                                            response.getJSONObject("Location").getString("lng");
+
+                                    double pano_deg = response.getJSONObject("Projection").getDouble("pano_yaw_deg") ;
+                                    JSONArray links=response.getJSONArray("Links");
+                                    JSONObject jo;
+                                    arrows = new ArrayList<>();
+                                    panoids = new ArrayList<>();
+                                    for(int i = 0;i<links.length();i++){
+                                        jo = links.getJSONObject(i);
+                                        float ang = 180f - (float) ((float) (jo.getDouble("yawDeg") + 450- pano_deg) % 360.0);
+                                        if(ang < 0)
+                                            arrows.add(360+ang);
+                                        else
+                                            arrows.add(ang);
+                                        panoids.add(jo.getString("panoId"));
+                                    }
+                                    renderer.setArrows(arrows);
+
+                                    vc.getPanorama(location,"50","high", c,new VenueController.VolleyCallback(){
+
+                                        @Override
+                                        public void onSuccess(JSONObject result) {
+                                            try {
+                                                String encoded = result.getString("highRes");
+                                                byte[] decodedString = Base64.decode(encoded, Base64.DEFAULT);
+                                                setBitmap(decodedString);
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    });
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Log.d(TAG, "Error occured in request");
+                            }
+                        });
+                        requestQueue.add(jsonObjectRequest);
                     }
                 }
-
-
-
             }
             //checkGLError("onDrawEye");
         }
