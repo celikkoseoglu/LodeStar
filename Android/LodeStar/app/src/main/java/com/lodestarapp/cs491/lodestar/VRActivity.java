@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.vrtoolkit.cardboard.CardboardActivity;
@@ -14,8 +15,13 @@ import com.google.vrtoolkit.cardboard.CardboardView;
 import com.google.vrtoolkit.cardboard.Eye;
 import com.google.vrtoolkit.cardboard.HeadTransform;
 import com.google.vrtoolkit.cardboard.Viewport;
+import com.lodestarapp.cs491.lodestar.Controllers.VenueController;
 import com.lodestarapp.cs491.lodestar.VR.MatrixCalculator;
 import com.lodestarapp.cs491.lodestar.VR.Renderer;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
@@ -46,8 +52,10 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
     float mDeltaY = 0.0f;
     float arrowAngle = 0.0f;
 
+    String coords;
+    VenueController vc = new VenueController();
     byte[] panorama;
-
+    boolean incoming = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,11 +64,11 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
 
         Bundle data = getIntent().getExtras();
         if (data != null) {
-            mDeltaY = data.getFloat("VrAngle");
-            String pano  = data.getString("BitmapName");
+            mDeltaY = data.getInt("VrAngle");
+            coords  = data.getString("BitmapName");
             arrowAngle = mDeltaY;
         }
-
+        Log.d(TAG,coords);
 
         cv = (CardboardView) findViewById(R.id.cardboard_view);
         cv.setRenderer(this);
@@ -71,6 +79,58 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
 
         //Toast toast =  Toast.makeText(getApplicationContext(), "Bring the phone in horizontal position", Toast.LENGTH_LONG);
         //toast.show();
+
+        vc = new VenueController();
+        vc.getPanorama(coords,"50","low", getApplicationContext(),new VenueController.VolleyCallback(){
+
+            @Override
+            public void onSuccess(JSONObject result) {
+                try {
+                    String encoded = result.getString("lowRes");
+                    double pano_deg = result.getJSONObject("Projection").getDouble("pano_yaw_deg") ;
+
+                    double angle  = (result.getJSONObject("Location").getDouble("best_view_direction_deg")+ 450 - pano_deg )%360.0;
+                    //pv.setAngle((float) angle);
+                    panorama = Base64.decode(encoded, Base64.DEFAULT);
+                    //renderer.loadTexture(getApplicationContext(), b);
+                    incoming = true;
+
+                    JSONArray links=result.getJSONArray("Links");
+                    JSONObject jo;
+                    final ArrayList<Float> arrows = new ArrayList<>();
+                    ArrayList<String> panoids = new ArrayList<>();
+                    for(int i = 0;i<links.length();i++){
+                        jo = links.getJSONObject(i);
+                        float ang = 180f - (float) ((float) (jo.getDouble("yawDeg") + 450- pano_deg) % 360.0);
+                        if(ang < 0)
+                            arrows.add(360+ang);
+                        else
+                            arrows.add(ang);
+                        panoids.add(jo.getString("panoId"));
+                    }
+                    renderer.setArrows(arrows);
+
+                    vc.getPanorama(coords,"50","high", getApplicationContext(),new VenueController.VolleyCallback(){
+                        @Override
+                        public void onSuccess(JSONObject result) {
+                            try {
+                                String encoded = result.getString("highRes");
+                                panorama = Base64.decode(encoded, Base64.DEFAULT);
+                                incoming = true;
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        });
+
 
     }
 
@@ -89,13 +149,10 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
     public void onSurfaceCreated(EGLConfig config) {
         Log.i(TAG, "onSurfaceCreated");
         GLES20.glClearColor(1f, 1f, 1f, 1f);
-
-
         renderer = new Renderer(this, 50, 5f);
         renderer.loadTexture(this, R.drawable.alan2);
         //renderer.setAngle(arrowAngle);
         checkGLError("onSurfaceCreated");
-
     }
 
     @Override
@@ -143,6 +200,10 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
 
 
     public void onDrawEye(Eye eye) {
+        if(panorama!=null &&incoming){
+            incoming = false;
+            renderer.loadTexture(this, panorama);
+        }
 
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
 

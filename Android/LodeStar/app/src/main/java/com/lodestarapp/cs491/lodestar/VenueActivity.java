@@ -205,7 +205,6 @@ public class VenueActivity extends AppCompatActivity implements ViewPagerEx.OnPa
                         byte[] decodedString = Base64.decode(encoded, Base64.DEFAULT);
                         pv.setBitmap(decodedString);
                         pv.setVisibility(View.VISIBLE);
-                        ll1.setVisibility(View.GONE);
 
                         JSONArray links = result.getJSONArray("Links");
                         JSONObject jo;
@@ -222,6 +221,8 @@ public class VenueActivity extends AppCompatActivity implements ViewPagerEx.OnPa
                         }
                         pv.setArrows(arrows);
                         pv.setPanos(panoids);
+                        pv.setCoords(coords);
+                        pv.setLL(ll1);
 
                         vc.getPanorama(coords, "50", "high", getApplicationContext(), new VenueController.VolleyCallback() {
                             @Override
@@ -232,6 +233,7 @@ public class VenueActivity extends AppCompatActivity implements ViewPagerEx.OnPa
                                     pv.setBitmap(decodedString);
                                     VRBitmap = coords;
                                     relative.setVisibility(View.VISIBLE);
+                                    ll1.setVisibility(View.GONE);
 
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -290,8 +292,8 @@ public class VenueActivity extends AppCompatActivity implements ViewPagerEx.OnPa
 
     public void goVr(View view) {
         Intent intent = new Intent(this, VRActivity.class);
-        if(VRBitmap != null)
-            intent.putExtra("BitmapName", VRBitmap);
+        if(pv.getCoords() != null)
+            intent.putExtra("BitmapName", pv.getCoords());
         intent.putExtra("VrAngle", 0);
 
         startActivity(intent);

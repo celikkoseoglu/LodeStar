@@ -1,7 +1,11 @@
 package com.lodestarapp.cs491.lodestar.VR;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -38,6 +42,7 @@ import com.lodestarapp.cs491.lodestar.Controllers.VenueController;
 import com.lodestarapp.cs491.lodestar.R;
 import com.lodestarapp.cs491.lodestar.VR.MatrixCalculator;
 import com.lodestarapp.cs491.lodestar.VR.Renderer;
+import com.lodestarapp.cs491.lodestar.WeatherInformationActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -101,6 +106,10 @@ public class PanoramaView extends GLSurfaceView{
     ArrayList<Float> arrows;
     private ArrayList<String> panoids;
     VenueController vc = new VenueController();
+    String coords;
+    LinearLayout ll;
+    private ProgressDialog progressDialog;
+
 
     public PanoramaView(Context context) {
         super(context);
@@ -138,7 +147,12 @@ public class PanoramaView extends GLSurfaceView{
         ht.stopTracking();
     }
 
-    public void setAngle(float ang){
+    public void setLL(LinearLayout cor){ ll = cor;};
+
+    public LinearLayout getLL(){return ll;}
+
+
+        public void setAngle(float ang){
         angle = ang;
     }
 
@@ -146,8 +160,14 @@ public class PanoramaView extends GLSurfaceView{
         arrows = new ArrayList<>(ang);
     }
 
+    public void setCoords(String cor){ coords = cor;};
 
-    @Override
+    public String getCoords(){return coords;}
+
+
+
+
+        @Override
     public void onResume(){
         ht.startTracking();
     }
@@ -291,10 +311,23 @@ public class PanoramaView extends GLSurfaceView{
                     int x = renderer.testTouch(renderWidth,renderHeight,readX,readY,mView,mProjectionMatrix, (arrows.get(i)) );
                     if(x>0){
                         Log.i("Check:",i + " touched: " + arrows.get(i));
-                        renderer.deleteCurrentTexture();
                         String url = "http://cbk0.google.com/cbk?output=json&panoid=" + panoids.get(i);
                         Log.i("Check:",url);
+                        final Activity ac= (Activity) c;
+                        renderer.deleteCurrentTexture();
+                        ac.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    progressDialog = new ProgressDialog(c, R.style.Theme_MyDialog);
+                                    progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                                    progressDialog.setTitle("Loading...");
+                                    progressDialog.setMessage("Retrieving panorama from the server");
+                                    progressDialog.show();
+                                }
+                        });
+
                         RequestQueue requestQueue = Volley.newRequestQueue(c);
+
 
                         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
                                 url, null, new Response.Listener<JSONObject>() {
@@ -304,7 +337,7 @@ public class PanoramaView extends GLSurfaceView{
                                     Log.i("Check:",response.toString());
                                     String location = response.getJSONObject("Location").getString("lat")+ "," +
                                             response.getJSONObject("Location").getString("lng");
-
+                                    renderer.deleteCurrentTexture();
                                     double pano_deg = response.getJSONObject("Projection").getDouble("pano_yaw_deg") ;
                                     JSONArray links=response.getJSONArray("Links");
                                     JSONObject jo;
@@ -319,7 +352,6 @@ public class PanoramaView extends GLSurfaceView{
                                             arrows.add(ang);
                                         panoids.add(jo.getString("panoId"));
                                     }
-                                    renderer.setArrows(arrows);
 
                                     vc.getPanorama(location,"50","high", c,new VenueController.VolleyCallback(){
 
@@ -328,6 +360,13 @@ public class PanoramaView extends GLSurfaceView{
                                             try {
                                                 String encoded = result.getString("highRes");
                                                 byte[] decodedString = Base64.decode(encoded, Base64.DEFAULT);
+                                                renderer.setArrows(arrows);
+                                                ac.runOnUiThread(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        progressDialog.dismiss();
+                                                    }
+                                                });
                                                 setBitmap(decodedString);
                                             } catch (JSONException e) {
                                                 e.printStackTrace();
