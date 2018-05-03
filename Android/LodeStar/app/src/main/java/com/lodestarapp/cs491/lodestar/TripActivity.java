@@ -22,8 +22,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.zxing.common.StringUtils;
+import com.lodestarapp.cs491.lodestar.Adapters.ADDITIONAL_USER;
 import com.lodestarapp.cs491.lodestar.Controllers.FlightInfoController;
 import com.lodestarapp.cs491.lodestar.Controllers.TripController;
 import com.lodestarapp.cs491.lodestar.Interfaces.MyOnFocusListenable;
@@ -49,6 +59,9 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
     private TripController trp = new TripController();
     private String photoReferenceOrig;
     private String photoReferenceDest;
+    ADDITIONAL_USER au;
+
+    FirebaseUser user;
 
     private int backgroundImageWidth;
 
@@ -199,104 +212,268 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
     private static final String TAG = "theMessage";
 
     public void sendRequest() {
-        String flight = "THY26"; //bunun binis kartından alınması gerekmiyo mu??????
+        Log.i("agam","metod girdi");
+        String flight = "THY26";
 
-        flc.getFlightInfo("IST", "PVG", flight, getActivity(), new FlightInfoController.VolleyCallback2() {
-            @Override
-            public void onSuccess(JSONObject result) {
-                try {
-                    String info = result.getString("ident");
-                    TextView view = getView().findViewById(R.id.info_text1);
+        //Take the flight info from database
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference();
 
-                    //info = qrCodeInfo.getFlightCode();
-
-                    view.setText("You will be boarding " + info + " from");
-
-                    TextView view1 = getView().findViewById(R.id.info_text3);
-                    view1.setText("You will be boarding " + info + " to");
-
-                    flightInfo.setLink("https://flightaware.com/live/flight/" + info);
-
-                    JSONObject origin = result.getJSONObject("origin");
-                    JSONObject des = result.getJSONObject("destination");
+        try {
+            Log.i("agam","metod girdi2");
+            ref.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
 
 
-                    TextView view2 = getView().findViewById(R.id.info_text5);
-                    view2.setText(origin.getString("city"));
-                    flightInfo.setOrig(origin.getString("city"));
-                    flightInfo.setOrig_airport(origin.getString("airport_name"));
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
 
-                    origCity = origin.getString("city");
-                    destCity = des.getString("city");
+                        au = childSnapshot.getValue(ADDITIONAL_USER.class);
+                        user = FirebaseAuth.getInstance().getCurrentUser();
+                        if(user.getEmail().equals(au.getemail())) {
 
-                    TextView view4 = getView().findViewById(R.id.info_text6);
-                    view4.setText(des.getString("city"));
-                    flightInfo.setDest(des.getString("city"));
-                    flightInfo.setDest_airport(des.getString("airport_name"));
+                            String toBeParsed = au.gettrips();
+                            Log.i("agam","shaq: " + toBeParsed);
+                            if(au.gettrips() != null) {
+                                String tmpArray[] = toBeParsed.split("From");
+                                Log.i("agam","shaq: " + tmpArray[0]);
 
+                                if(tmpArray != null && tmpArray.length >= 1) {
+                                    String flightCodeIn = tmpArray[0];
+                                    String wholeStr = flightCodeIn;
+                                    flightCodeIn = flightCodeIn.substring(13);
+                                    flightCodeIn = flightCodeIn.substring(0, flightCodeIn.length() - 1);
+                                    Log.i("agam","barcode:" + flightCodeIn + "PP");
 
-                    TextView view5 = getView().findViewById(R.id.info_text2);
-                    view5.setText("Swipe left to see information about " + des.getString("city").toString());
+                                    String flightx = flightCodeIn;
 
-                    TextView view3 = getView().findViewById(R.id.info_text4);
-                    view3.setText("Swipe right to see information about " + origin.getString("city").toString());
+                                    String cityFromAirportCodeX = substringBetween(tmpArray[1],": "," To: ");
 
-                    Log.i(TAG, info);
+                                    int toIndex = tmpArray[1].indexOf("To: ");
+                                    toIndex = toIndex + 3;
+                                    String toAirportCodeY = "" + tmpArray[1].charAt(toIndex+1) +tmpArray[1].charAt(toIndex+2) + tmpArray[1].charAt(toIndex+3);
+                                    Log.i("agam","indexim:" + toAirportCodeY+"d");
+                                    flc.getFlightInfo(cityFromAirportCodeX, toAirportCodeY, flightx, getActivity(), new FlightInfoController.VolleyCallback2() {
+                                        @Override
+                                        public void onSuccess(JSONObject result) {
+                                            try {
+                                                String info = result.getString("ident");
+                                                TextView view = getView().findViewById(R.id.info_text1);
 
-                    JSONObject depTime = result.getJSONObject("filed_departure_time");
-                    flightInfo.setOrig_localtime(depTime.getString("time") + " " + depTime.getString("tz"));
-                    flightInfo.setOrig_date(depTime.getString("date"));
+                                                //info = qrCodeInfo.getFlightCode();
 
-                    JSONObject arrTime = result.getJSONObject("filed_arrival_time");
-                    flightInfo.setDest_date(arrTime.getString("date"));
-                    flightInfo.setDest_localtime(arrTime.getString("time") + " " + arrTime.getString("tz"));
+                                                view.setText("You will be boarding " + info + " from");
 
-                    String aircarft = result.getString("aircrafttype");
-                    flightInfo.setAircraft(aircarft);
+                                                TextView view1 = getView().findViewById(R.id.info_text3);
+                                                view1.setText("You will be boarding " + info + " to");
 
-                    String distance = result.getString("distance_filed");
-                    flightInfo.setDistance(Integer.parseInt(distance));
+                                                flightInfo.setLink("https://flightaware.com/live/flight/" + info);
 
-                    String speed = result.getString("filed_airspeed_kts");
-                    flightInfo.setSpeed(Integer.parseInt(speed));
-
-                    String delay = result.getString("arrival_delay");
-                    flightInfo.setDelay(Integer.parseInt(delay));
-
-
-                    JSONObject weather = result.getJSONObject("weather");
-                    String weatherCond = weather.getString("cloud_friendly");
-                    flightInfo.setWeather(weatherCond);
-
-                    String temp = weather.getString("temp_air");
-                    flightInfo.setTemperature(Integer.parseInt(temp));
-
-                    String tempFeel = weather.getString("temp_perceived");
-                    flightInfo.setFeelsLike(Integer.parseInt(tempFeel));
-
-                    String humidity = weather.getString("temp_relhum");
-                    flightInfo.setHumidity(Integer.parseInt(humidity));
-
-                    boolean wifi = result.getBoolean("adhoc");
-                    flightInfo.setWifi(Boolean.toString(wifi));
-
-                    Button bt5 = getView().findViewById(R.id.flightinfo);
-                    bt5.setClickable(true);
-
-                    Button bt2 = getView().findViewById(R.id.weather);
-                    bt2.setClickable(true);
+                                                JSONObject origin = result.getJSONObject("origin");
+                                                JSONObject des = result.getJSONObject("destination");
 
 
-                    sendImageRequestOrig();
-                    sendImageRequestDest();
+                                                TextView view2 = getView().findViewById(R.id.info_text5);
+                                                view2.setText(origin.getString("city"));
+                                                flightInfo.setOrig(origin.getString("city"));
+                                                flightInfo.setOrig_airport(origin.getString("airport_name"));
+
+                                                origCity = origin.getString("city");
+                                                destCity = des.getString("city");
+
+                                                TextView view4 = getView().findViewById(R.id.info_text6);
+                                                view4.setText(des.getString("city"));
+                                                flightInfo.setDest(des.getString("city"));
+                                                flightInfo.setDest_airport(des.getString("airport_name"));
 
 
-                } catch (JSONException jsonException) {
-                    Log.e(TAG, "JSON Parsing error");
+                                                TextView view5 = getView().findViewById(R.id.info_text2);
+                                                view5.setText("Swipe left to see information about " + des.getString("city").toString());
+
+                                                TextView view3 = getView().findViewById(R.id.info_text4);
+                                                view3.setText("Swipe right to see information about " + origin.getString("city").toString());
+
+                                                Log.i(TAG, info);
+
+                                                JSONObject depTime = result.getJSONObject("filed_departure_time");
+                                                flightInfo.setOrig_localtime(depTime.getString("time") + " " + depTime.getString("tz"));
+                                                flightInfo.setOrig_date(depTime.getString("date"));
+
+                                                JSONObject arrTime = result.getJSONObject("filed_arrival_time");
+                                                flightInfo.setDest_date(arrTime.getString("date"));
+                                                flightInfo.setDest_localtime(arrTime.getString("time") + " " + arrTime.getString("tz"));
+
+                                                String aircarft = result.getString("aircrafttype");
+                                                flightInfo.setAircraft(aircarft);
+
+                                                String distance = result.getString("distance_filed");
+                                                flightInfo.setDistance(Integer.parseInt(distance));
+
+                                                String speed = result.getString("filed_airspeed_kts");
+                                                flightInfo.setSpeed(Integer.parseInt(speed));
+
+                                                String delay = result.getString("arrival_delay");
+                                                flightInfo.setDelay(Integer.parseInt(delay));
+
+
+                                                JSONObject weather = result.getJSONObject("weather");
+                                                String weatherCond = weather.getString("cloud_friendly");
+                                                flightInfo.setWeather(weatherCond);
+
+                                                String temp = weather.getString("temp_air");
+                                                flightInfo.setTemperature(Integer.parseInt(temp));
+
+                                                String tempFeel = weather.getString("temp_perceived");
+                                                flightInfo.setFeelsLike(Integer.parseInt(tempFeel));
+
+                                                String humidity = weather.getString("temp_relhum");
+                                                flightInfo.setHumidity(Integer.parseInt(humidity));
+
+                                                boolean wifi = result.getBoolean("adhoc");
+                                                flightInfo.setWifi(Boolean.toString(wifi));
+
+                                                Button bt5 = getView().findViewById(R.id.flightinfo);
+                                                bt5.setClickable(true);
+
+                                                Button bt2 = getView().findViewById(R.id.weather);
+                                                bt2.setClickable(true);
+
+
+                                                sendImageRequestOrig();
+                                                sendImageRequestDest();
+
+
+                                            } catch (JSONException jsonException) {
+                                                Log.e(TAG, "JSON Parsing error");
+                                            }
+
+                                        }
+                                    });
+
+
+
+
+                                }
+
+                            }
+
+                        }
+                    }
+
                 }
 
-            }
-        });
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
+        }catch (Exception e) {
+            flight = "THY26";
+            Log.i("agam","oo baba");
+
+            flc.getFlightInfo("IST", "PVG", flight, getActivity(), new FlightInfoController.VolleyCallback2() {
+                @Override
+                public void onSuccess(JSONObject result) {
+                    try {
+                        String info = result.getString("ident");
+                        TextView view = getView().findViewById(R.id.info_text1);
+
+                        //info = qrCodeInfo.getFlightCode();
+
+                        view.setText("You will be boarding " + info + " from");
+
+                        TextView view1 = getView().findViewById(R.id.info_text3);
+                        view1.setText("You will be boarding " + info + " to");
+
+                        flightInfo.setLink("https://flightaware.com/live/flight/" + info);
+
+                        JSONObject origin = result.getJSONObject("origin");
+                        JSONObject des = result.getJSONObject("destination");
+
+
+                        TextView view2 = getView().findViewById(R.id.info_text5);
+                        view2.setText(origin.getString("city"));
+                        flightInfo.setOrig(origin.getString("city"));
+                        flightInfo.setOrig_airport(origin.getString("airport_name"));
+
+                        origCity = origin.getString("city");
+                        destCity = des.getString("city");
+
+                        TextView view4 = getView().findViewById(R.id.info_text6);
+                        view4.setText(des.getString("city"));
+                        flightInfo.setDest(des.getString("city"));
+                        flightInfo.setDest_airport(des.getString("airport_name"));
+
+
+                        TextView view5 = getView().findViewById(R.id.info_text2);
+                        view5.setText("Swipe left to see information about " + des.getString("city").toString());
+
+                        TextView view3 = getView().findViewById(R.id.info_text4);
+                        view3.setText("Swipe right to see information about " + origin.getString("city").toString());
+
+                        Log.i(TAG, info);
+
+                        JSONObject depTime = result.getJSONObject("filed_departure_time");
+                        flightInfo.setOrig_localtime(depTime.getString("time") + " " + depTime.getString("tz"));
+                        flightInfo.setOrig_date(depTime.getString("date"));
+
+                        JSONObject arrTime = result.getJSONObject("filed_arrival_time");
+                        flightInfo.setDest_date(arrTime.getString("date"));
+                        flightInfo.setDest_localtime(arrTime.getString("time") + " " + arrTime.getString("tz"));
+
+                        String aircarft = result.getString("aircrafttype");
+                        flightInfo.setAircraft(aircarft);
+
+                        String distance = result.getString("distance_filed");
+                        flightInfo.setDistance(Integer.parseInt(distance));
+
+                        String speed = result.getString("filed_airspeed_kts");
+                        flightInfo.setSpeed(Integer.parseInt(speed));
+
+                        String delay = result.getString("arrival_delay");
+                        flightInfo.setDelay(Integer.parseInt(delay));
+
+
+                        JSONObject weather = result.getJSONObject("weather");
+                        String weatherCond = weather.getString("cloud_friendly");
+                        flightInfo.setWeather(weatherCond);
+
+                        String temp = weather.getString("temp_air");
+                        flightInfo.setTemperature(Integer.parseInt(temp));
+
+                        String tempFeel = weather.getString("temp_perceived");
+                        flightInfo.setFeelsLike(Integer.parseInt(tempFeel));
+
+                        String humidity = weather.getString("temp_relhum");
+                        flightInfo.setHumidity(Integer.parseInt(humidity));
+
+                        boolean wifi = result.getBoolean("adhoc");
+                        flightInfo.setWifi(Boolean.toString(wifi));
+
+                        Button bt5 = getView().findViewById(R.id.flightinfo);
+                        bt5.setClickable(true);
+
+                        Button bt2 = getView().findViewById(R.id.weather);
+                        bt2.setClickable(true);
+
+
+                        sendImageRequestOrig();
+                        sendImageRequestDest();
+
+
+                    } catch (JSONException jsonException) {
+                        Log.e(TAG, "JSON Parsing error");
+                    }
+
+                }
+            });
+        }
+
+
+            //bunun binis kartından alınması gerekmiyo mu??????
+
+
 
 
     }
@@ -472,6 +649,33 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
         Intent intent = new Intent(getActivity(), SearchUserActivity.class);
         startActivity(intent);
     }
+
+
+    //Following methods are retrieved from: http://www.java2s.com/Tutorial/Java/0040__Data-Type/GetstheStringthatisnestedinbetweentwoStringsOnlythefirstmatchisreturned.htm
+    //for parsing purposes
+
+
+
+
+    public static String substringBetween(String str, String open, String close) {
+        if (str == null || open == null || close == null) {
+            return null;
+        }
+        int start = str.indexOf(open);
+        if (start != -1) {
+            int end = str.indexOf(close, start + open.length());
+            if (end != -1) {
+                return str.substring(start + open.length(), end);
+            }
+        }
+        return null;
+    }
+
+    public static boolean isEmpty(String str) {
+        return str == null || str.length() == 0;
+    }
+
+
 
 
 }

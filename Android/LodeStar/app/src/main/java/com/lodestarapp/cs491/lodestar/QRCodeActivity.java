@@ -150,9 +150,9 @@ public class QRCodeActivity extends AppCompatActivity{
                             read = true;
                             Log.d(TAG, "23423423");
 
-                            Toast.makeText(QRCodeActivity.this, barcodeData.valueAt(0).displayValue , Toast.LENGTH_SHORT).show();
+                      //      Toast.makeText(QRCodeActivity.this, barcodeData.valueAt(0).displayValue , Toast.LENGTH_SHORT).show();
 
-                            diyalogOlusturucu.setMessage("You just scanned a new QRCode, would you like to move to History Page?")
+                            diyalogOlusturucu.setMessage("You just scanned a new QRCode, would you like to save it?")
                                     .setCancelable(true)
                                     .setNegativeButton("NO :(", new DialogInterface.OnClickListener() {
                                         @Override
@@ -251,7 +251,7 @@ public class QRCodeActivity extends AppCompatActivity{
                     }
                 });
 
-                Log.d("q", "Size: " + barcodeData.size());
+                //Log.d("q", "Size: " + barcodeData.size());
 
                 for (int i = 0; i < barcodeData.size(); i++){
                     Log.d(TAG, "At i: " + i + " have: " + barcodeData.valueAt(i).displayValue);
