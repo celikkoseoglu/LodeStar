@@ -111,8 +111,9 @@ public class Renderer {
         IntBuffer il = IntBuffer.allocate(1);
         GLES20.glGetIntegerv(GLES20.GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS, il);
         int limit = il.get();
-        Log.i("max combined texture",  limit+ "");
-        if(limit ==96 )
+        String manufacturer = android.os.Build.MANUFACTURER;
+        Log.i("device", manufacturer);
+        if(manufacturer.equals("HUAWEI") )
          ifEGLPresent = false;
 
         arrows = new ArrayList<>();

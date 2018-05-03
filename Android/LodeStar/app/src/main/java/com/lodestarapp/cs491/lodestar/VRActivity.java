@@ -93,14 +93,6 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
         setCardboardView(cv);
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        progressDialog = new ProgressDialog(VRActivity.this, R.style.Theme_MyDialog);
-        progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        progressDialog.setCanceledOnTouchOutside(false);
-        progressDialog.setTitle("Loading...");
-        progressDialog.setMessage("Retrieving panorama from the server");
-        progressDialog.show();
-
-
 
         //Toast toast =  Toast.makeText(getApplicationContext(), "Bring the phone in horizontal position", Toast.LENGTH_LONG);
         //toast.show();
@@ -143,7 +135,6 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
                                 String encoded = result.getString("highRes");
                                 panorama = Base64.decode(encoded, Base64.DEFAULT);
                                 incoming = true;
-                                progressDialog.dismiss();
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -177,7 +168,7 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
         Log.i(TAG, "onSurfaceCreated");
         GLES20.glClearColor(1f, 1f, 1f, 1f);
         renderer = new Renderer(this, 50, 5f);
-        renderer.loadTexture(this, R.drawable.alan2);
+        renderer.loadTexture(this, R.drawable.gray);
         //renderer.setAngle(arrowAngle);
         checkGLError("onSurfaceCreated");
     }
