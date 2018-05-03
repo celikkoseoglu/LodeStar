@@ -219,7 +219,9 @@ public class PanoramaView extends GLSurfaceView{
                 xBefore = x;
                 yBefore = y;
             }
-            requestRender();
+            if(pr != null)
+                if(!pr.sensorRead)
+                    requestRender();
 
         }
         return true;
@@ -319,7 +321,7 @@ public class PanoramaView extends GLSurfaceView{
                                 @Override
                                 public void run() {
                                     progressDialog = new ProgressDialog(c, R.style.Theme_MyDialog);
-                                    progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                                    //progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                                     progressDialog.setCanceledOnTouchOutside(false);
                                     progressDialog.setTitle("Loading...");
                                     progressDialog.setMessage("Retrieving panorama from the server");

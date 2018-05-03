@@ -96,8 +96,12 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
 
         //Toast toast =  Toast.makeText(getApplicationContext(), "Bring the phone in horizontal position", Toast.LENGTH_LONG);
         //toast.show();
-
-
+        progressDialog = new ProgressDialog(VRActivity.this, R.style.Theme_MyDialog);
+        //progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.setTitle("Loading...");
+        progressDialog.setMessage("Retrieving panorama from the server");
+        progressDialog.show();
 
         vc = new VenueController();
         vc.getPanorama(coords,"50","low", getApplicationContext(),new VenueController.VolleyCallback(){
@@ -135,6 +139,7 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
                                 String encoded = result.getString("highRes");
                                 panorama = Base64.decode(encoded, Base64.DEFAULT);
                                 incoming = true;
+                                progressDialog.dismiss();
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -204,7 +209,7 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
                         @Override
                         public void run() {
                             progressDialog = new ProgressDialog(VRActivity.this, R.style.Theme_MyDialog);
-                            progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                            //progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                             progressDialog.setCanceledOnTouchOutside(false);
                             progressDialog.setTitle("Loading...");
                             progressDialog.setMessage("Retrieving panorama from the server");
