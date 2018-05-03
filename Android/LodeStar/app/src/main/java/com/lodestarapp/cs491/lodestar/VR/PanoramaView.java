@@ -320,6 +320,7 @@ public class PanoramaView extends GLSurfaceView{
                                 public void run() {
                                     progressDialog = new ProgressDialog(c, R.style.Theme_MyDialog);
                                     progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                                    progressDialog.setCanceledOnTouchOutside(false);
                                     progressDialog.setTitle("Loading...");
                                     progressDialog.setMessage("Retrieving panorama from the server");
                                     progressDialog.show();

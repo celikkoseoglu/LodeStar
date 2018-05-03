@@ -1,6 +1,10 @@
 package com.lodestarapp.cs491.lodestar;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.opengl.GLES20;
 import android.opengl.Matrix;
 import android.os.Bundle;
@@ -8,8 +12,16 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.vrtoolkit.cardboard.CardboardActivity;
 import com.google.vrtoolkit.cardboard.CardboardView;
 import com.google.vrtoolkit.cardboard.Eye;
@@ -45,7 +57,6 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
 
     private float CAMERA_Z = 0.5f;
     private float[] mView = new float[16];
-    private int[] mResourceId = {R.drawable.alan1 , R.drawable.alan2};
     private int mCurrentPhotoPos = 0;
     private boolean mIsCardboardTriggered = false;
 
@@ -56,6 +67,10 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
     VenueController vc = new VenueController();
     byte[] panorama;
     boolean incoming = false;
+    ArrayList<Float> arrows;
+    ArrayList<String> panoids;
+    LinearLayout ll1;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,15 +85,27 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
         }
         Log.d(TAG,coords);
 
+        ll1 = findViewById(R.id.ll1);
+        ll1.setVisibility(View.VISIBLE);
+
         cv = (CardboardView) findViewById(R.id.cardboard_view);
         cv.setRenderer(this);
         setCardboardView(cv);
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        progressDialog = new ProgressDialog(VRActivity.this, R.style.Theme_MyDialog);
+        progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.setTitle("Loading...");
+        progressDialog.setMessage("Retrieving panorama from the server");
+        progressDialog.show();
+
 
 
         //Toast toast =  Toast.makeText(getApplicationContext(), "Bring the phone in horizontal position", Toast.LENGTH_LONG);
         //toast.show();
+
+
 
         vc = new VenueController();
         vc.getPanorama(coords,"50","low", getApplicationContext(),new VenueController.VolleyCallback(){
@@ -97,8 +124,8 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
 
                     JSONArray links=result.getJSONArray("Links");
                     JSONObject jo;
-                    final ArrayList<Float> arrows = new ArrayList<>();
-                    ArrayList<String> panoids = new ArrayList<>();
+                    arrows  = new ArrayList<>();
+                    panoids = new ArrayList<>();
                     for(int i = 0;i<links.length();i++){
                         jo = links.getJSONObject(i);
                         float ang = 180f - (float) ((float) (jo.getDouble("yawDeg") + 450- pano_deg) % 360.0);
@@ -108,7 +135,6 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
                             arrows.add(ang);
                         panoids.add(jo.getString("panoId"));
                     }
-                    renderer.setArrows(arrows);
 
                     vc.getPanorama(coords,"50","high", getApplicationContext(),new VenueController.VolleyCallback(){
                         @Override
@@ -117,6 +143,7 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
                                 String encoded = result.getString("highRes");
                                 panorama = Base64.decode(encoded, Base64.DEFAULT);
                                 incoming = true;
+                                progressDialog.dismiss();
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -173,25 +200,94 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
                 angles[i] = (float) Math.toDegrees((float)angles[i]);
 
             headRotatiton = angles[1];
-            if(arrowAngle == 80){
-                if(Math.abs(headRotatiton) < 0 + 30){
-                    arrowAngle = -100;
-                    //renderer.setAngle(arrowAngle);
-                    resetTexture();
+            if(headRotatiton < 0)
+                headRotatiton += 360;
 
+            for(int i=0;i<arrows.size();i++){
+                if( distance(headRotatiton, arrows.get(i)) < 20){
+                    Log.i("Check:",i + " touched: " + arrows.get(i));
+                    String url = "http://cbk0.google.com/cbk?output=json&panoid=" + panoids.get(i);
+                    Log.i("Check:",url);
+                    renderer.deleteCurrentTexture();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog = new ProgressDialog(VRActivity.this, R.style.Theme_MyDialog);
+                            progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                            progressDialog.setCanceledOnTouchOutside(false);
+                            progressDialog.setTitle("Loading...");
+                            progressDialog.setMessage("Retrieving panorama from the server");
+                            progressDialog.show();
+                        }
+                    });
+
+
+                    RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+
+                    JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
+                            url, null, new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                Log.i("Check:",response.toString());
+                                String location = response.getJSONObject("Location").getString("lat")+ "," +
+                                        response.getJSONObject("Location").getString("lng");
+                                renderer.deleteCurrentTexture();
+                                double pano_deg = response.getJSONObject("Projection").getDouble("pano_yaw_deg") ;
+                                JSONArray links=response.getJSONArray("Links");
+                                JSONObject jo;
+                                arrows = new ArrayList<>();
+                                panoids = new ArrayList<>();
+                                for(int i = 0;i<links.length();i++){
+                                    jo = links.getJSONObject(i);
+                                    float ang = 180f - (float) ((float) (jo.getDouble("yawDeg") + 450- pano_deg) % 360.0);
+                                    if(ang < 0)
+                                        arrows.add(360+ang);
+                                    else
+                                        arrows.add(ang);
+                                    panoids.add(jo.getString("panoId"));
+                                }
+
+                                vc.getPanorama(location,"50","high", getApplicationContext(),new VenueController.VolleyCallback(){
+
+                                    @Override
+                                    public void onSuccess(JSONObject result) {
+                                        try {
+                                            String encoded = result.getString("highRes");
+                                            byte[] decodedString = Base64.decode(encoded, Base64.DEFAULT);
+                                            renderer.setArrows(arrows);
+                                            panorama = Base64.decode(encoded, Base64.DEFAULT);
+                                            incoming = true;
+                                            runOnUiThread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    progressDialog.dismiss();
+                                                }
+                                            });
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                });
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.d(TAG, "Error occured in request");
+                        }
+                    });
+                    requestQueue.add(jsonObjectRequest);
                 }
             }
-            else if(arrowAngle == -100) {
-                if ( Math.abs(headRotatiton) > 180 -30)
-                {
-                    arrowAngle = 80;
-                    //renderer.setAngle(arrowAngle);
-                    resetTexture();
 
-                }
-            }
 
-            Log.d("eye view", floatToString(angles));
+
+
+            Log.d("eye view", headRotatiton+ "");
         }
 
 
@@ -202,6 +298,7 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
     public void onDrawEye(Eye eye) {
         if(panorama!=null &&incoming){
             incoming = false;
+            renderer.setArrows(arrows);
             renderer.loadTexture(this, panorama);
         }
 
@@ -232,13 +329,11 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
     private void resetTexture() {
         renderer.deleteCurrentTexture();
         checkGLError("after deleting texture");
-        renderer.loadTexture(this, getPhotoIndex());
+        //renderer.loadTexture(this, getPhotoIndex());
         checkGLError("loading texture");
     }
 
-    private int getPhotoIndex() {
-        return mResourceId[mCurrentPhotoPos++ % mResourceId.length];
-    }
+    //private int getPhotoIndex() { return mResourceId[mCurrentPhotoPos++ % mResourceId.length];  }
 
     @Override
     protected void onStop() {
@@ -303,6 +398,12 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
             r[2] = q[2] /s;
         }
         return r;
+    }
+
+    private float distance(float alpha, float beta) {
+        float phi = Math.abs(beta - alpha) % 360;
+        float distance = phi > 180 ? 360 - phi : phi;
+        return distance;
     }
 
 
