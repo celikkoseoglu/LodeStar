@@ -212,7 +212,7 @@ public class QRCodeActivity extends AppCompatActivity{
                                                                                             prev = au.gettrips();
 
                                                                                         if(prev != null)
-                                                                                            mDatabase.child("users").child(snapshot.getKey()).child("trips").setValue(prev + "!" + " Flight Code: " + qrCodeInfo.getFlightCode()+ " From: " + qrCodeInfo.getFrom() + " To: " + qrCodeInfo.getTo());
+                                                                                            mDatabase.child("users").child(snapshot.getKey()).child("trips").setValue("Flight Code: " + qrCodeInfo.getFlightCode()+ " From: " + qrCodeInfo.getFrom() + " To: " + qrCodeInfo.getTo() + "! " + prev );
                                                                                         else {
                                                                                             mDatabase.child("users").child(snapshot.getKey()).child("trips").setValue("Flight Code: " + qrCodeInfo.getFlightCode()+ " From: " + qrCodeInfo.getFrom() + " To: " + qrCodeInfo.getTo());
                                                                                         }

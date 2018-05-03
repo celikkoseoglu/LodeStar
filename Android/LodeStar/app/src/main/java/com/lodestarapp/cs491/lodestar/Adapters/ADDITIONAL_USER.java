@@ -7,6 +7,7 @@ public class ADDITIONAL_USER {
     private String trips;
     private String posts;
     private String favorites;
+    private String photouris;
 
     public ADDITIONAL_USER() {
 
@@ -54,4 +55,11 @@ public class ADDITIONAL_USER {
         this.username = username;
     }
 
+    public String getphotouris() {
+        return photouris;
+    }
+
+    public void setphotouris(String photouris) {
+        this.photouris = photouris;
+    }
 }

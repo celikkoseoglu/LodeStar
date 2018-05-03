@@ -21,12 +21,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.login.widget.ProfilePictureView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -58,9 +60,11 @@ public class UserPage extends android.support.v4.app.Fragment {
     FirebaseUser user,userMe;
     public FirebaseUser mUser;
     private DatabaseReference mDatabase;
+    Uri myUri = null;
 
     ADDITIONAL_USER au;
-    ADDITIONAL_USER au2;
+    ADDITIONAL_USER au3;
+    ADDITIONAL_USER au2,au4;
     DatabaseReference ref;
 
     private List<String> userInfoWithPosts = new ArrayList<>();
@@ -76,12 +80,90 @@ public class UserPage extends android.support.v4.app.Fragment {
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
     }
 
+    public void profilePicAdd() {
+
+        if(myUri != null) {
+            //Save user photo to database
+            final FirebaseDatabase database = FirebaseDatabase.getInstance();
+            ref = database.getReference();
+
+            ref.child("users").addValueEventListener(new ValueEventListener() {
+
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
+                        au3 = childSnapshot.getValue(ADDITIONAL_USER.class);
+                        userMe = FirebaseAuth.getInstance().getCurrentUser();
+
+
+                        if(userMe.getEmail().equals(au3.getemail())) {
+
+                            String str = "";
+
+                            if(au3.getphotouris() != null)
+                                str = au3.getposts();
+
+                            mDatabase.child("users").child(childSnapshot.getKey()).child("photouris").setValue(myUri);
+
+                        }
+
+
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }
+
+    }
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.activity_user_page, container, false);
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+        final View view = inflater.inflate(R.layout.activity_user_page, container, false);
 
         this.view = view;
+
+
+
+        //Bastaki imageı doldur
+      //  final ImageView profilePhoto = this.view.findViewById(R.id.me_profile_picture);
+
+        ref = database.getReference();
+
+       /* ref.child("users").addValueEventListener(new ValueEventListener() {
+
+                                                     @Override
+                                                     public void onDataChange(DataSnapshot dataSnapshot) {
+                                                         for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
+                                                             au4 = childSnapshot.getValue(ADDITIONAL_USER.class);
+                                                             user = FirebaseAuth.getInstance().getCurrentUser();
+
+                                                             if(user != null && au4 != null && au4.getphotouris() != null && au4.getemail().equals(user.getEmail())){
+                                                              Log.i("agam","Photo URIS" + au4.getphotouris());
+
+                                                                 profilePhoto.setImageURI(Uri.parse(au4.getphotouris()));
+                                                             }
+
+                                                         }
+
+
+                                                     }
+
+                                                     @Override
+                                                     public void onCancelled(DatabaseError databaseError) {
+
+                                                     }
+                                                 });*/
+        //view3.setImageURI(uri);
+
+        //------------------
 
         tw = view.findViewById(R.id.me_realName);
         tripLogs = view.findViewById(R.id.me_trip_logs_count);
@@ -105,6 +187,9 @@ public class UserPage extends android.support.v4.app.Fragment {
         mAdapter = new UserPageAdapter(userInfoWithPosts);
         mRecyclerView.setAdapter(mAdapter);
 
+
+
+
         AppCompatButton button = view.findViewById(R.id.write_post);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,11 +202,12 @@ public class UserPage extends android.support.v4.app.Fragment {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                profilePicAdd();
                 pickImageAndChangeTheProfilePicture();
             }
         });
 
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+
         //   ADDITIONAL_USER au = dataSnapshot.getValue(ADDITIONAL_USER.class);
         // Log.i("agam",au.username);
         ref = database.getReference();
@@ -188,7 +274,7 @@ public class UserPage extends android.support.v4.app.Fragment {
                     au2 = childSnapshot.getValue(ADDITIONAL_USER.class);
                     user = FirebaseAuth.getInstance().getCurrentUser();
 
-                    if(user.getEmail().equals(au2.getemail())) {
+                    if(user != null && user.getEmail().equals(au2.getemail())) {
                         String toBeParsed = au2.getposts();
 
                         if(au2.getposts() != null) {
@@ -214,12 +300,8 @@ public class UserPage extends android.support.v4.app.Fragment {
         });
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
         return view;
-
     }
-
-
     @Override
     public void onStart() {
         super.onStart();
@@ -229,7 +311,9 @@ public class UserPage extends android.support.v4.app.Fragment {
 
     public void writePost(){
         //REFERENCE:https://developer.android.com/guide/topics/ui/dialogs.html
+        Log.d("agam","kankyyyy");
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
         int t = 0;
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
@@ -260,9 +344,7 @@ public class UserPage extends android.support.v4.app.Fragment {
                                         String str = "";
                                         if(au.getposts() != null)
                                             str = au.getposts();
-
                                         mDatabase.child("users").child(childSnapshot.getKey()).child("posts").setValue(posts.getText().toString() + "&&&" + str);
-
                                     }
                                 }
                                 posts.setText("");
@@ -288,6 +370,7 @@ public class UserPage extends android.support.v4.app.Fragment {
 
     //REFERENCE: https://developer.android.com/reference/android/content/Intent.html
     public void pickImageAndChangeTheProfilePicture(){
+        Log.i("agam","bu babam icin");
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -298,9 +381,12 @@ public class UserPage extends android.support.v4.app.Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == IMAGE){
             if (resultCode == RESULT_OK){
-                Uri uri = data.getData();
+                final Uri uri = data.getData();
                 ImageView view3 = this.view.findViewById(R.id.me_profile_picture);
                 view3.setImageURI(uri);
+
+              //  Log.i("agam","uri: " + uri);
+               // myUri = uri;
             }
         }
     }
