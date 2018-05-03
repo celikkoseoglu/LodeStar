@@ -202,7 +202,6 @@ public class PanoramaView extends GLSurfaceView{
                         float deltaX = (x - xBefore) / this.getWidth() * 360;
                         float deltaY = (y - yBefore) / this.getHeight() * 360;
 
-
                         pr.mDeltaY += -deltaX*0.2 * (3.14159265 / 180.0);
                         pr.mDeltaX += deltaY*0.2 * (3.14159265 / 180.0);
 
@@ -258,7 +257,6 @@ public class PanoramaView extends GLSurfaceView{
             glViewport(0, 0, i, i1);
 
             MatrixCalculator.perspectiveUpdate(mProjectionMatrix, 90, (float) i / (float) i1, 1f, 10f);
-
         }
 
         @Override

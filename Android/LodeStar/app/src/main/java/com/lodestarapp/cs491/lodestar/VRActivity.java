@@ -133,6 +133,9 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
                                 String encoded = result.getString("highRes");
                                 panorama = Base64.decode(encoded, Base64.DEFAULT);
                                 incoming = true;
+                                if(progressDialog != null){
+                                    progressDialog.dismiss();
+                                }
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -168,6 +171,17 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
         renderer = new Renderer(this, 50, 5f);
         renderer.loadTexture(this, R.drawable.gray);
         //renderer.setAngle(arrowAngle);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                progressDialog = new ProgressDialog(VRActivity.this, R.style.Theme_MyDialog);
+                //progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                progressDialog.setCanceledOnTouchOutside(false);
+                progressDialog.setTitle("Loading...");
+                progressDialog.setMessage("");
+                progressDialog.show();
+            }
+        });
         checkGLError("onSurfaceCreated");
     }
 
@@ -192,6 +206,7 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
             if(headRotatiton < 0)
                 headRotatiton += 360;
 
+            if(arrows != null){
             for(int i=0;i<arrows.size();i++){
                 if( distance(headRotatiton, arrows.get(i)) < 20){
                     Log.i("Check:",i + " touched: " + arrows.get(i));
@@ -205,7 +220,7 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
                             //progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                             progressDialog.setCanceledOnTouchOutside(false);
                             progressDialog.setTitle("Loading...");
-                            progressDialog.setMessage("Retrieving panorama from the server");
+                            progressDialog.setMessage("");
                             progressDialog.show();
                         }
                     });
@@ -271,6 +286,7 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
                     });
                     requestQueue.add(jsonObjectRequest);
                 }
+            }
             }
 
 
@@ -343,7 +359,6 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
                 //Toast toast =  Toast.makeText(getApplicationContext(), "touched", Toast.LENGTH_SHORT);
                 //toast.show();
         }
-
         return true;
     }
 
