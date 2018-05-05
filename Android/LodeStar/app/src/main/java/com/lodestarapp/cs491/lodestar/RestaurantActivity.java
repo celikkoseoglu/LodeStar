@@ -449,4 +449,7 @@ public class RestaurantActivity extends AppCompatActivity implements OnMapReadyC
 
     }
 
+    public void nearStart(View view) {
+        finish();
+    }
 }

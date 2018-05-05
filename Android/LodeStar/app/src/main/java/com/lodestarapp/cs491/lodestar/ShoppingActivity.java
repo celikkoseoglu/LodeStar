@@ -429,4 +429,7 @@ public class ShoppingActivity extends AppCompatActivity implements OnMapReadyCal
 
     }
 
+    public void nearStart(View view) {
+        finish();
+    }
 }
