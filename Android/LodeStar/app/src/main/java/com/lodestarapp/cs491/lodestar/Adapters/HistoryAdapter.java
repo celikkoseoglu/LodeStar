@@ -67,8 +67,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ((HistoryViewHolder) holder).cityFrom.setText(historyInfos.get(position).getCityFrom());
-        ((HistoryViewHolder) holder).cityTo.setText(historyInfos.get(position).getCityTo());
+        ((HistoryViewHolder) holder).cityFrom.setText(historyInfos.get(position).getCityFrom().toUpperCase());
+        ((HistoryViewHolder) holder).cityTo.setText(historyInfos.get(position).getCityTo().toUpperCase());
         ((HistoryViewHolder) holder).fromAirport.setText(historyInfos.get(position).getFromAirport());
         ((HistoryViewHolder) holder).toAirport.setText(historyInfos.get(position).getToAirport());
 
@@ -81,7 +81,9 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         //((HistoryViewHolder) holder).arrivalDate.setText(historyInfos.get(position).getArrivalDate());
 
         ((HistoryViewHolder) holder).cityFromImage.setImageBitmap(historyInfos.get(position).getCityFromBitmap());
+
         ((HistoryViewHolder) holder).cityToImage.setImageBitmap(historyInfos.get(position).getCityToBitmap());
+
     }
 
     @Override

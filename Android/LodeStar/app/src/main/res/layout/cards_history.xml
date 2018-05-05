@@ -29,7 +29,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="125dp"
                     android:layout_marginBottom="5dp"
-                    card_view:srcCompat="@android:color/holo_blue_light" />
+                    card_view:srcCompat="@android:color/holo_blue_light"
+                    android:tint="#6F000000"
+                    android:scaleType="centerCrop"/>
 
                 <TextView
                     android:id="@+id/history_from_city_country_textview"
@@ -163,7 +165,9 @@
                     android:layout_height="125dp"
                     android:layout_below="@id/history_from_airport_name_textview"
                     android:layout_marginTop="5dp"
-                    card_view:srcCompat="@android:color/holo_green_dark" />
+                    card_view:srcCompat="@android:color/holo_green_dark"
+                    android:tint="#6F000000"
+                    android:scaleType="centerCrop"/>
 
             </RelativeLayout>
 

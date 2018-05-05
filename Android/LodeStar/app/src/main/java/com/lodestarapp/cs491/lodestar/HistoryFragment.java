@@ -215,21 +215,42 @@ public class HistoryFragment extends Fragment {
 
         for (int i = 0; i < size; i++) {
             final int finalI = i;
-            trc.getTripCity(from.get(i), getContext(), new TripController.VolleyCallback4() {
-                @Override
-                public void onSuccess(JSONObject result) {
-                    parseTheTripInformation(result, from.get(finalI), finalI, 0);
-                    mAdapter.notifyDataSetChanged();
-                }
-            });
+            if (ImageStorage.checkIfImageExists(from.get(finalI))) {
+                File file = ImageStorage.getImage("/" + from.get(finalI) + ".png");
+                assert file != null;
+                String p = file.getAbsolutePath();
+                Bitmap b = BitmapFactory.decodeFile(p);
+                getHistoryInfos().get(finalI).setCityFromBitmap(b);
 
-            trc.getTripCity(to.get(i), getContext(), new TripController.VolleyCallback4() {
-                @Override
-                public void onSuccess(JSONObject result) {
-                    parseTheTripInformation(result, to.get(finalI), finalI, 1);
-                    mAdapter.notifyDataSetChanged();
-                }
-            });
+
+            } else {
+                trc.getTripCity(from.get(i), getContext(), new TripController.VolleyCallback4() {
+                    @Override
+                    public void onSuccess(JSONObject result) {
+                        parseTheTripInformation(result, from.get(finalI), finalI, 0);
+                        mAdapter.notifyDataSetChanged();
+                    }
+                });
+            }
+
+            if (ImageStorage.checkIfImageExists(to.get(finalI))) {
+                File file = ImageStorage.getImage("/" + to.get(finalI) + ".png");
+                assert file != null;
+                String p = file.getAbsolutePath();
+                Bitmap b = BitmapFactory.decodeFile(p);
+                getHistoryInfos().get(finalI).setCityToBitmap(b);
+            }
+
+            else{
+                trc.getTripCity(to.get(i), getContext(), new TripController.VolleyCallback4() {
+                    @Override
+                    public void onSuccess(JSONObject result) {
+                        parseTheTripInformation(result, to.get(finalI), finalI, 1);
+                        mAdapter.notifyDataSetChanged();
+                    }
+                });
+            }
+
         }
     }
 
@@ -242,19 +263,8 @@ public class HistoryFragment extends Fragment {
             JSONObject photo = photos.getJSONObject(0);
             String cityReference = photo.getString("photo_reference");
 
-            if (ImageStorage.checkIfImageExists(city)) {
-                File file = ImageStorage.getImage("/" + city + ".png");
-                assert file != null;
-                String p = file.getAbsolutePath();
-                Bitmap b = BitmapFactory.decodeFile(p);
 
-                if(which == 0)
-                    getHistoryInfos().get(index).setCityFromBitmap(b);
-                else
-                    getHistoryInfos().get(index).setCityToBitmap(b);
-
-            } else {
-                trc.getBackgroundImage(cityReference, 1080, getContext(), new TripController.VolleyCallback5() {
+            trc.getBackgroundImage(cityReference, 1080, getContext(), new TripController.VolleyCallback5() {
                     @Override
                     public void onSuccess(Bitmap result) {
                         ImageStorage.saveToSdCard(result, city);
@@ -263,9 +273,8 @@ public class HistoryFragment extends Fragment {
                             getHistoryInfos().get(index).setCityFromBitmap(result);
                         else
                             getHistoryInfos().get(index).setCityToBitmap(result);
-                    }
-                });
-            }
+                    }});
+
 
         } catch (JSONException e) {
             e.printStackTrace();
