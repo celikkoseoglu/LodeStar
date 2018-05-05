@@ -46,6 +46,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.util.Locale;
 
 public class TripActivity extends Fragment implements MyOnFocusListenable {
     public ViewFlipper view_flipper;
@@ -55,6 +56,8 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
     private QRCodeInfo qrCodeInfo;
     private String origCity;
     private String destCity;
+    private String airportOrig;
+    private String airportDest;
     private FlightInfoController flc = new FlightInfoController();
     private TripController trp = new TripController();
     private String photoReferenceOrig;
@@ -104,6 +107,27 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
             }
         });
         weather.setClickable(false);
+
+        Button bt2 = view.findViewById(R.id.living);
+        bt2.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                livingStart(v);
+            }
+        });
+        bt2.setClickable(false);
+
+        Button bt3 = view.findViewById(R.id.lounge);
+        bt3.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                currencyStart(v);
+            }
+        });
+        bt3.setClickable(false);
+
 
 
         view_flipper = view.findViewById(R.id.flipper);
@@ -209,6 +233,37 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
         startActivity(intent);
     }
 
+    public void livingStart(View view){
+        Intent intent = new Intent(getActivity(), LivingExpensesActivity.class);
+        if (view_flipper.getCurrentView() == firstView)
+            intent.putExtra("City", origCity);
+        else
+            intent.putExtra("City", destCity);
+
+
+        startActivity(intent);
+    }
+
+    public void currencyStart(View view){
+        Intent intent = new Intent(getActivity(), CurrencyActivity.class);
+        if (view_flipper.getCurrentView() == firstView)
+            intent.putExtra("City", origCity);
+        else
+            intent.putExtra("City", destCity);
+
+        intent.putExtra("City1", origCity);
+        intent.putExtra("City2", destCity);
+
+        if (view_flipper.getCurrentView() == firstView)
+            intent.putExtra("Airport", airportOrig);
+        else
+            intent.putExtra("Airport", airportDest);
+
+
+
+        startActivity(intent);
+    }
+
     private static final String TAG = "theMessage";
 
     public void sendRequest() {
@@ -277,6 +332,7 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
                                                 view2.setText(origin.getString("city"));
                                                 flightInfo.setOrig(origin.getString("city"));
                                                 flightInfo.setOrig_airport(origin.getString("airport_name"));
+                                                airportOrig = origin.getString("airport_name");
 
                                                 origCity = origin.getString("city");
                                                 destCity = des.getString("city");
@@ -285,6 +341,7 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
                                                 view4.setText(des.getString("city"));
                                                 flightInfo.setDest(des.getString("city"));
                                                 flightInfo.setDest_airport(des.getString("airport_name"));
+                                                airportDest =des.getString("airport_name");
 
 
                                                 TextView view5 = getView().findViewById(R.id.info_text2);
@@ -332,11 +389,19 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
                                                 boolean wifi = result.getBoolean("adhoc");
                                                 flightInfo.setWifi(Boolean.toString(wifi));
 
-                                                Button bt5 = getView().findViewById(R.id.flightinfo);
-                                                bt5.setClickable(true);
+                                                Button bt3 = getView().findViewById(R.id.flightinfo);
+                                                bt3.setClickable(true);
 
                                                 Button bt2 = getView().findViewById(R.id.weather);
                                                 bt2.setClickable(true);
+
+                                                Button bt7 = getView().findViewById(R.id.living);
+                                                bt7.setClickable(true);
+
+                                                Button bt5 = getView().findViewById(R.id.lounge);
+                                                bt5.setClickable(true);
+
+
 
 
                                                 sendImageRequestOrig();
@@ -396,6 +461,7 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
                         view2.setText(origin.getString("city"));
                         flightInfo.setOrig(origin.getString("city"));
                         flightInfo.setOrig_airport(origin.getString("airport_name"));
+                        airportOrig = origin.getString("airport_name");
 
                         origCity = origin.getString("city");
                         destCity = des.getString("city");
@@ -404,6 +470,7 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
                         view4.setText(des.getString("city"));
                         flightInfo.setDest(des.getString("city"));
                         flightInfo.setDest_airport(des.getString("airport_name"));
+                        airportDest =des.getString("airport_name");
 
 
                         TextView view5 = getView().findViewById(R.id.info_text2);
@@ -451,11 +518,17 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
                         boolean wifi = result.getBoolean("adhoc");
                         flightInfo.setWifi(Boolean.toString(wifi));
 
-                        Button bt5 = getView().findViewById(R.id.flightinfo);
-                        bt5.setClickable(true);
+                        Button bt3 = getView().findViewById(R.id.flightinfo);
+                        bt3.setClickable(true);
 
                         Button bt2 = getView().findViewById(R.id.weather);
                         bt2.setClickable(true);
+
+                        Button bt7 = getView().findViewById(R.id.living);
+                        bt7.setClickable(true);
+
+                        Button bt5 = getView().findViewById(R.id.lounge);
+                        bt5.setClickable(true);
 
 
                         sendImageRequestOrig();
@@ -481,35 +554,38 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
     public void sendImageRequestOrig() {
         final Context c = getActivity();
         if (getView() != null) {
-            trp.getTripCity(origCity, c, new TripController.VolleyCallback4() {
-                @Override
-                public void onSuccess(JSONObject result) {
-                    try {
-                        JSONArray x = result.getJSONArray("results");
-                        JSONObject jo = x.getJSONObject(0);
+            final ImageView orig = getView().findViewById(R.id.orig);
 
-                        JSONArray photos = jo.getJSONArray("photos");
-                        JSONObject photo = photos.getJSONObject(0);
-                        photoReferenceOrig = photo.getString("photo_reference");
+            if (ImageStorage.checkIfImageExists(origCity)) {
+                File file = ImageStorage.getImage("/" + origCity + ".png");
+                assert file != null;
+                String p = file.getAbsolutePath();
+                Bitmap b = BitmapFactory.decodeFile(p);
+                orig.setImageBitmap(b);
 
-                        //Toast toast =  Toast.makeText(getApplicationContext(), photoReference, Toast.LENGTH_LONG);
-                        //toast.show();
+                //Toast toast =  Toast.makeText(c, backgroundImageWidth, Toast.LENGTH_LONG);
+                //toast.show();
+                getView().findViewById(R.id.ll1).setVisibility(View.GONE);
+                getView().findViewById(R.id.flipper).setVisibility(View.VISIBLE);
 
-                        final ImageView orig = getView().findViewById(R.id.orig);
+            }
+            else {
+                trp.getTripCity(origCity, c, new TripController.VolleyCallback4() {
+                    @Override
+                    public void onSuccess(JSONObject result) {
+                        try {
+                            JSONArray x = result.getJSONArray("results");
+                            JSONObject jo = x.getJSONObject(0);
 
-                        if (ImageStorage.checkIfImageExists(origCity)) {
-                            File file = ImageStorage.getImage("/" + origCity + ".png");
-                            assert file != null;
-                            String p = file.getAbsolutePath();
-                            Bitmap b = BitmapFactory.decodeFile(p);
-                            orig.setImageBitmap(b);
+                            JSONArray photos = jo.getJSONArray("photos");
+                            JSONObject photo = photos.getJSONObject(0);
+                            photoReferenceOrig = photo.getString("photo_reference");
 
-                            //Toast toast =  Toast.makeText(c, backgroundImageWidth, Toast.LENGTH_LONG);
+                            //Toast toast =  Toast.makeText(getApplicationContext(), photoReference, Toast.LENGTH_LONG);
                             //toast.show();
-                            getView().findViewById(R.id.ll1).setVisibility(View.GONE);
-                            getView().findViewById(R.id.flipper).setVisibility(View.VISIBLE);
 
-                        } else {
+                            final ImageView orig = getView().findViewById(R.id.orig);
+
                             trp.getBackgroundImage(photoReferenceOrig, backgroundImageWidth, c, new TripController.VolleyCallback5() {
                                 @Override
                                 public void onSuccess(Bitmap result) {
@@ -520,50 +596,50 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
                                     getView().findViewById(R.id.flipper).setVisibility(View.VISIBLE);
                                 }
                             });
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
 
 
-                    } catch (JSONException e) {
-                        e.printStackTrace();
                     }
-
-
-                }
-            });
+                });
+            }
         }
     }
 
     public void sendImageRequestDest() {
         final Context c = getActivity();
-        trp.getTripCity(destCity, c, new TripController.VolleyCallback4() {
-            @Override
-            public void onSuccess(JSONObject result) {
-                try {
-                    JSONArray x = result.getJSONArray("results");
-                    JSONObject jo = x.getJSONObject(0);
+        final ImageView dest = getView().findViewById(R.id.dest);
 
-                    JSONArray photos = jo.getJSONArray("photos");
-                    JSONObject photo = photos.getJSONObject(0);
-                    photoReferenceDest = photo.getString("photo_reference");
+        if (ImageStorage.checkIfImageExists(destCity)) {
+            File file = ImageStorage.getImage("/" + destCity + ".png");
+            assert file != null;
+            String p = file.getAbsolutePath();
+            Bitmap b = BitmapFactory.decodeFile(p);
+            dest.setImageBitmap(b);
 
-                    //Toast toast =  Toast.makeText(getApplicationContext(), photoReference, Toast.LENGTH_LONG);
-                    //toast.show();
-                    final ImageView dest = getView().findViewById(R.id.dest);
+            //Toast toast =  Toast.makeText(c, "image found", Toast.LENGTH_LONG);
+            //toast.show();
 
-                    if (ImageStorage.checkIfImageExists(destCity)) {
-                        File file = ImageStorage.getImage("/" + destCity + ".png");
-                        assert file != null;
-                        String p = file.getAbsolutePath();
-                        Bitmap b = BitmapFactory.decodeFile(p);
-                        dest.setImageBitmap(b);
+            getView().findViewById(R.id.ll1).setVisibility(View.GONE);
+            getView().findViewById(R.id.flipper).setVisibility(View.VISIBLE);
 
-                        //Toast toast =  Toast.makeText(c, "image found", Toast.LENGTH_LONG);
+        }
+        else{
+            trp.getTripCity(destCity, c, new TripController.VolleyCallback4() {
+                @Override
+                public void onSuccess(JSONObject result) {
+                    try {
+                        JSONArray x = result.getJSONArray("results");
+                        JSONObject jo = x.getJSONObject(0);
+
+                        JSONArray photos = jo.getJSONArray("photos");
+                        JSONObject photo = photos.getJSONObject(0);
+                        photoReferenceDest = photo.getString("photo_reference");
+
+                        //Toast toast =  Toast.makeText(getApplicationContext(), photoReference, Toast.LENGTH_LONG);
                         //toast.show();
 
-                        getView().findViewById(R.id.ll1).setVisibility(View.GONE);
-                        getView().findViewById(R.id.flipper).setVisibility(View.VISIBLE);
-
-                    } else {
                         trp.getBackgroundImage(photoReferenceDest, backgroundImageWidth, c, new TripController.VolleyCallback5() {
                             @Override
                             public void onSuccess(Bitmap result) {
@@ -574,15 +650,17 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
                                 getView().findViewById(R.id.flipper).setVisibility(View.VISIBLE);
                             }
                         });
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
+
                 }
+            });
 
-
-            }
-        });
+        }
     }
 
     public class OnSwipeTouchListener implements View.OnTouchListener {

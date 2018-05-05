@@ -21,8 +21,7 @@ public class LivingExpensesActivity extends AppCompatActivity {
 
     JSONObject js;
     LivingExpensesController lc = new LivingExpensesController();
-
-
+    String city = "Ankara";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +29,11 @@ public class LivingExpensesActivity extends AppCompatActivity {
 
 
         findViewById(R.id.sv1).setVisibility(View.GONE);
+
+        Bundle data = getIntent().getExtras();
+        if (data != null) {
+            city = data.getString("City");
+        }
 
 
         sendRequest();
@@ -49,7 +53,6 @@ public class LivingExpensesActivity extends AppCompatActivity {
 
 
     public void sendRequest() {
-        String city = "Ankara";
 
         TextView tx1 = findViewById(R.id.tx0);
         if(city != null)

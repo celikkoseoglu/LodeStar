@@ -610,4 +610,8 @@ public class PlacesToSeeExpandedActivity extends AppCompatActivity implements Vi
 
         startActivity(intent);
     }
+
+    public void goBack(View view) {
+        finish();
+    }
 }

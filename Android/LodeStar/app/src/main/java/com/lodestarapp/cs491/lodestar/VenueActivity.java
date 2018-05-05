@@ -500,4 +500,7 @@ public class VenueActivity extends AppCompatActivity implements ViewPagerEx.OnPa
     }
 
 
+    public void goback(View view) {
+        finish();
+    }
 }

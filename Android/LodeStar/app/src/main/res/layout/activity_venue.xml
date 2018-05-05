@@ -44,7 +44,7 @@
             android:drawableLeft="@drawable/arrow_left"
             android:gravity="left|center_vertical"
             android:minWidth="0dp"
-            android:onClick="nearStart"
+            android:onClick="goback"
             android:padding="0dp"
             android:text=" Back"
             android:textAllCaps="false"

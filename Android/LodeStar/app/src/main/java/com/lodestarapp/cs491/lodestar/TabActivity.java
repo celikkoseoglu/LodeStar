@@ -263,11 +263,6 @@ public class TabActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void livingStart(View view){
-        Intent intent = new Intent(this, LivingExpensesActivity.class);
-        startActivity(intent);
-    }
-
     public void prefStart(View view){
         Intent intent = new Intent(this, PreferencesActivity.class);
         startActivity(intent);

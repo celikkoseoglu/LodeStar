@@ -172,17 +172,24 @@
                         android:textColor="@android:color/background_light"
                         android:textSize="13sp"
                         android:layout_marginTop="40dp"
-                        android:layout_centerHorizontal="true"/>
+                        android:layout_centerHorizontal="true"
+                        android:shadowColor="#000000"
+                        android:shadowDx="1"
+                        android:shadowDy="1"
+                        android:shadowRadius="2"/>
 
                     <TextView
                         android:id="@+id/info_text6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Istanbul"
-                        android:layout_marginTop="55dp"
-                        android:layout_centerHorizontal="true"
+                        android:layout_centerInParent="true"
                         android:textColor="@android:color/background_light"
-                        android:textSize="25sp"/>
+                        android:textSize="36sp"
+                        android:shadowColor="#000000"
+                        android:shadowDx="1"
+                        android:shadowDy="1"
+                        android:shadowRadius="2"/>
 
 
                     <TextView
@@ -194,6 +201,10 @@
                         android:textSize="13sp"
                         android:layout_marginTop="170dp"
                         android:layout_centerHorizontal="true"
+                        android:shadowColor="#000000"
+                        android:shadowDx="1"
+                        android:shadowDy="1"
+                        android:shadowRadius="2"
                         />
 
                 </RelativeLayout>
@@ -349,7 +360,6 @@
                         android:drawableTop="@drawable/ic_002_vip"
                         android:text="Currency Exchange"
                         android:textAllCaps="false"
-                        android:onClick="currencyStart"
                         android:background="@drawable/button_state_list_animator"
                         android:layout_marginBottom="5dp"
                         android:layout_marginLeft="3dp"
@@ -399,7 +409,6 @@
                         android:drawableTop="@drawable/ic_001_wallet"
                         android:text="Living Expenses"
                         android:textAllCaps="false"
-                        android:onClick="livingStart"
                         android:background="@drawable/button_state_list_animator"
                         android:layout_marginBottom="5dp"
                         android:layout_marginLeft="2dp"

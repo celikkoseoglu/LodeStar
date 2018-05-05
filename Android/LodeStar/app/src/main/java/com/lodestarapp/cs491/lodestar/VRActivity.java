@@ -133,9 +133,7 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
                                 String encoded = result.getString("highRes");
                                 panorama = Base64.decode(encoded, Base64.DEFAULT);
                                 incoming = true;
-                                if(progressDialog != null){
-                                    progressDialog.dismiss();
-                                }
+
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -171,17 +169,7 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
         renderer = new Renderer(this, 50, 5f);
         renderer.loadTexture(this, R.drawable.gray);
         //renderer.setAngle(arrowAngle);
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                progressDialog = new ProgressDialog(VRActivity.this, R.style.Theme_MyDialog);
-                //progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                progressDialog.setCanceledOnTouchOutside(false);
-                progressDialog.setTitle("Loading...");
-                progressDialog.setMessage("");
-                progressDialog.show();
-            }
-        });
+
         checkGLError("onSurfaceCreated");
     }
 

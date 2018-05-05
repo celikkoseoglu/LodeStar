@@ -377,7 +377,7 @@ public class ShoppingActivity extends AppCompatActivity implements OnMapReadyCal
         menu.add(0, v.getId(), 0, "Shopping Mall");
         menu.add(0, v.getId(), 0, "Clothing");
         menu.add(0, v.getId(), 0, "Electronics");
-
+        menu.add(0, v.getId(), 0, "Luggage");
 
     }
 
@@ -407,6 +407,13 @@ public class ShoppingActivity extends AppCompatActivity implements OnMapReadyCal
             keyword = "electronics%20shopping";
             renewList();
             b.setText("Electronics - Tap Here to Change Shopping Type");
+
+        }
+        else if(item.getTitle()=="Luggage"){
+            Toast.makeText(getApplicationContext(),"searching Luggage Shops",Toast.LENGTH_LONG).show();
+            keyword = "luggage";
+            renewList();
+            b.setText("Luggage - Tap Here to Change Shopping Type");
 
         }
         else{
