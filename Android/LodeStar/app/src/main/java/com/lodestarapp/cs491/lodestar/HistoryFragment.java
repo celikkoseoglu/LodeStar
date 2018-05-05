@@ -1,5 +1,6 @@
 package com.lodestarapp.cs491.lodestar;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,6 +59,8 @@ public class HistoryFragment extends Fragment {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
+    volatile int check = 0;
+
     public ArrayList<HistoryInfo> getHistoryInfos() {
         return this.historyInfos;
     }
@@ -69,15 +73,23 @@ public class HistoryFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        arrayListOfHistory = new ArrayList<>();
-        flightCodeList = new ArrayList<>();
-        cityFroms = new ArrayList<>();
-        cityTos = new ArrayList<>();
+
+
     }
 
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
+
+        arrayListOfHistory = new ArrayList<>();
+        flightCodeList = new ArrayList<>();
+        cityFroms = new ArrayList<>();
+        cityTos = new ArrayList<>();
+        cityFromsComplete = new ArrayList<>();
+        cityTosComplete = new ArrayList<>();
+        historyInfos = new ArrayList<>();
+
+        myView = inflater.inflate(R.layout.fragment_history, container, false);
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
 
@@ -121,7 +133,96 @@ public class HistoryFragment extends Fragment {
                     }
                 }
                 if (flightCodeList.size() > 0) {
-                    myView = inflater.inflate(R.layout.fragment_history, container, false);
+                    /*myView = inflater.inflate(R.layout.fragment_history, container, false);
+
+                    mRecyclerView = myView.findViewById(R.id.history_recyclerview);
+                    mRecyclerView.setHasFixedSize(true);
+
+                    mLayoutManager = new LinearLayoutManager(getActivity());
+                    mRecyclerView.setLayoutManager(mLayoutManager);
+
+                    mAdapter = new HistoryAdapter(historyInfos);
+                    mRecyclerView.setAdapter(mAdapter);
+
+
+                    Log.d("history", "2222");*/
+
+
+
+                } else {
+                    myView = inflater.inflate(R.layout.activity_history_initial, container, false);
+                    Log.d("history", "1111");
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+        Log.d("history", "size2: " + flightCodeList.size());
+        //mAdapter.notifyDataSetChanged();
+
+        return myView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        arrayListOfHistory = new ArrayList<>();
+        flightCodeList = new ArrayList<>();
+        cityFroms = new ArrayList<>();
+        cityTos = new ArrayList<>();
+        cityFromsComplete = new ArrayList<>();
+        cityTosComplete = new ArrayList<>();
+        historyInfos = new ArrayList<>();
+
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+        ref = database.getReference();
+
+        ref.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+                    au = childSnapshot.getValue(ADDITIONAL_USER.class);
+                    user = FirebaseAuth.getInstance().getCurrentUser();
+
+                    if (user.getEmail().equals(au.getemail())) {
+                        if (au.gettrips() == null) {
+
+                        } else {
+                            String tmpArrayOfmine[] = au.gettrips().split("!");
+
+                            arrayListOfHistory.addAll(Arrays.asList(tmpArrayOfmine));
+
+                            for (int t = 0; t < arrayListOfHistory.size(); t++) {
+                                String s = arrayListOfHistory.get(t);
+                                s = s.substring(s.indexOf(":") + 1);
+                                s = s.substring(0, s.indexOf(" From"));
+                                flightCodeList.add(s.substring(1));
+                            }
+                            for (int e = 0; e < arrayListOfHistory.size(); e++) {
+                                String s = arrayListOfHistory.get(e);
+                                s = s.substring(s.indexOf("From: ") + 6);
+                                s = s.substring(0, s.indexOf(" To:"));
+                                cityFroms.add(s);
+                            }
+                            for (int e = 0; e < arrayListOfHistory.size(); e++) {
+                                String s = arrayListOfHistory.get(e);
+                                s = s.substring(s.indexOf("To: ") + 4);
+                                s = s.substring(0, s.length());
+                                cityTos.add(s);
+                            }
+                        }
+                    }
+                }
+                if (flightCodeList.size() > 0) {
 
                     mRecyclerView = myView.findViewById(R.id.history_recyclerview);
                     mRecyclerView.setHasFixedSize(true);
@@ -133,10 +234,12 @@ public class HistoryFragment extends Fragment {
                     mRecyclerView.setAdapter(mAdapter);
 
                     sendRequest(flightCodeList);
-                } else {
-                    myView = inflater.inflate(R.layout.activity_history_initial, container, false);
+
+                    Log.d("history", "2222");
+                    
                 }
 
+                mAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -144,13 +247,14 @@ public class HistoryFragment extends Fragment {
 
             }
         });
-
-        return myView;
     }
 
     public void sendRequest(ArrayList<String> flightCodeList) {
-        cityFromsComplete = new ArrayList<>();
-        cityTosComplete = new ArrayList<>();
+        //cityFromsComplete = new ArrayList<>();
+        //cityTosComplete = new ArrayList<>();
+        //this.historyInfos = new ArrayList<>();
+
+        Log.d("history" , "cityFroms size: " + cityFroms.size());
 
         int size = flightCodeList.size();
 
@@ -201,12 +305,18 @@ public class HistoryFragment extends Fragment {
             cityFromsComplete.add(cityFrom);
             cityTosComplete.add(cityTo);
 
-            mAdapter.notifyDataSetChanged();
         }catch (JSONException e){
             e.printStackTrace();
         }
 
         getFromAndToCityPhotos(cityFromsComplete, cityTosComplete);
+        //mAdapter.notifyDataSetChanged();
+        //Log.d("history", "size: " + historyInfos.size());
+
+
+        //for (int i = 0; i < this.historyInfos.size(); i++) {
+        //    mAdapter.notifyItemInserted(i);
+        //}
     }
 
     private void getFromAndToCityPhotos(final ArrayList<String> from, final ArrayList<String> to) {
@@ -221,6 +331,7 @@ public class HistoryFragment extends Fragment {
                 String p = file.getAbsolutePath();
                 Bitmap b = BitmapFactory.decodeFile(p);
                 getHistoryInfos().get(finalI).setCityFromBitmap(b);
+                //mAdapter.notifyDataSetChanged();
 
 
             } else {
@@ -228,7 +339,7 @@ public class HistoryFragment extends Fragment {
                     @Override
                     public void onSuccess(JSONObject result) {
                         parseTheTripInformation(result, from.get(finalI), finalI, 0);
-                        mAdapter.notifyDataSetChanged();
+                        //mAdapter.notifyDataSetChanged();
                     }
                 });
             }
@@ -239,6 +350,7 @@ public class HistoryFragment extends Fragment {
                 String p = file.getAbsolutePath();
                 Bitmap b = BitmapFactory.decodeFile(p);
                 getHistoryInfos().get(finalI).setCityToBitmap(b);
+                //mAdapter.notifyDataSetChanged();
             }
 
             else{
@@ -246,12 +358,17 @@ public class HistoryFragment extends Fragment {
                     @Override
                     public void onSuccess(JSONObject result) {
                         parseTheTripInformation(result, to.get(finalI), finalI, 1);
-                        mAdapter.notifyDataSetChanged();
+                        //mAdapter.notifyDataSetChanged();
                     }
                 });
             }
 
         }
+        mAdapter.notifyDataSetChanged();
+
+        //mRecyclerView.setAdapter(mAdapter);
+        //mAdapter.notifyDataSetChanged();
+        Log.d("history" , "here?");
     }
 
     private void parseTheTripInformation(JSONObject result, final String city, final int index, final int which) {
