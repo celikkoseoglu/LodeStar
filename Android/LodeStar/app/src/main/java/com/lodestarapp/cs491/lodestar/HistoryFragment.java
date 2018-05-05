@@ -89,7 +89,7 @@ public class HistoryFragment extends Fragment {
         cityTosComplete = new ArrayList<>();
         historyInfos = new ArrayList<>();
 
-        myView = inflater.inflate(R.layout.fragment_history, container, false);
+
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
 
@@ -133,6 +133,7 @@ public class HistoryFragment extends Fragment {
                     }
                 }
                 if (flightCodeList.size() > 0) {
+                    myView = inflater.inflate(R.layout.fragment_history, container, false);
                     /*myView = inflater.inflate(R.layout.fragment_history, container, false);
 
                     mRecyclerView = myView.findViewById(R.id.history_recyclerview);
@@ -237,7 +238,7 @@ public class HistoryFragment extends Fragment {
 
                     Log.d("history", "2222");
                     mAdapter.notifyDataSetChanged();
-                    
+
                 }
 
 
@@ -383,15 +384,15 @@ public class HistoryFragment extends Fragment {
 
 
             trc.getBackgroundImage(cityReference, 1080, getContext(), new TripController.VolleyCallback5() {
-                    @Override
-                    public void onSuccess(Bitmap result) {
-                        ImageStorage.saveToSdCard(result, city);
+                @Override
+                public void onSuccess(Bitmap result) {
+                    ImageStorage.saveToSdCard(result, city);
 
-                        if(which == 0)
-                            getHistoryInfos().get(index).setCityFromBitmap(result);
-                        else
-                            getHistoryInfos().get(index).setCityToBitmap(result);
-                    }});
+                    if(which == 0)
+                        getHistoryInfos().get(index).setCityFromBitmap(result);
+                    else
+                        getHistoryInfos().get(index).setCityToBitmap(result);
+                }});
 
 
         } catch (JSONException e) {
