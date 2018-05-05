@@ -17,9 +17,9 @@
         tools:layout_editor_absoluteY="45dp">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/the_toolbar_favorites"
+            android:id="@+id/my_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="42dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
@@ -31,14 +31,17 @@
             tools:layout_editor_absoluteY="0dp">
 
             <TextView
+                android:id="@+id/tv_daily"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Favorites"
                 android:textColor="@android:color/background_light"
-                android:textSize="20sp" />
-
+                android:textSize="20sp"
+                tools:layout_editor_absoluteX="319dp"
+                tools:layout_editor_absoluteY="19dp" />
         </android.support.v7.widget.Toolbar>
+
 
         <TextView
             android:id="@+id/textview40"

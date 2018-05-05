@@ -65,7 +65,7 @@ public class WeatherInformationActivity extends AppCompatActivity {
 
         findViewById(R.id.weather_progress_bar).setVisibility(View.GONE);
 
-        progressDialog = new ProgressDialog(WeatherInformationActivity.this);
+        progressDialog = new ProgressDialog(WeatherInformationActivity.this, R.style.Theme_MyDialog);
         progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         progressDialog.setTitle("Loading...");
         progressDialog.setMessage("Retrieving weather information from the server");

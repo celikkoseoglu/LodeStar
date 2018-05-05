@@ -1,16 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <TextView
+            android:id="@+id/tv_daily"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="History"
+            android:textColor="@android:color/background_light"
+            android:textSize="20sp"
+            tools:layout_editor_absoluteX="319dp"
+            tools:layout_editor_absoluteY="19dp" />
+    </android.support.v7.widget.Toolbar>
+
+    <RelativeLayout
+        android:id="@+id/history"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/my_toolbar"
+        >
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/history_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+    </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/ll1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_below="@id/my_toolbar"
+            >
+
+            <ProgressBar
+                android:id="@+id/pb2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:indeterminate="true"
+                android:layout_marginTop="20dp"
+                android:indeterminateTint="@color/colorRoyalBlue"
+                />
+        </LinearLayout>
+        <RelativeLayout
+            android:id="@+id/history_nodata"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite"
+            android:clickable="true"
+            android:focusable="true"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="45dp"
+            android:layout_below="@id/my_toolbar">
+            <TextView
+                android:id="@+id/textview32"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="106dp"
+                android:alpha="1"
+                android:text="You haven't scanned any boarding \n\t\t\t\t\t boarding passes yet!"
+                android:textAllCaps="false"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textview33"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="232dp"
+                android:alpha="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="Tap here to scan a boarding pass"
+                android:textAllCaps="false"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop = "true"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="270dp"
+                android:alpha="0.5"
+                android:src="@drawable/qr" />
+
+
+        </RelativeLayout>
     </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

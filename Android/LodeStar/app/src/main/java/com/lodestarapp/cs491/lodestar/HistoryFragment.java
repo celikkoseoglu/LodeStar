@@ -12,6 +12,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -60,6 +62,9 @@ public class HistoryFragment extends Fragment {
     private RecyclerView.LayoutManager mLayoutManager;
 
     volatile int check = 0;
+    RelativeLayout rl, rl_no;
+    LinearLayout ll;
+    boolean scanned = false;
 
     public ArrayList<HistoryInfo> getHistoryInfos() {
         return this.historyInfos;
@@ -88,10 +93,19 @@ public class HistoryFragment extends Fragment {
         cityFromsComplete = new ArrayList<>();
         cityTosComplete = new ArrayList<>();
         historyInfos = new ArrayList<>();
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
 
         myView = inflater.inflate(R.layout.fragment_history, container, false);
 
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        rl = myView.findViewById(R.id.history);
+        ll = myView.findViewById(R.id.ll1);
+        rl_no = myView.findViewById(R.id.history_nodata);
+
+        rl.setVisibility(View.GONE);
+        rl_no.setVisibility(View.GONE);
+        ll.setVisibility(View.VISIBLE);
+
+
 
         ref = database.getReference();
 
@@ -107,51 +121,14 @@ public class HistoryFragment extends Fragment {
                         if (au.gettrips() == null) {
 
                         } else {
-                            String tmpArrayOfmine[] = au.gettrips().split("!");
-
-                            arrayListOfHistory.addAll(Arrays.asList(tmpArrayOfmine));
-
-                            for (int t = 0; t < arrayListOfHistory.size(); t++) {
-                                String s = arrayListOfHistory.get(t);
-                                s = s.substring(s.indexOf(":") + 1);
-                                s = s.substring(0, s.indexOf(" From"));
-                                flightCodeList.add(s.substring(1));
-                            }
-                            for (int e = 0; e < arrayListOfHistory.size(); e++) {
-                                String s = arrayListOfHistory.get(e);
-                                s = s.substring(s.indexOf("From: ") + 6);
-                                s = s.substring(0, s.indexOf(" To:"));
-                                cityFroms.add(s);
-                            }
-                            for (int e = 0; e < arrayListOfHistory.size(); e++) {
-                                String s = arrayListOfHistory.get(e);
-                                s = s.substring(s.indexOf("To: ") + 4);
-                                s = s.substring(0, s.length());
-                                cityTos.add(s);
-                            }
+                            scanned = true;
                         }
                     }
                 }
-                if (flightCodeList.size() > 0) {
-                    /*myView = inflater.inflate(R.layout.fragment_history, container, false);
 
-                    mRecyclerView = myView.findViewById(R.id.history_recyclerview);
-                    mRecyclerView.setHasFixedSize(true);
-
-                    mLayoutManager = new LinearLayoutManager(getActivity());
-                    mRecyclerView.setLayoutManager(mLayoutManager);
-
-                    mAdapter = new HistoryAdapter(historyInfos);
-                    mRecyclerView.setAdapter(mAdapter);
-
-
-                    Log.d("history", "2222");*/
-
-
-
-                } else {
-                    myView = inflater.inflate(R.layout.activity_history_initial, container, false);
-                    Log.d("history", "1111");
+                if(!scanned) {
+                    rl_no.setVisibility(View.VISIBLE);
+                    ll.setVisibility(View.GONE);
                 }
 
             }
@@ -161,6 +138,7 @@ public class HistoryFragment extends Fragment {
 
             }
         });
+
 
 
         Log.d("history", "size2: " + flightCodeList.size());
@@ -236,10 +214,10 @@ public class HistoryFragment extends Fragment {
                     sendRequest(flightCodeList);
 
                     Log.d("history", "2222");
-                    
-                }
 
-                mAdapter.notifyDataSetChanged();
+                }
+                if(scanned)
+                    mAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -266,6 +244,14 @@ public class HistoryFragment extends Fragment {
                 }
             });
         }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        rl.setVisibility(View.GONE);
+        rl_no.setVisibility(View.GONE);
+        ll.setVisibility(View.VISIBLE);
     }
 
     private void parseTheJSONObject(JSONObject result) {
@@ -365,7 +351,8 @@ public class HistoryFragment extends Fragment {
 
         }
         mAdapter.notifyDataSetChanged();
-
+        ll.setVisibility(View.GONE);
+        rl.setVisibility(View.VISIBLE);
         //mRecyclerView.setAdapter(mAdapter);
         //mAdapter.notifyDataSetChanged();
         Log.d("history" , "here?");
