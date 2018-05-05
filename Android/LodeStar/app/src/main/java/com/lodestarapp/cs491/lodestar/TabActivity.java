@@ -291,6 +291,11 @@ public class TabActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void shoppingStart(View view){
+        Intent intent = new Intent(this, ShoppingActivity.class);
+        startActivity(intent);
+    }
+
 
 
 

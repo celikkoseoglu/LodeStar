@@ -96,6 +96,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".SearchFlightActivity" />
+        <activity android:name=".ShoppingActivity" />
     </application>
 
 </manifest>

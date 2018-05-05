@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RestaurantActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/my_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="?attr/colorPrimary"
+            android:elevation="4dp"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp">
+
+            <TextView
+                android:id="@+id/tv_daily"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Shopping"
+                android:textColor="@android:color/background_light"
+                android:textSize="20sp"
+                tools:layout_editor_absoluteX="319dp"
+                tools:layout_editor_absoluteY="19dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_gravity="left"
+                android:background="@android:color/transparent"
+                android:drawableLeft="@drawable/arrow_left"
+                android:gravity="left|center_vertical"
+                android:minWidth="0dp"
+                android:onClick="nearStart"
+                android:padding="0dp"
+                android:text=" Trip"
+                android:textAllCaps="false"
+                android:textColor="@android:color/holo_blue_bright"
+                android:textSize="16sp"
+                tools:ignore="OnClick" />
+        </android.support.v7.widget.Toolbar>
+
+        <fragment
+            android:id="@+id/fragment_map_shopping"
+            android:name="com.google.android.gms.maps.MapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="230dp"
+            android:layout_below="@id/my_toolbar"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="56dp" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/fragment_map_shopping"
+            android:id="@+id/ll1"
+            android:orientation="vertical">
+
+            <ProgressBar
+                android:id="@+id/pb3"
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:indeterminate="true"
+                android:indeterminateTint="@color/colorRoyalBlue"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/fragment_map_shopping"
+            android:id="@+id/ll2"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/optionMenuShopping"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ced91d1d"
+                android:text="General - Tap Here to Change Shopping Type "
+                android:textAllCaps="false"
+                android:paddingTop="10dp"
+                android:minHeight="0dp"
+                android:paddingBottom="10dp"
+                android:textColor="@color/colorWhite"
+                />
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/near_me_recycler2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:layout_editor_absoluteX="8dp"
+                tools:layout_editor_absoluteY="233dp" >
+            </android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</android.support.constraint.ConstraintLayout>
