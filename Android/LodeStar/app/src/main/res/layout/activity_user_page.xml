@@ -194,6 +194,14 @@
                     android:layout_alignParentTop="true"
                     android:text="Add Picture" />
 
+                <Button
+                    android:id="@+id/button11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/me_profile_picture"
+                    android:layout_alignStart="@+id/me_last_trip"
+                    android:text="Choose Avatar" />
+
 
             </RelativeLayout>
 

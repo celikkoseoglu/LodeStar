@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
@@ -21,16 +22,23 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.facebook.login.widget.ProfilePictureView;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -61,7 +69,7 @@ public class UserPage extends android.support.v4.app.Fragment {
     public FirebaseUser mUser;
     private DatabaseReference mDatabase;
     Uri myUri = null;
-
+    ListView listView;
     ADDITIONAL_USER au;
     ADDITIONAL_USER au3;
     ADDITIONAL_USER au2,au4;
@@ -124,34 +132,156 @@ public class UserPage extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+
+
+
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
 
         final View view = inflater.inflate(R.layout.activity_user_page, container, false);
 
+
         this.view = view;
+
+        listView = new ListView(view.getContext());
+
+        String items[] = {"Avatar 1","Avatar 2","Avatar 3"};
+
+        ArrayAdapter<String> adapter=new ArrayAdapter<String>(view.getContext(),
+                R.layout.list_item, R.id.txtitem,items);
+        listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new
+                                                AdapterView.OnItemClickListener() {
+
+                                                    @Override
+
+                                                    public void onItemClick(AdapterView<?> parent, View view, int
+                                                            position, long id) {
+
+                                                        ViewGroup vg=(ViewGroup)view;
+
+                                                        final TextView txt=(TextView)vg.findViewById(R.id.txtitem);
+
+                                                        Toast.makeText(view.getContext(),"You chose " + txt.getText().toString(),Toast.LENGTH_LONG).show();
+
+                                                        //DB islemleri
+
+                                                        ref = database.getReference();
+
+                                                        ref.child("users").addValueEventListener(new ValueEventListener() {
+
+                                                            @Override
+                                                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                                                for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
+                                                                    au4 = childSnapshot.getValue(ADDITIONAL_USER.class);
+                                                                    user = FirebaseAuth.getInstance().getCurrentUser();
+
+                                                                    if(user != null && au4 != null && au4.getemail().equals(user.getEmail())){
+                                                                        Log.i("agam","Photo URIS" + txt.getText().toString());
+
+                                                                        mDatabase.child("users").child(childSnapshot.getKey()).child("photouris").setValue(txt.getText().toString());
+                                                                    }
+
+                                                                }
+
+
+                                                            }
+
+                                                            @Override
+                                                            public void onCancelled(DatabaseError databaseError) {
+
+                                                            }
+                                                        });
+
+
+
+                                                    }
+
+                                                });
+
+        Button avatarButton = view.findViewById(R.id.button11);
+
+        avatarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialogListView(view);
+                final ImageView view3 = view.findViewById(R.id.me_profile_picture);
+
+
+                ref = database.getReference();
+
+                ref.child("users").addValueEventListener(new ValueEventListener() {
+
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
+                            au4 = childSnapshot.getValue(ADDITIONAL_USER.class);
+                            user = FirebaseAuth.getInstance().getCurrentUser();
+
+                            if(user != null && au4 != null && au4.getemail().equals(user.getEmail())){
+
+
+                                    if(au4.getphotouris().equals("Avatar 1")) {
+                                        String url = "https://firebasestorage.googleapis.com/v0/b/firebase-lodestar.appspot.com/o/LodeStar-GroupPhoto.jpg?alt=media&token=0f9a3665-f90e-4433-b6a0-853db737c260";
+
+                                        Glide.with(getContext()).load(url).into(view3);
+                                    }
+                                    else if(au4.getphotouris().equals("Avatar 2")){
+                                        String url = "https://firebasestorage.googleapis.com/v0/b/firebase-lodestar.appspot.com/o/download.png?alt=media&token=504973c5-01b1-4649-9a34-f938980854de";
+
+                                        Glide.with(getContext()).load(url).into(view3);
+                                    }
+                              //  }
+
+                                //        profilePhoto.setImageURI(Uri.parse(au4.getphotouris()));
+                            }
+
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+                //view3.setImageURI(uri);
+                //view3.setImageURI(Uri.parse("https://firebasestorage.googleapis.com/v0/b/firebase-lodestar.appspot.com/o/LodeStar-GroupPhoto.jpg?alt=media&token=0f9a3665-f90e-4433-b6a0-853db737c260"));
+
+
+
+
+            }
+        });
+
+
+
+
 
 
 
         //Bastaki imageı doldur
-      //  final ImageView profilePhoto = this.view.findViewById(R.id.me_profile_picture);
+       // final ImageView profilePhoto = this.view.findViewById(R.id.me_profile_picture);
 
         ref = database.getReference();
 
-       /* ref.child("users").addValueEventListener(new ValueEventListener() {
+        ref.child("users").addValueEventListener(new ValueEventListener() {
 
                                                      @Override
                                                      public void onDataChange(DataSnapshot dataSnapshot) {
-                                                         for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
-                                                             au4 = childSnapshot.getValue(ADDITIONAL_USER.class);
-                                                             user = FirebaseAuth.getInstance().getCurrentUser();
-
-                                                             if(user != null && au4 != null && au4.getphotouris() != null && au4.getemail().equals(user.getEmail())){
-                                                              Log.i("agam","Photo URIS" + au4.getphotouris());
-
-                                                                 profilePhoto.setImageURI(Uri.parse(au4.getphotouris()));
-                                                             }
-
-                                                         }
+//                                                         for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
+//                                                             au4 = childSnapshot.getValue(ADDITIONAL_USER.class);
+//                                                             user = FirebaseAuth.getInstance().getCurrentUser();
+//
+//                                                             if(user != null && au4 != null && au4.getphotouris() != null && au4.getemail().equals(user.getEmail())){
+//                                                           //   Log.i("agam","Photo URIS" + au4.getphotouris());
+//
+//                                                         //        profilePhoto.setImageURI(Uri.parse(au4.getphotouris()));
+//                                                             }
+//
+//                                                         }
 
 
                                                      }
@@ -160,7 +290,9 @@ public class UserPage extends android.support.v4.app.Fragment {
                                                      public void onCancelled(DatabaseError databaseError) {
 
                                                      }
-                                                 });*/
+                                                 });
+
+
         //view3.setImageURI(uri);
 
         //------------------
@@ -302,6 +434,26 @@ public class UserPage extends android.support.v4.app.Fragment {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         return view;
     }
+
+
+    public void showDialogListView(View view){
+
+        AlertDialog.Builder builder=new
+                AlertDialog.Builder(view.getContext());
+
+        builder.setCancelable(true);
+
+        builder.setPositiveButton("OK",null);
+
+        builder.setView(listView);
+
+        AlertDialog dialog=builder.create();
+
+        dialog.show();
+
+
+
+    }
     @Override
     public void onStart() {
         super.onStart();
@@ -382,8 +534,7 @@ public class UserPage extends android.support.v4.app.Fragment {
         if(requestCode == IMAGE){
             if (resultCode == RESULT_OK){
                 final Uri uri = data.getData();
-                ImageView view3 = this.view.findViewById(R.id.me_profile_picture);
-                view3.setImageURI(uri);
+
 
               //  Log.i("agam","uri: " + uri);
                // myUri = uri;
