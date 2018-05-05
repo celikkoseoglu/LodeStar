@@ -236,10 +236,11 @@ public class HistoryFragment extends Fragment {
                     sendRequest(flightCodeList);
 
                     Log.d("history", "2222");
+                    mAdapter.notifyDataSetChanged();
                     
                 }
 
-                mAdapter.notifyDataSetChanged();
+
             }
 
             @Override
