@@ -94,8 +94,8 @@ public class HistoryFragment extends Fragment {
         cityTosComplete = new ArrayList<>();
         historyInfos = new ArrayList<>();
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        myView  = inflater.inflate(R.layout.fragment_history, container, false);
 
-        myView = inflater.inflate(R.layout.fragment_history, container, false);
 
         rl = myView.findViewById(R.id.history);
         ll = myView.findViewById(R.id.ll1);
@@ -125,7 +125,6 @@ public class HistoryFragment extends Fragment {
                         }
                     }
                 }
-
                 if(!scanned) {
                     rl_no.setVisibility(View.VISIBLE);
                     ll.setVisibility(View.GONE);
@@ -214,11 +213,14 @@ public class HistoryFragment extends Fragment {
                     sendRequest(flightCodeList);
 
                     Log.d("history", "2222");
-
                 }
+
                 if(scanned)
                     mAdapter.notifyDataSetChanged();
-            }
+
+                }
+
+
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -369,15 +371,15 @@ public class HistoryFragment extends Fragment {
 
 
             trc.getBackgroundImage(cityReference, 1080, getContext(), new TripController.VolleyCallback5() {
-                    @Override
-                    public void onSuccess(Bitmap result) {
-                        ImageStorage.saveToSdCard(result, city);
+                @Override
+                public void onSuccess(Bitmap result) {
+                    ImageStorage.saveToSdCard(result, city);
 
-                        if(which == 0)
-                            getHistoryInfos().get(index).setCityFromBitmap(result);
-                        else
-                            getHistoryInfos().get(index).setCityToBitmap(result);
-                    }});
+                    if(which == 0)
+                        getHistoryInfos().get(index).setCityFromBitmap(result);
+                    else
+                        getHistoryInfos().get(index).setCityToBitmap(result);
+                }});
 
 
         } catch (JSONException e) {
