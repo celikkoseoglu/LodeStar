@@ -87,20 +87,6 @@
             android:paddingLeft="10dp"
             />
 
-        <Button
-            android:id="@+id/button5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="    View Your Trip History"
-            android:textAllCaps="false"
-            android:background="@android:color/background_light"
-            android:gravity="left|center_vertical"
-            android:layout_below="@id/button4"
-            android:drawableRight="@drawable/ic_arrow_right"
-            android:drawableLeft="@drawable/green"
-            android:paddingLeft="10dp"
-            />
 
         <Button
             android:id="@+id/button6"
@@ -111,7 +97,7 @@
             android:textAllCaps="false"
             android:alpha="0.8"
             android:drawableLeft="@drawable/ic_cardboard"
-            android:layout_below="@id/button5"
+            android:layout_below="@id/button4"
 
             >
 
