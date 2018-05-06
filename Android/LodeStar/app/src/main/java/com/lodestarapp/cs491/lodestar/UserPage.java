@@ -356,8 +356,11 @@ public class UserPage extends android.support.v4.app.Fragment {
                         //  Toast.makeText(this,au.gettrips(),Toast.LENGTH_LONG).show();
                         tw.setText(au.getusername());
 
-                        if(au.gettrips() != null && au.gettrips().contains("!")) {
-                            tripCount.setText(au.gettrips().split("!").length + "");
+                        if(au.gettrips() != null) {
+                            if(au.gettrips().split("!").length == 0)
+                                tripCount.setText("0");
+                            else
+                                tripCount.setText(au.gettrips().split("!").length + "");
                         } else {
                             tripCount.setText("0");
                         }
