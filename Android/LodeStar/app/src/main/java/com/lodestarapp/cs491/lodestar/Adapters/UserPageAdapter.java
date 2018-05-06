@@ -86,7 +86,7 @@ public class UserPageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         ((UserPagePosts) holder).userPostView.setText(userInfoWithPosts.get(position));
         ((UserPagePosts) holder).userPostView.setText(userInfoWithPosts.get(position));
         ((UserPagePosts) holder).userNameView.setText("");
-        ((UserPagePosts) holder).realNameView.setText(mayusername);
+        ((UserPagePosts) holder).realNameView.setText("");
         String url = "https://firebasestorage.googleapis.com/v0/b/firebase-lodestar.appspot.com/o/download.png?alt=media&token=504973c5-01b1-4649-9a34-f938980854de";
 
    //     Glide.with(UserPage.class).load(url).into(view3);
