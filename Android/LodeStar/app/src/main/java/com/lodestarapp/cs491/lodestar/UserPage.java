@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.app.AppCompatActivity;
@@ -52,6 +53,7 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import static android.app.Activity.RESULT_OK;
 import static android.widget.Toast.LENGTH_LONG;
@@ -139,76 +141,175 @@ public class UserPage extends android.support.v4.app.Fragment {
 
         final View view = inflater.inflate(R.layout.activity_user_page, container, false);
 
+        final ImageView view3 = view.findViewById(R.id.me_profile_picture);
+
 
         this.view = view;
 
-        listView = new ListView(view.getContext());
+       String url = "https://firebasestorage.googleapis.com/v0/b/firebase-lodestar.appspot.com/o/download.png?alt=media&token=504973c5-01b1-4649-9a34-f938980854de";
 
-        String items[] = {"Avatar 1","Avatar 2","Avatar 3"};
-
-        ArrayAdapter<String> adapter=new ArrayAdapter<String>(view.getContext(),
-                R.layout.list_item, R.id.txtitem,items);
-        listView.setAdapter(adapter);
-
-        listView.setOnItemClickListener(new
-                                                AdapterView.OnItemClickListener() {
-
-                                                    @Override
-
-                                                    public void onItemClick(AdapterView<?> parent, View view, int
-                                                            position, long id) {
-
-                                                        ViewGroup vg=(ViewGroup)view;
-
-                                                        final TextView txt=(TextView)vg.findViewById(R.id.txtitem);
-
-                                                        Toast.makeText(view.getContext(),"You chose " + txt.getText().toString(),Toast.LENGTH_LONG).show();
-
-                                                        //DB islemleri
-
-                                                        ref = database.getReference();
-
-                                                        ref.child("users").addValueEventListener(new ValueEventListener() {
-
-                                                            @Override
-                                                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                                                for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
-                                                                    au4 = childSnapshot.getValue(ADDITIONAL_USER.class);
-                                                                    user = FirebaseAuth.getInstance().getCurrentUser();
-
-                                                                    if(user != null && au4 != null && au4.getemail().equals(user.getEmail())){
-                                                                        Log.i("agam","Photo URIS" + txt.getText().toString());
-
-                                                                        mDatabase.child("users").child(childSnapshot.getKey()).child("photouris").setValue(txt.getText().toString());
-                                                                    }
-
-                                                                }
+       Glide.with(getContext()).load(url).into(view3);
 
 
-                                                            }
+      //  final Button avatarButton = view.findViewById(R.id.button11);
 
-                                                            @Override
-                                                            public void onCancelled(DatabaseError databaseError) {
+        //Give a random avatar Reference: https://stackoverflow.com/questions/6029495/how-can-i-generate-random-number-in-specific-range-in-android
+        int min = 1;
+        int max = 4;
 
-                                                            }
-                                                        });
+        Random r = new Random();
+        final int i1 = r.nextInt(max - min + 1) + min;
+
+//
+//        ref = database.getReference();
+//
+//        ref.child("users").addValueEventListener(new ValueEventListener() {
+//
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
+//                    au4 = childSnapshot.getValue(ADDITIONAL_USER.class);
+//                    user = FirebaseAuth.getInstance().getCurrentUser();
+//
+//                    Log.i("agam",user.getEmail() + " vs atalim " + au4.getemail());
+//
+//                    if(user != null && au4 != null && au4.getemail().equals(user.getEmail())){
+//
+//                       // if(au4.getphotouris() == null) {
+//                        //    if(i1 == 1) {
+//                             //   String url = "https://firebasestorage.googleapis.com/v0/b/firebase-lodestar.appspot.com/o/download.png?alt=media&token=504973c5-01b1-4649-9a34-f938980854de";
+//                           //     Glide.clear(view3);
+//                             //   Glide.with(getContext()).load(url).into(view3);
+//                          /*      mDatabase.child("users").child(childSnapshot.getKey()).child("photouris").setValue("" + i1);
+//                            }else if(i1 == 2){
+//                                String url = "https://firebasestorage.googleapis.com/v0/b/firebase-lodestar.appspot.com/o/maxresdefault.jpg?alt=media&token=6456ce90-64fc-43d7-bd94-aa99494501f4";
+//                                Glide.clear(view3);
+//                                Glide.with(getContext()).load(url).into(view3);
+//                                mDatabase.child("users").child(childSnapshot.getKey()).child("photouris").setValue("" + i1);
+//                            }else if(i1 == 3){
+//                                String url = "https://firebasestorage.googleapis.com/v0/b/firebase-lodestar.appspot.com/o/maxresdefault.jpg?alt=media&token=6456ce90-64fc-43d7-bd94-aa99494501f4";
+//                                Glide.clear(view3);
+//                                Glide.with(getContext()).load(url).into(view3);
+//                                mDatabase.child("users").child(childSnapshot.getKey()).child("photouris").setValue("" + i1);
+//                            }else if(i1 == 4) {
+//                                String url = "https://firebasestorage.googleapis.com/v0/b/firebase-lodestar.appspot.com/o/maxresdefault.jpg?alt=media&token=6456ce90-64fc-43d7-bd94-aa99494501f4";
+//                                Glide.clear(view3);
+//                                Glide.with(getContext()).load(url).into(view3);
+//                                mDatabase.child("users").child(childSnapshot.getKey()).child("photouris").setValue("" + i1);
+//                            }
+//                      //  }
+//                       /* else {
+//                            String str = au4.getphotouris();
+//
+//                            if(str.equals("1")) {
+//                                String url = "https://firebasestorage.googleapis.com/v0/b/firebase-lodestar.appspot.com/o/LodeStar-GroupPhoto.jpg?alt=media&token=0f9a3665-f90e-4433-b6a0-853db737c260";
+//                                Glide.clear(view3);
+//                                Glide.with(getContext()).load(url).into(view3);
+//                                mDatabase.child("users").child(childSnapshot.getKey()).child("photouris").setValue("" + i1);
+//                            }else if(str.equals("2")){
+//                                String url = "https://firebasestorage.googleapis.com/v0/b/firebase-lodestar.appspot.com/o/maxresdefault.jpg?alt=media&token=6456ce90-64fc-43d7-bd94-aa99494501f4";
+//                                Glide.clear(view3);
+//                                Glide.with(getContext()).load(url).into(view3);
+//                                mDatabase.child("users").child(childSnapshot.getKey()).child("photouris").setValue("" + i1);
+//                            }else if(str.equals("3")){
+//                                String url = "https://firebasestorage.googleapis.com/v0/b/firebase-lodestar.appspot.com/o/maxresdefault.jpg?alt=media&token=6456ce90-64fc-43d7-bd94-aa99494501f4";
+//                                Glide.clear(view3);
+//                                Glide.with(getContext()).load(url).into(view3);
+//                                mDatabase.child("users").child(childSnapshot.getKey()).child("photouris").setValue("" + i1);
+//                            }else if(str.equals("4")) {
+//                                String url = "https://firebasestorage.googleapis.com/v0/b/firebase-lodestar.appspot.com/o/maxresdefault.jpg?alt=media&token=6456ce90-64fc-43d7-bd94-aa99494501f4";
+//                                Glide.clear(view3);
+//                                Glide.with(getContext()).load(url).into(view3);
+//                                mDatabase.child("users").child(childSnapshot.getKey()).child("photouris").setValue("" + i1);
+//                            }
+//                        }
+//*/
+//
+//
+//                    }
+//
+//                }
+//
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
+//
+//
+//
+//        listView = new ListView(view.getContext());
+//
+//        String items[] = {"Avatar 1","Avatar 2","Avatar 3", "Avatar 4"};
+//
+//        ArrayAdapter<String> adapter=new ArrayAdapter<String>(view.getContext(),
+//                R.layout.list_item, R.id.txtitem,items);
+//        listView.setAdapter(adapter);
+//
+//        listView.setOnItemClickListener(new
+//                                                AdapterView.OnItemClickListener() {
+//
+//                                                    @Override
+//
+//                                                    public void onItemClick(AdapterView<?> parent, View view, int
+//                                                            position, long id) {
+//
+//                                                        ViewGroup vg=(ViewGroup)view;
+//
+//                                                        final TextView txt=(TextView)vg.findViewById(R.id.txtitem);
+//
+//                                                        Toast.makeText(view.getContext(),"You chose " + txt.getText().toString(),Toast.LENGTH_LONG).show();
+//
+//                                                        //DB islemleri
+//
+//                                                        ref = database.getReference();
+//
+//                                                        ref.child("users").addValueEventListener(new ValueEventListener() {
+//
+//                                                            @Override
+//                                                            public void onDataChange(DataSnapshot dataSnapshot) {
+//                                                                for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
+//                                                                    au4 = childSnapshot.getValue(ADDITIONAL_USER.class);
+//                                                                    user = FirebaseAuth.getInstance().getCurrentUser();
+//
+//                                                                    if(user != null && au4 != null && au4.getemail().equals(user.getEmail())){
+//                                                                        Log.i("agam","Photo URIS" + txt.getText().toString());
+//
+//                                                                        mDatabase.child("users").child(childSnapshot.getKey()).child("photouris").setValue(txt.getText().toString());
+//                                                                    }
+//
+//                                                                }
+//
+//
+//                                                            }
+//
+//                                                            @Override
+//                                                            public void onCancelled(DatabaseError databaseError) {
+//
+//                                                            }
+//                                                        });
+//
+//
+//
+//                                                    }
+//
+//                                                });
+//
+//
+//
+//        avatarButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                showDialogListView(view);
 
 
-
-                                                    }
-
-                                                });
-
-        Button avatarButton = view.findViewById(R.id.button11);
-
-        avatarButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDialogListView(view);
-                final ImageView view3 = view.findViewById(R.id.me_profile_picture);
-
-
+/*
                 ref = database.getReference();
+
+                final boolean[] wasInside = {false};
 
                 ref.child("users").addValueEventListener(new ValueEventListener() {
 
@@ -218,19 +319,39 @@ public class UserPage extends android.support.v4.app.Fragment {
                             au4 = childSnapshot.getValue(ADDITIONAL_USER.class);
                             user = FirebaseAuth.getInstance().getCurrentUser();
 
+                            if(wasInside[0])
+                                return;
+
+                            Log.i("agam",user.getEmail() + " vs atalim " + au4.getemail());
+
                             if(user != null && au4 != null && au4.getemail().equals(user.getEmail())){
 
+                                if(user != null && au4 != null && au4.getemail().equals(user.getEmail())){
 
                                     if(au4.getphotouris().equals("Avatar 1")) {
                                         String url = "https://firebasestorage.googleapis.com/v0/b/firebase-lodestar.appspot.com/o/LodeStar-GroupPhoto.jpg?alt=media&token=0f9a3665-f90e-4433-b6a0-853db737c260";
-
-                                        Glide.with(getContext()).load(url).into(view3);
+                                        Glide.with(view.getContext()).load(url).into(view3);
+                                        mDatabase.child("users").child(childSnapshot.getKey()).child("photouris").setValue("Avatar 1");
+                                        wasInside[0] = true;
+                                    }else if(au4.getphotouris().equals("Avatar 2")){
+                                        String url = "https://firebasestorage.googleapis.com/v0/b/firebase-lodestar.appspot.com/o/LodeStar-GroupPhoto.jpg?alt=media&token=0f9a3665-f90e-4433-b6a0-853db737c260";
+                                        Glide.with(view.getContext()).load(url).into(view3);
+                                        mDatabase.child("users").child(childSnapshot.getKey()).child("photouris").setValue("Avatar 2");
+                                        wasInside[0] = true;
+                                    } else if(au4.getphotouris().equals("Avatar 3")){
+                                        String url = "https://firebasestorage.googleapis.com/v0/b/firebase-lodestar.appspot.com/o/LodeStar-GroupPhoto.jpg?alt=media&token=0f9a3665-f90e-4433-b6a0-853db737c260";
+                                        Glide.with(view.getContext()).load(url).into(view3);
+                                        mDatabase.child("users").child(childSnapshot.getKey()).child("photouris").setValue("Avatar 3");
+                                        wasInside[0] = true;
+                                    }else if(au4.getphotouris().equals("Avatar 4")) {
+                                        String url = "https://firebasestorage.googleapis.com/v0/b/firebase-lodestar.appspot.com/o/maxresdefault.jpg?alt=media&token=6456ce90-64fc-43d7-bd94-aa99494501f4";
+                                        Glide.with(view.getContext()).load(url).into(view3);
+                                        mDatabase.child("users").child(childSnapshot.getKey()).child("photouris").setValue("Avatar 4");
+                                        wasInside[0] = true;
                                     }
-                                    else if(au4.getphotouris().equals("Avatar 2")){
-                                        String url = "https://firebasestorage.googleapis.com/v0/b/firebase-lodestar.appspot.com/o/download.png?alt=media&token=504973c5-01b1-4649-9a34-f938980854de";
 
-                                        Glide.with(getContext()).load(url).into(view3);
-                                    }
+                                }
+
                               //  }
 
                                 //        profilePhoto.setImageURI(Uri.parse(au4.getphotouris()));
@@ -246,16 +367,17 @@ public class UserPage extends android.support.v4.app.Fragment {
 
                     }
                 });
+                */
 
                 //view3.setImageURI(uri);
                 //view3.setImageURI(Uri.parse("https://firebasestorage.googleapis.com/v0/b/firebase-lodestar.appspot.com/o/LodeStar-GroupPhoto.jpg?alt=media&token=0f9a3665-f90e-4433-b6a0-853db737c260"));
 
 
 
-
-            }
-        });
-
+//
+//            }
+//        });
+//
 
 
 
@@ -265,24 +387,30 @@ public class UserPage extends android.support.v4.app.Fragment {
         //Bastaki imageı doldur
        // final ImageView profilePhoto = this.view.findViewById(R.id.me_profile_picture);
 
+        final String[] userEmail = {""};
+        final String[] uNAME = {""};
+
         ref = database.getReference();
 
         ref.child("users").addValueEventListener(new ValueEventListener() {
 
                                                      @Override
                                                      public void onDataChange(DataSnapshot dataSnapshot) {
-//                                                         for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
-//                                                             au4 = childSnapshot.getValue(ADDITIONAL_USER.class);
-//                                                             user = FirebaseAuth.getInstance().getCurrentUser();
+                                                         for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
+                                                             au4 = childSnapshot.getValue(ADDITIONAL_USER.class);
+                                                             user = FirebaseAuth.getInstance().getCurrentUser();
 //
-//                                                             if(user != null && au4 != null && au4.getphotouris() != null && au4.getemail().equals(user.getEmail())){
-//                                                           //   Log.i("agam","Photo URIS" + au4.getphotouris());
-//
-//                                                         //        profilePhoto.setImageURI(Uri.parse(au4.getphotouris()));
-//                                                             }
-//
-//                                                         }
+                                                             if(user != null && au4 != null && au4.getemail().equals(user.getEmail())){
+                                                                    userEmail[0] = "" + au4.getemail();
+                                                                    uNAME[0] = "" + au4.getusername();
 
+                                                                 Log.i("agam","usename" + uNAME[0]);
+
+                                                                 mAdapter = new UserPageAdapter(userInfoWithPosts,uNAME[0],userEmail[0],getContext());
+                                                                 mRecyclerView.setAdapter(mAdapter);
+
+                                                             }
+                                                         }
 
                                                      }
 
@@ -316,8 +444,9 @@ public class UserPage extends android.support.v4.app.Fragment {
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new UserPageAdapter(userInfoWithPosts);
-        mRecyclerView.setAdapter(mAdapter);
+
+        //Databaseden cek username ve email
+
 
 
 
@@ -330,14 +459,14 @@ public class UserPage extends android.support.v4.app.Fragment {
             }
         });
 
-        AppCompatButton button2 = view.findViewById(R.id.profile_picture_add);
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                profilePicAdd();
-                pickImageAndChangeTheProfilePicture();
-            }
-        });
+//        AppCompatButton button2 = view.findViewById(R.id.profile_picture_add);
+//        button2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                profilePicAdd();
+//                pickImageAndChangeTheProfilePicture();
+//            }
+//        });
 
 
         //   ADDITIONAL_USER au = dataSnapshot.getValue(ADDITIONAL_USER.class);
@@ -446,11 +575,18 @@ public class UserPage extends android.support.v4.app.Fragment {
 
         builder.setCancelable(true);
 
-        builder.setPositiveButton("OK",null);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
 
         builder.setView(listView);
 
         AlertDialog dialog=builder.create();
+
 
         dialog.show();
 
@@ -466,7 +602,6 @@ public class UserPage extends android.support.v4.app.Fragment {
 
     public void writePost(){
         //REFERENCE:https://developer.android.com/guide/topics/ui/dialogs.html
-        Log.d("agam","kankyyyy");
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         int t = 0;

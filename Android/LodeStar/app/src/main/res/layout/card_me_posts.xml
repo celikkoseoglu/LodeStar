@@ -79,15 +79,15 @@
                     android:textColor="#353535"
                     android:textSize="12sp" />
 
-                <ImageButton
+                <ImageView
                     android:id="@+id/user_post_city_more_info_button"
-                    android:layout_width="300dp"
+                    android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:layout_alignLeft="@+id/me_user_post"
                     android:layout_alignStart="@+id/me_user_post"
                     android:layout_below="@+id/me_user_post"
                     android:layout_marginTop="14dp"
-                    app:srcCompat="@drawable/thy_lounge_background"
+                    app:srcCompat="@color/colorBlack"
                     tools:layout_editor_absoluteX="164dp"
                     tools:layout_editor_absoluteY="96dp" />
 

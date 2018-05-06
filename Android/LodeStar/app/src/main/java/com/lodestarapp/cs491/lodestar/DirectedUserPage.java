@@ -102,7 +102,7 @@ public class DirectedUserPage extends AppCompatActivity {
                         tw.setText(au.getusername());
                         realName.add(au.getusername());
 
-                        if(au.gettrips() != null && au.gettrips().contains("!")) {
+                        if(au.gettrips() != null) {
                             tripCounr.setText(au.gettrips().split("!").length + "");
                         } else {
                             tripCounr.setText("0");
