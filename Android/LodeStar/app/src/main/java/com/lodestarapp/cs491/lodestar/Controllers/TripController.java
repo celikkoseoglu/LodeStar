@@ -28,7 +28,7 @@ public class TripController {
 
         final JSONObject[] result = new JSONObject[1];
 
-        String requestFromTheUrl = "https://maps.googleapis.com/maps/api/place/textsearch/json?query="+city+"&key=" + key;
+        String requestFromTheUrl = "https://maps.googleapis.com/maps/api/place/textsearch/json?query="+city.replaceAll(" ", "%20")+"&key=" + key;
 
         RequestQueue requestQueue = Volley.newRequestQueue( c.getApplicationContext() );
 

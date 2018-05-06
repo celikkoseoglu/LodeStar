@@ -264,24 +264,22 @@
                     >
 
                     <Button
-                        android:id="@+id/transport"
-                        android:layout_width="0dp"
-                        android:layout_height="fill_parent"
+                        android:id="@+id/landmarks"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginRight="2dp"
                         android:layout_weight="1"
                         android:alpha="0.7"
-                        android:drawableTop="@drawable/ic_001_bus"
-                        android:text="Transport \nOptions"
-                        android:textAllCaps="false"
                         android:background="@drawable/button_state_list_animator"
+                        android:drawableTop="@drawable/ic_001_landmark"
                         android:elevation="5dp"
-                        android:stateListAnimator="@null"
-                        android:layout_marginLeft="3dp"
-                        android:layout_marginRight="3dp"
-                        android:layout_marginTop="3dp"
-                        android:paddingTop="20dp"
                         android:paddingBottom="5dp"
-                        android:layout_marginBottom="5dp"
-                        />
+                        android:paddingTop="20dp"
+                        android:stateListAnimator="@null"
+                        android:text="Landmarks"
+                        android:textAllCaps="false" />
 
                     <Button
                         android:id="@+id/weather"
@@ -436,72 +434,6 @@
                         android:onClick="nearMeStart"/>
 
                     <Button
-                        android:id="@+id/accomodation"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:alpha="0.7"
-                        android:drawableTop="@drawable/asset_accomodation"
-                        android:text="Accommodation"
-                        android:textAllCaps="false"
-                        android:background="@drawable/button_state_list_animator"
-                        android:layout_marginBottom="5dp"
-                        android:layout_marginLeft="2dp"
-                        android:layout_marginRight="2dp"
-                        android:elevation="5dp"
-                        android:stateListAnimator="@null"
-                        android:paddingTop="20dp"
-                        android:paddingBottom="5dp"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/row4"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:baselineAligned="false"
-                    android:orientation="horizontal"
-
-
-                    >
-
-                    <Button
-                        android:id="@+id/landmarks"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:layout_marginLeft="2dp"
-                        android:layout_marginRight="2dp"
-                        android:layout_weight="1"
-                        android:alpha="0.7"
-                        android:background="@drawable/button_state_list_animator"
-                        android:drawableTop="@drawable/ic_001_landmark"
-                        android:elevation="5dp"
-                        android:paddingBottom="5dp"
-                        android:paddingTop="20dp"
-                        android:stateListAnimator="@null"
-                        android:text="Landmarks"
-                        android:textAllCaps="false" />
-
-                    <Button
-                        android:id="@+id/sim"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:layout_marginLeft="2dp"
-                        android:layout_marginRight="2dp"
-                        android:layout_weight="1"
-                        android:alpha="0.7"
-                        android:background="@drawable/button_state_list_animator"
-                        android:drawableTop="@drawable/ic_sim_card"
-                        android:elevation="5dp"
-                        android:paddingBottom="5dp"
-                        android:paddingTop="20dp"
-                        android:stateListAnimator="@null"
-                        android:text="Get a SIM Card"
-                        android:textAllCaps="false" />
-
-                    <Button
                         android:id="@+id/search_for_user"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
@@ -519,26 +451,8 @@
                         android:text="Search For User"
                         android:textAllCaps="false" />
 
-
-                    <!--<Button
-                        android:id="@+id/na"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:layout_marginLeft="2dp"
-                        android:layout_marginRight="2dp"
-                        android:layout_weight="1"
-                        android:alpha="0.7"
-                        android:background="@drawable/button_state_list_animator"
-                        android:drawableTop="@drawable/ic_001_not_available"
-                        android:elevation="5dp"
-                        android:paddingBottom="5dp"
-                        android:paddingTop="20dp"
-                        android:stateListAnimator="@null"
-                        android:text="Not Available"
-                        android:textAllCaps="false" />!-->
-
                 </LinearLayout>
+
 
             </LinearLayout>
         </ScrollView>

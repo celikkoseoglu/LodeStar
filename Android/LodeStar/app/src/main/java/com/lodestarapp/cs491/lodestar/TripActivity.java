@@ -207,12 +207,6 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
             Button bt1 = getView().findViewById(R.id.places);
             bt1.setLayoutParams(params);
 
-            Button bt2 = getView().findViewById(R.id.accomodation);
-            bt2.setLayoutParams(params);
-
-            Button bt3 = getView().findViewById(R.id.transport);
-            bt3.setLayoutParams(params);
-
             Button bt4 = getView().findViewById(R.id.weather);
             bt4.setLayoutParams(params);
 
@@ -230,9 +224,6 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
 
             Button bt9 = getView().findViewById(R.id.landmarks);
             bt9.setLayoutParams(params);
-
-            Button bt10 = getView().findViewById(R.id.sim);
-            bt10.setLayoutParams(params);
 
             Button bt11 = getView().findViewById(R.id.search_for_user);
             bt11.setLayoutParams(params);
@@ -386,17 +377,18 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
                                                 airportOrig = origin.getString("airport_name");
 
                                                 origCity = origin.getString("city");
-                                                destCity = des.getString("city");
+                                                destCity = des.getString("city").split(",")[0];
 
                                                 TextView view4 = getView().findViewById(R.id.info_text6);
-                                                view4.setText(des.getString("city"));
-                                                flightInfo.setDest(des.getString("city"));
+                                                view4.setText(des.getString("city").split(",")[0]);
+
+                                                flightInfo.setDest(des.getString("city").split(",")[0]);
                                                 flightInfo.setDest_airport(des.getString("airport_name"));
                                                 airportDest =des.getString("airport_name");
 
 
                                                 TextView view5 = getView().findViewById(R.id.info_text2);
-                                                view5.setText("Swipe left to see information about " + des.getString("city").toString());
+                                                view5.setText("Swipe left to see information about " + des.getString("city").split(",")[0]);
 
                                                 TextView view3 = getView().findViewById(R.id.info_text4);
                                                 view3.setText("Swipe right to see information about " + origin.getString("city").toString());
@@ -424,7 +416,7 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
                                                 flightInfo.setDelay(Integer.parseInt(delay));
 
 
-                                                JSONObject weather = result.getJSONObject("weather");
+                                                JSONObject weather = result.getJSONObject("originWeather");
                                                 String weatherCond = weather.getString("cloud_friendly");
                                                 flightInfo.setWeather(weatherCond);
 
@@ -523,17 +515,17 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
                         airportOrig = origin.getString("airport_name");
 
                         origCity = origin.getString("city");
-                        destCity = des.getString("city");
+                        destCity = des.getString("city").split(",")[0];
 
                         TextView view4 = getView().findViewById(R.id.info_text6);
-                        view4.setText(des.getString("city"));
-                        flightInfo.setDest(des.getString("city"));
+                        view4.setText(des.getString("city").split(",")[0]);
+                        flightInfo.setDest(des.getString("city").split(",")[0]);
                         flightInfo.setDest_airport(des.getString("airport_name"));
                         airportDest =des.getString("airport_name");
 
 
                         TextView view5 = getView().findViewById(R.id.info_text2);
-                        view5.setText("Swipe left to see information about " + des.getString("city").toString());
+                        view5.setText("Swipe left to see information about " + des.getString("city").split(",")[0].toString());
 
                         TextView view3 = getView().findViewById(R.id.info_text4);
                         view3.setText("Swipe right to see information about " + origin.getString("city").toString());
