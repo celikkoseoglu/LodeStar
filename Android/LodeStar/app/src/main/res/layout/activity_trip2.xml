@@ -265,8 +265,8 @@
 
                     <Button
                         android:id="@+id/landmarks"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
                         android:layout_marginBottom="5dp"
                         android:layout_marginLeft="2dp"
                         android:layout_marginRight="2dp"
@@ -398,8 +398,8 @@
 
                     <Button
                         android:id="@+id/living"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
                         android:layout_weight="1"
                         android:alpha="0.7"
                         android:drawableTop="@drawable/ic_001_wallet"
@@ -416,8 +416,8 @@
 
                     <Button
                         android:id="@+id/places"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
                         android:layout_marginBottom="5dp"
                         android:layout_marginLeft="2dp"
                         android:layout_marginRight="2dp"
@@ -435,8 +435,8 @@
 
                     <Button
                         android:id="@+id/search_for_user"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
                         android:layout_marginBottom="5dp"
                         android:layout_marginLeft="2dp"
                         android:layout_marginRight="2dp"
