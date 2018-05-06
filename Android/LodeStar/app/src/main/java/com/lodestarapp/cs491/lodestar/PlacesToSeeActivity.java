@@ -67,6 +67,7 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
 
     private static final String TAG = "placesToSeeMessage";
     LatLngBounds.Builder builder;
+    String cityname = "ankara";
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +78,11 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
         MapFragment mapFragment = (MapFragment) getFragmentManager()
                 .findFragmentById(R.id.fragment_map);
         mapFragment.getMapAsync(this);
+
+        Bundle data = getIntent().getExtras();
+        if (data != null) {
+            cityname = data.getString("City");
+        }
 
         //Reference: https://developer.android.com/guide/topics/location/strategies.html
         //locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
@@ -177,12 +183,8 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
                         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(
                                 myLocation[0].getLatitude(), myLocation[0].getLongitude()), 14));
 
-                        googleMap.addMarker((new MarkerOptions().
-                                position(new LatLng(myLocation[0].getLatitude(), myLocation[0].getLongitude()))
-                                .title("You are Here")));
-                        builder.include(new LatLng(myLocation[0].getLatitude(), myLocation[0].getLongitude()));
 
-                        placesToSeeController = new PlacesToSeeController(true, myLocation[0]);
+                        placesToSeeController = new PlacesToSeeController(true, myLocation[0],cityname);
                         placesToSeeController.getPlacesToSeeInformation(placesToSeeController.getRequestFromUrl(),
                                 getApplicationContext(), new LodeStarServerCallback() {
                                     @Override
@@ -212,12 +214,8 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(
                     myLocation[0].getLatitude(), myLocation[0].getLongitude()), 14));
 
-            googleMap.addMarker((new MarkerOptions().
-                    position(new LatLng(myLocation[0].getLatitude(), myLocation[0].getLongitude()))
-                    .title("You are Here")));
-            builder.include(new LatLng(myLocation[0].getLatitude(), myLocation[0].getLongitude()));
 
-            placesToSeeController = new PlacesToSeeController(true, myLocation[0]);
+            placesToSeeController = new PlacesToSeeController(true, myLocation[0], cityname);
             placesToSeeController.getPlacesToSeeInformation(placesToSeeController.getRequestFromUrl(),
                     getApplicationContext(), new LodeStarServerCallback() {
                         @Override
@@ -271,12 +269,9 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
                                 googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(
                                         myLocation[0].getLatitude(), myLocation[0].getLongitude()), 14));
 
-                                googleMap.addMarker((new MarkerOptions().
-                                        position(new LatLng(myLocation[0].getLatitude(), myLocation[0].getLongitude()))
-                                        .title("You are Here")));
-                                builder.include(new LatLng(myLocation[0].getLatitude(), myLocation[0].getLongitude()));
 
-                                placesToSeeController = new PlacesToSeeController(true, myLocation[0]);
+
+                                placesToSeeController = new PlacesToSeeController(true, myLocation[0], cityname);
                                 placesToSeeController.getPlacesToSeeInformation(placesToSeeController.getRequestFromUrl(),
                                         getApplicationContext(), new LodeStarServerCallback() {
                                             @Override
@@ -298,7 +293,7 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
                     });
                 }
                 else{
-                    placesToSeeController = new PlacesToSeeController(false, null);
+                    placesToSeeController = new PlacesToSeeController(false, null, cityname);
                 }
                 break;
             default:

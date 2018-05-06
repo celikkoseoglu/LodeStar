@@ -68,148 +68,148 @@
                 android:layout_height="match_parent"
                 >
 
-            <ViewFlipper
-                android:id="@+id/flipper"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:layout_alignParentTop="true"
-                >
-
-                <RelativeLayout
-                    android:id="@+id/view1"
+                <ViewFlipper
+                    android:id="@+id/flipper"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_alignParentTop="true"
                     >
 
-                    <ImageView
-                        android:id="@+id/orig"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentTop="true"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/thy_lounge_background"
-                        android:tint="#6F000000"/>
+                    <RelativeLayout
+                        android:id="@+id/view1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical"
+                        >
+
+                        <ImageView
+                            android:id="@+id/orig"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/thy_lounge_background"
+                            android:tint="#6F000000"/>
 
 
-                    <TextView
-                        android:id="@+id/info_text1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="40dp"
-                        android:text="You will be boarding from"
-                        android:textColor="@android:color/background_light"
-                        android:textSize="13sp"
-                        android:shadowColor="#000000"
-                        android:shadowDx="1"
-                        android:shadowDy="1"
-                        android:shadowRadius="2"/>
+                        <TextView
+                            android:id="@+id/info_text1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="40dp"
+                            android:text="You will be boarding from"
+                            android:textColor="@android:color/background_light"
+                            android:textSize="13sp"
+                            android:shadowColor="#000000"
+                            android:shadowDx="1"
+                            android:shadowDy="1"
+                            android:shadowRadius="2"/>
 
-                    <TextView
-                        android:id="@+id/info_text5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:text="Istanbul"
-                        android:textColor="@android:color/background_light"
-                        android:textSize="36sp"
-                        android:shadowColor="#000000"
-                        android:shadowDx="1"
-                        android:shadowDy="1"
-                        android:shadowRadius="2"/>
+                        <TextView
+                            android:id="@+id/info_text5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:text="Istanbul"
+                            android:textColor="@android:color/background_light"
+                            android:textSize="36sp"
+                            android:shadowColor="#000000"
+                            android:shadowDx="1"
+                            android:shadowDy="1"
+                            android:shadowRadius="2"/>
 
-                    <TextView
-                        android:id="@+id/info_text2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="170dp"
-                        android:shadowColor="#000000"
-                        android:shadowDx="1"
-                        android:shadowDy="1"
-                        android:shadowRadius="2"
-                        android:text="Swipe left to see information about"
-                        android:textColor="@android:color/background_light"
-                        android:textSize="14sp" />
-
-
-
-
-                </RelativeLayout>
+                        <TextView
+                            android:id="@+id/info_text2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="170dp"
+                            android:shadowColor="#000000"
+                            android:shadowDx="1"
+                            android:shadowDy="1"
+                            android:shadowRadius="2"
+                            android:text="Swipe left to see information about"
+                            android:textColor="@android:color/background_light"
+                            android:textSize="14sp" />
 
 
 
-                <RelativeLayout
-                    android:id="@+id/view2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
 
-                    <ImageView
-                        android:id="@+id/dest"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentTop="true"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/thy_lounge_background"
-                        android:tint="#6F000000"/>
-
-                    <TextView
-                        android:id="@+id/info_text3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:text="You will be boarding to"
-                        android:textColor="@android:color/background_light"
-                        android:textSize="13sp"
-                        android:layout_marginTop="40dp"
-                        android:layout_centerHorizontal="true"
-                        android:shadowColor="#000000"
-                        android:shadowDx="1"
-                        android:shadowDy="1"
-                        android:shadowRadius="2"/>
-
-                    <TextView
-                        android:id="@+id/info_text6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Istanbul"
-                        android:layout_centerInParent="true"
-                        android:textColor="@android:color/background_light"
-                        android:textSize="36sp"
-                        android:shadowColor="#000000"
-                        android:shadowDx="1"
-                        android:shadowDy="1"
-                        android:shadowRadius="2"/>
+                    </RelativeLayout>
 
 
-                    <TextView
-                        android:id="@+id/info_text4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Swipe right to see information about"
-                        android:textColor="@android:color/background_light"
-                        android:textSize="13sp"
-                        android:layout_marginTop="170dp"
-                        android:layout_centerHorizontal="true"
-                        android:shadowColor="#000000"
-                        android:shadowDx="1"
-                        android:shadowDy="1"
-                        android:shadowRadius="2"
-                        />
 
-                </RelativeLayout>
+                    <RelativeLayout
+                        android:id="@+id/view2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
 
-            </ViewFlipper>
+                        <ImageView
+                            android:id="@+id/dest"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/thy_lounge_background"
+                            android:tint="#6F000000"/>
+
+                        <TextView
+                            android:id="@+id/info_text3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:text="You will be boarding to"
+                            android:textColor="@android:color/background_light"
+                            android:textSize="13sp"
+                            android:layout_marginTop="40dp"
+                            android:layout_centerHorizontal="true"
+                            android:shadowColor="#000000"
+                            android:shadowDx="1"
+                            android:shadowDy="1"
+                            android:shadowRadius="2"/>
+
+                        <TextView
+                            android:id="@+id/info_text6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Istanbul"
+                            android:layout_centerInParent="true"
+                            android:textColor="@android:color/background_light"
+                            android:textSize="36sp"
+                            android:shadowColor="#000000"
+                            android:shadowDx="1"
+                            android:shadowDy="1"
+                            android:shadowRadius="2"/>
+
+
+                        <TextView
+                            android:id="@+id/info_text4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Swipe right to see information about"
+                            android:textColor="@android:color/background_light"
+                            android:textSize="13sp"
+                            android:layout_marginTop="170dp"
+                            android:layout_centerHorizontal="true"
+                            android:shadowColor="#000000"
+                            android:shadowDx="1"
+                            android:shadowDy="1"
+                            android:shadowRadius="2"
+                            />
+
+                    </RelativeLayout>
+
+                </ViewFlipper>
 
                 <LinearLayout
                     android:id="@+id/ll1"
@@ -344,7 +344,6 @@
                         android:background="@drawable/button_state_list_animator"
                         android:drawableTop="@drawable/ic_001_shopping_bag"
                         android:elevation="5dp"
-                        android:onClick="shoppingStart"
                         android:paddingBottom="5dp"
                         android:paddingTop="20dp"
                         android:stateListAnimator="@null"
@@ -384,7 +383,6 @@
                         android:layout_marginRight="3dp"
                         android:elevation="5dp"
                         android:stateListAnimator="@null"
-                        android:onClick="restStart"
                         android:paddingTop="20dp"
                         android:paddingBottom="5dp"/>
 
@@ -479,7 +477,6 @@
                         android:background="@drawable/button_state_list_animator"
                         android:drawableTop="@drawable/ic_001_landmark"
                         android:elevation="5dp"
-                        android:onClick="landmarksStart"
                         android:paddingBottom="5dp"
                         android:paddingTop="20dp"
                         android:stateListAnimator="@null"

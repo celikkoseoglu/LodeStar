@@ -257,23 +257,12 @@ public class TabActivity extends AppCompatActivity {
     }
 
 
-
-    public void currencyStart(View view){
-        Intent intent = new Intent(this, CurrencyActivity.class);
-        startActivity(intent);
-    }
-
     public void prefStart(View view){
         Intent intent = new Intent(this, PreferencesActivity.class);
         startActivity(intent);
     }
     public void meStart(View view){
         finish();
-    }
-
-    public void landmarksStart(View view){
-        Intent intent = new Intent(this, PlacesToSeeActivity.class);
-        startActivity(intent);
     }
 
     public void nearMeStart(View view){

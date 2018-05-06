@@ -128,6 +128,36 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
         });
         bt3.setClickable(false);
 
+        Button bt8 = view.findViewById(R.id.landmarks);
+        bt8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                landmarksStart(v);
+            }
+        });
+        bt8.setClickable(false);
+
+        Button bt6 = view.findViewById(R.id.shopping);
+        bt6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                shoppingStart(v);
+            }
+        });
+        bt6.setClickable(false);
+
+
+        Button bt9 = view.findViewById(R.id.restaurants);
+        bt9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                restStart(v);
+            }
+        });
+        bt9.setClickable(false);
+
+
+
 
 
         view_flipper = view.findViewById(R.id.flipper);
@@ -259,8 +289,29 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
         else
             intent.putExtra("Airport", airportDest);
 
+        startActivity(intent);
+    }
 
+    public void landmarksStart(View view){
+        Intent intent = new Intent(getActivity(), PlacesToSeeActivity.class);
+        if (view_flipper.getCurrentView() == firstView)
+            intent.putExtra("City", origCity);
+        else
+            intent.putExtra("City", destCity);
+        startActivity(intent);
+    }
 
+    public void shoppingStart(View view){
+        Intent intent = new Intent(getActivity(), ShoppingActivity.class);
+        intent.putExtra("Airport1", airportOrig + "," + origCity);
+        intent.putExtra("Airport2", airportDest + "," + destCity);
+        startActivity(intent);
+    }
+
+    public void restStart(View view){
+        Intent intent = new Intent(getActivity(), RestaurantActivity.class);
+        intent.putExtra("Airport1", airportOrig + "," + origCity);
+        intent.putExtra("Airport2", airportDest + "," + destCity);
         startActivity(intent);
     }
 
@@ -401,6 +452,14 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
                                                 Button bt5 = getView().findViewById(R.id.lounge);
                                                 bt5.setClickable(true);
 
+                                                Button bt8 = getView().findViewById(R.id.landmarks);
+                                                bt8.setClickable(true);
+
+                                                Button bt9 = getView().findViewById(R.id.shopping);
+                                                bt9.setClickable(true);
+
+                                                Button bt10 = getView().findViewById(R.id.restaurants);
+                                                bt10.setClickable(true);
 
 
 
@@ -530,6 +589,14 @@ public class TripActivity extends Fragment implements MyOnFocusListenable {
                         Button bt5 = getView().findViewById(R.id.lounge);
                         bt5.setClickable(true);
 
+                        Button bt8 = getView().findViewById(R.id.landmarks);
+                        bt8.setClickable(true);
+
+                        Button bt9 = getView().findViewById(R.id.shopping);
+                        bt9.setClickable(true);
+
+                        Button bt10 = getView().findViewById(R.id.restaurants);
+                        bt10.setClickable(true);
 
                         sendImageRequestOrig();
                         sendImageRequestDest();

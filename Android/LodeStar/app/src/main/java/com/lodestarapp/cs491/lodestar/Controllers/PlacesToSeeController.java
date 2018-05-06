@@ -25,14 +25,14 @@ public class PlacesToSeeController {
     private String requestFromUrl;
     private Location location;
 
-    public PlacesToSeeController(boolean locationPermissionGiven, Location location){
+    public PlacesToSeeController(boolean locationPermissionGiven, Location location, String city){
         this.locationPermissionGiven = locationPermissionGiven;
         this.location = location;
 
         if(this.locationPermissionGiven){
             //Server part not implemented
 
-            this.requestFromUrl = "http://lodestarapp.com:3010/?city=ankara";
+            this.requestFromUrl = "http://lodestarapp.com:3010/?city=" + city;
 
             // this.requestFromUrl = "http://lodestarapp.com:3009/?location="+location.getLatitude()+
             //","+location.getLongitude()+"&limit=5";

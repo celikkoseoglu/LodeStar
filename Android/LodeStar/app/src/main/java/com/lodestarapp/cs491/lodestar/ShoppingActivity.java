@@ -3,6 +3,8 @@ package com.lodestarapp.cs491.lodestar;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -39,6 +41,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,12 +60,44 @@ public class ShoppingActivity extends AppCompatActivity implements OnMapReadyCal
     LatLngBounds.Builder builder;
     private LinearLayout ll2;
     String keyword = "shopping";
-    Button b;
+    Button b,set;
+    boolean selectedOwn = true;
+    boolean destAirport = false;
+    boolean origAirport = false;
+
+    boolean menuSelected = false;
+    boolean buttonSelected = false;
+    private String airport1,airport2;
+    private Location airportOrig;
+    private Location airportDest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping);
+        Geocoder geocoder = new Geocoder(getApplicationContext());
+
+        Bundle data = getIntent().getExtras();
+        if (data != null) {
+            airport1 =  data.getString("Airport1");
+            airport2 =  data.getString("Airport2");
+
+            try {
+                List<Address> list3 = geocoder.getFromLocationName(airport1,1);
+                airportOrig = new Location("");
+                airportOrig.setLatitude(list3.get(0).getLatitude());
+                airportOrig.setLongitude(list3.get(0).getLongitude());
+
+                List<Address> list4 = geocoder.getFromLocationName(airport2,1);
+                airportDest = new Location("");
+                airportDest.setLatitude(list4.get(0).getLatitude());
+                airportDest.setLongitude(list4.get(0).getLongitude());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+        }
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
@@ -82,10 +117,22 @@ public class ShoppingActivity extends AppCompatActivity implements OnMapReadyCal
         builder= new LatLngBounds.Builder();
 
         b = findViewById(R.id.optionMenuShopping);
+
+        set = findViewById(R.id.button10);
         registerForContextMenu(b);
         b.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+                menuSelected = true;
+                openContextMenu(view);
+            }
+        });
+
+        registerForContextMenu(set);
+        set.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                buttonSelected = true;
                 openContextMenu(view);
             }
         });
@@ -129,15 +176,39 @@ public class ShoppingActivity extends AppCompatActivity implements OnMapReadyCal
                         public void onComplete(@NonNull Task task) {
                             if(task.isSuccessful()){
                                 myLocation[0] = locationResult.getResult();
-                                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(
-                                        myLocation[0].getLatitude(), myLocation[0].getLongitude()), 14));
+                                if(selectedOwn){
+                                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(
+                                            myLocation[0].getLatitude(), myLocation[0].getLongitude()), 14));
 
-                                googleMap.addMarker((new MarkerOptions().
-                                        position(new LatLng(myLocation[0].getLatitude(), myLocation[0].getLongitude()))
-                                        .title("You are Here")));
-                                builder.include(new LatLng(myLocation[0].getLatitude(), myLocation[0].getLongitude()));
+                                    googleMap.addMarker((new MarkerOptions().
+                                            position(new LatLng(myLocation[0].getLatitude(), myLocation[0].getLongitude()))
+                                            .title("You are Here")));
+                                    builder.include(new LatLng(myLocation[0].getLatitude(), myLocation[0].getLongitude()));
+                                    nmc = new NearMeController("", true, myLocation[0]);
+                                }
+                                else if(origAirport){
+                                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(
+                                            airportOrig.getLatitude(), airportOrig.getLongitude()), 14));
 
-                                nmc = new NearMeController("", true, myLocation[0]);
+                                    googleMap.addMarker((new MarkerOptions().
+                                            position(new LatLng(airportOrig.getLatitude(), airportOrig.getLongitude()))
+                                            .title("You are Here")));
+                                    builder.include(new LatLng(airportOrig.getLatitude(), airportOrig.getLongitude()));
+
+                                    nmc = new NearMeController("", true, airportOrig);
+
+                                }
+                                else if(destAirport){
+                                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(
+                                            airportDest.getLatitude(), airportDest.getLongitude()), 14));
+
+                                    googleMap.addMarker((new MarkerOptions().
+                                            position(new LatLng(airportDest.getLatitude(), airportDest.getLongitude()))
+                                            .title("You are Here")));
+                                    builder.include(new LatLng(airportDest.getLatitude(), airportDest.getLongitude()));
+                                    nmc = new NearMeController("", true, airportDest);
+
+                                }
                                 nmc.setLimit(5);
                                 nmc.getNearMeInformation(getApplicationContext(),
                                         keyword, new NearMeController.VolleyCallback5() {
@@ -190,15 +261,39 @@ public class ShoppingActivity extends AppCompatActivity implements OnMapReadyCal
                     if (task.isSuccessful()) {
                         done[0] = true;
                         myLocation[0] = locationResult.getResult();
-                        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(
-                                myLocation[0].getLatitude(), myLocation[0].getLongitude()), 14));
+                        if(selectedOwn){
+                            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(
+                                    myLocation[0].getLatitude(), myLocation[0].getLongitude()), 14));
 
-                        googleMap.addMarker((new MarkerOptions().
-                                position(new LatLng(myLocation[0].getLatitude(), myLocation[0].getLongitude()))
-                                .title("You are Here")));
-                        builder.include(new LatLng(myLocation[0].getLatitude(), myLocation[0].getLongitude()));
+                            googleMap.addMarker((new MarkerOptions().
+                                    position(new LatLng(myLocation[0].getLatitude(), myLocation[0].getLongitude()))
+                                    .title("You are Here")));
+                            builder.include(new LatLng(myLocation[0].getLatitude(), myLocation[0].getLongitude()));
+                            nmc = new NearMeController("", true, myLocation[0]);
+                        }
+                        else if(origAirport){
+                            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(
+                                    airportOrig.getLatitude(), airportOrig.getLongitude()), 14));
 
-                        nmc = new NearMeController("", true, myLocation[0]);
+                            googleMap.addMarker((new MarkerOptions().
+                                    position(new LatLng(airportOrig.getLatitude(), airportOrig.getLongitude()))
+                                    .title("You are Here")));
+                            builder.include(new LatLng(airportOrig.getLatitude(), airportOrig.getLongitude()));
+
+                            nmc = new NearMeController("", true, airportOrig);
+
+                        }
+                        else if(destAirport){
+                            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(
+                                    airportDest.getLatitude(), airportDest.getLongitude()), 14));
+
+                            googleMap.addMarker((new MarkerOptions().
+                                    position(new LatLng(airportDest.getLatitude(), airportDest.getLongitude()))
+                                    .title("You are Here")));
+                            builder.include(new LatLng(airportDest.getLatitude(), airportDest.getLongitude()));
+                            nmc = new NearMeController("", true, airportDest);
+
+                        }
                         nmc.setLimit(5);
                         nmc.getNearMeInformation(getApplicationContext(),
                                 keyword, new NearMeController.VolleyCallback5() {
@@ -222,15 +317,39 @@ public class ShoppingActivity extends AppCompatActivity implements OnMapReadyCal
             final Location[] myLocation = new Location[1];
             myLocation[0] = location;
 
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(
-                    myLocation[0].getLatitude(), myLocation[0].getLongitude()), 14));
+            if(selectedOwn){
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(
+                        myLocation[0].getLatitude(), myLocation[0].getLongitude()), 14));
 
-            googleMap.addMarker((new MarkerOptions().
-                    position(new LatLng(myLocation[0].getLatitude(), myLocation[0].getLongitude()))
-                    .title("You are Here")));
-            builder.include(new LatLng(myLocation[0].getLatitude(), myLocation[0].getLongitude()));
+                googleMap.addMarker((new MarkerOptions().
+                        position(new LatLng(myLocation[0].getLatitude(), myLocation[0].getLongitude()))
+                        .title("You are Here")));
+                builder.include(new LatLng(myLocation[0].getLatitude(), myLocation[0].getLongitude()));
+                nmc = new NearMeController("", true, myLocation[0]);
+            }
+            else if(origAirport){
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(
+                        airportOrig.getLatitude(), airportOrig.getLongitude()), 14));
 
-            nmc = new NearMeController("", true, myLocation[0]);
+                googleMap.addMarker((new MarkerOptions().
+                        position(new LatLng(airportOrig.getLatitude(), airportOrig.getLongitude()))
+                        .title("You are Here")));
+                builder.include(new LatLng(airportOrig.getLatitude(), airportOrig.getLongitude()));
+
+                nmc = new NearMeController("", true, airportOrig);
+
+            }
+            else if(destAirport){
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(
+                        airportDest.getLatitude(), airportDest.getLongitude()), 14));
+
+                googleMap.addMarker((new MarkerOptions().
+                        position(new LatLng(airportDest.getLatitude(), airportDest.getLongitude()))
+                        .title("You are Here")));
+                builder.include(new LatLng(airportDest.getLatitude(), airportDest.getLongitude()));
+                nmc = new NearMeController("", true, airportDest);
+
+            }
             nmc.setLimit(5);
             nmc.getNearMeInformation(getApplicationContext(),
                     keyword, new NearMeController.VolleyCallback5() {
@@ -372,12 +491,27 @@ public class ShoppingActivity extends AppCompatActivity implements OnMapReadyCal
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
     {
         super.onCreateContextMenu(menu, v, menuInfo);
-        menu.setHeaderTitle("Select a Shopping Type");
-        menu.add(0, v.getId(), 0, "General");//groupId, itemId, order, title
-        menu.add(0, v.getId(), 0, "Shopping Mall");
-        menu.add(0, v.getId(), 0, "Clothing");
-        menu.add(0, v.getId(), 0, "Electronics");
-        menu.add(0, v.getId(), 0, "Luggage");
+        if(menuSelected){
+            menuSelected = false;
+            menu.setHeaderTitle("Select a Shopping Type");
+            menu.add(0, v.getId(), 0, "General");//groupId, itemId, order, title
+            menu.add(0, v.getId(), 0, "Shopping Mall");
+            menu.add(0, v.getId(), 0, "Clothing");
+            menu.add(0, v.getId(), 0, "Electronics");
+            menu.add(0, v.getId(), 0, "Luggage");
+            menu.add(0, v.getId(), 0, "Rental Car");
+            menu.add(0, v.getId(), 0, "Sim Card");
+
+        }
+        if(buttonSelected){
+            buttonSelected = false;
+            super.onCreateContextMenu(menu, v, menuInfo);
+            menu.setHeaderTitle("Select a Locaiton");
+            menu.add(0, v.getId(), 0, "Current Location");//groupId, itemId, order, title
+            menu.add(0, v.getId(), 0, "Origin Airport");
+            menu.add(0, v.getId(), 0, "Destination Airport");
+        }
+
 
     }
 
@@ -416,6 +550,42 @@ public class ShoppingActivity extends AppCompatActivity implements OnMapReadyCal
             b.setText("Luggage - Tap Here to Change Shopping Type");
 
         }
+        else if(item.getTitle()=="Rental Car"){
+            Toast.makeText(getApplicationContext(),"searching Luggage Shops",Toast.LENGTH_LONG).show();
+            keyword = "rental%20car";
+            renewList();
+            b.setText("Rental Car - Tap Here to Change Shopping Type");
+
+        } else if(item.getTitle()=="Sim Card"){
+            Toast.makeText(getApplicationContext(),"searching Luggage Shops",Toast.LENGTH_LONG).show();
+            keyword = "mobile%20phone";
+            renewList();
+            b.setText("Sim Card - Tap Here to Change Shopping Type");
+
+        }else if(item.getTitle()=="Current Location") {
+            Toast.makeText(getApplicationContext(), "location changed to current", Toast.LENGTH_LONG).show();
+            selectedOwn = true;
+            destAirport = false;
+            origAirport = false;
+            renewList();
+
+        }
+        else if(item.getTitle()=="Origin Airport") {
+            Toast.makeText(getApplicationContext(), "location changed to origin airport", Toast.LENGTH_LONG).show();
+            selectedOwn = false;
+            destAirport = false;
+            origAirport = true;
+
+            renewList();
+
+        }else if(item.getTitle()=="Destination Airport") {
+            Toast.makeText(getApplicationContext(), "location changed to destination airport", Toast.LENGTH_LONG).show();
+            selectedOwn = false;
+            destAirport = true;
+            origAirport = false;
+            renewList();
+        }
+
         else{
             return false;
         }
