@@ -357,7 +357,7 @@ public class HistoryFragment extends Fragment {
         rl.setVisibility(View.VISIBLE);
         //mRecyclerView.setAdapter(mAdapter);
         //mAdapter.notifyDataSetChanged();
-        Log.d("history" , "here?");
+        //Log.d("history" , "here?");
     }
 
     private void parseTheTripInformation(JSONObject result, final String city, final int index, final int which) {

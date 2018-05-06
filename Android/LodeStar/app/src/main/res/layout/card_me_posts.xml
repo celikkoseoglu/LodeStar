@@ -7,7 +7,9 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <android.support.v7.widget.CardView
             android:id="@+id/me_posts"
@@ -47,13 +49,13 @@
                     android:layout_alignBaseline="@+id/me_realName"
                     android:layout_alignBottom="@+id/me_realName"
                     android:layout_marginEnd="89dp"
-                    android:layout_marginRight="89dp"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginRight="89dp"
+                    android:layout_marginStart="10dp"
                     android:layout_toLeftOf="@+id/me_post_date"
                     android:layout_toStartOf="@+id/me_post_date"
                     android:text="crackerjack"
-                    android:textSize="12sp"
-                    android:layout_marginStart="10dp" />
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/me_post_date"
@@ -81,31 +83,29 @@
 
                 <ImageView
                     android:id="@+id/user_post_city_more_info_button"
-                    android:layout_width="match_parent"
+                    android:layout_width="299dp"
                     android:layout_height="100dp"
-                    android:layout_alignLeft="@+id/me_user_post"
-                    android:layout_alignStart="@+id/me_user_post"
                     android:layout_below="@+id/me_user_post"
+                    android:layout_centerHorizontal="true"
                     android:layout_marginTop="14dp"
-                    app:srcCompat="@color/colorBlack"
-                    tools:layout_editor_absoluteX="164dp"
-                    tools:layout_editor_absoluteY="96dp" />
+                    android:scaleType="centerCrop"
+                    app:srcCompat="@color/colorBlack" />
 
-                <TextView
-                    android:id="@+id/user_post_city_more_info_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/user_post_city_more_info_button"
-                    android:layout_alignStart="@+id/user_post_city_more_info_button"
-                    android:layout_below="@+id/user_post_city_more_info_button"
-                    android:layout_marginTop="8dp"
-                    android:maxWidth="300dp"
-                    android:text="Tap to View Istanbul in LodeStar"
-                    android:textColor="#353535"
-                    android:textSize="12sp"
-                    tools:layout_editor_absoluteX="181dp"
-                    tools:layout_editor_absoluteY="221dp"
-                     />
+                <!--<TextView-->
+                <!--android:id="@+id/user_post_city_more_info_text"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignLeft="@+id/user_post_city_more_info_button"-->
+                <!--android:layout_alignStart="@+id/user_post_city_more_info_button"-->
+                <!--android:layout_below="@+id/user_post_city_more_info_button"-->
+                <!--android:layout_marginTop="8dp"-->
+                <!--android:maxWidth="300dp"-->
+                <!--android:text="Tap to View Istanbul in LodeStar"-->
+                <!--android:textColor="#353535"-->
+                <!--android:textSize="12sp"-->
+                <!--tools:layout_editor_absoluteX="181dp"-->
+                <!--tools:layout_editor_absoluteY="221dp"-->
+                <!--/>-->
 
 
             </RelativeLayout>
