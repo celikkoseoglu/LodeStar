@@ -31,6 +31,7 @@ public class PlacesToSeeExpandedAdapter extends RecyclerView.Adapter<RecyclerVie
         TextView reviewReviewViewHolder;
         TextView rating;
         ImageView[] placeStarImages = new ImageView[5];
+        ImageView im;
 
         PlacesToSeeExpandedViewHolder(View itemView) {
             super(itemView);
@@ -89,6 +90,7 @@ public class PlacesToSeeExpandedAdapter extends RecyclerView.Adapter<RecyclerVie
                 ((PlacesToSeeExpandedViewHolder) holder).placeStarImages[i].setVisibility(View.GONE);
 
             ((PlacesToSeeExpandedViewHolder) holder).rating.setText(numberOfStars + "/5");
+
 
         }
     }

@@ -44,6 +44,7 @@ public class PlacesToSeeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         TextView placeLocationView;
 
         ImageView placeTypeIcon;
+        ImageView im;
 
         //ImageView ??? Number of stars???
         ImageView[] placeStarImages = new ImageView[5];
@@ -108,6 +109,8 @@ public class PlacesToSeeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             this.placeLocationView = itemView.findViewById(R.id.place_location);
             //this.placeNumberOfReviewsView = itemView.findViewById(R.id.place_number_of_reviews);
             this.placeTypeIcon = itemView.findViewById(R.id.place_icon_from_api);
+            this.im = itemView.findViewById(R.id.place_iconn);
+
 
             this.placeStarImages[0] = itemView.findViewById(R.id.place_stars_image1);
             this.placeStarImages[1] = itemView.findViewById(R.id.place_stars_image2);
@@ -168,6 +171,8 @@ public class PlacesToSeeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         if(halfStar)
             ((PlacesViewHolder) holder).placeStarImages[noOfStars].setImageResource(this.context.getResources()
                     .getIdentifier("ic_star_half_full", "drawable", this.context.getPackageName()));
+
+        ((PlacesToSeeAdapter.PlacesViewHolder) holder).im.setImageResource(R.drawable.ic_location);
 
     }
 
