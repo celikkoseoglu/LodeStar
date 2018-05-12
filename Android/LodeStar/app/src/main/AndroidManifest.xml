@@ -59,7 +59,9 @@
         <activity android:name=".LivingExpensesActivity" />
         <activity android:name=".TabActivity" />
         <activity android:name=".ForgotPasswordActivity" />
-        <activity android:name=".VRActivity" />
+        <activity android:name=".VRActivity"
+            android:screenOrientation="landscape"
+            />
         <activity android:name=".PanoramaActivity" />
         <activity android:name=".PreferencesActivity" />
         <activity android:name=".PlacesToSeeActivity" />

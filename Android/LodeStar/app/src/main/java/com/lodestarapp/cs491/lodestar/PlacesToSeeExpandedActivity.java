@@ -102,7 +102,7 @@ public class PlacesToSeeExpandedActivity extends AppCompatActivity implements Vi
     SensorManager sManager;
     VenueController vc;
     RelativeLayout relative;
-    LinearLayout ll1;
+    LinearLayout ll1,ll2;
 
     String VRBitmap;
 
@@ -112,6 +112,9 @@ public class PlacesToSeeExpandedActivity extends AppCompatActivity implements Vi
         pv=findViewById(R.id.layout);
         relative = findViewById(R.id.relative);
         ll1 =findViewById(R.id.ll1);
+        ll2 = findViewById(R.id.ll2);
+        ll2.setVisibility(View.GONE);
+
 
         add = findViewById(R.id.landmarks_add_to_favorites);
 
@@ -293,7 +296,8 @@ public class PlacesToSeeExpandedActivity extends AppCompatActivity implements Vi
                     });
 
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    ll1.setVisibility(View.GONE);
+                    ll2.setVisibility(View.VISIBLE);
                 }
 
 

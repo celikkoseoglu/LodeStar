@@ -97,7 +97,37 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
         //Toast toast =  Toast.makeText(getApplicationContext(), "Bring the phone in horizontal position", Toast.LENGTH_LONG);
         //toast.show();
 
-        vc = new VenueController();
+
+    }
+
+    @Override
+    public void onFinishFrame(Viewport p0) {
+
+    }
+
+    @Override
+    public void onSurfaceChanged(int p0, int p1) {
+        glViewport(0, 0, p0, p1);
+
+        MatrixCalculator.perspectiveUpdate(mProjectionMatrix, 90, (float) p0 / (float) p1, 1f, 10f);
+    }
+
+    public void onSurfaceCreated(EGLConfig config) {
+        Log.i(TAG, "onSurfaceCreated");
+        GLES20.glClearColor(1f, 1f, 1f, 1f);
+        renderer = new Renderer(this, 50, 5f);
+        renderer.loadTexture(this, R.drawable.gray);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                progressDialog = new ProgressDialog(VRActivity.this, R.style.Theme_MyDialog);
+                //progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                progressDialog.setCanceledOnTouchOutside(false);
+                progressDialog.setTitle("Loading...");
+                progressDialog.setMessage("");
+                progressDialog.show();
+            }
+        });
         vc.getPanorama(coords,"50","low", getApplicationContext(),new VenueController.VolleyCallback(){
 
             @Override
@@ -133,6 +163,12 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
                                 String encoded = result.getString("highRes");
                                 panorama = Base64.decode(encoded, Base64.DEFAULT);
                                 incoming = true;
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        progressDialog.dismiss();
+                                    }
+                                });
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -149,25 +185,6 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
         });
 
 
-    }
-
-    @Override
-    public void onFinishFrame(Viewport p0) {
-
-    }
-
-    @Override
-    public void onSurfaceChanged(int p0, int p1) {
-        glViewport(0, 0, p0, p1);
-
-        MatrixCalculator.perspectiveUpdate(mProjectionMatrix, 90, (float) p0 / (float) p1, 1f, 10f);
-    }
-
-    public void onSurfaceCreated(EGLConfig config) {
-        Log.i(TAG, "onSurfaceCreated");
-        GLES20.glClearColor(1f, 1f, 1f, 1f);
-        renderer = new Renderer(this, 50, 5f);
-        renderer.loadTexture(this, R.drawable.gray);
         //renderer.setAngle(arrowAngle);
 
         checkGLError("onSurfaceCreated");

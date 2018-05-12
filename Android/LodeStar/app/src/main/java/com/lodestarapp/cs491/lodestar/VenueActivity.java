@@ -73,7 +73,7 @@ public class VenueActivity extends AppCompatActivity implements ViewPagerEx.OnPa
     SensorManager sManager;
     VenueController vc;
     RelativeLayout relative;
-    LinearLayout ll1;
+    LinearLayout ll1,ll2;
     PanoramaView pv;
 
     private CardView cv1;
@@ -106,10 +106,12 @@ public class VenueActivity extends AppCompatActivity implements ViewPagerEx.OnPa
         pv=findViewById(R.id.layout);
         relative = findViewById(R.id.relative);
         ll1 =findViewById(R.id.ll1);
+        ll2 = findViewById(R.id.ll2);
 
         pv.setVisibility(View.GONE);
         relative.setVisibility(View.GONE);
         ll1.setVisibility(View.VISIBLE);
+        ll2.setVisibility(View.GONE);
 
         ScrollView sc = findViewById(R.id.scroll_general);
         
@@ -242,7 +244,8 @@ public class VenueActivity extends AppCompatActivity implements ViewPagerEx.OnPa
                         });
 
                     } catch (JSONException e) {
-                        e.printStackTrace();
+                        ll1.setVisibility(View.GONE);
+                        ll2.setVisibility(View.VISIBLE);
                     }
 
 

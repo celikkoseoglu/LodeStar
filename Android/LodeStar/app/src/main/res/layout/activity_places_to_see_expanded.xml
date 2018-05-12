@@ -308,6 +308,23 @@
 
                         </LinearLayout>
 
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:id="@+id/ll2"
+                            android:orientation="vertical"
+                            android:layout_below="@id/place_name_expanded2">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@null"
+                                app:srcCompat="@drawable/no_image_found1"
+                                android:adjustViewBounds="true"
+                                android:scaleType="centerCrop"/>
+
+                        </LinearLayout>
+
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"

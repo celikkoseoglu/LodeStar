@@ -327,15 +327,22 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
         LatLng placeViewPort;
 
         String photoAttribution;
-
-        for (int i = 0; i < 5 ; i++) {
+        int i = 0;
+        int limit = 5;
+        while ( i <limit ) {
             place = jsonArray.getJSONObject(i);
 
             geometry = place.getJSONObject("geometry");
             location = geometry.getJSONObject("location");
             viewport = geometry.getJSONObject("viewport");
 
-            photos = place.getJSONArray("photos");
+            if(place.has("photos"))
+                photos = place.getJSONArray("photos");
+            else{
+                limit++;
+                i++;
+                continue;
+            }
             types = place.getJSONArray("types");
 
             placeName = place.getString("name");
@@ -361,6 +368,7 @@ public class PlacesToSeeActivity extends FragmentActivity implements OnMapReadyC
             String coords = location.getDouble("lat")+ "," +location.getDouble("lng");
             placesList.add(new Places("landmark",null, placeName, placeAddress, placeType,
                     placeRating, null, placeRating, placeId, coords));
+            i++;
 
         }
         LatLngBounds bounds= builder.build();
