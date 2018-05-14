@@ -326,16 +326,6 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
 
     }
 
-    @Override
-    public void onCardboardTrigger() {
-        Log.i(TAG, "onCardboardTrigger");
-
-        mIsCardboardTriggered = true;
-
-
-    }
-
-
     private void resetTexture() {
         renderer.deleteCurrentTexture();
         checkGLError("after deleting texture");
@@ -365,6 +355,12 @@ public class VRActivity extends CardboardActivity implements CardboardView.Stere
                 //toast.show();
         }
         return true;
+    }
+
+    @Override
+    public void onCardboardTrigger() {
+        Log.i(TAG, "magnetic trigger");
+        mIsCardboardTriggered = true;
     }
 
 

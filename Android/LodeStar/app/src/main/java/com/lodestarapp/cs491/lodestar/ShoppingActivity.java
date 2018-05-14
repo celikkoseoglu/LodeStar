@@ -551,13 +551,13 @@ public class ShoppingActivity extends AppCompatActivity implements OnMapReadyCal
 
         }
         else if(item.getTitle()=="Rental Car"){
-            Toast.makeText(getApplicationContext(),"searching Luggage Shops",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"searching Rental Car Shops",Toast.LENGTH_LONG).show();
             keyword = "rental%20car";
             renewList();
             b.setText("Rental Car - Tap Here to Change Shopping Type");
 
         } else if(item.getTitle()=="Sim Card"){
-            Toast.makeText(getApplicationContext(),"searching Luggage Shops",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"searching Sim Card Shops",Toast.LENGTH_LONG).show();
             keyword = "mobile%20phone";
             renewList();
             b.setText("Sim Card - Tap Here to Change Shopping Type");
