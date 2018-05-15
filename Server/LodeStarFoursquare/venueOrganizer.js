@@ -10,7 +10,7 @@ const app = express();
  * esenboga airport coordinates: 40.12443989999999,32.991672600000015
  */
 
-let venueSearchURL = "https://api.foursquare.com/v2/venues/search";
+let venueSearchURL = "https://api.foursquare.com/v2/venues/explore";
 let venueReviewsURL = "https://api.foursquare.com/v2/venues/venue_id/tips"; //replace "venue_id" with the real venue_id of the place
 let venuePhotosURL = "https://api.foursquare.com/v2/venues/venue_id/photos"; //replace "venue_id" with the real venue_id of the place
 
@@ -21,7 +21,7 @@ let requestQuery = {
         client_id: 'YUYULQTBMYN3VEFRZLV4UDSWMEQDVNUBOSCTCE2ALE0VIZ12',
         client_secret: 'NMPD43K4MGD2JT4ZFQ5JX2OC1GPT5HR3PU4FZVW1IMRBDIGC',
         //near: 'Ankara,TR', //only required if ll (latitude longitude not provided)
-        v: '20180414',
+        v: '20180304',
         limit: 1
         //radius: 250 //in meters. Only valid when used with query enabled
     }
@@ -60,16 +60,12 @@ function foursqaureRequest(query, res) {
 
                 let data = JSON.parse(foursquareBody); //this step is required for making modifications on JSON data
 
-                res.send(data);
-
                 let numberOfVenuesInResponse = data.response.groups[0].items.length; // this line will throw error if daily quota exceeded
 
                 let imageRequests = [];
                 let reviewRequests = [];
 
                 for (let i = 0; i < numberOfVenuesInResponse; i++) {
-
-                    console.log(data.response.groups[0].items[i].venue.name);
 
                     let venue_id = data.response.groups[0].items[i].venue.id;
                     let venuePhotoRequestURL = venuePhotosURL.replace("venue_id", venue_id);
@@ -106,7 +102,7 @@ function foursqaureRequest(query, res) {
                         if (result[i].photos.count !== 0)
                             data.response.groups[0].items[i].venueImage = imageLink.prefix + '300x300' + imageLink.suffix;
                         else //items with no picture will be owned by huseyin
-                            data.response.groups[0].items[i].venueImage = "http://lodestarapp.com/images/team/huseyin_beyan_bw_optimized_overlay.jpg";
+                            data.response.groups[0].items[i].venueImage = "http://lodestarapp.com/images/external_placeholders/foursquare_empty.png";
                     }
 
                     async.map(reviewRequests, requestReview, reviewRequestDone);

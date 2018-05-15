@@ -10,6 +10,8 @@
 		143EB945208D476E0086BDAA /* NearMeSmallCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143EB943208D476E0086BDAA /* NearMeSmallCell.swift */; };
 		143EB946208D476E0086BDAA /* NearMeMainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143EB944208D476E0086BDAA /* NearMeMainCell.swift */; };
 		143FF65F2037088C00C462F6 /* loginBackground.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 143FF65E2037088B00C462F6 /* loginBackground.pdf */; };
+		146AC9C820A8B8BE00926897 /* isbank.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 146AC9C620A8B8BE00926897 /* isbank.jpg */; };
+		146AC9C920A8B8BE00926897 /* anitkabir360.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 146AC9C720A8B8BE00926897 /* anitkabir360.jpg */; };
 		146ED5BB207BB475001BCD5F /* VenueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146ED5BA207BB475001BCD5F /* VenueViewController.swift */; };
 		147523EB207CED97006C0AAB /* VenueVRCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147523EA207CED96006C0AAB /* VenueVRCell.swift */; };
 		147524082080EECC006C0AAB /* PhotoDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147524072080EECC006C0AAB /* PhotoDescriptionCell.swift */; };
@@ -105,6 +107,8 @@
 		143EB943208D476E0086BDAA /* NearMeSmallCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearMeSmallCell.swift; sourceTree = "<group>"; };
 		143EB944208D476E0086BDAA /* NearMeMainCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearMeMainCell.swift; sourceTree = "<group>"; };
 		143FF65E2037088B00C462F6 /* loginBackground.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = loginBackground.pdf; sourceTree = "<group>"; };
+		146AC9C620A8B8BE00926897 /* isbank.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = isbank.jpg; sourceTree = "<group>"; };
+		146AC9C720A8B8BE00926897 /* anitkabir360.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = anitkabir360.jpg; sourceTree = "<group>"; };
 		146ED5BA207BB475001BCD5F /* VenueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueViewController.swift; sourceTree = "<group>"; };
 		147523EA207CED96006C0AAB /* VenueVRCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueVRCell.swift; sourceTree = "<group>"; };
 		147524072080EECC006C0AAB /* PhotoDescriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDescriptionCell.swift; sourceTree = "<group>"; };
@@ -244,6 +248,8 @@
 		14DA46B4207BC9D7009871A8 /* 360 Images */ = {
 			isa = PBXGroup;
 			children = (
+				146AC9C720A8B8BE00926897 /* anitkabir360.jpg */,
+				146AC9C620A8B8BE00926897 /* isbank.jpg */,
 				14F342E620975E3600C0CAC5 /* vodafone_ataturk_airport.jpg */,
 				14DA46B5207BCA04009871A8 /* grand_canyon.jpg */,
 				14DA46B6207BCA04009871A8 /* sindhu_beach.jpg */,
@@ -489,6 +495,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				146AC9C820A8B8BE00926897 /* isbank.jpg in Resources */,
 				8D22B2622030C7DF00ACFBD7 /* user.pdf in Resources */,
 				8D22B2642030C7DF00ACFBD7 /* weather.pdf in Resources */,
 				8D22B2532030C7DF00ACFBD7 /* bus.jpg in Resources */,
@@ -501,6 +508,7 @@
 				8D8FEB2D20990F1B00E17712 /* barcode.png in Resources */,
 				8D22B2632030C7DF00ACFBD7 /* weather.jpg in Resources */,
 				14D03F0F202B35FF00B3B80A /* istabul.png in Resources */,
+				146AC9C920A8B8BE00926897 /* anitkabir360.jpg in Resources */,
 				8D6F76C91F961993004824B0 /* LaunchScreen.storyboard in Resources */,
 				8D6F76C61F961993004824B0 /* Assets.xcassets in Resources */,
 				8D6F76C41F961993004824B0 /* Main.storyboard in Resources */,
